@@ -1,0 +1,258 @@
+@charset "UTF-8";
+body {margin: 0; position:relative;}
+
+.headback {width: 100%; height: 100px; background-color: #fa6146; margin: 0;}
+#mainlogo {position: relative; text-align: center; width: 150px; height: 100px; margin: auto auto;}
+#mainlogo img {width: 100px; height: 100px;}
+
+.headbuttons {position:absolute; width: 320px; top:23px; left:calc(50% + 300px); }
+.headbutton {width: 150px; height: 50px;border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 100%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #fff; line-height: 50px; color:#fff; background-color: transparent; border: 2px solid white; }
+.headbutton:hover {background-color: white; color: #fa6146; cursor: pointer;}
+
+#maintextbox {position: relative; width:100%; height:375px; overflow:hidden;}
+#maintextbox img {width:100%;}
+#maintextbox #maintext {font-size:200%; font-weight: bold; color: #fa6146; white-space:pre; position: absolute; right: 15%; top: 30%;} 
+
+#main {position: relative; margin:0; width:100%; height:300px; background-color: #fa6146;}
+
+#search{text-align: center; }
+#searchtext{width:400px; height:35px; border-radius: 10px; border:none; margin-top: 40px;}
+#searchicon{position:absolute; top:50px; left:calc(50% + 170px); cursor: pointer; opacity:50%;}
+#searchicon1{position:absolute; top:50px; left:calc(50% + 170px); cursor: pointer; opacity:50%; margin-left:-10px; margin-top: -3px;}
+#searchicon1 button{background-color:white; border: none;} 
+#hash{width:100%; height:70px; background-color: white;}
+.hashboxes{margin: 0 auto; width: 1100px; height: 70px; }
+.hashbox{width: 120px; height: 70px; cursor: pointer; float: left; margin:0 30px; text-align: center;}
+.hashbox span{ line-height:70px; color: #fa6146; font-weight: bold; font-family: Verdana; font-size:120%;
+ }
+ .hashbox a{text-decoration: none;}
+ .hashbox:hover{opacity:0.6;}
+
+#kindboxes {margin:0 auto; width: 1350px; margin-top: 10px; height: 180px; }
+.kindbox {border: 2px solid white; width: 120px; height:120px; float: left; border-radius: 10px; margin: 20px; cursor: pointer; text-align: center;
+padding-top:20px; }
+.kindbox:hover{opacity:0.5;}
+.kindbox span {color: white; font-family: Verdana; margin: 0;}
+.kindbox a{text-decoration: none;}
+.kindbox img {margin-top:10px; width:64px; height:60px;}
+
+.footerbox{position:relative; height: 100px; width: 100%; background-color: white;}
+.footerbox #copy{position:absolute; top: 50px; text-align: center; right:20px; font-size: 15px; opacity: 80%; color: #fa6146;}
+.footerbox  #logo{position:absolute; width:80px; height: 90px;  left: 15px; opacity: 60%; }
+.footerbox #logotextbox{position:absolute; top:10px; left: 110px; line-height:25px; width: 500px; }
+.footerbox #logotext{font-family: Verdana; font-weight: bold; color: #fa6146; }
+.footerbox .linemenubox{width: 150px; height: 20px; cursor: pointer; float: right; margin:10px; font-weight: bold; color: #fa6146; text-align: center;}
+
+.member_join {width: 700px; overflow: hidden; margin:50px auto;}
+#input_warp { margin: 0; width: 700px;}
+.join_list { position: relative; height: 44px; padding: 0; margin: 0; overflow: hidden; border-radius: 3px; margin: 10px;}
+.join_listt { position: relative; height: 60px; border-radius: 3px; margin: 10px;}
+.member_join_title { text-align: left; font-size: 26px;font-weight: bold; }
+.error_text { font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 0; margin-left: 20px; font-size: 60%; padding: 0;}
+.input_text {overflow: hidden;position: relative;display: block; width: 100%;padding: 10px 13px; background: #ffffff;box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;font-size: 15px;color: #616161;font-weight: 900;-webkit-transition: all .3s;transition: all .3s;border-radius: 3px;-webkit-border-radius: 3px; border: 1px solid #BCBCBC;}
+.join_list #id_btn {  position: absolute;  width: 180px;  height: 45px;  top: 0px; right: 0;  border: 0; border-radius: 3px;}
+.join_list #id_btn:hover { outline: 0px solid #9191dfab; background-color: rgb(248, 225, 225);}
+#join_btn {margin-left: 200px;}
+#join_btn .join_btn {width: 150px; height: 50px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 100%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #fa6146; line-height: 40px; color:#fff; border: 1px solid white; text-align: center;}
+#join_btn .join_btn:hover {background-color: white; color: #fa6146; cursor: pointer; border:2px solid #fa6146}
+#join_agree_text {width: 680px; height: 120px; overflow-y: auto; border: 1px solid #ccc;  margin: 10px;}
+#join_agree_btn {margin:10px;}
+
+#mainlist {position: relative; margin:0; width:100%; height:260px; background-color: #fa6146;}
+#searchtextlist{width:400px; height:35px; border-radius: 10px; border:none; margin-top: 10px;}
+#searchiconlist{position:absolute; top:20px; left:calc(50% + 170px); cursor: pointer; opacity:50%; }
+#kindboxeslist {margin:0 auto; width: 1350px; margin-top: 0px; height: 180px;}
+
+.row{position: relative; width:1180px; margin:0 auto;  margin-top:15px; height:650px; overflow:hidden;}
+.resList{ width: 250px; height: 280px; margin:20px; border:2px solid #f85454; border-radius:10%; -webkit-border-radius:10%; -moz-border-radius:10%; -ms-border-radius:10%; -o-border-radius:10%;
+float: left;}
+.resList:hover{ box-shadow: 1px 1px 10px #fa6130; opacity: 0.9; transform: translate(0,-10px);  }
+.rimage { text-decoration: none;}
+.res_imgbox {width: 100%; height: 130px; text-align: center;}
+.res_imgbox img {width: auto; height: 100%; }
+.rtext .res_name{ font-size: 140%; color: #fa6146; text-align: center; font-weight:bolder;}
+.rtext .res_kind{text-align: center; color:black;}
+.rtext .res_tag{text-align: center; color:black;}
+
+.login_form {position: relative; width:100%; height:745px;}
+#logspace {width: 100%; height: 100px;}
+#loginmessage {width: 100%; height: 20px; margin-top: 30px; color: red; text-align: center; }
+#Login_form_space {width:100%; height:150px;}
+#loginmain_logo{position: relative; text-align: center; width: 150px; height: 100px; margin: 0 auto; border-radius:50%; width: calc(5.5em / 0.7); height: calc(5em / 0.7); background-color: #fa6146; opacity:90%;}
+#loginmain_logo img{width: 100px; height: 100px;}
+#login_box{position: relative; height:300px; width:500px; border:2px solid rgb(224, 133, 80); margin: 0 auto; border-radius: 20px; margin-top:50px; }
+#text_button_box{position:relative; width: 500px;height: 190px; margin-top: 50px; margin-left:0 auto;}
+#login_idpw_box{position:relative; height:75px; width:310px; margin-top:0 auto; margin-left:90px;}
+#login_id{position: relative; width:300px;height:36px; border:1px solid #616161; padding-left:10px;}
+#login_pw{position: relative; width:300px; height:36px; bottom:1px; border:1px solid #616161; padding-left:10px; margin-top:10px;}
+#log_buttonbox{position: relative; width: 310px; height:40px; margin-top: 40px;margin-left:90px;}
+#log_button{position: relative; width: 310px; height:40px; background-color:#fa6146; opacity:80%;border-color:#fa6146; border-radius:10px; cursor: pointer;}
+#log_button span{position: relative;font-size: 20px; font-weight:bold;color: white; } 
+#login_idpw_box input:enabled{background:white;}
+#login_idpw_box input:focus{background: rgb(255, 209, 182); outline: none;}
+#loginform_linetextbox{height:25px; width:450px; margin:0 auto;}
+.loginform_linetext span{ position: relative; float: left; cursor: pointer; width:100px; margin-left: 45px; }
+
+#idcheck_box{width: 100%; color: rgb(0, 0, 0); height:300px; padding:1px;}
+#idcheck_text{padding-left: 30px; }
+
+#popup{color: rgb(0, 0, 0); height:100%; padding:1px;}
+#popup_text{text-align: center; font-size: 110%;}
+#zipcodee{margin: 0 auto;   width: 500px;}
+#zipcodee th{ border: 3px solid #fa6146;border-radius: 5px; color: black; height: 30px;}
+#zipcodee td{ border-bottom:1px solid rgb(201, 199, 199) ; border-right: 1px solid rgb(201, 199, 199); height: 30px;}
+.zipa{color: black; text-decoration: none;}
+#zipcodee td:hover{background-color: rgb(248, 225, 225); }
+#dongtext{border:0 ; border-bottom:1px solid rgb(201, 199, 199) ; height: 30px;width: 400px; outline: none; font-size: 100%; padding: 5px; line-height: 30px; padding-left:20px;}
+#eheqhrl{background-image:url("../images/eheqhrl.png");width: 40px;height: 40px; cursor: pointer; border: 0;}
+
+
+#realjenche{position: relative;width: 1056px; margin: 0 auto;}
+#jenche{position: relative; width:700px; height: 100%; border: 1px solid #fa6146; overflow: hidden;}
+#gageirm{ height:50px ; font: gray; border-bottom: 1px solid #fa6146;font-size: 120%; font-weight: bold;text-align: center;line-height: 50px;}
+#gagemain{height: 140px; border-bottom: 1px solid #fa6146; }
+.smlogo{height: 120px; width: 120px; position: relative; float: left;margin: 10px;}
+#gibon{font-size: 100%; position: absolute; left: 150px;line-height: 33px;}
+        
+.redd{color: orange; font-weight: bold;}
+#gagemenu{height: 140px; border: 0.5px solid rgb(241, 241, 241);  padding-left:20px; font-weight: bold; line-height: 30px; position: relative; cursor: pointer;}
+#gagemenu:active{background: rgb(238, 238, 238);}
+.grayy{color: gray; font-weight: normal; font-size: 100%; }
+.grayyy{color: gray; font-weight: normal; font-size: 100%;  width: 500px;position: absolute; top: 50px;}
+.menugaguk{bottom: 3px; position: absolute;}
+#cleanreview{font-weight: bold; }
+.smmenu{height: 120px;width: 120px; position: absolute; right: 10px;top: 10px;}
+#menujengbo{height: 50px;  }
+.menujengbotab{ color: white; height:50px; width:347px ;position: relative;float:left ;line-height: 50px;text-align: center; font-weight: bold;font-size: 110%;cursor:pointer;}
+
+
+#menudel{ width: 690px;}
+#gagejengbo{padding-left: 15px; padding-right: 15px; line-height: 25px;border-bottom: 1px solid #fa6146;}
+#reviewbogi{text-align: center;}
+#bigstarr{color: orange;}
+/* 리뷰 관련 은지 수정 */
+
+.m_nick{ width:30px; height: 30px; border: 1px solid black; border-radius:50px ; 
+background-image:url("../images/mainlogo2.png"); background-position: center; background-size: cover; 
+ margin-top: 10px; float: right; margin-right:10px; float:left}
+.reviewimage{ height: 200px;  }
+.reviewdel{position: relative;border-bottom: 1px solid rgb(231, 231, 231); height: 210px;}
+.rvsajin{margin: 0 auto; position: absolute;right: 5px; top: 5px;}
+.rvnaeyong{margin: 0 auto; position: absolute;left: 5px; top: 5px; text-align: left;}
+.rvnick{font-size: 150%; margin-left:5px ; margin-right: 8px; font-weight: bold;}
+.starr{color: orange; margin-left: 7px; }
+#tul{ width: 1400px; float: left; position: relative; overflow-y: scroll;}
+#jengboreview{width:680px; position:absolute; top:0px; right: 0px;}
+#reviewww{border-bottom: 1px solid #fa6146;}
+
+#menutabb{background-color: #fa6146;border :1px solid #fa6146;}
+#jengbotabb{background-color: #ffb6a9;border :1px solid #ffb6a9;}
+
+
+#jangbagunitul{width: 352px;border: 1px solid #fa6146;position: absolute;top: 150px;right: 0;}
+#jbtitle{width: 350px;border: 1px solid #fa6146;height: 50px;text-align: center;line-height: 50px; font-size: 140%; font-weight: bold; color: white;background:#fa6146 ;}
+.jbitem{width: 340px;border: 1px solid rgb(241, 241, 241); height: 100px; position: relative;padding: 5px;}
+.jbitemname{font-size: 120%;}
+.jbitemsub{font-size: 110%; color: rgb(136, 136, 136);}
+.jbitemprice{position:absolute;bottom: 10px;right: 10px; font-weight: bold;font-size: 120%;color:#fa6146 ;}
+.jbcancel{cursor:pointer; background: white;border: 1px solid rgb(241, 241, 241); color: #fa6146;font-weight: bold;height: 20px;border-radius: 25%;width: 23px;}
+.baedaltip{height: 48px;border: 1px solid rgb(241, 241, 241); font-size: 100%; text-align: right; line-height: 50px;}
+.jbtotal{height: 48px;border: 1px solid #fd9c8b;background-color:#fd9c8b;
+color: white;font-size: 115%; text-align: right;line-height: 52px;font-weight: bold;}
+.jbwanryo{cursor:pointer; height: 55px; border: 1px solid #fa6146;color: white;width: 352px;background: #fa6146; font-size: 130%;font-weight: bold;}
+#jbtotalprice{border: 0;background: #fd9c8b; color: white; font-size: 120%;font-weight: bold; width: 85px; text-align: right; outline:none;}
+#jbtotalprice:focus{outline:none;}
+
+
+#idcheckbutton1 {display: none;}
+#idcheckline {border-bottom: #d53651 2px solid; width: 400px; padding-bottom: 20px; margin-bottom: 20px;}
+#idcheckbutton1_1 {cursor: pointer;}
+#idcheckbutton2 {border: 0; width: 60px; height: 25px; background-color: #fa6146;}
+
+
+
+ .popup {position: absolute; width: 460px;height: 760px;top: 50%;left: 50%;margin: 0 auto; transform: translate(-50%, -50%);border: 1px solid gray;background-color: #fffcfd;}
+.popupheader {width: 460px;height: 60px;background-color: #d53651;color: white;opacity: 0.9;padding: 25px 0 0 0;z-index: 2;text-align: center;font-weight: 700;font-size: 21px;}
+.popupimgg {height: 220px;margin: auto;display: block;padding-top: 14px;}
+.popupcontext {padding-inline: 5%;}
+#contextsub {text-align: center;}
+.contextsub2 {line-height: 10%;}
+.contextprice {position: relative;height: 58.5px;font-weight: 700;}
+.contextprice1 {position: absolute;left: 0px;line-height: 58.5px;}
+.contextprice2 {position: absolute;right: 0px;line-height: 58.5px;}
+.contextoption {position: relative;font-weight: 700;height: 120px;}
+.optionnn {position: relative;left: 0px;line-height: 30px;}
+.optionprice {position: absolute;top: 0px;right: 0px;font-size: 15px;}
+.popupchecks {margin-left: 10px;position: relative;margin-bottom: 10px;font-size: 14px;}
+.popupquantity {line-height: 58.5px;position: relative;height: 58.5px;font-weight: 700;}
+.pquantity {width: 100px;}
+.pbox {position: absolute;right: 5px;top: 10px;line-height: 32px;}
+.pbox_button {width: 30px;height: 30px;font-size: 15px;font-weight: 700;border-radius: 3px;border: none;background: #f2f0f1;}
+.pcount {outline: none;border: none;font-size: 17px;background-color: #fffcfd;text-align: center;width: 30px;height: 30px;}
+.popuptotal {position: relative;height: 58.5px;font-weight: 700;}
+.ptotal {position: absolute;left: 0px;line-height: 58.5px;}
+.pwon {border: 1px solid white; font-weight: bold; position: absolute; right: 0px; font-size: 23px; color: #d53651; text-align: center;}
+.popupbutton {position: fixed;width: 460px;border: none;font-size: 16px;font-weight: bold;margin: 0;}
+#plbutton {position: relative;float: left;height: 48px;width: 50%;background-color: #515050;cursor: pointer;font-weight: 700;border: none;color: white;font-size: 16px;}
+#prbutton {position: relative;height: 48px;width: 50%;background-color: #d53651;float: right;cursor: pointer;font-weight: 700;border: none;color: white;font-size: 16px;}
+
+nav#sub_menu {text-align: center; width:20%; float: left; height:745px; margin-top:100px;}
+nav#sub_menu ul {list-style:none; margin: 0; padding:0; padding-right: 20px;}
+nav#sub_menu a {text-decoration: none; color: #fa6146; font-family: verdana; font-weight: bold; font-size: 16px; display: block; height: 30px;  line-height: 30px; width:100%; padding:10px 0; border-bottom: 1px dotted #999;}
+nav#sub_menu a:first-child {border-top: 1px dotted #999}
+nav#sub_menu a:hover {color:white; font-size: 17px; background-color:#fa6146}
+
+
+#review_form {text-align: center;}
+#review_form fieldset{border:0; display: inline-block; direction: rtl; text-align: center;}
+#review_form input[type=radio]{display: none;} 
+#review_form label{font-size: 3em;color: transparent;text-shadow: 0 0 0 #d1d1d1;}
+#review_form label:hover{text-shadow: 0 0 0 rgba(255, 111, 44); cursor: pointer;}
+#review_form label:hover ~ label{text-shadow: 0 0 0 rgba(255, 111, 44);}
+#review_form input[type=radio]:checked ~ label{text-shadow: 0 0 0 rgba(255, 111, 44);}
+#star_box{width: 100%;}
+#reviewContent {width: 80%; height: 150px;padding: 10px; box-sizing: border-box; border: solid 1.5px #D3D3D3; border-radius: 5px; font-size: 16px; resize: none;}
+#reviewWriteButton {width: 30%; height: 30px; font-size: 130%; border: 0; background-color: #fd6913; cursor: pointer; color: white;}
+
+#menuorderdetail {width: 75%; width:745px; margin-left: 25%; margin-top:10px; }
+.menuorderdetaildiv {background-color: #f0f0f0; padding:10px;}
+#menuorderdetaildiv1_1 {color:rgba(255, 111, 44); font-size: 20px; font-weight: bold; margin-bottom: 10px;}
+#menuorderdetaildiv1_2 {font-size: 25px; font-weight: bold; margin-bottom: 10px;}
+#menuorderdetaildiv1_3 {font-size: 20px; font-weight: bold; margin-bottom: 5px;}
+#menuorderdetaildiv1_4 {font-size: 15px; font-weight: bold; margin-bottom: 5px;}
+#menuorderdetaildiv2_1 {font-size: 20px; font-weight: bold; margin-bottom: 10px;}
+#menuorderdetaildiv2_2 { margin-bottom: 5px;}
+#menuorderdetaildiv3 {margin-bottom: 5px;}
+
+#previewDiv img {height:300px}
+
+#gumae{ height:50px ;color: white; font-size: 120%; font-weight: bold;text-align: center;line-height: 50px;  background: #515050;}
+#juso{  position: relative;float:left ;line-height: 50px;text-align: center; font-weight: bold;font-size: 110%; height: 52px;width: 600px; cursor: pointer;}
+#jusotabb{background-color: #fa6146;border :1px solid #fa6146; color: white; width: 300px ;height:50px; }
+#newjusotabb{background-color: #ffb6a9;border :1px solid #ffb6a9; width: 300px;color: white;position: absolute;top: 0px ;right: 0px;}
+#juso1{width: 590px; height: 175px;font-size: 15px; line-height: 40px;padding-left: 10px; padding-top: 10px; font-weight: 900; border-bottom: 1px solid #fa6146;}
+#juso2{width:598px;position: absolute;right: 1px;top: 5px;border-bottom: 1px solid #fa6146;height: 180px;}
+.grayy2{color: gray; font-weight: bold; font-size: 100%; }
+#xxxx{width:600px; border-left: 1px solid #fa6146; border-right: 1px solid #fa6146;  position: relative; line-height: 180%; font-size:100%; font-weight:900; }
+#realjenche2{position: relative;width: 600px; margin: 0 auto;}
+#jenche2{position: relative; width:600px;  border:1px solid #fa6146; border-top: 0;height: 290px; border-bottom: 0; overflow: hidden;}
+#tul2{ width: 1200px; float: left; position: relative;}
+.jbwanryo2{cursor:pointer; height: 55px; color: white;width: 600px; font-size: 130%;font-weight: bold;color: white; background: #fa6146; border: 1px solid #fa6146;}
+#jangbagunitul2{width: 600px;border: 1px solid #fa6146;}
+#jbtitle2{width: 598px;border: 1px solid #fa6146;height: 50px;text-align: center;line-height: 50px; font-size: 140%; font-weight: bold; color: white;background:#fa6146 ;}
+.jbitem2{width: 590px; border: 1px solid rgb(241, 241, 241); height: 85px; position: relative;padding: 5px;}
+.gumaeinput_text {overflow: hidden;position: relative;display: block; width: 100%;padding: 10px 13px; background: #ffffff;box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;font-size: 15px;color: #616161;font-weight: 900;-webkit-transition: all .3s;transition: all .3s;border-radius: 3px;-webkit-border-radius: 3px; border: 1px solid rgb(241, 241, 241);}
+#oopyon {  position: absolute;  width: 180px;  height: 45px;  top: 0px; right: 0;  border: 0; border-radius: 3px;}
+#oopyon:hover { outline: 0px solid #9191dfab; background-color: rgb(248, 225, 225);}
+.pointer{cursor:pointer;}
+
+#badal{border: 0; font-size: 100%; text-align: right; outline:none;}
+.toggle1 input[type=radio]{display: none;}
+.toggle1 input[type=radio] + label {color: #e0e0e0;font-size: 100%;}
+.toggle1 input[type=radio]:checked + label {color: white; background-color:#fa6146; }
+.toggle2 input[type=radio]{display: none;}
+.toggle2 input[type=radio] + label {color: #e0e0e0;font-size: 100%;}
+.toggle2 input[type=radio]:checked + label {color: white; background-color:#fa6146;  }
+.toggle3 input[type=radio] {display: none;}
+.toggle3 input[type=radio] + label {color: #e0e0e0;font-size: 100%; width: 20px; height: 20px; width: 300px;}
+.toggle3 input[type=radio]:checked + label {color: white; background-color:#fa6146;}
