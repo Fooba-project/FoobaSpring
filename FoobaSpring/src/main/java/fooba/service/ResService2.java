@@ -18,5 +18,10 @@ public class ResService2 {
 		rdao.foodList(paramMap);
 		
 	}
+
+	public void selectFood(HashMap<String, Object> paramMap) {
+		rdao.selectFood(paramMap);
+		
+	}
 	
 }
