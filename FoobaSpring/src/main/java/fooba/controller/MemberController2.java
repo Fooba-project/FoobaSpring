@@ -51,7 +51,7 @@ public class MemberController2 {
 		return "member/memberLogin";
 	}
 	
-	 @RequestMapping(value="login", method=RequestMethod.POST)
+	 @RequestMapping(value="/login", method=RequestMethod.POST)
 	   public String login(@ModelAttribute("dto") @Valid MemberVO membervo, 
 			   BindingResult result, HttpServletRequest request, Model model) {
 	      
@@ -102,7 +102,7 @@ public class MemberController2 {
 	 @RequestMapping("/miniLogin")
 	 public String miniLogin(@ModelAttribute("dto") @Valid MemberVO membervo, BindingResult result, 
 	         HttpServletRequest request, Model model,
-	         @RequestParam("pseq") String pseq) {
+	         @RequestParam("fseq") String fseq) {
 		 
 		 String url="member/memberMiniLogin";
 		 
