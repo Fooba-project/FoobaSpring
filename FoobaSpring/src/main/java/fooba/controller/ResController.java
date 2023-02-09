@@ -47,7 +47,8 @@ public class ResController {
 	@RequestMapping(value="/res_login",method=RequestMethod.POST)
 	public String res_login(@RequestParam("resid") String resid,@RequestParam("respw")String respw,
 			 BindingResult result, HttpSession session, Model model) {
-		String url="";
+		String url=""; 
+		
 		
 		
 		return url;
