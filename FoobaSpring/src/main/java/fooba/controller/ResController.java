@@ -31,4 +31,11 @@ public class ResController {
 	}
 	*/
 	
+	@RequestMapping("/res_loginForm")
+	public String res_loginForm() {
+		
+		return "restaurant/res_login";
+	}
+	
+	
 }
