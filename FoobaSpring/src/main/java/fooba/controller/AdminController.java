@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fooba.dto.Paging;
 import fooba.service.AdminService;
 
 @Controller
@@ -67,8 +68,39 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("/adminList")
+	public String adminList(HttpServletRequest request, HttpSession session, Model model, @RequestParam("table") String table) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		
+		HashMap<String, Object> paramMap = new HashMap<>();
+		paramMap.put("table", table);
+		paramMap.put("request", request);
+		paramMap.put("ref_cursor", null);
+		as.adminList(paramMap);
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)paramMap.get("ref_cursor");
+		model.addAttribute("paging", (Paging)paramMap.get("paging"));
+		model.addAttribute("key", (String)paramMap.get("key"));
+		if(table.equals("r")) { 
+			model.addAttribute("resList", list);
+			return "admin/productList";
+		} else if(table.equals("o")) {
+			model.addAttribute("orderList", list);
+			return "admin/productList";
+		} else if(table.equals("m")) {
+			model.addAttribute("memberList", list);
+			return "admin/productList";
+		} else if(table.equals("q")) {
+			model.addAttribute("qnaList", list);
+			return "admin/productList";
+		} else if(table.equals("b")) {
+			model.addAttribute("bannerList", list);
+			return "admin/productList";
+		}
+	}
+	
+	
 }	
+
 	/*
 	// 기본 프레임
 	@RequestMapping("/")
