@@ -106,27 +106,27 @@ public class MemberController2 {
 		 
 		 model.addAttribute("check", "1");
 		 
-		 if(result.getFieldError("userid")!=null)
-	         model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-	      else if (result.getFieldError("userpw")!=null)
-	         model.addAttribute("message", result.getFieldError("userpw").getDefaultMessage());
+		 if(result.getFieldError("id")!=null)
+	         model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
+	      else if (result.getFieldError("pwd")!=null)
+	         model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
 	      else {
-	         HashMap<String, Object> paramMap = new HashMap<String, Object>();
-	         paramMap.put("userid", membervo.getId());
-	         paramMap.put("ref_cursor", null);
+	         HashMap<String, Object> prm = new HashMap<String, Object>();
+	         prm.put("id", membervo.getId());
+	         prm.put("ref_cursor", null);
 	         
-	         ms.getMember(paramMap);
+	         ms.getMember(prm);
 	         
 	         ArrayList<HashMap<String,Object>> list 
-	         = (ArrayList<HashMap<String,Object>>)paramMap.get("ref_cursor");
+	         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 	         if(list==null) {	
 	            model.addAttribute("message","아이디가 없습니다.");
 	            return "member/memberLogin";   
 	         }
 	         HashMap<String, Object> mvo = list.get(0);
-	         if(!mvo.get("USERPW").equals(membervo.getPwd()))
+	         if(!mvo.get("PWD").equals(membervo.getPwd()))
 	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (mvo.get("USERPW").equals(membervo.getPwd())) {
+	         else if (mvo.get("PWD").equals(membervo.getPwd())) {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("loginUser", mvo);
 	            url = "redirect:/";
@@ -135,40 +135,19 @@ public class MemberController2 {
 		 return url;
 	 }
 	 	
-	 /*
+	 
 	 @RequestMapping("/search")
-	 public String search(HttpServletRequest request,HttpSession session){
+	 public String search(HttpServletRequest request,HttpSession session,Model model){
 		 
 		 String url="main/resList.jsp";
 		 HashMap<String, Object> prm = new HashMap<>();
 		 prm.put("request", request);
+		 prm.put("ref_cursor", null);
 		 
-		 // 서비스에 넣고, plsql로 조회한 후 루프 돌리기
-		 // 다시 되돌아 와서 list에 넣기
-		 
-		 ms.resList(prm);
-		 
-		
-		if (search!=null && !search.equals("")) {
-			ArrayList<RestaurantVO> searchList = rdao.searchKey(search);
-			for (RestaurantVO rvo : searchList) {
-				rvo.setFimage( rdao.FimagebyRseq( rvo.getRseq() ) );
-			}
-			request.setAttribute("search", search);
-			request.setAttribute("RList", searchList);
-		}
-			
-		if (hash!=null && !hash.equals("")) {
-			ArrayList<RestaurantVO>searchList=rdao.searchKey(hash);
-			for (RestaurantVO rvo : searchList) {
-				rvo.setFimage( rdao.FimagebyRseq( rvo.getRseq() ) );
-			}
-			request.setAttribute("search", "#"+hash );
-			request.setAttribute("RList", searchList);
-		}
-		
-		request.getRequestDispatcher(url).forward(request, response);
-
+		 ms.SearchResList(prm);
+		 String search = (String)prm.get("search");
+		 model.addAttribute("search",search);
+		 return "main/resList";
 	}
-	 */
+	 
 }

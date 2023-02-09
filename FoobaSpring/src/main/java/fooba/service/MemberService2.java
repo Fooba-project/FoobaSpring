@@ -1,5 +1,6 @@
 package fooba.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fooba.dao.IMemberDao2;
+import fooba.dto.RestaurantVO;
 
 @Service
 public class MemberService2 {
@@ -17,30 +19,37 @@ public class MemberService2 {
 	IMemberDao2 mdao;
 
 	public void getMember(HashMap<String, Object> prm) {
+		
 		mdao.getMember(prm);
 		
 	}
 
-	public void resList(HashMap<String, Object> prm) {
-		HttpServletRequest request = (HttpServletRequest)prm.get("request");
-		HttpSession session = request.getSession();
-		
-		if( request.getParameter("first")!=null) 
-			session.removeAttribute("search");
+	public void SearchResList(HashMap<String, Object> prm) {
+		HttpServletRequest request	= (HttpServletRequest)prm.get("request");
+		HttpSession session = request.getSession();		
 		
 		String search = "";
-		if( request.getParameter("search") != null ) {
-			search = request.getParameter("search");
-			session.setAttribute("search", search);
-		} else if( session.getAttribute("search")!= null ) {
-			search = (String)session.getAttribute("search");
-		} else {
-			session.removeAttribute("search");
+		if( request.getParameter("search") != null ) search = request.getParameter("search");
+		prm.put("searchtext", search);
+		
+		mdao.SearchResList(prm);
+		
+		ArrayList< HashMap<String,Object> > list 
+		= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
+		for(HashMap<String,Object> a : list) {
+			int rseq=Integer.parseInt(a.get("RSEQ")+"");
+			prm.put("rseq", rseq);
+			prm.put("fimage", "" );
+			mdao.FimagebyRseq(prm);
+			String fimage=(String)prm.get("fimage");
+			a.put("RIMAGE",fimage);
 		}
 		
-		HashMap<String, Object> sMap = new HashMap<>();
-		sMap.put(search, sMap);
+		String hash = "";
+		if( request.getParameter("hash") != null ) search = request.getParameter("hash");
+		prm.put("searchtext", search);
 		
+		mdao.SearchResList(prm);
 	}
 	
 }
