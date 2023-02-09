@@ -45,7 +45,6 @@ public class MemberController2 {
 	}
 	*/
 	
-	
 	@RequestMapping("/loginForm")
 	public String loginForm() {
 		return "member/memberLogin";

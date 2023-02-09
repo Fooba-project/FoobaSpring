@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
  
-<form method="post" action="fooba.do?command=login" name="loginForm">
+<form method="post" action="login" name="loginForm">
 	<div class="login_form">
 			<div id="logspace"></div>
 	        <div id="loginmain_logo">
@@ -26,13 +26,13 @@
 	            </div>
 	        <div id="loginform_linetextbox">
 	            <div class="loginform_linetext">
-	                <span class="text1" onclick="location.href='fooba.do?command=memberFindIdForm'"> 아이디찾기</span>
+	                <span class="text1" onclick="location.href='memberFindIdForm'"> 아이디찾기</span>
 	            </div>
 	            <div class="loginform_linetext">            
-	                <span class="text2"  onclick="location.href='fooba.do?command=memberFindPwForm'"> 비밀번호찾기 </span>
+	                <span class="text2"  onclick="location.href='memberFindPwForm'"> 비밀번호찾기 </span>
 	            </div>
 	            <div class="loginform_linetext">
-	                <span class="text3" onclick="location.href='fooba.do?command=memberJoinForm'"> 회원 가입</span>
+	                <span class="text3" onclick="location.href='memberJoinForm'"> 회원 가입</span>
 	            </div>
 	        </div>
 	    </div>

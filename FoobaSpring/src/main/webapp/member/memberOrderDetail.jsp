@@ -111,7 +111,7 @@ function review_write() {
     </div>
 <br>
     <c:if test="${ovo.result==2}">
-        <form class="review" name="review_form" id="review_form" method="post" action="fooba.do?command=memberReviewWrite&rseq=${ovList[0].rseq }&oseq=${ovo.oseq }" enctype="multipart/form-data" >
+        <form class="review" name="review_form" id="review_form" method="post" action="memberReviewWrite?rseq=${ovList[0].rseq }&oseq=${ovo.oseq }" enctype="multipart/form-data" >
             <fieldset>
                 <span class="star_text" id="star_text">
                     별점을 선택해주세요

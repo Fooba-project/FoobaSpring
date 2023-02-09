@@ -33,7 +33,7 @@
 
 </head>
 <body>
-    <form method="post" action="fooba.do?command=memberFindPw" name="findId">
+    <form method="post" action="memberFindPw" name="findId">
         <div class="login_form">
                 <div id="logspace"></div>
                 <div id="loginmain_logo">

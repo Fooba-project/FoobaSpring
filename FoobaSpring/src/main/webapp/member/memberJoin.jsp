@@ -4,7 +4,7 @@
     <div class="member_join">
         <div class="member_join_title">회원가입</div>
         <div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
-        <form name="member_join_send_form" id="member_join_send_form" method="post" action="fooba.do?command=memberJoin">
+        <form name="member_join_send_form" id="member_join_send_form" method="post" action="memberJoin">
             <table class="member_join_table">
                 <div class="join_list">
                     <input type="text" class="input_text" style="width: 490px;" name="userid" placeholder="아이디" onkeyup="chkIdCode(event)" value="${dto.id}"/>
@@ -109,7 +109,7 @@
             <br><br>
             <div id="join_btn">
                 <input class="join_btn" type="button" value="가입" onclick="joincheck()">
-                <input class="join_btn" type="button" value="홈으로" onclick="location.href='fooba.do?command=index'">
+                <input class="join_btn" type="button" value="홈으로" onclick="location.href='index'">
             </div>
         </form>
     </div>

@@ -14,7 +14,7 @@
 <script src="script/fooba.js"></script>
 </head>
 <body>
-<form method="post" action="fooba.do?command=miniLogin" name="loginForm">
+<form method="post" action="miniLogin" name="loginForm">
 	<div class="login_form">
 			<div id="logspace"></div>
 	        <div id="loginmain_logo">

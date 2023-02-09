@@ -12,9 +12,8 @@
 <body>
 <div id="idcheck_box">
 	<div id="idcheck_text">
-		<form method="post" name="idCheckForm" action="fooba.do">
+		<form method="post" name="idCheckForm" action="memberIdCheckForm">
 			<h1 id="idcheckline">ID 중복 확인</h1>
-            <input type="hidden" name="command" value="memberIdCheckForm" />
             아이디 : <input type="text" name="userid" value="${userid}" style="font-size: 17px;">
             <input type="submit" value="검색" class="submit" id="idcheckbutton1"><label for="idcheckbutton1" id="idcheckbutton1_1">검색</label><br><br><br>
 			<c:if test="${result == 1}">

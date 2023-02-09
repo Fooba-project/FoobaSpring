@@ -61,7 +61,7 @@
             <br><br>
             <div id="join_btn">
             <input class="join_btn" type="button" value="정보수정" class="submit" onclick="go_update();"> 
-			<input class="join_btn" type="reset" value="취소" class="cancel" onclick="location.href='fooba.do?command=index'"></div>
+			<input class="join_btn" type="reset" value="취소" class="cancel" onclick="location.href='index'"></div>
             </div>
         </form>
     </div>

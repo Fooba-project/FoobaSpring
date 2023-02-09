@@ -22,7 +22,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
                     <tr>
                         <td style="width:20%">
                             <div id="memberOrderListimg">
-                                <a href="fooba.do?command=restaurantDetail&rseq=${ovo.rseq }"><img src="images/title/${ovo.rimage }" width="80" height="80"></a>
+                                <a href="restaurantDetail?rseq=${ovo.rseq }"><img src="images/title/${ovo.rimage }" width="80" height="80"></a>
                             </div>
                             <div>${ovo.rname }</div>
                         </td>
@@ -55,7 +55,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 		                    	</c:choose>	
                             </div>
                             <div id="memberOrderListDetail" margin="10" >
-                                <input type="button" value="주문상세" id="memberOrderDetailButton" onclick="location.href='fooba.do?command=memberOrderDetail&oseq=${ovo.oseq}'"/>
+                                <input type="button" value="주문상세" id="memberOrderDetailButton" onclick="location.href='memberOrderDetail?oseq=${ovo.oseq}'"/>
                             </div>            
                         </td>
                     </tr>
