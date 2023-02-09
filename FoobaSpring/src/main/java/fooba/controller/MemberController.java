@@ -51,11 +51,11 @@ public class MemberController {
 
 	@RequestMapping("/memberIdCheckForm")
 		public String member_id_check_form( 
-				@RequestParam("userid") String userid,
+				@RequestParam("id") String id,
 				Model model, 
 				HttpServletRequest request ) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("userid", userid);
+		paramMap.put("id", id);
 		paramMap.put("ref_cursor", null);
 		ms.getMember( paramMap );
 		
@@ -65,7 +65,7 @@ public class MemberController {
 		if( list.size()==0 ) model.addAttribute("result" , -1);
 		else model.addAttribute("result" , 1);
 		
-		model.addAttribute("userid", userid);		
+		model.addAttribute("id", id);		
 		return "member/memberIdCheck";
 	}
 	
