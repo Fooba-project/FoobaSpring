@@ -135,4 +135,6 @@ public class MemberController2 {
 		 return url;
 	 }
 	 
+	 @RequestMapping("/")
+	 
 }
