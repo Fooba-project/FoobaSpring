@@ -31,3 +31,4 @@ begin
         select * from restaurant where rname=p_rname;
 end;
 
+alter table restaurant add raddress3 varchar2(100);

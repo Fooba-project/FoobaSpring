@@ -1,8 +1,11 @@
 package fooba.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import fooba.service.ResService;
 
@@ -133,7 +140,7 @@ public class ResController {
 		return"restaurant/res_FindPw";
 	}
 	
-	@RequestMapping(value="res_FindPw",method=RequestMethod.POST)
+	@RequestMapping(value="/res_FindPw",method=RequestMethod.POST)
 	public String res_FindPw(@RequestParam("rname")String rname,@RequestParam("rphone")String rphone,
 			@RequestParam("rid")String rid,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
@@ -156,9 +163,45 @@ public class ResController {
 			model.addAttribute("message","귀하의 비밀번호는 '"+rphone+"'로 전송되었습니다.");
 			return "redirect:/res_loginForm";
 		}
-		
+	}
+	
+	@RequestMapping("/res_show")
+	public String res_show(HttpSession session,Model model) {
+		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
+		HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
+		model.addAttribute("RestaurantVO",rvo);
+		return "restaurant/res_show.jsp";
 		
 	}
+	@RequestMapping("/res_joinForm")
+	public String res_joinForm() {
+		return"restaurant/res_join";
+	}
+	@Autowired
+	ServletContext context;
+	
+	@RequestMapping(value="fileup",method=RequestMethod.POST)
+	@ResponseBody	
+	public HashMap<String , Object>fileup(Model model,HttpServletRequest request){
+		//현재 메서드는 다른 메서드처럼 jsp 파일이름을 리턴해서 파일이름.jsp로 이동하는 메서드가 아니다.
+		//ajax에 의해서 호출된 지점으로 다시 되돌아가서 화면 이동없이 운영이 계속되어야 하기때문에 이동할때
+		//가져갈 데이터가 리턴된다.
+		
+		String path=context.getRealPath("/product_images");
+		HashMap<String,Object>result=new HashMap<String,Object>();
+		
+		try {
+			MultipartRequest multi =new MultipartRequest(
+					request,path,5*1024*1024,"UTF-8",new DefaultFileRenamePolicy()
+			);
+			result.put("STATUS",1);
+			result.put("FILENAME", multi.getFilesystemName("fileimage"));
+		} catch (IOException e) {	e.printStackTrace();
+		}
+		
+		return result; //result는 목적지의 매개변수 data객체로 전달된다.
+	}
+	
 	
 	
 	
