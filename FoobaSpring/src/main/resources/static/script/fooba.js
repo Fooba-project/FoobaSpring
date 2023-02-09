@@ -155,7 +155,7 @@ function idcheck(){
 		documnet.member_join_send_form.userid.focus();
 		return;
 	}
-	var url = "memberIdCheckForm?userid=" + document.member_join_send_form.userid.value;
+	var url = "fooba.do?command=memberIdCheckForm&userid=" + document.member_join_send_form.userid.value;
 	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=250, scrollbars=no";
 	window.open(url, "IdCheck", opt);	
 }
