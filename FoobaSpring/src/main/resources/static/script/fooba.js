@@ -206,7 +206,7 @@ function go_update(){
 	    document.member_update_form.userpwd.focus();
 	}
 	else {
-	    document.member_update_form.action = "fooba.do?command=memberUpdate";
+	    document.member_update_form.action = "memberUpdate";
 	    document.member_update_form.submit();
 	}
 }
@@ -243,7 +243,7 @@ function go_search2(){
 }
 
 function go_search(hash){
-	var url = "fooba.do?command=search&hash="+ hash;  
+	var url = "search?hash="+ hash;  
 	document.search.action = url;
 	document.search.submit();
 }       
@@ -253,19 +253,19 @@ function go_search(hash){
  function withdrawalMember(){
  	var ok=confirm("정말 탈퇴하겠습니까?");
  	if(ok){
-		location.href="fooba.do?command=memberWithdrawal";
+		location.href="memberWithdrawal";
 	}
 }
 
  function menupopup(fseq){
   
 	var popupX = (window.screen.width / 2) - 230;
-     window.open("fooba.do?command=menupopup&fseq="+fseq,"메뉴 상세","width=462, height=786, menubar=no, status=no, toolbar=no, top=100 , left="+ popupX);
+     window.open("menupopup?fseq="+fseq,"메뉴 상세","width=462, height=786, menubar=no, status=no, toolbar=no, top=100 , left="+ popupX);
  } 
   
   function deleteejb(cseq,rseq){
 	var ok=confirm("장바구니에서 삭제하시겠습니까?");
-	if(ok) location.href="fooba.do?command=deleteCartmenu&cseq="+cseq+"&rseq="+rseq;
+	if(ok) location.href="deleteCartmenu?cseq="+cseq+"&rseq="+rseq;
     else return;
    }
    

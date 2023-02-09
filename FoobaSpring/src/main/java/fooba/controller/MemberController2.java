@@ -51,33 +51,32 @@ public class MemberController2 {
 	}
 	
 	 @RequestMapping(value="/login", method=RequestMethod.POST)
-	   public String login(@ModelAttribute("dto") @Valid MemberVO membervo, 
-			   BindingResult result, HttpServletRequest request, Model model) {
+	   public String login(@ModelAttribute("dto") @Valid MemberVO mvo, 
+			   BindingResult result, HttpSession session, Model model) {
 	      
 	      String url = "member/memberLogin";
-	      if(result.getFieldError("userid")!=null)
-	         model.addAttribute("message", result.getFieldError("userid").getDefaultMessage());
-	      else if (result.getFieldError("userpw")!=null)
-	         model.addAttribute("message", result.getFieldError("userpw").getDefaultMessage());
+	      if(result.getFieldError("id")!=null)
+	         model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
+	      else if (result.getFieldError("pwd")!=null)
+	         model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
 	      else {
-	         HashMap<String, Object> paramMap = new HashMap<String, Object>();
-	         paramMap.put("userid", membervo.getId());
-	         paramMap.put("ref_cursor", null);
+	         HashMap<String, Object> prm = new HashMap<>();
+	         prm.put("id", mvo.getId());
+	         prm.put("ref_cursor", null);
 	         
-	         ms.getMember(paramMap);
+	         ms.getMember(prm);
 	         
 	         ArrayList<HashMap<String,Object>> list 
-	         = (ArrayList<HashMap<String,Object>>)paramMap.get("ref_cursor");
-	         if(list==null) {	
+	         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+	         if(list.size()==0) {	
 	            model.addAttribute("message","아이디가 없습니다.");
 	            return "member/memberLogin";   
 	         }
-	         HashMap<String, Object> mvo = list.get(0);
-	         if(!mvo.get("USERPW").equals(membervo.getPwd()))
+	         HashMap<String, Object> hvo = list.get(0);
+	         if(!hvo.get("PWD").equals(mvo.getPwd()))
 	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (mvo.get("USERPW").equals(membervo.getPwd())) {
-	            HttpSession session = request.getSession();
-	            session.setAttribute("loginUser", mvo);
+	         else if (hvo.get("PWD").equals(mvo.getPwd())) {
+	            session.setAttribute("loginUser", hvo);
 	            url = "redirect:/";
 	         }	   
 	      }

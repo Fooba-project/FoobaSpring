@@ -11,11 +11,11 @@
 	        <div id="login_box">
 	            <div id="text_button_box" >
 	                <div id="login_idpw_box">
-	                    <input type="text" id="login_id" name="userid" placeholder="아이디" title="아이디"
-	                maxlength="30" value="">
+	                    <input type="text" id="login_id" name="id" placeholder="아이디" title="아이디"
+	                maxlength="30" value="${dto.id}">
 	    
-	                    <input type="password" id="login_pw" name="userpw" placeholder="비밀번호" title="비밀번호"
-	                maxlength="16" value="">
+	                    <input type="password" id="login_pw" name="pwd" placeholder="비밀번호" title="비밀번호"
+	                maxlength="16" value="${dto.pwd}">
 	                </div>
 	    
 	                <div id="log_buttonbox">
