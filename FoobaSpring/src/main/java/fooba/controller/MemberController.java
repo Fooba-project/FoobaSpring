@@ -71,10 +71,14 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping("/memberJoinForm")
+	public String memberJoinForm() {
+		return "member/memberJoin";
+	}
 	
 	
 	
-	@RequestMapping(value="/member_join_send_form", method=RequestMethod.POST)
+	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
 	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
 			HttpServletRequest request, HttpSession session, Model model,
 			@RequestParam(value="userreid") String userreid,
