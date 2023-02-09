@@ -1,15 +1,16 @@
 package fooba.controller;
 
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ezen.mshop.dto.MemberVO;
-
-import fooba.service.MemberService2;
 import fooba.service.ResService;
 
 @Controller
@@ -44,7 +45,15 @@ public class ResController {
 	}
 	
 	@RequestMapping(value="/res_login",method=RequestMethod.POST)
-	public Sring res_login(@ModelAttribute("dto")@Valid RestaurantVO rvo,)
+	public String res_login(@RequestParam("resid") String resid,@RequestParam("respw")String respw,
+			 BindingResult result, HttpSession session, Model model) {
+		String url=""; 
+		
+		
+		
+		return url;
+		
+	}
 	
 	
 	

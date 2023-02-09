@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class RestaurantVO {
+	
 	private String rid;
 	private String rpwd;
 	private String rname;
