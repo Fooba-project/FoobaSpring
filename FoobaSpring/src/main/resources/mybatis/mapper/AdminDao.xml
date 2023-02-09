@@ -23,6 +23,10 @@
 	<update id="admin_resOx" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL admin_resOx (#{ox}, #{rseq} )}
 	</update>
+	
+	<update id="admin_orderLR" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL admin_orderLR (#{result}, #{oseq} )}
+	</update>
 
 </mapper>
 

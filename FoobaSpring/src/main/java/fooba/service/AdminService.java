@@ -71,6 +71,10 @@ public class AdminService {
 		adao.admin_resOx(prm);
 	}
 
+	public void admin_orderLR(HashMap<String, Object> prm) {
+		adao.admin_orderLR(prm);
+	}
+
 //	public void insertProduct(HashMap<String, Object> paramMap) {
 //		adao.insertProduct(paramMap);
 //	}

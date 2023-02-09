@@ -42,6 +42,7 @@ public class AdminController {
 	@RequestMapping("/admin_loginForm")
 	public String admin_loginForm(HttpSession session) {
 		session.removeAttribute("loginAdmin");
+		System.out.println(12);
 		return "admin/admin_login";
 	}
 
@@ -62,7 +63,6 @@ public class AdminController {
 		HashMap<String,Object> hm = list.get(0);
 		if (hm.get("PWD")==null) model.addAttribute("message", "DB오류 관리자에게 문의하세요");
 		else if(adminPw.equals((String)hm.get("PWD"))) {
-			System.out.println(1);
 			session.setAttribute("loginAdmin", hm);
 			session.removeAttribute("message");
 			return "redirect:/adminList?table=r&first=y";
@@ -110,6 +110,18 @@ public class AdminController {
 		prm.put("rseq", rseq);
 		as.admin_resOx(prm);
 		return "redirect:/adminList?table=r";
+	}
+	
+	
+	@RequestMapping("/admin_orderLR")
+	public String admin_orderLR(	HttpSession session, @RequestParam("result") int result, @RequestParam("oseq") int oseq) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("result", result);
+		prm.put("oseq", oseq);
+		as.admin_orderLR(prm);
+		return "redirect:/adminList?table=o";
 	}
 	
 	

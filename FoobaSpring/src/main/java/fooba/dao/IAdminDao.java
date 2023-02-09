@@ -13,4 +13,6 @@ public interface IAdminDao {
 
 	void admin_resOx(HashMap<String, Object> prm);
 
+	void admin_orderLR(HashMap<String, Object> prm);
+
 }
