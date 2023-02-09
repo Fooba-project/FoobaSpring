@@ -65,6 +65,12 @@ public class AdminService {
 		adao.adminList(prm);
 	}
 
+	
+
+	public void admin_resOx(HashMap<String, Object> prm) {
+		adao.admin_resOx(prm);
+	}
+
 //	public void insertProduct(HashMap<String, Object> paramMap) {
 //		adao.insertProduct(paramMap);
 //	}

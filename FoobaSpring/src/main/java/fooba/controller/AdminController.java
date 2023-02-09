@@ -101,6 +101,17 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("/admin_resOx")
+	public String admin_restaurantOk(	HttpSession session, @RequestParam("ox") int ox, @RequestParam("rseq") int rseq) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("ox", ox);
+		prm.put("rseq", rseq);
+		as.admin_resOx(prm);
+		return "redirect:/adminList?table=r";
+	}
+	
 	
 }	
 
@@ -110,16 +121,16 @@ public class AdminController {
 	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
 			HttpServletRequest request, HttpSession session, Model model,
 			@RequestParam("인수") String 인수) {
-		if(session.getAttribute("loginUser")==null) return "redirect:/login"; // 로그인체크
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm"; // 로그인체크
 
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("인수", 인수);
-		prm.put("rc", null);
-		as.servicemethod(hm);
-		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("rc");
+		prm.put("ref_cursor", null);
+		as.servicemethod(prm);
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		HashMap<String,Object> hm = list.get(0);
 		model.addAttribute("memberList", hm);
-		return "갈곳경로;
+		return "갈곳경로";
 	}
 	*/
 	

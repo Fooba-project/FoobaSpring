@@ -2,11 +2,11 @@
 <%@ include file="admin_header.jsp"%>
 
  <script type="text/javascript">
- function go_search( comm ){
+ function go_search(){
 		document.frm.action = "adminList?table=m";
 }
 
-	function go_total( comm ){
+	function go_total(){
 		document.frm.action = "adminList?table=m&first=y";
 		document.frm.submit();
 } 
@@ -19,9 +19,9 @@
             <tr> 
                 <td style="font-size:17px; width:642;">회원 ID: <input class="keyy" type="text" name="key" value="${key}">
                     <input class="admin_searchres_btn" type="button" name="btn_total" value="전체보기 " 
-                        onClick="go_total( 'admin_memberList' );">
+                        onClick="go_total();">
                     <input class="admin_searchres_btn" type="submit" name="btn_search" value="검색" 
-                        onClick="go_search( 'admin_memberList' );">  
+                        onClick="go_search();">  
                      
                 </td>
             </tr>

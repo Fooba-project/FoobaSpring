@@ -20,5 +20,9 @@
 		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
 	</select>
 
+	<update id="admin_resOx" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL admin_resOx (#{ox}, #{rseq} )}
+	</update>
+
 </mapper>
 

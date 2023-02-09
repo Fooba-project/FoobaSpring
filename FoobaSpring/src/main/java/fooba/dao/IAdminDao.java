@@ -11,4 +11,6 @@ public interface IAdminDao {
 
 	void adminList(HashMap<String, Object> prm);
 
+	void admin_resOx(HashMap<String, Object> prm);
+
 }
