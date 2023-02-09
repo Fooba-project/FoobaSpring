@@ -3,14 +3,11 @@
 
  <script type="text/javascript">
  function go_search( comm ){
-		var url = "fooba.do?command=" + comm + "&page=1";
-		document.frm.action = url;
-		
+		document.frm.action = "adminList?table=m";
 }
 
 	function go_total( comm ){
-		document.frm.key.value="";
-		document.frm.action = "fooba.do?command=" + comm + "&page=1";
+		document.frm.action = "adminList?table=m&first=y";
 		document.frm.submit();
 } 
 </script>
@@ -33,11 +30,11 @@
             <tr><th>회원 ID</th><th>회원 닉네임</th><th>전화번호</th><th>이메일</th><th>가입날짜</th></tr>       
         <c:forEach items="${memberList}" var="MemberVO">
                 <tr>
-                    <td style="text-align:center;">${MemberVO.id}</td>
-                    <td style="text-align:center;">${MemberVO.nick}</td>
-                    <td style="text-align:center;">${MemberVO.phone}</td>
-                    <td style="text-align:center;">${MemberVO.email}</td>                    
-                    <td style=text-align:center;><fmt:formatDate value="${MemberVO.indate}"/></td> 
+                    <td style="text-align:center;">${MemberVO.ID}</td>
+                    <td style="text-align:center;">${MemberVO.NICK}</td>
+                    <td style="text-align:center;">${MemberVO.PHONE}</td>
+                    <td style="text-align:center;">${MemberVO.EMAIL}</td>                    
+                    <td style=text-align:center;><fmt:formatDate value="${MemberVO.INDATE}"/></td> 
                 </tr>
          </c:forEach>
          </table>
@@ -46,7 +43,7 @@
 </article>
 <br>
 <jsp:include page="/admin/paging/paging.jsp">
-<jsp:param name="command" value="fooba.do?command=admin_memberKick"/>
+<jsp:param name="command" value="adminList?table=m"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 

@@ -24,6 +24,7 @@ public class AdminService {
 	public void adminList(HashMap<String, Object> prm) {
 		HttpServletRequest request = (HttpServletRequest)prm.get("request");
 		HttpSession session = request.getSession();
+		
 		if(request.getParameter("first")!=null) {
 			session.removeAttribute("page");
 			session.removeAttribute("key");
@@ -56,9 +57,11 @@ public class AdminService {
 		int count = Integer.parseInt( prm.get("cnt")+"" );
 		paging.setTotalCount(count);
 		paging.paging();
+		
 		prm.put("startNum", paging.getStartNum());
 		prm.put("endNum", paging.getEndNum());
 		prm.put("paging", paging);
+		
 		adao.adminList(prm);
 	}
 

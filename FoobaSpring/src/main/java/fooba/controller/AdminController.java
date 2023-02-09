@@ -45,13 +45,13 @@ public class AdminController {
 
 	@RequestMapping("/admin_login")
 	public String admin_login(	HttpServletRequest request, HttpSession session, Model model,
-			@RequestParam("adminid") String adminid, @RequestParam("adminpw") String adminpw) {
+			@RequestParam("adminId") String adminId, @RequestParam("adminPw") String adminPw) {
 		
 		HashMap<String, Object> prm = new HashMap<>();
-		prm.put("adminid", adminid);
-		prm.put("rc", null);
+		prm.put("adminId", adminId);
+		prm.put("ref_cursor", null);
 		as.getAdmin(prm);
-		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("rc");
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		
 		if(list.size()==0) {model.addAttribute("message", "아이디가 없습니다.");
 			return "admin/admin_login";
@@ -59,7 +59,7 @@ public class AdminController {
 		
 		HashMap<String,Object> hm = list.get(0);
 		if (hm.get("PWD")==null) model.addAttribute("message", "DB오류 관리자에게 문의하세요");
-		else if(adminpw.equals((String)hm.get("PWD"))) {
+		else if(adminPw.equals((String)hm.get("PWD"))) {
 			session.setAttribute("loginAdmin", hm);
 			session.removeAttribute("message");
 			return "redirect:/adminList?table=r&first=y";
@@ -85,16 +85,16 @@ public class AdminController {
 			return "admin/productList";
 		} else if(table.equals("o")) {
 			model.addAttribute("orderList", list);
-			return "admin/productList";
+			return "admin/orderList";
 		} else if(table.equals("m")) {
 			model.addAttribute("memberList", list);
-			return "admin/productList";
+			return "admin/memberList";
 		} else if(table.equals("q")) {
 			model.addAttribute("qnaList", list);
-			return "admin/productList";
+			return "admin/qnaList";
 		} else {
 			model.addAttribute("bannerList", list);
-			return "admin/productList";
+			return "admin/bannerList";
 		}
 	}
 	

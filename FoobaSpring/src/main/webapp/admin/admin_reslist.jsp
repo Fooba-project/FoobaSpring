@@ -9,13 +9,11 @@
 }
  
  function go_search( comm ){
-		var url = "fooba.do?command=" + comm + "&page=1";
-		document.frm.action = url;
+		document.frm.action = "adminList?table=r";
 }
 
 	function go_total( comm ){
-		document.frm.key.value="";
-		document.frm.action = "fooba.do?command=" + comm + "&page=1";
+		document.frm.action = "adminList?table=r&first=y";
 		document.frm.submit();
 } 
 	function go_ryn( rseq ){
@@ -49,22 +47,22 @@
             <tr><th>번호</th><th>가게명</th><th>가입현황</th><th>승인현황</th></tr>       
         <c:forEach items="${resList}" var="RestaurantVO">
                 <tr>
-                    <td height="23" align="center">${RestaurantVO.rseq}</td>
+                    <td height="23" align="center">${RestaurantVO.RSEQ}</td>
                     <td style="text-align:left; padding-left:40px;">
-                        <a style="text-decoration-line: none;"href="#" onClick="go_detail('${RestaurantVO.rseq}');">${RestaurantVO.rname}</a>
+                        <a style="text-decoration-line: none;"href="#" onClick="go_detail('${RestaurantVO.RSEQ}');">${RestaurantVO.RNAME}</a>
                     </td>
                     <td style=text-align:center;>
                         <c:choose>
-                              <c:when test='${RestaurantVO.ryn==1}'>운영중
-   								 <td style="text-align:center;"><input type="button" value="거부" onClick="reject_ryn('${RestaurantVO.rseq}');"></td>
+                              <c:when test='${RestaurantVO.RYN==1}'>운영중
+   								 <td style="text-align:center;"><input type="button" value="거부" onClick="reject_ryn('${RestaurantVO.RSEQ}');"></td>
                               </c:when>
-                              <c:when test='${RestaurantVO.ryn==0}'>미승인           
-	                              <td style="text-align:center;"><input type="button" value="승인" onClick="go_ryn('${RestaurantVO.rseq}');">
-	                              <input type="button" value="거부" onClick="reject_ryn('${RestaurantVO.rseq}');"></td>
+                              <c:when test='${RestaurantVO.RYN==0}'>미승인           
+	                              <td style="text-align:center;"><input type="button" value="승인" onClick="go_ryn('${RestaurantVO.RSEQ}');">
+	                              <input type="button" value="거부" onClick="reject_ryn('${RestaurantVO.RSEQ}');"></td>
 	                   		  </c:when>
-	                   		  <c:when test='${RestaurantVO.ryn==3}'>휴업중
+	                   		  <c:when test='${RestaurantVO.RYN==3}'>휴업중
 	                   		  </c:when>
-                              <c:otherwise>승인거부<td style="text-align:center;"><input type="button" value="복구" onClick="go_ryn('${RestaurantVO.rseq}');"></td></c:otherwise>
+                              <c:otherwise>승인거부<td style="text-align:center;"><input type="button" value="복구" onClick="go_ryn('${RestaurantVO.RSEQ}');"></td></c:otherwise>
                         </c:choose>
                     </td> 
                 </tr>
@@ -75,7 +73,7 @@
 </article>
 <br>
 <jsp:include page="/admin/paging/paging.jsp">
-<jsp:param name="command" value="fooba.do?command=admin_restaurantList" />
+<jsp:param name="command" value="adminList?table=r" />
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br>
 

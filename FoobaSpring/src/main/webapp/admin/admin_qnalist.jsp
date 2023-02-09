@@ -16,14 +16,12 @@
 	}
 
  function go_search( comm ){
-		var url = "fooba.do?command=" + comm + "&page=1";
-		document.frm.action = url;
+		document.frm.action = "adminList?table=q";
 		
 }
 
 	function go_total( comm ){
-		document.frm.key.value="";
-		document.frm.action = "fooba.do?command=" + comm + "&page=1";
+		document.frm.action = "adminList?table=q&first=y";
 		document.frm.submit();
 } 
  
@@ -49,9 +47,9 @@
             <tr><th>질문번호</th><th>제목</th></tr>
         <c:forEach items="${qnaList}" var="QnaVO">
                 <tr>
-                    <td style="text-align:center;">${QnaVO.qseq}</td>
+                    <td style="text-align:center;">${QnaVO.QSEQ}</td>
                     <td style="text-align:left; padding-left:20px;">
-                    <a style="text-decoration-line: none;"href="#" onClick="go_detail('${QnaVO.qseq}');">${QnaVO.subject}</a>                
+                    <a style="text-decoration-line: none;"href="#" onClick="go_detail('${QnaVO.QSEQ}');">${QnaVO.SUBJECT}</a>                
                 </tr>
          </c:forEach>
          </table>
@@ -60,7 +58,7 @@
 </article>
 <br>
 <jsp:include page="/admin/paging/paging.jsp">
-<jsp:param name="command" value="fooba.do?command=admin_qnaList"/>
+<jsp:param name="command" value="adminList?table=q"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <%@ include file="admin_footer.jsp"%>

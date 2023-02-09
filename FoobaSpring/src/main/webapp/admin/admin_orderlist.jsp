@@ -11,14 +11,12 @@
 		document.frm.submit();
 	}
   function go_search( comm ){
-		var url = "fooba.do?command=" + comm + "&page=1";
-		document.frm.action = url;
+		document.frm.action = "adminList?table=o";
 		
 }
 
 	function go_total( comm ){
-		document.frm.key.value="";
-		document.frm.action = "fooba.do?command=" + comm + "&page=1";
+		document.frm.action = "adminList?table=o&first=y";
 		document.frm.submit();
 } 
   
@@ -42,33 +40,33 @@
             <tr><th>주문번호</th><th>주문자 ID</th><th>가게이름</th><th>가격</th><th>주문시간</th><th>주문상태</th></tr>      
         <c:forEach items="${orderList}" var="OrderViewVO">
                 <tr>
-                    <td style="text-align:center;">${OrderViewVO.oseq}</td>
-                    <td style="text-align:center;">${OrderViewVO.id}</td>
-                    <td style="text-align:center;">${OrderViewVO.rname}</td>
-                    <td style="text-align:center;">${OrderViewVO.totalprice}</td>                    
-                    <td style="text-align:center;"><fmt:formatDate value="${OrderViewVO.indate}"/></td> 
+                    <td style="text-align:center;">${OrderViewVO.OSEQ}</td>
+                    <td style="text-align:center;">${OrderViewVO.ID}</td>
+                    <td style="text-align:center;">${OrderViewVO.RNAME}</td>
+                    <td style="text-align:center;">${OrderViewVO.TOTALPRICE}</td>                    
+                    <td style="text-align:center;"><fmt:formatDate value="${OrderViewVO.INDATE}"/></td> 
        
          	<td style=text-align:center;>
          	<c:choose>
-     			<c:when test='${OrderViewVO.result=="0"}'>
-					<input disabled type="button" value="&lt;" onclick="go_left('${OrderViewVO.oseq}', '${OrderViewVO.result }');">
+     			<c:when test='${OrderViewVO.RESULT=="0"}'>
+					<input disabled type="button" value="&lt;" onclick="go_left('${OrderViewVO.OSEQ}', '${OrderViewVO.RESULT }');">
 					주문확인중
-					<input type="button" value="&gt;" onclick="go_right('${OrderViewVO.oseq}');"> 
+					<input type="button" value="&gt;" onclick="go_right('${OrderViewVO.OSEQ}');"> 
                 </c:when>
-                <c:when test='${OrderViewVO.result=="1"}'>
-						<input type="button" value="&lt;" onclick="go_left('${OrderViewVO.oseq}', '${OrderViewVO.result }');">
+                <c:when test='${OrderViewVO.RESULT=="1"}'>
+						<input type="button" value="&lt;" onclick="go_left('${OrderViewVO.OSEQ}', '${OrderViewVO.RESULT }');">
 					배달중
-					<input type="button" value="&gt;" onclick="go_right('${OrderViewVO.oseq}');"> 
+					<input type="button" value="&gt;" onclick="go_right('${OrderViewVO.OSEQ}');"> 
                 </c:when>
-                <c:when test='${OrderViewVO.result=="2"}'>
-					<input type="button" value="&lt;" onclick="go_left('${OrderViewVO.oseq}', '${OrderViewVO.result }');">
+                <c:when test='${OrderViewVO.RESULT=="2"}'>
+					<input type="button" value="&lt;" onclick="go_left('${OrderViewVO.OSEQ}', '${OrderViewVO.RESULT }');">
 					배달완료
-					<input type="button" value="&gt;" onclick="go_right('${OrderViewVO.oseq}');"> 
+					<input type="button" value="&gt;" onclick="go_right('${OrderViewVO.OSEQ}');"> 
                 </c:when>
                 <c:otherwise>
-					<input  type="button" value="&lt;" onclick="go_left('${OrderViewVO.oseq}', '${OrderViewVO.result }');">
+					<input  type="button" value="&lt;" onclick="go_left('${OrderViewVO.OSEQ}', '${OrderViewVO.RESULT }');">
 					리뷰작성완료
-					<input disabled type="button" value="&gt;" onclick="go_right('${OrderViewVO.oseq}');"> 
+					<input disabled type="button" value="&gt;" onclick="go_right('${OrderViewVO.OSEQ}');"> 
                 </c:otherwise>
             </c:choose>
  
@@ -81,7 +79,7 @@
 </article>
 <br>
 <jsp:include page="/admin/paging/paging.jsp">
-<jsp:param name="command" value="fooba.do?command=admin_orderList"/>
+<jsp:param name="command" value="adminList?table=o&first=y"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
