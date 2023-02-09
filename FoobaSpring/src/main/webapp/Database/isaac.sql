@@ -55,3 +55,13 @@ elsif p_table= 'b' then
     select * from banner order by useyn desc, order_seq asc;
 end if;
 END;
+
+
+
+create or replace procedure admin_resOx( p_ox in number, p_rseq in number )
+IS
+BEGIN
+    update restaurant set ryn=p_ox where rseq=p_rseq;
+    commit;
+END;
+
