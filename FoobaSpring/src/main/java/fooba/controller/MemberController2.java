@@ -88,4 +88,12 @@ public class MemberController2 {
 	      return url;
 	 }
 	
+	 @RequestMapping(value="/logout")
+	 public String logout(HttpServletRequest request) {
+		 HttpSession session = request.getSession();
+		 session.removeAttribute("loginUser");
+		 return "redirect:/";
+	 }
+	 
+	 
 }
