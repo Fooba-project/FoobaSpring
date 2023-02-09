@@ -68,7 +68,7 @@ public class ResController {
 			
 			if(list.size()==0) {
 				model.addAttribute("message","아이디가 업습니다.");
-				return "member/login";
+				return "restaurant/res_login";
 			}
 			HashMap<String,Object>rvo=list.get(0);
 			if(!rvo.get("RPWD").equals(rpwd))
@@ -76,13 +76,27 @@ public class ResController {
 			else if(rvo.get("RYN").equals("0")) 
 				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
 			else if(rvo.get("RPWD").equals(rpwd)) {
-				session.setAttribute("loginUser",rvo);
-				url="redirect:/";
+				session.setAttribute("loginRes",rvo);
+				url="redirect:/res_foodmenu";
+				
+				
+				paramMap.put("rseq",rvo.get("RSEQ"));
+				paramMap.put("star",0);
+				rs.starAvg(paramMap);
+				int intstar=(int)star;
+				double doublestar=(int)(star*10)/(double)10;
+				session.setAttribute("intstar",intstar); //별 개수
+				session.setAttribute("doublestar",doublestar); //별점(소수점까지)
+				/**/
+				session.removeAttribute("message");
+				
 			}			
 		}
 		return url;
-		
 	}
+	
+	
+	
 	
 	
 	

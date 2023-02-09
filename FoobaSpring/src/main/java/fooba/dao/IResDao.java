@@ -9,4 +9,6 @@ public interface IResDao {
 
 	void getRes(HashMap<String, Object> paramMap);
 
+	void starAvg(HashMap<String, Object> starMap);
+
 }

@@ -13,6 +13,15 @@
 				)}
 	</select>
 	
+	<select id="starAvg" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL starAvg(
+				#{rseq},
+				#{stars,mode=OUT,jdbcType=INTEGER},
+				#{orders,mode=OUT,jdbcType=INTEGER}	
+			)
+		}
+	</select>
 
 </mapper>
 

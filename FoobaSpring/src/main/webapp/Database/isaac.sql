@@ -5,7 +5,7 @@ p_rc out sys_refcursor
 IS
 BEGIN
     open p_rc for
-    select * from admin where id = ?;
+    select * from admin where id = p_id;
 END;
 
 create or replace procedure adminGetAllCount(
