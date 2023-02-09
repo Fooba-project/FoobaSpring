@@ -1,5 +1,8 @@
 package fooba.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import fooba.dto.RestaurantVO;
 import fooba.service.ResService2;
 
 @Controller
@@ -35,8 +39,27 @@ public class ResController2 {
 	}
 	*/
 	@RequestMapping("/res_foodmenu")
-		public String method(HttpServletRequest request, HttpSession session, Model model) {
+		public String res_foodmenu(HttpServletRequest request, HttpSession session, Model model
+		) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		return ""; 
+		else {	
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		RestaurantVO rvo=(RestaurantVO)session.getAttribute("loginRes");
+		paramMap.put("rseq",rvo.getRseq());
+		paramMap.put("ref_cursor", null);
+
+		rs.foodList( paramMap );
+		ArrayList<HashMap<String, Object>> list
+			=(ArrayList<HashMap<String, Object>>)paramMap.get("ref_cursor");
+		model.addAttribute("FoodList",list);
+		}
+		return "restaurant/res_foodmenu";  
 	}
+	
+	@RequestMapping("/res_foodmenuUpdateForm")
+		public String res_foodmenuUpdateForm(HttpServletRequest request, HttpSession session, Model model) {
+		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
+		return "";  
+	}
+	
 }

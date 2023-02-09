@@ -7,6 +7,9 @@
 <mapper namespace="fooba.dao.IResDao2">
 	<resultMap id="resMap" type="java.util.HashMap"></resultMap>
 	
+	<select id="foodList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL foodList( #{rseq},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}}
+	</select>
 
 </mapper>
 
