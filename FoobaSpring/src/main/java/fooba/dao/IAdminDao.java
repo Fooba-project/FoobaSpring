@@ -9,4 +9,6 @@ public interface IAdminDao {
 
 	void getAdmin(HashMap<String, Object> prm);
 
+	void adminList(HashMap<String, Object> prm);
+
 }

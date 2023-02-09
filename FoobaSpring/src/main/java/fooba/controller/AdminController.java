@@ -72,14 +72,14 @@ public class AdminController {
 	public String adminList(HttpServletRequest request, HttpSession session, Model model, @RequestParam("table") String table) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		
-		HashMap<String, Object> paramMap = new HashMap<>();
-		paramMap.put("table", table);
-		paramMap.put("request", request);
-		paramMap.put("ref_cursor", null);
-		as.adminList(paramMap);
-		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)paramMap.get("ref_cursor");
-		model.addAttribute("paging", (Paging)paramMap.get("paging"));
-		model.addAttribute("key", (String)paramMap.get("key"));
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("table", table);
+		prm.put("request", request);
+		prm.put("ref_cursor", null);
+		as.adminList(prm);
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		model.addAttribute("paging", (Paging)prm.get("paging"));
+		model.addAttribute("key", (String)prm.get("key"));
 		if(table.equals("r")) { 
 			model.addAttribute("resList", list);
 			return "admin/productList";
@@ -92,7 +92,7 @@ public class AdminController {
 		} else if(table.equals("q")) {
 			model.addAttribute("qnaList", list);
 			return "admin/productList";
-		} else if(table.equals("b")) {
+		} else {
 			model.addAttribute("bannerList", list);
 			return "admin/productList";
 		}
