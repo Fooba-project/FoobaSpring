@@ -14,6 +14,14 @@
 	<select id="selectFood" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL selectFood( #{fseq},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2}}
 	</select>
+	
+	
+	<insert id="addFoodMenu" statementType="CALLABLE">
+		{ CALL addFoodMenu( #{rseq},#{fseq},#{fname},#{price},#{content},#{fside1},#{fsideprice1},
+			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3}) }
+	</insert>
+	
+	
 
 </mapper>
 

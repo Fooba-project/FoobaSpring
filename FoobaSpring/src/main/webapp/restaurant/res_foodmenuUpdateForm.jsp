@@ -36,8 +36,10 @@
                             </div><hr>
 	                    			  
                             <h3>메뉴 사진</h3>        
-                            	<img src="images/foodmenu/${FoodmenuVO.FIMAGE}" width="100px"><br>            
-                                <input type="file" name="fimage" />
+                            	<input type="hidden" name="fimage" id="image" >
+   								<div id="filename"></div>
+					<%--   	<img src="images/foodmenu/${FoodmenuVO.FIMAGE}" width="100px"><br>            
+                                <input type="file" name="fimage" /> --%>
                                 
                              <h3>사이드메뉴 1</h3>
                             <div id="food_text">
@@ -77,7 +79,12 @@
              </div>
           
             </form>
-            </div>   
-        </div>
+            </div>
+            <div style="position:relative; top:-80px;">
+			<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
+			<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
+			</form>
+			</div>   
+        
 
 <%@ include file="/restaurant/res_footer.jsp"%>

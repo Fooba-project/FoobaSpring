@@ -23,5 +23,15 @@ public class ResService2 {
 		rdao.selectFood(paramMap);
 		
 	}
+
+	public void addFoodMenu(HashMap<String, Object> paramMap) {
+		rdao.addFoodMenu(paramMap);
+		
+	}
+
+	public void deleteFoodMenu(HashMap<String, Object> paramMap) {
+		rdao.deleteFoodMenu(paramMap);
+		
+	}
 	
 }

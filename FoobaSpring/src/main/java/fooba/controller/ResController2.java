@@ -32,7 +32,6 @@ public class ResController2 {
 		public String res_foodmenu(HttpServletRequest request, HttpSession session, Model model
 		) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		else {	
 			HashMap<String , Object> paramMap = new HashMap<String , Object>();
 			HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
 			paramMap.put("rseq",rvo.get("RSEQ"));
@@ -42,7 +41,6 @@ public class ResController2 {
 			ArrayList<HashMap<String, Object>> list
 				=(ArrayList<HashMap<String, Object>>)paramMap.get("ref_cursor");
 			model.addAttribute("FoodList",list);
-		}
 		return "restaurant/res_foodmenu";  
 	}
 	
@@ -50,7 +48,6 @@ public class ResController2 {
 		public String res_foodmenuUpdateForm(HttpServletRequest request, HttpSession session, Model model,
 				@RequestParam("fseq") int fseq) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		else {	
 			HashMap<String , Object> paramMap = new HashMap<String , Object>();
 			
 			paramMap.put("fseq", fseq);
@@ -62,9 +59,12 @@ public class ResController2 {
 			HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
 			model.addAttribute("RestaurantVO",rvo);
 			model.addAttribute("FoodmenuVO", list.get(0));		
-		}
+	
 		return "restaurant/res_foodmenuUpdateForm";  
 	}
+	
+	
+	
 	
 	@Autowired
 	ServletContext context;
@@ -87,36 +87,37 @@ public class ResController2 {
 		return result; 
 	}
 
-	@RequestMapping("/res_foodemenuUpdate")
+	@RequestMapping("/res_foodemenuAdd")
 	public String res_foodemenuUpdate(HttpServletRequest request, HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		else {	
+			
 			HashMap<String , Object> paramMap = new HashMap<String , Object>();
-			paramMap.put("name", request.getParameter("name"));
-			paramMap.put("kind", request.getParameter("kind"));
-			paramMap.put("price1", Integer.parseInt(request.getParameter("price1")));
-			paramMap.put("price2", Integer.parseInt(request.getParameter("price2")));
-			paramMap.put("price3", Integer.parseInt(request.getParameter("price3")));
+			paramMap.put("rseq", Integer.parseInt(request.getParameter("rseq")));
+			paramMap.put("fseq", Integer.parseInt(request.getParameter("fseq")));
+			paramMap.put("fname", request.getParameter("fname"));
+			paramMap.put("price", Integer.parseInt(request.getParameter("price")));
 			paramMap.put("content", request.getParameter("content"));
-			paramMap.put("image", request.getParameter("image"));
+			paramMap.put("fside1", request.getParameter("fside1"));
+			paramMap.put("fsideprice1", Integer.parseInt(request.getParameter("fsideprice1")));
+			paramMap.put("fside2", request.getParameter("fside2"));
+			paramMap.put("fsideprice2", Integer.parseInt(request.getParameter("fsideprice2")));
+			paramMap.put("fside3", request.getParameter("fside3"));
+			paramMap.put("fsideprice3", Integer.parseInt(request.getParameter("fsideprice3")));
+			paramMap.put("fimage", request.getParameter("fimage"));
 			
-		}
-		return null;
-		
+			rs.addFoodMenu(paramMap);
+		return "redirect:/res_foodmenu";	
 	}
 	
-
-	@RequestMapping("/res_foodmenuAddForm")
-		public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session, Model model) {
+	@RequestMapping("/res_foodmenuDelete")
+	public String res_foodmenuDelete(HttpServletRequest request, HttpSession session, Model model,
+			@RequestParam("fseq") int fseq) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		else {
-			HashMap<String , Object> paramMap = new HashMap<String , Object>();
-			
-			
-		}
-		return"restaurant/res_foodMenuAdd";
-		
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("fseq", fseq);
+		rs.deleteFoodMenu(paramMap);
+		return "redirect:/res_foodmenu";
 	}
 	
-
+	
 }
