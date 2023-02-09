@@ -11,4 +11,6 @@ public interface IResDao {
 
 	void starAvg(HashMap<String, Object> starMap);
 
+	void resFindId(HashMap<String, Object> paramMap);
+
 }

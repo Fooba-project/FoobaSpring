@@ -14,8 +14,12 @@ public class RestaurantVO {
 	@NotNull(message="비밀번호를 써주세요")
 	@NotEmpty(message="비밀번호를 써주세요")
 	private String rpwd;
+	@NotNull(message="이름을 써주세요")
+	@NotEmpty(message="이름을 써주세요")
 	private String rname;
 	private String ownername;
+	@NotNull(message="전화번호를 써주세요")
+	@NotEmpty(message="전화번호를 써주세요")
 	private String rphone;
 	private String raddress;
 	private String rimage;

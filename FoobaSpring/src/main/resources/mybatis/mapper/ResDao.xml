@@ -16,11 +16,15 @@
 	<select id="starAvg" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 			CALL starAvg(
-				#{rseq},
-				#{stars,mode=OUT,jdbcType=INTEGER},
-				#{orders,mode=OUT,jdbcType=INTEGER}	
+				#{rseq},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
 			)
 		}
+	</select>
+	
+	<select id="resFindId" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL resFindId(#{rname},
+				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+				)}
 	</select>
 
 </mapper>

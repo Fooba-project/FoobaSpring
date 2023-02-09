@@ -2,9 +2,7 @@
 <%@ include file="res_header.jsp"%>
 
 
-<form method="post" action="fooba.do" name="res_loginForm">
-<input type="hidden" name="command" value="res_login">
-
+<form method="post" action="res_login" name="res_loginForm">
 
 	<div class="login_form">
 			<div id="logspace"><br>restaurant login</div>
@@ -30,13 +28,13 @@
 	            </div>
 	            <div id="loginform_linetextbox">
 	            <div class="loginform_linetext">
-	                <span class="text1" onclick="location.href='fooba.do?command=res_FindIdForm'"> 아이디찾기</span>
+	                <span class="text1" onclick="location.href='res_FindIdForm'"> 아이디찾기</span>
 	            </div>
 	            <div class="loginform_linetext">            
-	                <span class="text2"  onclick="location.href='fooba.do?command=res_FindPwForm'"> 비밀번호찾기 </span>
+	                <span class="text2"  onclick="location.href='res_FindPwForm'"> 비밀번호찾기 </span>
 	            </div>
 	            <div class="loginform_linetext">
-	                <span class="text3" onclick="location.href='fooba.do?command=res_joinForm'"> 회원 가입</span>
+	                <span class="text3" onclick="location.href='res_joinForm'"> 회원 가입</span>
 	            </div>
 	        </div>
 	    </div>

@@ -31,7 +31,7 @@
 </style>
 </head>
 <body>
-    <form method="post" action="fooba.do?command=res_FindId" name="findId">
+    <form method="post" action="res_FindId" name="findId">
         <div class="login_form">
                 <div id="logspace"></div>
                 <div id="loginmain_logo">
@@ -41,8 +41,8 @@
                 <div id="login_box">
                     <div id="text_button_box">
                         <div id="login_idpw_box">
-							<input type="text" id="find_name" name="username" placeholder="사업자 이름" title="이름" maxlength="30">
-                            <input type="text" id="find_phone" name="userphone" placeholder="전화번호를 입력하세요" maxlength="13" onkeyup="chkPhoneCode(event)">
+							<input type="text" id="find_name" name="rname" placeholder="사업자 이름" title="이름" maxlength="30">
+                            <input type="text" id="find_phone" name="rphone" placeholder="전화번호를 입력하세요" maxlength="13" onkeyup="chkPhoneCode(event)">
                         </div>
             			<br>
             			<div style="text-align:center; "><p id="check" class="check" >${check}${message }</p></div>
