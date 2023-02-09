@@ -80,8 +80,8 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
 	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
 			HttpServletRequest request, HttpSession session, Model model,
-			@RequestParam(value="userreid") String userreid,
-			@RequestParam(value="userpwdchk") String userpwdchk) {
+			@RequestParam(value="userreid", required=false) String userreid,
+			@RequestParam(value="userpwdchk", required=false) String userpwdchk) {
 		if( result.getFieldError("id")!=null)
 			model.addAttribute("message", result.getFieldError("id").getDefaultMessage() );
 		else if( result.getFieldError("pwd")!=null)
