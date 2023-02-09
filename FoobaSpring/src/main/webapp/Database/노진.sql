@@ -3,9 +3,6 @@ create or replace procedure getMemberFooba(
     p_cursor OUT SYS_REFCURSOR
 )
 IS
-    result_cur SYS_REFCURSOR;
 BEGIN
-    OPEN result_cur For select * from member where id=p_id;
-    p_cursor := result_cur;
+    OPEN p_cursor For select * from member where id=p_id;
 END;
-
