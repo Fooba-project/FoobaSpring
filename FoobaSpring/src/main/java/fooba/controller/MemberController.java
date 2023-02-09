@@ -72,7 +72,6 @@ public class MemberController {
 			HttpServletRequest request, HttpSession session, Model model,
 			@RequestParam(value="userreid") String userreid,
 			@RequestParam(value="userpwdchk") String userpwdchk) {
-	
 		if( result.getFieldError("id")!=null)
 			model.addAttribute("message", result.getFieldError("id").getDefaultMessage() );
 		else if( result.getFieldError("pwd")!=null)
