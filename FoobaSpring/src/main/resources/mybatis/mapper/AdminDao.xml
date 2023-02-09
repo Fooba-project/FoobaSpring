@@ -8,7 +8,7 @@
 	<resultMap id="adminMap" type="java.util.HashMap"></resultMap>
 	
 	<select id="getAdmin" statementType="CALLABLE" >
-		{CALL getAdmin(#{adminId }, #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap }) }
+		{CALL getAdmin(#{adminId }, #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}) }
 	</select>
 	
 	<select id="adminGetAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">

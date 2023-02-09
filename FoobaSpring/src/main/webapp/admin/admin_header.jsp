@@ -105,22 +105,23 @@ body {margin: 0; position:relative;}
 <body>
     <div class="headback" id="adminheadback">
         <div id="mainlogo">
-            <a href="fooba.do?command=index"><img src="images/mainlogo1.png"></a>
+            <a href="index"><img src="images/mainlogo1.png"></a>
         </div>
     </div>
     
     <div class="headbuttons" id="adminheadbuttons">
     	<c:choose>
     		<c:when test="${empty loginAdmin}">
-	    		<input type="button" value="Res" class="headbutton" onclick="location.href='fooba.do?command=res_login'">
-	    		<input type="button" value="Home" class="headbutton" onclick="location.href='fooba.do?command=index'">
+	    		<input type="button" value="Res" class="headbutton" onclick="location.href='res_login'">
+	    		<input type="button" value="Home" class="headbutton" onclick="location.href='index'">
     		</c:when>
     		<c:otherwise>
-    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='fooba.do?command=admin_logout&page=1&search=&key='">
-	    		<input type="button" value="가게관리" class="headbutton" onclick="location.href='fooba.do?command=admin_restaurantList&page=1&search=&key='">
-	    		<input type="button" value="회원관리" class="headbutton" onclick="location.href='fooba.do?command=admin_memberList&page=1&search=&key='">
-	    		<input type="button" value="주문관리" class="headbutton" onclick="location.href='fooba.do?command=admin_orderList&page=1&search=&key='">
-	    		<input type="button" value="QnA" class="headbutton" onclick="location.href='fooba.do?command=admin_qnaList&page=1&search=&key='">
+    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='admin_logout'">
+	    		<input type="button" value="가게관리" class="headbutton" onclick="location.href='adminList?table=r&first=y'">
+	    		<input type="button" value="회원관리" class="headbutton" onclick="location.href='adminList?table=m&first=y'">
+	    		<input type="button" value="주문관리" class="headbutton" onclick="location.href='adminList?table=o&first=y'">
+	    		<input type="button" value="QnA관리" class="headbutton" onclick="location.href='adminList?table=q&first=y'">
+	    		<input type="button" value="배너관리" class="headbutton" onclick="location.href='adminList?table=b&first=y'">
     		</c:otherwise>
     	</c:choose>
     </div>

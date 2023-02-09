@@ -23,7 +23,6 @@ public class AdminController {
 	
 	@RequestMapping("/")
 	public String main() {
-		System.out.println(1);
 		return "redirect:/admin_loginForm";
 	}
 	
@@ -66,11 +65,12 @@ public class AdminController {
 		HashMap<String,Object> hm = list.get(0);
 		if (hm.get("PWD")==null) model.addAttribute("message", "DB오류 관리자에게 문의하세요");
 		else if(adminPw.equals((String)hm.get("PWD"))) {
+			System.out.println(1);
 			session.setAttribute("loginAdmin", hm);
 			session.removeAttribute("message");
 			return "redirect:/adminList?table=r&first=y";
 		} else model.addAttribute("message", "비밀번호가 틀렸습니다.");
-		return "admin/admin_loginForm";
+		return "admin/admin_login";
 	}
 	
 	
