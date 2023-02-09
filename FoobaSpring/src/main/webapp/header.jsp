@@ -16,7 +16,7 @@
 <body>
     <div class="headback">
         <div id="mainlogo">
-            <a href="fooba.do?command=index"><img src="images/mainlogo1.png"></a>
+            <a href="index"><img src="images/mainlogo1.png"></a>
         </div>
     </div>
     <div class="headbuttons">
