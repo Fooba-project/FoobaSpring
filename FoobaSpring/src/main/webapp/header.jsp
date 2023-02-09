@@ -22,12 +22,12 @@
     <div class="headbuttons">
     	<c:choose>
     		<c:when test="${empty loginUser}">
-	    		<input type="button" value="로그인" class="headbutton" onclick="location.href='fooba.do?command=loginForm'">
-	    		<input type="button" value="회원가입" class="headbutton" onclick="location.href='fooba.do?command=memberJoinForm'">
+	    		<input type="button" value="로그인" class="headbutton" onclick="location.href='loginForm'">
+	    		<input type="button" value="회원가입" class="headbutton" onclick="location.href='memberJoinForm'">
     		</c:when>
     		<c:otherwise>
-    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='fooba.do?command=logout'">
-	    		<input type="button" value="마이페이지" class="headbutton" onclick="location.href='fooba.do?command=memberOrderList&&page=1'">
+    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='logout'">
+	    		<input type="button" value="마이페이지" class="headbutton" onclick="location.href='memberOrderList?first=y'">
     		</c:otherwise>
     	</c:choose>
     </div>
