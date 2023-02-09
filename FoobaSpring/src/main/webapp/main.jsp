@@ -68,7 +68,7 @@ $(function() {
 
 <div id="main">
 
-    <form id="search" name="search" method="post" action="fooba.do?command=search">
+    <form id="search" name="search" method="post" action="search">
         <input type="text" name="searchtext" id="searchtext"  placeholder="검색어를 입력하세요"  size="30px" value="${search}"/>
         <div id="searchicon1">
         	<button type="button" title="search" id="btn" name="btn" onClick="go_search2()" style="cursor:pointer"><img src="images/search.png"></button>

@@ -134,7 +134,41 @@ public class MemberController2 {
 	      }
 		 return url;
 	 }
+	 	
 	 
-	 @RequestMapping("/")
+	 @RequestMapping("/search")
+	 public String search(HttpServletRequest request,HttpSession session){
+		 
+		 String url="main/resList.jsp";
+		 HashMap<String, Object> prm = new HashMap<>();
+		 prm.put("request", request);
+		 
+		 // 서비스에 넣고, plsql로 조회한 후 루프 돌리기
+		 // 다시 되돌아 와서 list에 넣기
+		 
+		 ms.searchKey(prm);
+		 
+		/*
+		if (search!=null && !search.equals("")) {
+			ArrayList<RestaurantVO> searchList = rdao.searchKey(search);
+			for (RestaurantVO rvo : searchList) {
+				rvo.setFimage( rdao.FimagebyRseq( rvo.getRseq() ) );
+			}
+			request.setAttribute("search", search);
+			request.setAttribute("RList", searchList);
+		}*/
+			
+		if (hash!=null && !hash.equals("")) {
+			ArrayList<RestaurantVO>searchList=rdao.searchKey(hash);
+			for (RestaurantVO rvo : searchList) {
+				rvo.setFimage( rdao.FimagebyRseq( rvo.getRseq() ) );
+			}
+			request.setAttribute("search", "#"+hash );
+			request.setAttribute("RList", searchList);
+		}
+		
+		request.getRequestDispatcher(url).forward(request, response);
+
+	}
 	 
 }
