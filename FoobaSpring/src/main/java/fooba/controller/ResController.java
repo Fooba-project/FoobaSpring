@@ -1,6 +1,8 @@
 package fooba.controller;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +50,35 @@ public class ResController {
 	public String res_login(@RequestParam("rid") String rid,@RequestParam("rpwd")String rpwd,
 			 BindingResult result, HttpSession session, Model model) { 
 		
-		String url=""; 
+		String url="restaurant/res_login"; 
 		if(result.getFieldError("rid")!=null)
 			model.addAttribute("message",result.getFieldError("rid").getDefaultMessage());
 		else if(result.getFieldError("rpwd")!=null)
 			model.addAttribute("message",result.getFieldError("rpwd").getDefaultMessage());
 		else {
-		
-		
-		
-		
+
+			HashMap<String,Object>paramMap=new HashMap<String,Object>();
+			paramMap.put("rid",rid);
+			paramMap.put("ref_cursor",null);
 			
+			rs.getRes(paramMap);
+		
+			ArrayList<HashMap<String,Object>> list
+			=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+			
+			if(list.size()==0) {
+				model.addAttribute("message","아이디가 업습니다.");
+				return "member/login";
+			}
+			HashMap<String,Object>rvo=list.get(0);
+			if(!rvo.get("RPWD").equals(rpwd))
+				model.addAttribute("message","비번이 틀립니다.");
+			else if(rvo.get("RYN").equals("0")) 
+				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
+			else if(rvo.get("RPWD").equals(rpwd)) {
+				session.setAttribute("loginUser",rvo);
+				url="redirect:/";
+			}			
 		}
 		return url;
 		

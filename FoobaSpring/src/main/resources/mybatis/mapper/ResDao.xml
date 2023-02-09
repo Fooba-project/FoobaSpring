@@ -7,6 +7,12 @@
 <mapper namespace="fooba.dao.IResDao">
 	<resultMap id="resMap" type="java.util.HashMap"></resultMap>
 	
+	<select id="getRes" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL getRes(#{rid},
+				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+				)}
+	</select>
+	
 
 </mapper>
 
