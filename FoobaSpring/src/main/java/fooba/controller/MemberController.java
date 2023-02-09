@@ -67,6 +67,9 @@ public class MemberController {
 	}
 	
 	
+	
+	
+	
 	@RequestMapping(value="/member_join_send_form", method=RequestMethod.POST)
 	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
 			HttpServletRequest request, HttpSession session, Model model,
