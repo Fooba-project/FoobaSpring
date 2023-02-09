@@ -5,7 +5,7 @@
 	<ul>
 		<li><a href="memberOrderList&page=1">진행중인 주문내역</a></li>
 		<li><a href="memberOrderAll&page=1">전체 주문내역</a></li>		
-		<li><a href="memberUpdateForm">회원정보수정</a></li>
+		<li><a href="memberUpdateForm" >회원정보수정</a></li>
 		<li><a onclick="withdrawalMember()" a href="#">회원탈퇴</a></li>
 	</ul>
 </nav>

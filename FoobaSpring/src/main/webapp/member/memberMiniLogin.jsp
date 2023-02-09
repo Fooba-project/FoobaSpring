@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Fooba</title>
-<link href="css/fooba.css" rel="stylesheet">
+<link href="css/fooba.css" rel="stylesheet" >
 <script type="text/javascript" src="/code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src = "script/jquery-3.6.1.js"></script>
 <script src="script/fooba.js"></script>

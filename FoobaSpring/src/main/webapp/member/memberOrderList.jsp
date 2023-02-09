@@ -3,7 +3,7 @@
 <%@ include file="memberMypageSub.jsp"%>
 
 <style type="text/css">
-#memberOrderListdiv {width:100%; height:745px;}
+#memberOrderListdiv {width:100%; height:745px; }
 table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  border-top:0.5px solid black;}
 #orderArticle h2 {text-align: center;}
 #orderArticle hr {width: 200px; border: 1px solid gray;}

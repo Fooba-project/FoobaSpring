@@ -9,7 +9,7 @@
 <script type="text/javascript" src="script/fooba.js"></script>
 <link href="css/fooba.css" rel="stylesheet"> 
 <style type=text/css>
-.login_form {position: relative; width:100%; height:745px;}
+.login_form {position: relative; width:100%; height:745px; }
 #logspace {width: 100%; height: 100px;}
 #loginmessage {width: 100%; height: 20px; margin-top: 30px; color: red; text-align: center; }
 #Login_form_space {width:100%; height:150px;}

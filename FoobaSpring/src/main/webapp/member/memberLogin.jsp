@@ -9,7 +9,7 @@
 	        </div>
 	    
 	        <div id="login_box">
-	            <div id="text_button_box">
+	            <div id="text_button_box" >
 	                <div id="login_idpw_box">
 	                    <input type="text" id="login_id" name="userid" placeholder="아이디" title="아이디"
 	                maxlength="30" value="">

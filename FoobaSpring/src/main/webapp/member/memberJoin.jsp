@@ -9,7 +9,7 @@
                 <div class="join_list">
                     <input type="text" class="input_text" style="width: 490px;" name="userid" placeholder="아이디" onkeyup="chkIdCode(event)" value="${dto.id}"/>
                     <input type="hidden" name="userreid" value="${dto.userreid}"/>
-                    <input type="button" id="id_btn" value="중복 확인" onclick="idcheck()">
+                    <input type="button" id="id_btn" value="중복 확인" onclick="idcheck()" >
                 </div>
 
                 <div class="join_list">

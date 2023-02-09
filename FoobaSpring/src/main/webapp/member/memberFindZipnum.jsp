@@ -15,7 +15,7 @@
 <div id="popup">
     <div id="popup_text">
 		<h1>우편번호 검색</h1>
-		<form method="post" name="formm" action="memberFindZipNum">
+		<form method="post" name="formm" action="memberFindZipNum" >
                  <input name="dong" id="dongtext" type="text" placeholder="주소를 입력하세요.">
                  <input type="submit" value=" " class="submit" id="eheqhrl">
 		</form> 

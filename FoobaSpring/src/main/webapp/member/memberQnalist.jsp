@@ -2,7 +2,7 @@
 <%@ include file="../header.jsp"%>
 
 <style type="text/css">
-.member_list{text-align: center; margin-top:30px;}
+.member_list{text-align: center; margin-top:30px; }
 #member_list_table{margin: auto; width:810px;}
 .qna_title{ padding-left: 10px; height:30px;padding-top: 10px; background-color: #ffd1d1; font-weight: bold;  border-radius: 10px;}
 .qna_box{width:700px; margin:0 auto;}

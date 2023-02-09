@@ -32,7 +32,7 @@ function review_write() {
 }
 </script>
 <div id="menuorderdetail">
-    <div class="menuorderdetaildiv" id="menuorderdetaildiv1">
+    <div class="menuorderdetaildiv" id="menuorderdetaildiv1" >
         <div id="menuorderdetaildiv1_1">
             <c:choose>
                 <c:when test="${ovo.result==0}">
