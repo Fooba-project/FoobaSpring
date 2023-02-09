@@ -45,12 +45,21 @@ public class ResController {
 	}
 	
 	@RequestMapping(value="/res_login",method=RequestMethod.POST)
-	public String res_login(@RequestParam("resid") String resid,@RequestParam("respw")String respw,
-			 BindingResult result, HttpSession session, Model model) {
+	public String res_login(@RequestParam("rid") String rid,@RequestParam("rpwd")String rpwd,
+			 BindingResult result, HttpSession session, Model model) { 
+		
 		String url=""; 
+		if(result.getFieldError("rid")!=null)
+			model.addAttribute("message",result.getFieldError("rid").getDefaultMessage());
+		else if(result.getFieldError("rpwd")!=null)
+			model.addAttribute("message",result.getFieldError("rpwd").getDefaultMessage());
+		else {
 		
 		
 		
+		
+			
+		}
 		return url;
 		
 	}
