@@ -82,6 +82,7 @@ public class ResController {
 				
 				paramMap.put("rseq",rvo.get("RSEQ"));
 				paramMap.put("star",0);
+				int star=0;
 				rs.starAvg(paramMap);
 				int intstar=(int)star;
 				double doublestar=(int)(star*10)/(double)10;
