@@ -37,6 +37,6 @@ public class ResController2 {
 	@RequestMapping("/res_foodmenu")
 		public String method(HttpServletRequest request, HttpSession session, Model model) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		return "";
+		return ""; 
 	}
 }
