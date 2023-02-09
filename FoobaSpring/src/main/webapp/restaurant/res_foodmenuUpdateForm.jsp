@@ -2,6 +2,7 @@
 <%@ include file="/restaurant/res_header.jsp"%>
 <%@ include file="/restaurant/res_subhead.jsp"%>
 
+
         <div id="res_tab">
             <div class="res_infotab" onclick="location.href='fooba.do?command=res_foodmenu'" >돌아가기</div>
             <div class="res_infotab" onclick="#">수정</div>

@@ -11,7 +11,36 @@
 <script type="text/javascript" src="/code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src = "../script/jquery-3.6.1.js"></script>
 <link href="css/fooba.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
+
+
+
+$(function(){
+	$('#myButton').click( function(){
+		var formselect = $("#fileupForm")[0];   
+		var formdata = new FormData(formselect); 
+		$.ajax({    
+			url:"<%=request.getContextPath() %>/fileup", // 해당 컨트롤러의 requestMapping 목적지 설정 
+			type:"POST",
+			enctype:"multipart/form-data",
+			async: false,
+			data: formdata,
+	    	timeout: 10000,
+	    	contentType : false,
+	        processData : false,
+	        success : function(data){
+	            if(data.STATUS == 1){  	
+	            	$("#filename").append("<div>"+data.FILENAME+"</div>");
+	            	$("#image").val(data.FILENAME);
+	            	$("#filename").html("<img src='product_images/"+data.FILENAME+"' height='150'/>");
+	            }
+	        },
+	        error: function() {	alert("실패");}
+		});
+	});
+});
+
 
 function resCheck(){
 
