@@ -1,7 +1,13 @@
 package fooba.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.ezen.mshop.dto.MemberVO;
 
 import fooba.service.MemberService2;
 import fooba.service.ResService;
@@ -32,10 +38,15 @@ public class ResController {
 	*/
 	
 	@RequestMapping("/res_loginForm")
-	public String res_loginForm() {
-		
+	public String res_loginForm(HttpSession session) {
+		if(session.getAttribute("loginRes")!=null) return "redirect:/res_foodmenu";
 		return "restaurant/res_login";
 	}
+	
+	@RequestMapping(value="/res_login",method=RequestMethod.POST)
+	public Sring res_login(@ModelAttribute("dto")@Valid RestaurantVO rvo,)
+	
+	
 	
 	
 }
