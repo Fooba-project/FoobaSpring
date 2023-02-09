@@ -67,10 +67,10 @@
 	</form>
 		<div class="clear"></div>
 </article>
-<br>
-<jsp:include page="/admin/paging/paging.jsp">
+<br>1
+<jsp:include page="../../paging.jsp">
 <jsp:param name="command" value="adminList?table=r" />
-</jsp:include>	
+</jsp:include>	1
 <br><br><br><br><br><br><br><br><br><br><br>
 
 <%@ include file="admin_footer.jsp"%>

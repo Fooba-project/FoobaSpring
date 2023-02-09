@@ -42,7 +42,7 @@
 		<div class="clear"></div>
 </article>
 <br>
-<jsp:include page="/admin/paging/paging.jsp">
+<jsp:include page="/admin/paging.jsp">
 <jsp:param name="command" value="adminList?table=m"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

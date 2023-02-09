@@ -52,8 +52,8 @@ function go_total(){
 		<div class="clear"></div>
 </article>
 <br>
-<jsp:include page="/admin/paging/paging.jsp">
-<jsp:param name="command" value="adminList?table=q"/>
+<jsp:include page="/admin/paging.jsp">
+	<jsp:param name="command" value="adminList?table=q"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <%@ include file="admin_footer.jsp"%>

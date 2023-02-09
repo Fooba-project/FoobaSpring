@@ -42,7 +42,6 @@ public class AdminController {
 	@RequestMapping("/admin_loginForm")
 	public String admin_loginForm(HttpSession session) {
 		session.removeAttribute("loginAdmin");
-		System.out.println(12);
 		return "admin/admin_login";
 	}
 
@@ -56,7 +55,8 @@ public class AdminController {
 		as.getAdmin(prm);
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		
-		if(list.size()==0) {model.addAttribute("message", "아이디가 없습니다.");
+		if(list.size()==0) {
+			model.addAttribute("message", "아이디가 없습니다.");
 			return "admin/admin_login";
 		}
 		

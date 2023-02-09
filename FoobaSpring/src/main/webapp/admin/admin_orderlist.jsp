@@ -60,14 +60,14 @@
 							<input disabled type="button" value="&gt;" onclick="lrb(3, '${OrderViewVO.OSEQ}')"> 
 						</c:when>
 					</c:choose>
-				</td> 
+				</td>
 			</tr>
-		</c:forEach>                    
+		</c:forEach>
 	</table>
 </form>
 </article>
 <br>
-<jsp:include page="/admin/paging/paging.jsp">
+<jsp:include page="/admin/paging.jsp">
 <jsp:param name="command" value="adminList?table=o&first=y"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

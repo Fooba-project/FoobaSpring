@@ -28,8 +28,8 @@
 	    </div>
 	    <div id="copy">	All contents Copyright 2022 Fooba.Co all rights reserved<br>
 			Contact mail : abc@abc.com  Tel : +82 02 1234 1234 Fax : +82 02 1233 1233<br>
-			*<a href="fooba.do?command=admin_loginForm">administrator</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			*<a href="fooba.do?command=res_loginForm">restaurant</a>
+			*<a href="admin_loginForm">administrator</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			*<a href="res_loginForm">restaurant</a>
 		</div>
 	</div>
 	
