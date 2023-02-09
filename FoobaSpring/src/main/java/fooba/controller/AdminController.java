@@ -21,10 +21,7 @@ public class AdminController {
 	@Autowired
 	AdminService as;
 	
-	@RequestMapping("/")
-	public String main() {
-		return "redirect:/admin_loginForm";
-	}
+	
 	
 	@RequestMapping("/admin_tos")
 	public String admin_tos() {

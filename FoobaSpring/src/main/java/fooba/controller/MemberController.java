@@ -44,7 +44,11 @@ public class MemberController {
 		return "갈곳경로;
 	}
 	*/
-	
+	@RequestMapping("/")
+	public String main() {
+		return "main";
+	}
+
 	@RequestMapping("/idCheckForm")
 		public String id_check_form( 
 				@RequestParam("id") String id,
