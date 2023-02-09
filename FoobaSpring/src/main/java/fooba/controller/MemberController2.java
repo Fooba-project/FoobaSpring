@@ -1,7 +1,12 @@
 package fooba.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import fooba.service.MemberService2;
 
@@ -29,5 +34,10 @@ public class MemberController2 {
 		return "갈곳경로;
 	}
 	*/
+	
+	@RequestMapping("/index")
+	public String index() {
+		return "main";
+	}
 	
 }
