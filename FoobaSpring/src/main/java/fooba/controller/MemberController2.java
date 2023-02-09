@@ -135,7 +135,7 @@ public class MemberController2 {
 		 return url;
 	 }
 	 	
-	 
+	 /*
 	 @RequestMapping("/search")
 	 public String search(HttpServletRequest request,HttpSession session){
 		 
@@ -146,9 +146,9 @@ public class MemberController2 {
 		 // 서비스에 넣고, plsql로 조회한 후 루프 돌리기
 		 // 다시 되돌아 와서 list에 넣기
 		 
-		 ms.searchKey(prm);
+		 ms.resList(prm);
 		 
-		/*
+		
 		if (search!=null && !search.equals("")) {
 			ArrayList<RestaurantVO> searchList = rdao.searchKey(search);
 			for (RestaurantVO rvo : searchList) {
@@ -156,7 +156,7 @@ public class MemberController2 {
 			}
 			request.setAttribute("search", search);
 			request.setAttribute("RList", searchList);
-		}*/
+		}
 			
 		if (hash!=null && !hash.equals("")) {
 			ArrayList<RestaurantVO>searchList=rdao.searchKey(hash);
@@ -170,5 +170,5 @@ public class MemberController2 {
 		request.getRequestDispatcher(url).forward(request, response);
 
 	}
-	 
+	 */
 }

@@ -2,6 +2,9 @@ package fooba.service;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +21,25 @@ public class MemberService2 {
 		
 	}
 
-	public void searchKey(HashMap<String, Object> prm) {
-		mdao.searchKey(prm);
+	public void resList(HashMap<String, Object> prm) {
+		HttpServletRequest request = (HttpServletRequest)prm.get("request");
+		HttpSession session = request.getSession();
+		
+		if( request.getParameter("first")!=null) 
+			session.removeAttribute("search");
+		
+		String search = "";
+		if( request.getParameter("search") != null ) {
+			search = request.getParameter("search");
+			session.setAttribute("search", search);
+		} else if( session.getAttribute("search")!= null ) {
+			search = (String)session.getAttribute("search");
+		} else {
+			session.removeAttribute("search");
+		}
+		
+		HashMap<String, Object> sMap = new HashMap<>();
+		sMap.put(search, sMap);
 		
 	}
 	
