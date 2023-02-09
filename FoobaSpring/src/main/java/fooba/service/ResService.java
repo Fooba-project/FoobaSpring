@@ -9,6 +9,6 @@ import fooba.dao.IResDao;
 public class ResService {
 	
 	@Autowired
-	IResDao rdao;
+	IResDao rdao; 
 	
 }
