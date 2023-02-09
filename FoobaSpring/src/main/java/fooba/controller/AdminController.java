@@ -21,6 +21,12 @@ public class AdminController {
 	@Autowired
 	AdminService as;
 	
+	@RequestMapping("/")
+	public String main() {
+		System.out.println(1);
+		return "redirect:/admin_loginForm";
+	}
+	
 	@RequestMapping("/admin_tos")
 	public String admin_tos() {
 		return "admin/admin_fooba_tos";
@@ -82,19 +88,19 @@ public class AdminController {
 		model.addAttribute("key", (String)prm.get("key"));
 		if(table.equals("r")) { 
 			model.addAttribute("resList", list);
-			return "admin/productList";
+			return "admin/admin_reslist";
 		} else if(table.equals("o")) {
 			model.addAttribute("orderList", list);
-			return "admin/orderList";
+			return "admin/admin_orderlist";
 		} else if(table.equals("m")) {
 			model.addAttribute("memberList", list);
-			return "admin/memberList";
+			return "admin/admin_memlist";
 		} else if(table.equals("q")) {
 			model.addAttribute("qnaList", list);
-			return "admin/qnaList";
+			return "admin/admin_qnalist";
 		} else {
 			model.addAttribute("bannerList", list);
-			return "admin/bannerList";
+			return "admin/admin_bannerlist";
 		}
 	}
 	
