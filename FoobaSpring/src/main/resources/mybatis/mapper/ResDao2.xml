@@ -16,14 +16,14 @@
 	</select>
 	
 	<update id="updateFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL addFoodMenu( #{rseq},#{fseq},#{fname},#{price},#{content},#{fside1},#{fsideprice1},
-			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3}) }
+		{ CALL updateFoodMenu(#{fseq},#{fname},#{fprice},#{fcontent},#{fside1},#{fsideprice1},
+			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3},#{fimage}) }
 	</update>
 	
 	
 	<insert id="addFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL addFoodMenu( #{rseq},#{fseq},#{fname},#{price},#{content},#{fside1},#{fsideprice1},
-			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3}) }
+		{ CALL addFoodMenu( #{rseq},#{fseq},#{fname},#{fprice},#{fcontent},#{fside1},#{fsideprice1},
+			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3},#{fimage}) }
 	</insert>
 	
 	<delete id="deleteFoodeMenu" statementType="CALLABLE">

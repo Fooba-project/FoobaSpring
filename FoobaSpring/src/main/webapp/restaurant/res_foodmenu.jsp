@@ -4,7 +4,7 @@
 <!-- RestaurantVO, FoodmenuList, ReviewList-->
     <div id="res_tab">
         <div class="res_infotab" style="color:white;">메뉴</div>
-        <div class="res_infotab" onclick="location.href='res_foodmenuAdd'">
+        <div class="res_infotab" onclick="location.href='res_foodmenuAddForm'">
         메뉴 추가</div>
     </div>
     <div id="res_menuall">

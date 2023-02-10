@@ -15,7 +15,6 @@ public class FoodmenuVO {
 	@NotEmpty
 	private String fname;
 	@NotNull
-	@NotEmpty
 	private int fprice;
 	@NotNull
 	@NotEmpty
@@ -27,19 +26,16 @@ public class FoodmenuVO {
 	@NotEmpty
 	private String fside1;
 	@NotNull
-	@NotEmpty
 	private int fsideprice1;
 	@NotNull
 	@NotEmpty
 	private String fside2;
 	@NotNull
-	@NotEmpty
 	private int fsideprice2;
 	@NotNull
 	@NotEmpty
 	private String fside3;
 	@NotNull
-	@NotEmpty
 	private int fsideprice3;
 	
 	

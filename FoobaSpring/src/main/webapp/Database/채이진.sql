@@ -64,14 +64,14 @@ CREATE OR REPLACE PROCEDURE updateFoodMenu(
     p_fseq IN foodmenu.fseq%type,
     p_fname IN foodmenu.fname%type,
     p_fprice IN foodmenu.fprice%type,
-    p_fimage IN foodmenu.fimage%type,
     p_fcontent IN foodmenu.fcontent%type,
     p_fside1 IN foodmenu.fside1%type,
      p_fsideprice1 IN foodmenu.fsideprice1%type,
       p_fside2 IN foodmenu.fside2%type,
      p_fsideprice2 IN foodmenu.fsideprice2%type,
      p_fside3 IN foodmenu.fside3%type,
-     p_fsideprice3 IN foodmenu.fsideprice3%type
+     p_fsideprice3 IN foodmenu.fsideprice3%type,
+     p_fimage IN foodmenu.fimage%type
 )
 IS
 BEGIN

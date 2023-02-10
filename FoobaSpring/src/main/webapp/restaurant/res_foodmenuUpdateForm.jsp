@@ -10,13 +10,12 @@
         
         <div id="res_menuall_a">
         
-        
             	
-	            	      <form id="res_menuall_a" name="food_menu" method="post"  >
+	            	      <form id="res_menuall_a" name="food_menu" method="post" action="res_foodmenuUpdate" >
 					      	<input type="hidden" name="rseq" value="${RestaurantVO.RSEQ}"> 
 					      	<input type="hidden" name="fseq" value="${FoodmenuVO.FSEQ}"> 
 					      	<input type="hidden" name="oldImage" value="${FoodmenuVO.FIMAGE}">          	
-	                    	<h2>메뉴 수정</h2><hr>
+	                    	<h2>메뉴 수정 <a style="color:red;text-align:center;">&nbsp;&nbsp;&nbsp;${messagex}</a></h2><hr>
                             <h3>메뉴 이름</h3>
                             <div id="food_text">
                                 <input type="text" class="food_text" name="fname" value="${FoodmenuVO.FNAME}"/>
@@ -30,7 +29,7 @@
                             
                             <h3>메뉴 소개</h3>
                             <div id="food_text">
-                            	<textarea name="fcontent" rows="5" cols="50" style="border-radius:2px; resize:none"  maxlength="60">${FoodmenuVO.fcontent}</textarea>
+                            	<textarea name="fcontent" rows="5" cols="50" style="border-radius:2px; resize:none"  maxlength="60">${FoodmenuVO.FCONTENT}</textarea>
                                 
                             </div><hr>
 	                    			  
@@ -64,13 +63,13 @@
                             </div><hr>
                             
                             <h3>메뉴 사진</h3>        
-                            	<input type="hidden" name="fimage" id="image" >
+                            	<input type="hidden" name="fimage" id="fileimage" >
    								<div id="filename"></div>
 							<%--<img src="images/foodmenu/${FoodmenuVO.FIMAGE}" width="100px"><br>            
                                 <input type="file" name="fimage" /> --%>
                                                            
                             <div id="res_tab">
-            					<input type="button" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:0px"
+            					<input type="submit" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:0px"
          						 value="수정">                              
                     		</div>	
                     		

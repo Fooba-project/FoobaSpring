@@ -50,7 +50,7 @@ public class ResController2 {
 	
 	@RequestMapping("/res_foodmenuUpdateForm")
 		public String res_foodmenuUpdateForm(HttpServletRequest request, HttpSession session, Model model,
-				@RequestParam("fseq") int fseq) {
+				@RequestParam("fseq") int fseq,@RequestParam(value="message",required=false)String message) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 			HashMap<String , Object> paramMap = new HashMap<String , Object>();
 			
@@ -63,36 +63,45 @@ public class ResController2 {
 			HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
 			model.addAttribute("RestaurantVO",rvo);
 			model.addAttribute("FoodmenuVO", list.get(0));		
-	
+			if(message!=null) model.addAttribute("messagex","빈칸을 채워주세요.");
 		return "restaurant/res_foodmenuUpdateForm";  
 	}
 	
 	@RequestMapping("/res_foodmenuUpdate")
-	public String res_foodmenuUpdate(@ModelAttribute("dto") @Valid FoodmenuVO fvo, BindingResult result,
+	public String res_foodmenuUpdate(@ModelAttribute("FoodmenuVO") @Valid FoodmenuVO fvo, BindingResult result,
 			HttpServletRequest request, HttpSession session, Model model) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		
-		if(result.getFieldErrors()!=null) 
-			model.addAttribute("message", "내용을 입력하세요.");
-		else {
+		if(result.getFieldError("fname")!=null) {
+		}else if(result.getFieldError("fprice")!=null) {
+		}else if(result.getFieldError("fimage")!=null) {
+		}else if(result.getFieldError("fcontent")!=null) {
+		}else if(result.getFieldError("fside1")!=null) {
+		}else if(result.getFieldError("fsideprice1")!=null) {
+		}else if(result.getFieldError("fside2")!=null) {
+		}else if(result.getFieldError("fsideprice2")!=null) {
+		}else if(result.getFieldError("fside3")!=null) {
+		}else if(result.getFieldError("fsideprice3")!=null) {
+		}else {
+	
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();
-		paramMap.put("rseq", Integer.parseInt(request.getParameter("rseq")));
 		paramMap.put("fseq", Integer.parseInt(request.getParameter("fseq")));
 		paramMap.put("fname", request.getParameter("fname"));
-		paramMap.put("price", Integer.parseInt(request.getParameter("price")));
-		paramMap.put("content", request.getParameter("content"));
+		paramMap.put("fprice", Integer.parseInt(request.getParameter("fprice")));
+		paramMap.put("fcontent", request.getParameter("fcontent"));
 		paramMap.put("fside1", request.getParameter("fside1"));
 		paramMap.put("fsideprice1", Integer.parseInt(request.getParameter("fsideprice1")));
 		paramMap.put("fside2", request.getParameter("fside2"));
 		paramMap.put("fsideprice2", Integer.parseInt(request.getParameter("fsideprice2")));
 		paramMap.put("fside3", request.getParameter("fside3"));
 		paramMap.put("fsideprice3", Integer.parseInt(request.getParameter("fsideprice3")));
-		if(request.getParameter("fimage")==null) paramMap.put("oldImag",request.getParameter("oldImg"));
-        else request.getParameter("fimage");
+		if(request.getParameter("fimage")==null||request.getParameter("fimage").equals("")) paramMap.put("fimage",request.getParameter("oldImage"));
+        else paramMap.put("fimage", request.getParameter("fimage")); 
 		rs.updateFoodMenu(paramMap);
-		}
-		
 		return "redirect:/res_foodmenu";
+		}
+		return "redirect:/res_foodmenuUpdateForm?fseq="+fvo.getFseq()+"&message=1";
+		
 	}
 	
 	
