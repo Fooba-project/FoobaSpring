@@ -78,30 +78,22 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
-	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
-			HttpServletRequest request, HttpSession session, Model model,
-			@RequestParam(value="reid", required=false) String reid,
-			@RequestParam(value="userpwdchk", required=false) String userpwdchk) {
-		if( result.getFieldError("id")!=null)
-			model.addAttribute("message", result.getFieldError("id").getDefaultMessage() );
-		else if( result.getFieldError("pwd")!=null)
-			model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage() );
-		else if( result.getFieldError("name")!=null)
-			model.addAttribute("message", result.getFieldError("name").getDefaultMessage() );
-		else if( result.getFieldError("phone")!=null)
-			model.addAttribute("message", result.getFieldError("phone").getDefaultMessage() );
-		else if( result.getFieldError("email")!=null)
-			model.addAttribute("message", result.getFieldError("email").getDefaultMessage() );
-		else if( reid == null || ( reid != null && !reid.equals(mvo.getId() ) ) )
+	public String method(@ModelAttribute("mvo") @Valid MemberVO mvo, BindingResult result, 
+			 HttpSession session, Model model ) {
+		
+		String url = "member/memberJoin";
+		if (result.getFieldErrors()!=null) 	model.addAttribute("message", "빈칸 없이 입력하세요" );
+		else if( mvo.getReid() == null || ( mvo.getReid() != null && !mvo.getReid().equals(mvo.getId() ) ) )
 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
-		else if( userpwdchk == null || (  userpwdchk != null && !userpwdchk.equals(mvo.getPwd() ) ) ) 
+		else if( mvo.getUserpwdchk() == null || (  mvo.getUserpwdchk() != null && !mvo.getUserpwdchk().equals(mvo.getPwd() ) ) ) 
 			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
 		else {
 			ms.insertMember( mvo );
 			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
-			}
-			return "member/memberLogin";	
-		}	
+			url = "member/memberLogin";
+		}
+		return url;
+	}	
 
 	
 }
