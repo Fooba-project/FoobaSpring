@@ -141,8 +141,8 @@ public class ResController2 {
 		return "restaurant/res_foodMenuAdd";
 	}
 
-	@RequestMapping("/res_foodemenuAdd")
-	public String res_foodemenuUpdate(HttpServletRequest request, HttpSession session) {
+	@RequestMapping("/res_foodmenuAdd")
+	public String res_foodmenuAdd(HttpServletRequest request, HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 			
 			HashMap<String , Object> paramMap = new HashMap<String , Object>();
