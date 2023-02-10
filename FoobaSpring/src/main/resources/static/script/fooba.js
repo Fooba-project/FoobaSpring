@@ -100,17 +100,17 @@ function autoHypenPhone(str){
         
         
  function joincheck() {
-		if(document.member_join_send_form.userid.value.length==0){
+		if(document.member_join_send_form.id.value.length==0){
 			alert("아이디를 입력하세요");
-			document.member_join_send_form.userid.focus();
+			document.member_join_send_form.id.focus();
 		}
-		else if(document.member_join_send_form.userreid.value.length==0){
+		else if(document.member_join_send_form.reid.value.length==0){
 			alert("아이디 중복확인을 하지 않았습니다.");
-			document.member_join_send_form.userid.focus();		
+			document.member_join_send_form.id.focus();		
 		}
-		else if(document.member_join_send_form.userreid.value != document.member_join_send_form.userid.value){
+		else if(document.member_join_send_form.reid.value != document.member_join_send_form.id.value){
 			alert("아이디 중복확인을 하지 않았습니다.");
-			document.member_join_send_form.userid.focus();	
+			document.member_join_send_form.id.focus();	
 		}
 		else if(document.member_join_send_form.userpwd.value.length==0){
 			alert("비밀번호를 입력하세요.");
@@ -184,7 +184,7 @@ function idok( id ){
 
 
 function post_zip(){
-	var url = "fooba.do?command=memberFindZipNum";
+	var url = document.memberFindZipNum;
 	var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500, top=100, left=700";
 	window.open( url, "우편번호 찾기", opt);
 }
@@ -194,8 +194,8 @@ function post_zip(){
 
 function result( zip_num, sido, gugun, dong){
 	//  함수 호출 형태 - result( '123-123', '서울시', '서대문구',  '대현동')
-	opener.document.member_join_send_form.userzip_num.value=zip_num;
-	opener.document.member_join_send_form.useraddress1.value=sido+" "+gugun+" "+dong;
+	opener.document.member_join_send_form.zip_num.value=zip_num;
+	opener.document.member_join_send_form.address1.value=sido+" "+gugun+" "+dong;
 	self.close();
 }
 
