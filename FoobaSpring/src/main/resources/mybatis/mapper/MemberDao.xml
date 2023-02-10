@@ -8,8 +8,13 @@
 	<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
 	
 	
-	<select id="getMember" resultType="fooba.dto.MemberVO">
-		select * from member where id=#{param1}
+	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+			CALL getMember( 
+				#{ id, mode=IN }, 
+				#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
+			)
+		}
 	</select>
 	
 	<insert id="insertMember" statementType="CALLABLE" parameterType="fooba.dto.MemberVO" >

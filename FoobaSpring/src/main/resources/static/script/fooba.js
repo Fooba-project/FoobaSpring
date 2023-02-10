@@ -150,14 +150,14 @@ function autoHypenPhone(str){
 }
 
 function idcheck(){
-	if( document.member_join_send_form.userid.value=="" ){
+	if( document.member_join_send_form.id.value=="" ){
 		alert("아이디를 입력하고 중복체크를 진행하세요" );
-		documnet.member_join_send_form.userid.focus();
+		documnet.member_join_send_form.id.focus();
 		return;
 	}
-	var url = "memberIdCheckForm?userid=" + document.member_join_send_form.userid.value;
+	var url = document.member_join_send_form.id.value;
 	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=250, scrollbars=no";
-	window.open(url, "IdCheck", opt);	
+	window.open("memberIdCheckForm?id=" + url, "Id check", opt);	
 }
 
 
@@ -175,9 +175,9 @@ function loginCheck(){
 	}	
 }
 
-function idok( userid ){
-	opener.member_join_send_form.userid.value = userid;
-	opener.member_join_send_form.userreid.value = userid;
+function idok( id ){
+	opener.member_join_send_form.id.value = id;
+	opener.member_join_send_form.reid.value = id;
 	self.close();
 }
 
