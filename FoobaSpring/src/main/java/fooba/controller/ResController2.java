@@ -103,7 +103,7 @@ public class ResController2 {
 	@ResponseBody
 	public HashMap<String,Object> ResImgfileUp(Model model, HttpServletRequest request){
 
-		String path = context.getRealPath("/images/foodmenu");
+		String path = context.getRealPath("images/foodmenu");
 		HashMap<String,Object> result = new HashMap<String,Object>();
 		
 		try {

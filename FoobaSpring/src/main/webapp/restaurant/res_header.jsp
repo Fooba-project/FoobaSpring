@@ -32,11 +32,11 @@ $(function(){
 	        success : function(data){
 	            if(data.STATUS == 1){  	
 	            	$("#filename").append("<div>"+data.FILENAME+"</div>");
-	            	$("#image").val(data.FILENAME);
-	            	$("#filename").html("<img src='product_images/"+data.FILENAME+"' height='150'/>");
+	            	$("#fileimage").val(data.FILENAME);
+	            	$("#filename").html("<img src='images/foodmenu"+data.FILENAME+"' height='150'/>");
 	            }
 	        },
-	        error: function() {	alert("실패");}
+	        error: function() {	alert("업로드 실패");}
 		});
 	});
 });
