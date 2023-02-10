@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 <style type="text/css">
  #privacy_box{width: 750px; height: 750px; overflow-y: auto; border: 1px solid #ccc; margin: 0 auto; }
 </style>
@@ -213,4 +213,4 @@
 - 고지 일자: 2022.11.10
 - 시행 일자: 2022.11.17
 </div>
-<%@ include file="footer.jsp"%>
+<%@ include file="../footer.jsp"%>

@@ -144,7 +144,6 @@ public class MemberController2 {
 	 @RequestMapping("/search")
 	 public String search(HttpServletRequest request,HttpSession session,Model model){
 		 
-		 String url="main/resList.jsp";
 		 HashMap<String, Object> prm = new HashMap<>();
 		 prm.put("request", request);
 		 prm.put("ref_cursor", null);
@@ -157,9 +156,35 @@ public class MemberController2 {
 			= (ArrayList<HashMap<String, Object>>) prm.get("list");
 		 
 		 model.addAttribute("RList",list);
-		 
-		 
+		 		 
 		 return "main/resList";
 	}
 	 
+	 @RequestMapping("/category")
+	 public String category(HttpServletRequest request,HttpSession session,Model model){
+		 HashMap<String, Object> prm = new HashMap<>();
+		 prm.put("request", request);
+		 prm.put("ref_cursor", null);
+		 
+		 ms.searchKind(prm);
+		 
+		 ArrayList< HashMap<String,Object> > list 
+			= (ArrayList<HashMap<String, Object>>) prm.get("list");
+		
+		 model.addAttribute("RList",list);
+		 
+		 return "main/resList";
+	 }
+	 
+	 @RequestMapping("/fooba_tos")
+	 public String fooba_tos(HttpServletRequest request) {
+		 
+		 return "etc/fooba_tos";
+	 }
+	 
+	 @RequestMapping("/fooba_privacy")
+	 public String fooba_privacy(HttpServletRequest request) {
+		 
+		 return "etc/fooba_privacy";
+	 }
 }

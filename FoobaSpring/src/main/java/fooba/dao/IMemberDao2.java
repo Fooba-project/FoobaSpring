@@ -13,5 +13,7 @@ public interface IMemberDao2 {
 
 	void FimagebyRseq(HashMap<String, Object> prm);
 
+	void searchKind(HashMap<String, Object> prm);
+
 
 }

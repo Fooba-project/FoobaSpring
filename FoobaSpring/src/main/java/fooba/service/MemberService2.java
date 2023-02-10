@@ -46,19 +46,42 @@ public class MemberService2 {
 		
 		ArrayList< HashMap<String,Object> > list 
 		= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
-		for(HashMap<String,Object> a : list) {
-			int rseq=Integer.parseInt(a.get("RSEQ")+"");
-			prm.put("rseq", rseq);
-			mdao.FimagebyRseq(prm);
-			ArrayList< HashMap<String,Object> > fimageList 
-			= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
-			HashMap<String,Object> one = fimageList.get(0);
-			String fimage=(String)one.get("FIMAGE");
-			a.put("FIMAGE",fimage);
-		}
+		
+		insertFimageByRseq(list);
 		
 		prm.put("list", list);
 		
+	}
+
+	public void searchKind(HashMap<String, Object> prm) {
+		HttpServletRequest request	= (HttpServletRequest)prm.get("request");
+		HttpSession session = request.getSession();		
+		
+		int kind =Integer.parseInt(request.getParameter("kind")); 
+		prm.put("kind",kind);
+		
+		mdao.searchKind(prm);
+		
+		ArrayList< HashMap<String,Object> > klist 
+		= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
+		
+		insertFimageByRseq(klist);
+		
+		prm.put("list", klist);
+	}
+
+	private void insertFimageByRseq(ArrayList<HashMap<String, Object>> list) {
+		for(HashMap<String,Object> a : list) {
+			HashMap<String, Object> hm = new HashMap<>();
+			int rseq=Integer.parseInt(a.get("RSEQ")+"");
+			hm.put("rseq", rseq);
+			mdao.FimagebyRseq(hm);
+			ArrayList< HashMap<String,Object> > fimageList 
+			= (ArrayList<HashMap<String, Object>>) hm.get("ref_cursor");
+			HashMap<String,Object> one = fimageList.get(0);
+			String fimage=(String)one.get("FIMAGE");
+			a.put("FIMAGE",fimage);	
+		}	
 	}
 	
 }

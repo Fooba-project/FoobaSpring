@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+<%@ include file="../header.jsp"%>
 
 <style type="text/css">
 #fooba_boxs{width: 750px; height: 750px; overflow-y: auto; border: 1px solid #ccc; margin: 0 auto;}
@@ -247,4 +247,4 @@
 [<h4>제1조</h4>] 본 약관은 2022년 6월 10일에 개정되었으며, 2022년 6월 10일부터 시행됩니다.
 </div>
 
-<%@ include file="footer.jsp"%>
+<%@ include file="../footer.jsp"%>
