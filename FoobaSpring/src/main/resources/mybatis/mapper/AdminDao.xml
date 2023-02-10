@@ -38,7 +38,7 @@
 		{ CALL admin_orderLR (#{result}, #{oseq} )}
 	</update>
 	
-	<!-- insert, update, delate 통합 -->
+	<!-- insert, update, delete 통합 -->
 	<update id="adminQna" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL adminQna ( #{procedure}, #{qvo.QSEQ}, #{qvo.SUBJECT}, #{qvo.CONTENT} )}
 	</update>
