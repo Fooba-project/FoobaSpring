@@ -117,14 +117,17 @@ public class ResController2 {
 		return result; 
 	}
 	
-	/*
+	
 	@RequestMapping("/res_foodmenuAddForm")
-	public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session) {
+	public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session, Model model) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		paramMap.put("ref_cursor", null);
+		ArrayList<HashMap<String, Object>> list
+		=(ArrayList<HashMap<String, Object>>)paramMap.get("ref_cursor");
 		
-		
-		
+		HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
+		model.addAttribute("RestaurantVO",rvo);	
 		
 		return "restaurant/res_foodMenuAdd";
 	}
@@ -149,7 +152,7 @@ public class ResController2 {
 			
 			rs.addFoodMenu(paramMap);
 		return "redirect:/res_foodmenu";	
-	}*/
+	}
 	
 	@RequestMapping("/res_foodmenuDelete")
 	public String res_foodmenuDelete(HttpServletRequest request, HttpSession session, Model model,
