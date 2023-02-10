@@ -152,8 +152,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminDetail")
 	public String adminDetail(HttpSession session, Model model,
-			@RequestParam("procedure") String procedure, @RequestParam("seq") int seq
-			) {
+			@RequestParam("procedure") String procedure, @RequestParam("seq") int seq ) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		
 		HashMap<String, Object> prm = new HashMap<>();
@@ -169,7 +168,6 @@ public class AdminController {
 		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
 		else return "admin/admin_qnaDetail";
 	}
-	
 	
 }
 	
