@@ -27,5 +27,24 @@
 		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
+	<select id="resInf" statementType="CALLABLE" parameterType="java.util.HashMap">
+	{	CALL resInf(#{rseq},
+	#{ref_cursor1 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+	</select>
+	
+	<select id="reviewList" statementType="CALLABLE" parameterType="java.util.HashMap">
+	{ CALL reviewList(#{rseq},
+	#{ref_cursor2 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+	</select>
+	
+	<select id="cartList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL cartList(#{rseq}, #{id},
+	#{ref_cursor3 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+	</select>
+	
+	<select id="CartListSum" statementType="CALLABLE" resultType='Integer' parameterType="java.util.HashMap">
+		{CALL CartListSum(#{id},#{rseq},
+		#{sum ,mode=OUT, jdbcType=INTEGER, javaType=int})}
+	</select>
 	
 </mapper>

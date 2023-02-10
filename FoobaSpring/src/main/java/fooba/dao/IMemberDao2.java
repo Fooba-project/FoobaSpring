@@ -15,5 +15,14 @@ public interface IMemberDao2 {
 
 	void searchKind(HashMap<String, Object> prm);
 
+	void resInf(HashMap<String, Object> prm);
+
+	void reviewList(HashMap<String, Object> prm);
+
+	void cartList(HashMap<String, Object> prm);
+
+	int CartListSum(HashMap<String, Object> prm);
+
+
 
 }

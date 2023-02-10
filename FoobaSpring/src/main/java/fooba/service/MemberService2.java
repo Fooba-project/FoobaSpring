@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fooba.dao.IMemberDao2;
-import fooba.dto.RestaurantVO;
 
 @Service
 public class MemberService2 {
 
 	@Autowired
 	IMemberDao2 mdao;
+	
 
 	public void getMember(HashMap<String, Object> prm) {
 		
@@ -83,5 +83,43 @@ public class MemberService2 {
 			a.put("FIMAGE",fimage);	
 		}	
 	}
+
+	public void resInf(HashMap<String, Object> prm) {
+		mdao.resInf(prm);		
+	}
+
+	public void reviewList(HashMap<String, Object> prm) {
+		mdao.reviewList(prm);
+		
+	}
+
+	public void cartList(HashMap<String, Object> prm) {		
+		mdao.cartList(prm);
+		
+		ArrayList< HashMap<String,Object> > cpricelist 
+		= (ArrayList<HashMap<String, Object>>) prm.get("sum");
+		
+		CartListSum(cpricelist);
+	}
+
+	private void CartListSum(ArrayList<HashMap<String, Object>> cpricelist) {
+		for(HashMap<String,Object>cprice:cpricelist) {
+			HashMap<String, Object> cm = new HashMap<>();
+			int rtip=Integer.parseInt(cprice.get("RTIP")+"");
+		}
+		
+	}
+
+
+	/*
+	  public int CartListSum(HashMap<String, Object> prm) { int sum= 0;
+	  
+	  for(HashMap<String,Object> cprice: prm )
+	 
+	  return sum; }
+	 */
+
+
+	
 	
 }

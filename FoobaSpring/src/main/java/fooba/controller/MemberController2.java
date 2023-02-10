@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fooba.dto.MemberVO;
+import fooba.dto.Paging;
 import fooba.service.MemberService2;
+import fooba.service.ResService;
+import fooba.service.ResService2;
 
 @Controller
 public class MemberController2 {
@@ -167,10 +170,8 @@ public class MemberController2 {
 		 prm.put("ref_cursor", null);
 		 
 		 ms.searchKind(prm);
-		 
 		 ArrayList< HashMap<String,Object> > list 
 			= (ArrayList<HashMap<String, Object>>) prm.get("list");
-		
 		 model.addAttribute("RList",list);
 		 
 		 return "main/resList";
@@ -182,9 +183,85 @@ public class MemberController2 {
 		 return "etc/fooba_tos";
 	 }
 	 
+	 @Autowired
+	 ResService2 rs2;
+	 
+	 @Autowired
+	 ResService rs;
+	 
+	 
+	 
 	 @RequestMapping("/fooba_privacy")
 	 public String fooba_privacy(HttpServletRequest request) {
 		 
 		 return "etc/fooba_privacy";
 	 }
+	 
+	 @RequestMapping("/restaurantDetail")
+	 public String restaurant_detail(HttpServletRequest request, HttpSession session,
+			 Model model, @RequestParam("rseq")int rseq) {
+		 
+		 int carttotalprice=0; 
+		 HashMap<String,Object> rvo =new HashMap<String,Object>();
+		 
+		 HashMap<String, Object> prm = new HashMap<>();
+		 prm.put("rseq", rseq);		 
+		 prm.put("ref_cursor", null);
+		 prm.put("ref_cursor1", null);
+		 prm.put("ref_cursor2", null);
+		 prm.put("ref_cursor3", null);
+		 		 
+		 rs2.foodList(prm);
+		 ms.resInf(prm);
+		 ms.reviewList(prm);
+		 	 
+		 
+		 ArrayList<HashMap<String, Object>> list
+			=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
+		 
+		 
+		 ArrayList<HashMap<String,Object>>list1
+			=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		  rvo =list1.get(0);
+		 
+		 ArrayList<HashMap<String,Object>>list2
+			=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
+		 
+		 HashMap<String,Object> mvo=
+				 (HashMap<String,Object>) session.getAttribute("loginUser");
+				 
+		 
+		 if(mvo != null) {
+			 
+			 prm.put("id", mvo.get("ID"));
+			 ms.cartList(prm);
+			 
+			 ArrayList<HashMap<String,Object>>list3
+				=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
+			 prm.put("sum", null); 
+			 model.addAttribute("clist",list3);
+			// int sum=ms.CartListSum(prm);
+			// carttotalprice=sum+Integer.parseInt((String)rvo.get("Rtip"));
+		// } else {
+
+//			carttotalprice=carttotalprice+Integer.parseInt((String)rvo.get("Rtip"));
+		 }
+	
+		 /*가게 별점*/
+		 
+		double star=0;
+		rs.starAvg(prm);
+		int intstar=(int)star;
+		double doublestar=(int)(star*10)/(double)10;
+		session.setAttribute("intstar",prm.get("intstar")); //별 개수
+		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)
+		 
+		
+		 model.addAttribute("FoodmenuList",list);
+		 model.addAttribute("RestaurantVO",rvo);
+		 model.addAttribute("ReviewList",list2);
+		 
+		 return "main/menuDetail";
+	 }
+	
 }
