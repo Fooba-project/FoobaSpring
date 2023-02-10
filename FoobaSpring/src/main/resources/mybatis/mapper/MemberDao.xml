@@ -20,7 +20,7 @@
 	<insert id="insertMember" statementType="CALLABLE" parameterType="fooba.dto.MemberVO" >
 		{ 
 			CALL insertMember( 
-				#{id},#{pwd},#{name},#{phone},#{email},#{zip_num},#{address1},#{address2}, #{address3},#{nick}
+				#{id},#{pwd},#{name},#{phone},#{email},#{zip_num},#{address1},#{address2},#{address3},#{nick}
 			) 
 		}
 	</insert>
