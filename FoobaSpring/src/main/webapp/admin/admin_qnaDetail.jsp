@@ -4,9 +4,8 @@
 <script type="text/javascript">
 function qnaDelete(qseq){
 	var bool = confirm('정말로 삭제하시겠습니까?');
-	if (bool) {
-		location.href='adminQna?procedure=delete&qseq='+qseq;
-	}
+	if (bool) return true;
+	else return false;
 }
 </script>
 
@@ -21,12 +20,17 @@ function qnaDelete(qseq){
 			A : ${vo.CONTENT} 
 		</div>
 	</table>
-	<input type="hidden" value="${vo.QSEQ}" name="qseq">
-	<div id="join_btn" style="margin: auto; width: 470px;">
-		<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="수정" onclick="location.href='admin_qnaUpdateForm?qseq=${vo.QSEQ}'">
-		<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="목록" onclick="location.href='adminList?table=q'">
-		<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="삭제" onclick="qnaDelete('${vo.QSEQ}')">
-	</div>
+	<form action="adminQna">
+		<input type="hidden" value="delete" name="procedure">
+		<input type="hidden" value="${vo.QSEQ}" name="QSEQ">
+		<input type="hidden" value="${vo.SUBJECT}" name="SUBJECT">
+		<input type="hidden" value="${vo.CONTENT}" name="CONTENT">
+		<div id="join_btn" style="margin: auto; width: 470px;">
+			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="수정" onclick="location.href='adminDetail?procedure=qnaUp&seq=${vo.QSEQ}'">
+			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="목록" onclick="location.href='adminList?table=q'">
+			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="submit" value="삭제" onclick="return qnaDelete()">
+		</div>
+	</form>
 </div>
 <br><br><br><br><br><br><br><br><br><br>
 <%@ include file="admin_footer.jsp"%>

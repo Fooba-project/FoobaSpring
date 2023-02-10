@@ -141,25 +141,25 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping("/admin_qnaUpdateForm")
-	public String admin_qnaUpdateForm(HttpSession session) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-			return "admin/admin_qnaUpdate";
-	}
 	
-	
-	@RequestMapping("/admin_qnaWU")
-	public String admin_qnaWrite(@ModelAttribute("vo") @Valid QnaVO qvo, BindingResult result, HttpSession session, Model model) {
+	@RequestMapping("/adminQna")
+	public String admin_qnaWrite(@ModelAttribute("vo") @Valid QnaVO qvo, BindingResult result, HttpSession session, Model model, @RequestParam("procedure") String procedure) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-		
 		String url = "admin/admin_qnaWrite";
-		if(result.getFieldError("SUBJECT")!=null)
+		if(procedure.equals("update")) url = "admin/admin_qnaUpdate";
+		
+		if(!procedure.equals("delete") && result.getFieldError("SUBJECT")!=null)
 			model.addAttribute("message",result.getFieldError("SUBJECT").getDefaultMessage());
-		else if(result.getFieldError("CONTENT")!=null)
+		else if(!procedure.equals("delete") && result.getFieldError("CONTENT")!=null)
 			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
 		else {
-			as.insertQna(qvo);
-			url = "redirect:/adminList?table=q";
+			System.out.println("1");
+			HashMap<String, Object> prm = new HashMap<>();
+			prm.put("procedure", procedure);
+			prm.put("qvo", qvo);
+			as.adminQna(prm);
+			if(procedure.equals("update")) url = "redirect:/adminDetail?procedure=qna&seq="+qvo.getQSEQ();
+			else url = "redirect:/adminList?table=q";
 		}
 		return url;
 	}
@@ -181,7 +181,7 @@ public class AdminController {
 		model.addAttribute("vo", vo);
 		
 		if (procedure.equals("res")) return "admin/admin_resDetail";
-		if (procedure.equals("qnaUpdate")) return "admin/admin_qnaUpdate";
+		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
 		else return "admin/admin_qnaDetail";
 	}
 	

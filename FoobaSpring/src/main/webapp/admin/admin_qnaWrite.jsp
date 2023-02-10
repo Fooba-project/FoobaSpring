@@ -9,11 +9,11 @@
 			<legend style="font-weight: 700; font-size: 19px; ">QnA 작성</legend><br>
 			<table>
 				<th style="font-weight: 700;">Q:&nbsp;&nbsp; </th>
-				<th><input type="text" name="SUBJECT" value="#{vo.SUBJECT }"></input></th>
+				<th><input type="text" name="SUBJECT" value="${vo.SUBJECT }"></input></th>
 			</table>
 			<table>
 				<th style="font-weight: 700;">A:&nbsp;&nbsp; </th>
-				<th><textarea style="height:160px; width: 600px; resize:none;"  name="CONTENT" value="#{vo.CONTENT }"></textarea></th>
+				<th><textarea style="height:160px; width: 600px; resize:none;"  name="CONTENT">${vo.CONTENT }</textarea></th>
 			</table> 
 		</fieldset>     
               
@@ -23,6 +23,6 @@
 		</div>
 	</form>
 </article>
-<h3 style="text-align:center;">#{message}</h3>
+<h3 style="text-align:center;">${message}</h3>
 <br><br><br><br><br><br><br><br><br>
 <%@ include file="admin_footer.jsp"%>

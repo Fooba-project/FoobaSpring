@@ -39,8 +39,8 @@
 	</update>
 	
 	<!-- insert, update, delate 통합 -->
-	<update id="adminQna" statementType="CALLABLE" parameterType="fooba.dto.QnaVO">
-		{ CALL adminQna ( #{procedure}, #{qseq}, #{subject}, #{content} )}
+	<update id="adminQna" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL adminQna ( #{procedure}, #{qvo.QSEQ}, #{qvo.SUBJECT}, #{qvo.CONTENT} )}
 	</update>
 
 	
