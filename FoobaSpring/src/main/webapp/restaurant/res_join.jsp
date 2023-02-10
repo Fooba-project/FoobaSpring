@@ -230,9 +230,8 @@ function chkIdCode(event) {
 		                  }
 		              }).open();
 		          }
-		      </script><br>
+		      </script>
 		 
-            <div class="member_join">
                 <div class="member_join_title">
                     사업장 정보 입력
                 </div>
@@ -241,20 +240,11 @@ function chkIdCode(event) {
                 
                 
             
-                <div class="res_text_boxs">
-                     가게 대표이미지
-                </div> 
-                <div class="join_list">
-                    <div id="images_upload_box">
-                         <input type="file" class="input_text" name="fimage" id="image">
-                         <div id="filename">
-                    </div>
-                </div>
+               
                    
                 <div class="res_text_boxs">
-                    사업장 업종 분류
-                </div>
-                <div id="res_select_box">
+                    사업장 업종 분류 &nbsp;&nbsp;&nbsp;
+                
                     <select style="width:60px;" name="kind">
                         <option value="1">한식</option>
                         <option value="2">중식</option>
@@ -268,20 +258,24 @@ function chkIdCode(event) {
                 </div>
                  
                 <div id="textarea_box">
-                    <textarea placeholder="사업장 소개글을 작성해주세요(100자 이내)" name="content" maxlength="100" style="resize:none;"></textarea>
+                    <textarea placeholder="사업장 소개글을 작성해주세요(100자 이내)" name="content" maxlength="100" style="resize:none; font-weight: 900;" ></textarea>
                 </div>
                 <div class="join_list">
                     <input type="text" class="input_text" name="rtip" maxlength="4" placeholder="기본배달료를 입력하세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                 </div>
                 <div class="join_list">
-                    <input type="text" class="input_text" name="hash" placeholder="해시태그">
+                    <input type="text" class="input_text" name="hash" placeholder="해시태그 예시) &nbsp; 국물음식, 건강한, 가성비">
                 </div>
-                <div class="res_text_boxs">
-                    <span style="line-height:0px; ">예시) &nbsp; 국물음식, 건강한, 가성비
-                    </span>
+                
+                 <div class="res_text_boxs">
+                     가게 대표이미지
+                </div> 
+                    <div id="images_upload_box" style="height:200px">
+                         <input type="hidden" class="input_text" name="fimage" id="image">
+                         <div id="filename">
+                    </div>
+                
                 </div>
- 
-                <br>
                 <div id="join_agree_btn">
                     <input type="checkbox" name="res_agree" id="join_agree" value="Y">
                     <label for="join_agree">이용약관</label>
@@ -291,18 +285,18 @@ function chkIdCode(event) {
                     <h5>제1조 [목 적]</h5>
                     <p>본 서비스 약관은 주식회사 푸바에서 제공하는 서비스의 이용에 관련하여 회원과 푸바 간의 권리, 의무, 책임 및 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
                 </div>
-            </div>
+            
+            
         </table>
-            <br><br>
-            <div id="join_btn">
+            <div id="join_btn"  style="position:absolute; bottom:100px;">
                 <input class="join_btn" type="submit" value="가입" >
                 <input class="join_btn" type="button" value="홈으로" onclick="location.href='res_login'">
             </div>
     </form>
     
-    <div style="position:relative; top:-80px;">
+    <div style="position:absolute; bottom:400px;">
 		<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
-					<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
+					&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
 		</form>
 	
 	</div>

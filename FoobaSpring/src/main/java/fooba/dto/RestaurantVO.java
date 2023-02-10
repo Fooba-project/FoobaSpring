@@ -52,9 +52,10 @@ public class RestaurantVO {
 	@NotNull(message="사업자번호를 입력해주세요")
 	@NotEmpty(message="사업자번호를 입력해주세요")
 	private String rbiznum;
-
+	@NotNull(message="카테고리를 입력해주세요")
 	private int kind;
 
+	@NotNull(message="배달팁을 입력해주세요")
 	private int rtip;
 	private int ryn;
 	

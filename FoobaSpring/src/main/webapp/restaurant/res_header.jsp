@@ -266,7 +266,7 @@ line-height: 60px; margin:0 auto; font-family: Verdana; border: 1; border-radius
 #res_menuall_a{width: 700px; float: left; position: relative; height:1150px; }
 
 
-.res_join {width: 700px; overflow: hidden; margin:50px auto;}
+.res_join {width: 700px; overflow: hidden; margin:50px auto; height:1500px;}
 #input_warp { margin: 0; width: 700px;}
 .join_list { position: relative; height: 50px; padding: 0; margin: 0; overflow: hidden; border-radius: 3px; margin: 10px;}
 .res_join_title { text-align: left; font-size: 26px;font-weight: bold; }
@@ -277,12 +277,12 @@ line-height: 60px; margin:0 auto; font-family: Verdana; border: 1; border-radius
 #join_btn {margin-left: 200px;}
 #join_btn .join_btn {width: 150px; height: 50px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 100%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color:  rgb(255,204,0); line-height: 40px; color:#fff; border: 1px solid white; text-align: center;}
 #join_btn .join_btn:hover {background-color: white; color:  rgb(255,204,0); cursor: pointer; border:2px solid  rgb(255,204,0)}
-#join_agree_text {width: 680px; height: 120px; overflow-y: auto; border: 1px solid #ccc;  margin: 10px; }
-#join_agree_btn {margin:10px; }
+#join_agree_text {width: 680px; height: 180px; overflow-y: auto; border: 1px solid #ccc;  margin: 10px;  }
+#join_agree_btn {margin:10px;font-size: 15px;color: #616161;font-weight: 900; }
 #res_select_box{ margin-left: 10px; margin-top: 10px;}
 #textarea_box{margin-left: 10px; margin-top: 10px; height: 100px; width: 100%;}
 #textarea_box textarea{height: 90px; width: 675px; opacity: 70%;}
-.res_text_boxs{margin-top: 10px;  padding-left: 10px;}
+.res_text_boxs{margin-top: 10px;  padding-left: 10px;font-size: 15px;color: #616161;font-weight: 900;}
 #dongtext{border:0 ; border-bottom:1px solid rgb(201, 199, 199) ; height: 30px;width: 400px; outline: none; font-size: 100%; padding: 5px; line-height: 30px; padding-left:20px;}
 #eheqhrl{background-image:url("../images/eheqhrl.png");width: 40px;height: 40px; cursor: pointer; border: 0;}
 #zipcodee{margin: 0 auto;   width: 500px;}
