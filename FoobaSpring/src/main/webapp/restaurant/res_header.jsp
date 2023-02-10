@@ -263,7 +263,7 @@ border :1px solid lightyellow; line-height: 50px; text-align: center; font-weigh
 
 .food_text{position:relative; width:300px; height:50px; border:1px solid rgb(211, 210, 210); background:white;   
 line-height: 60px; margin:0 auto; font-family: Verdana; border: 1; border-radius:5px ;}
-#res_menuall_a{width: 700px; float: left; position: relative; height:1100px; }
+#res_menuall_a{width: 700px; float: left; position: relative; height:1150px; }
 
 
 .res_join {width: 700px; overflow: hidden; margin:50px auto;}
