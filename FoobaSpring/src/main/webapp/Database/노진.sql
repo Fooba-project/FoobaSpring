@@ -9,10 +9,10 @@ END;
 commit;
 
 CREATE OR REPLACE PROCEDURE insertMember(
-    p_id IN member.id%TYPE ,
-    p_pwd IN member.pwd%TYPE ,
-    p_name IN member.name%TYPE ,
-    p_email IN member.email%TYPE ,
+    p_id IN member.id%TYPE,
+    p_pwd IN member.pwd%TYPE,
+    p_name IN member.name%TYPE,
+    p_email IN member.email%TYPE,
     p_phone IN member.phone%TYPE,
     p_zip_num IN member.zip_num%TYPE,
     p_address1 IN member.address1%TYPE,
