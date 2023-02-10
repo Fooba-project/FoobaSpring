@@ -120,7 +120,7 @@ function chkIdCode(event) {
 <div class="res_join">
     <div class="res_join_title">사업자 회원가입</div>
     <div style="border-top: 2px solid  rgb(255,204,0); margin-top:15px;"></div>
-    <form name="res_join_send_form" id="res_join_send_form" method="post" action="res_join" enctype="multipart/form-data">
+    <form name="res_join_send_form" id="res_join_send_form" method="post" action="res_join" >
         <table class="member_join_table">
             <div class="join_list">
                 <input type="text" class="input_text" style="width: 490px;" name="rid" placeholder="아이디" onkeyup="chkIdCode(event)"/>

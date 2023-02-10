@@ -58,13 +58,13 @@ function res_idcheck(){
 			documnet.res_join_send_form.rid.focus();
 			return;
 		}
-		var url = "fooba.do?command=res_idCheckForm&rid=" + document.res_join_send_form.rid.value;
+		var url = "res_idCheckForm?rid=" + document.res_join_send_form.rid.value;
 		var opt = "toolbar=no, menubar=no, resizable=no, width=550, height=400, top=100, left=700, scrollbars=no";
 		window.open(url, "IdCheck", opt);	
 	}
 
 function res_post_zip(){
-	var url = "fooba.do?command=res_findZipNum";
+	var url = "res_findZipNum";
 	var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500, top=100, left=700";
 	window.open( url, "우편번호 찾기", opt);
 }
@@ -357,15 +357,15 @@ background-color: black; margin-top: 10px; float: right; margin-right:10px; }
     <div class="headbuttons" id="resheadbuttons">
     	<c:choose>
     		<c:when test="${empty loginRes}">
-	    		<input type="button" value="가입신청" class="headbutton" name="userLogin" onclick="location.href='fooba.do?command=res_joinForm'">
-	    		<input type="button" value="Home" class="headbutton" name="userJoin" onclick="location.href='fooba.do?command=res_loginForm'">
+	    		<input type="button" value="가입신청" class="headbutton" name="userLogin" onclick="location.href='res_joinForm'">
+	    		<input type="button" value="Home" class="headbutton" name="userJoin" onclick="location.href='res_loginForm'">
     		</c:when>
     		<c:otherwise>
-    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='fooba.do?command=res_logout&page=1&search=&key='">
-	    		<input type="button" value="주문관리" class="headbutton" onclick="location.href='fooba.do?command=res_order&page=1&search=&key='">
-	    		<input type="button" value="리뷰관리" class="headbutton" onclick="location.href='fooba.do?command=res_review&key=2'">
-	    		<input type="button" value="메뉴관리" class="headbutton" onclick="location.href='fooba.do?command=res_foodmenu&page=1&search=&key='">
-	    		 <input type="button" value="정보관리" class="headbutton" onclick="location.href='fooba.do?command=res_show&page=1&search=&key='">   		
+    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='res_logout?page=1&search=&key='">
+	    		<input type="button" value="주문관리" class="headbutton" onclick="location.href='res_order?page=1&search=&key='">
+	    		<input type="button" value="리뷰관리" class="headbutton" onclick="location.href='res_review?key=2'">
+	    		<input type="button" value="메뉴관리" class="headbutton" onclick="location.href='res_foodmenu?page=1&search=&key='">
+	    		 <input type="button" value="정보관리" class="headbutton" onclick="location.href='res_show?page=1&search=&key='">   		
 	    	</c:otherwise>
     	</c:choose>
     </div>

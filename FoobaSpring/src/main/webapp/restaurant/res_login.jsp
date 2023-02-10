@@ -21,7 +21,7 @@
 	                </div>
 	    
 	                <div id="log_buttonbox">
-	                    <button type="button" id="log_button"  onClick="resCheck();">
+	                    <button type="submit" id="log_button"  >
 	                        <span class="btn_text">로그인</span>
 	                    </button>
 	                </div>

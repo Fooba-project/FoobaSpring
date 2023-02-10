@@ -31,4 +31,10 @@ begin
         select * from restaurant where rname=p_rname;
 end;
 
+alter table restaurant add zip_num varchar2(100);
+alter table restaurant add raddress2 varchar2(100);
 alter table restaurant add raddress3 varchar2(100);
+
+update restaurant set raddress2='999µ¿ 999È£', raddress3='½ÅÃÌ±æ',zip_num='01234';
+
+select*from restaurant;

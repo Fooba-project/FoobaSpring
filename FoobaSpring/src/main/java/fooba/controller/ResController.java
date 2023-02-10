@@ -7,11 +7,13 @@ import java.util.HashMap;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import fooba.dto.RestaurantVO;
 import fooba.service.ResService;
 
 @Controller
@@ -54,7 +57,7 @@ public class ResController {
 	}
 	
 	@RequestMapping(value="/res_login",method=RequestMethod.POST)
-	public String res_login(@RequestParam("rid") String rid,@RequestParam("rpwd")String rpwd,
+	public String res_login(@ModelAttribute("dto")@Valid RestaurantVO rvo,
 			 BindingResult result, HttpSession session, Model model) { 
 		
 		String url="restaurant/res_login"; 
@@ -65,7 +68,7 @@ public class ResController {
 		else {
 
 			HashMap<String,Object>paramMap=new HashMap<String,Object>();
-			paramMap.put("rid",rid);
+			paramMap.put("rid",rvo.getRid());
 			paramMap.put("ref_cursor",null);
 			
 			rs.getRes(paramMap);
@@ -77,16 +80,16 @@ public class ResController {
 				model.addAttribute("message","아이디가 없습니다.");
 				return "restaurant/res_login";
 			}
-			HashMap<String,Object>rvo=list.get(0);
-			if(!rvo.get("RPWD").equals(rpwd))
+			HashMap<String,Object>Rvo=list.get(0);
+			if(!Rvo.get("RPWD").equals(rvo.getRpwd()))
 				model.addAttribute("message","비번이 틀립니다.");
-			else if(rvo.get("RYN").equals("0")) 
+			else if(Rvo.get("RYN").equals("0")) 
 				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
-			else if(rvo.get("RPWD").equals(rpwd)) {
+			else if(Rvo.get("RPWD").equals(rvo.getRpwd())) {
 				session.setAttribute("loginRes",rvo);
 				url="redirect:/res_foodmenu";
 				
-				paramMap.put("rseq",rvo.get("RSEQ"));
+				paramMap.put("rseq",Rvo.get("RSEQ"));
 				rs.starAvg(paramMap);
 				session.setAttribute("intstar",paramMap.get("intstar")); //별 개수
 				session.setAttribute("doublestar",paramMap.get("doublestar")); //별점(소수점까지)
@@ -202,8 +205,26 @@ public class ResController {
 		return result; //result는 목적지의 매개변수 data객체로 전달된다.
 	}
 	
+	@RequestMapping(value="/res_idCheckForm",method=RequestMethod.POST)
+	public String res_idCheckForm(@RequestParam@ModelAttribute("rid")String rid,Model model) {
+		HashMap<String,Object>paramMap=new HashMap<String,Object>();
+		paramMap.put("rid",rid);
+		paramMap.put("ref_cursor",null);
+		rs.getRes(paramMap);
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+		if(list.size()==0)
+			model.addAttribute("result",-1);
+		else model.addAttribute("result",1);
+		return "restaurant/res_idcheck";
+	}
 	
-	
+	@RequestMapping(value="/res_join",method=RequestMethod.POST)
+	public String res_join(@ModelAttribute("dto")@Valid RestaurantVO resvo,BindingResult result,
+			@RequestParam(value="reid",required=false)String reid,
+			@RequestParam(value="respwdchk",required=false)String respwdchk) {
+		return "";
+	}
 	
 	
 }
