@@ -113,7 +113,7 @@
             <br><br>
             <div id="join_btn">
                 <input class="join_btn" type="button" value="가입" onclick="joincheck()">
-                <input class="join_btn" type="button" value="홈으로" onclick="history.go(-1);">
+                <input class="join_btn" type="button" value="홈으로" onclick="location.href='main'">
             </div>
         </form>
     </div>

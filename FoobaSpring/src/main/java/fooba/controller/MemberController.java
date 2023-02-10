@@ -102,7 +102,6 @@ public class MemberController {
 			}
 			return "member/memberLogin";	
 		}	
-	
-	
+
 	
 }
