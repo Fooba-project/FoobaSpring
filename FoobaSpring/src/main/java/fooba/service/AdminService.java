@@ -4,12 +4,14 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fooba.dao.IAdminDao;
 import fooba.dto.Paging;
+import fooba.dto.QnaVO;
 
 @Service
 public class AdminService {
@@ -54,17 +56,10 @@ public class AdminService {
 		int count = Integer.parseInt( prm.get("cnt")+"" );
 		paging.setTotalCount(count);
 		paging.paging();
-		System.out.println("count:"+count);
 		
 		prm.put("startNum", paging.getStartNum());
 		prm.put("endNum", paging.getEndNum());
 		prm.put("paging", paging);
-		
-		System.out.println("paging begin: "+paging.getBeginPage());
-		System.out.println("paging end: "+paging.getEndPage());
-		System.out.println("paging page: "+paging.getPage());
-		System.out.println("paging total: "+paging.getTotalCount());
-		System.out.println("paging display: "+paging.getDisplayRow());
 		adao.adminList(prm);
 	}
 
@@ -76,31 +71,15 @@ public class AdminService {
 		adao.admin_orderLR(prm);
 	}
 
-//	public void insertProduct(HashMap<String, Object> paramMap) {
-//		adao.insertProduct(paramMap);
-//	}
-//
-//	public void updateProduct(HashMap<String, Object> paramMap) {
-//		adao.updateProduct(paramMap);
-//		
-//	}
-//
-//	public void updateOrderResult(int[] odseqs) {
-//		for(int odseq : odseqs) {
-//			adao.updateOrderResult(odseq);
-//		}
-//	}
-//
-//	public void memberReinsert(String id, String useyn) {
-//		adao.memberReinsert(id, useyn);
-//	}
-//
-//	public void replyQna(HashMap<String, Object> paramMap) {
-//		adao.replyQna(paramMap);
-//	}
-//
-//	public void insertBanner(HashMap<String, Object> paramMap) {
-//		adao.insertBanner(paramMap);
-//	}
+	public void adminQna(HashMap<String, Object> prm) {
+		adao.adminQna(prm);
+	}
+
+	public void adminDetail(HashMap<String, Object> prm) {
+		adao.adminDetail(prm);
+	}
+
+
+
 	
 }

@@ -8,6 +8,21 @@ BEGIN
     select * from admin where id = p_id;
 END;
 
+create or replace procedure adminGetDetail (
+p_procedure in varchar2,
+p_invar in number,
+p_rc out sys_refcursor )
+IS
+BEGIN
+    if (p_procedure='resdetail' ) then
+        open p_rc for
+        select * from admin where id = p_invar;
+    if (p_procedure='qnadetail' ) then
+        open p_rc for
+        select * from admin where id = p_invar;        
+    end if;
+END;
+
 create or replace procedure adminGetAllCount(
 p_table in varchar2,
 p_key in varchar2,
@@ -18,7 +33,7 @@ BEGIN
 if p_table= 'r' then
     select count(*) into p_cnt from restaurant where rname like '%'|| p_key ||'%';
 elsif p_table='o' then
-    select count(*) into p_cnt from order_view where id like '%'|| p_key ||'%' or rname like '%'|| p_key ||'%';
+    select count(distinct oseq) into p_cnt from order_view where id like '%'|| p_key ||'%' or rname like '%'|| p_key ||'%';
 elsif p_table='m' then
     select count(*) into p_cnt from member where id like '%'|| p_key ||'%';
 elsif p_table='q' then
@@ -27,7 +42,6 @@ elsif p_table= 'b' then
     select count(rownum) into p_cnt from banner;
 end if;
 END;
-
 
 
 create or replace procedure adminList(
@@ -77,3 +91,20 @@ BEGIN
     end if;
     commit;
 END;
+
+
+
+create or replace procedure adminQna( p_procedure in varchar2, p_qseq in number, p_subject in varchar2, p_content in varchar2 )
+IS
+BEGIN
+    if (p_procedure='insert') then
+        insert into qna(qseq, subject, content) values(qna_seq.nextVal, p_subject, p_content);
+    elsif (p_procedure='update') then
+        update qna set subject=p_subject, content=p_content where qseq=p_qseq;
+    elsif (p_procedure='delete') then
+        delete from qna where qseq=p_qseq;
+    end if;
+    commit;
+END;
+
+

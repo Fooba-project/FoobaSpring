@@ -8,25 +8,42 @@
 	<resultMap id="adminMap" type="java.util.HashMap"></resultMap>
 	
 	<select id="getAdmin" statementType="CALLABLE" >
-		{CALL getAdmin(#{adminId }, #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}) }
+		{CALL getAdmin( #{adminId }, #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}) }
 	</select>
 	
+	<!-- res, member, order, qna, banner 통합 -->
 	<select id="adminGetAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL adminGetAllCount (#{table}, #{key}, #{cnt, mode=OUT, jdbcType=INTEGER })}
 	</select>
 	
+	<!-- res, member, order, qna, banner 통합 -->
 	<select id="adminList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL adminList (#{table}, #{key}, #{startNum}, #{endNum},
 		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
 	</select>
+	
+	<!-- qnaDetail, resDetail 통합 -->
+	<select id="adminDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL adminDetail (#{procedure}, #{seq},
+		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
+	</select>
 
+	<!-- accept, reject 통합 -->
 	<update id="admin_resOx" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL admin_resOx (#{ox}, #{rseq} )}
 	</update>
 	
+	<!-- left, right 통합 -->
 	<update id="admin_orderLR" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL admin_orderLR (#{result}, #{oseq} )}
 	</update>
+	
+	<!-- insert, update, delate 통합 -->
+	<update id="adminQna" statementType="CALLABLE" parameterType="fooba.dto.QnaVO">
+		{ CALL adminQna ( #{procedure}, #{qseq}, #{subject}, #{content} )}
+	</update>
 
+	
+	
 </mapper>
 

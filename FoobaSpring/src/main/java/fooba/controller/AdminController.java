@@ -5,14 +5,18 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fooba.dto.Paging;
+import fooba.dto.QnaVO;
 import fooba.service.AdminService;
 
 @Controller
@@ -20,18 +24,19 @@ public class AdminController {
 	
 	@Autowired
 	AdminService as;
-	
-	
+
 	
 	@RequestMapping("/admin_tos")
 	public String admin_tos() {
 		return "admin/admin_fooba_tos";
 	}
 	
+	
 	@RequestMapping("/admin_privacy")
 	public String admin_privacy() {
 		return "admin/admin_fooba_privacy";
 	}
+	
 	
 	@RequestMapping("/admin_logout")
 	public String admin_logout(HttpSession session) {
@@ -39,12 +44,14 @@ public class AdminController {
 		return "admin/admin_login";
 	}
 	
+	
 	@RequestMapping("/admin_loginForm")
 	public String admin_loginForm(HttpSession session) {
 		session.removeAttribute("loginAdmin");
 		return "admin/admin_login";
 	}
 
+	
 	@RequestMapping("/admin_login")
 	public String admin_login(	HttpServletRequest request, HttpSession session, Model model,
 			@RequestParam("adminId") String adminId, @RequestParam("adminPw") String adminPw) {
@@ -102,6 +109,7 @@ public class AdminController {
 		
 	}
 	
+	
 	@RequestMapping("/admin_resOx")
 	public String admin_restaurantOk(	HttpSession session, @RequestParam("ox") int ox, @RequestParam("rseq") int rseq) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
@@ -126,26 +134,59 @@ public class AdminController {
 	}
 	
 	
+	@RequestMapping("/admin_qnaWriteForm")
+	public String admin_qnaWriteForm(HttpSession session) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+			return "admin/admin_qnaWrite";
+	}
+	
+	
+	@RequestMapping("/admin_qnaUpdateForm")
+	public String admin_qnaUpdateForm(HttpSession session) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+			return "admin/admin_qnaUpdate";
+	}
+	
+	
+	@RequestMapping("/admin_qnaWU")
+	public String admin_qnaWrite(@ModelAttribute("vo") @Valid QnaVO qvo, BindingResult result, HttpSession session, Model model) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		
+		String url = "admin/admin_qnaWrite";
+		if(result.getFieldError("SUBJECT")!=null)
+			model.addAttribute("message",result.getFieldError("SUBJECT").getDefaultMessage());
+		else if(result.getFieldError("CONTENT")!=null)
+			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
+		else {
+			as.insertQna(qvo);
+			url = "redirect:/adminList?table=q";
+		}
+		return url;
+	}
+	
+	
+	@RequestMapping("/adminDetail")
+	public String adminDetail(HttpSession session, Model model,
+			@RequestParam("procedure") String procedure, @RequestParam("seq") int seq
+			) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("procedure", procedure);
+		prm.put("seq", seq);
+		prm.put("ref_cursor", null);
+		as.adminDetail(prm);
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		HashMap<String,Object> vo = list.get(0);
+		model.addAttribute("vo", vo);
+		
+		if (procedure.equals("res")) return "admin/admin_resDetail";
+		if (procedure.equals("qnaUpdate")) return "admin/admin_qnaUpdate";
+		else return "admin/admin_qnaDetail";
+	}
+	
 }	
 
-	/*
-	// 기본 프레임
-	@RequestMapping("/")
-	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
-			HttpServletRequest request, HttpSession session, Model model,
-			@RequestParam("인수") String 인수) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm"; // 로그인체크
-
-		HashMap<String, Object> prm = new HashMap<>();
-		prm.put("인수", 인수);
-		prm.put("ref_cursor", null);
-		as.servicemethod(prm);
-		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		HashMap<String,Object> hm = list.get(0);
-		model.addAttribute("memberList", hm);
-		return "갈곳경로";
-	}
-	*/
 	
 	
 

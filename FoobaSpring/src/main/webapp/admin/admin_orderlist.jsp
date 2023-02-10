@@ -68,7 +68,7 @@
 </article>
 <br>
 <jsp:include page="/admin/paging.jsp">
-<jsp:param name="command" value="adminList?table=o&first=y"/>
+<jsp:param name="command" value="adminList?table=o"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 

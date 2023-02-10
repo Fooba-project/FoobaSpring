@@ -3,7 +3,7 @@
 
 <script type="text/javascript">
 function go_detail( qseq ){
-	document.frm.action = "admin_qnaView&qseq=" + qseq;
+	document.frm.action = "adminDetail?procedure=qna&seq="+qseq;
 	document.frm.submit();
 }
 

@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import fooba.dto.QnaVO;
+
 @Mapper
 public interface IAdminDao {
 
@@ -17,4 +19,7 @@ public interface IAdminDao {
 
 	void adminGetAllCount(HashMap<String, Object> prm);
 
+	void adminQna(HashMap<String, Object> prm);
+
+	void adminDetail(HashMap<String, Object> prm);
 }
