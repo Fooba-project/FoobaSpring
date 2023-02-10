@@ -21,7 +21,7 @@ public class MemberService {
 		mdao.getMember(paramMap);
 	}
 
-	public void insertMember(@Valid MemberVO mvo) {
+	public void insertMember(MemberVO mvo) {
 		mdao.insertMember(mvo);
 		
 	}

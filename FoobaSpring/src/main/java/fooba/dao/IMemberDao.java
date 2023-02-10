@@ -12,7 +12,7 @@ import fooba.dto.MemberVO;
 public interface IMemberDao {
 
 	void getMember(HashMap<String, Object> paramMap);
-	void insertMember(@Valid MemberVO mvo);
+	void insertMember(MemberVO mvo);
 
 	
 }

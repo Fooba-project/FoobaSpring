@@ -80,7 +80,6 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
 	public String method(@ModelAttribute("mvo") @Valid MemberVO mvo, BindingResult result, 
 			 HttpSession session, Model model ) {
-		
 		String url = "member/memberJoin";
 		if (result.getFieldErrors()!=null) 	model.addAttribute("message", "빈칸 없이 입력하세요" );
 		else if( mvo.getReid() == null || ( mvo.getReid() != null && !mvo.getReid().equals(mvo.getId() ) ) )
