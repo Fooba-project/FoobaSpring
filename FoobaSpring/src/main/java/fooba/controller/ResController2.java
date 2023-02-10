@@ -69,7 +69,7 @@ public class ResController2 {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping(value="fileup", method=RequestMethod.POST)
+	@RequestMapping(value="fileup2", method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> fileup(Model model, HttpServletRequest request){
 
