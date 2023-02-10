@@ -70,16 +70,16 @@
                                 <input type="file" name="fimage" /> --%>
                                                            
                             <div id="res_tab">
-            					<input type="button" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:-200px"
+            					<input type="button" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:0px"
          						 value="수정">                              
                     		</div>	
                     		
 	        			</form>
-	        				
+	        				<div style="position:absolute; bottom:50px;">
 	        				<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
 							<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
 							</form> 
-	        			 	
+	        			 	</div>
 							
 							 
 	             

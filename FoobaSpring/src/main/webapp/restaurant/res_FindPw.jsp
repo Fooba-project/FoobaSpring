@@ -42,7 +42,7 @@
                     <div id="text_button_box">
                         <div id="login_idpw_box">
                         	<input type="text" id="find_id" name="rid" placeholder="아이디를 입력하세요" maxlength="16" onkeyup="chkIdCode(event)">
-							<input type="text" id="find_name" name="rname" placeholder="사업자 이름" title="이름" maxlength="30">
+							<input type="text" id="find_name" name="rname" placeholder="가게 이름" title="이름" maxlength="30">
                             <input type="text" id="find_phone" name="rphone" placeholder="휴대폰 번호를 입력하세요" maxlength="13"  onkeyup="chkPhoneCode(event)">
                         </div>
             			<br><br>

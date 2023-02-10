@@ -119,22 +119,22 @@ public class ResController {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
 		paramMap.put("rname",rname);
 		paramMap.put("ref_cursor",null);
-		
 		rs.resFindId(paramMap);
 		ArrayList<HashMap<String,Object>> list
 		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
 		if(list.size()==0) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-			return "redirect:/res_FindIdForm";
-		}
-		HashMap<String,Object> rvo=list.get(0);
-		if(!rvo.get("RPHONE").equals(rphone)) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-			return "redirect:/res_FindIdForm";
-		}
-		else {
-			model.addAttribute("message","귀하의 아이디는 '"+rvo.get("ID")+"'입니다.");
-			return "redirect:/res_loginForm";
+			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요1.");
+			return "restaurant/res_FindId";
+		}else {
+			HashMap<String,Object> rvo=list.get(0);
+			if(!rvo.get("RPHONE").equals(rphone)) {
+				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요2.");
+				return "restaurant/res_FindId";
+			}
+			else {
+				model.addAttribute("message","귀하의 아이디는 '"+rvo.get("RID")+"'입니다.");
+				return  "restaurant/res_login";
+			}
 		}
 	}
 	
@@ -155,16 +155,16 @@ public class ResController {
 		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
 		if(list.size()==0) {
 			model.addAttribute("message","아이디가 없습니다.");
-			return "redirect:/res_FindPwForm";
+			return "restaurant/res_FindPw";
 		}
 		HashMap<String,Object> rvo=list.get(0);
 		if(!rvo.get("RPHONE").equals(rphone)||!rvo.get("RNAME").equals(rname)) {
 			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-			return "redirect:/res_FindPwForm";
+			return "restaurant/res_FindPw";
 		}
 		else {
 			model.addAttribute("message","귀하의 비밀번호는 '"+rphone+"'로 전송되었습니다.");
-			return "redirect:/res_loginForm";
+			return "restaurant/res_login";
 		}
 	}
 	
@@ -173,7 +173,7 @@ public class ResController {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
 		model.addAttribute("RestaurantVO",rvo);
-		return "restaurant/res_show.jsp";
+		return "restaurant/res_show";
 		
 	}
 	@RequestMapping("/res_joinForm")
@@ -190,7 +190,7 @@ public class ResController {
 		//ajax에 의해서 호출된 지점으로 다시 되돌아가서 화면 이동없이 운영이 계속되어야 하기때문에 이동할때
 		//가져갈 데이터가 리턴된다.
 		
-		String path=context.getRealPath("/product_images");
+		String path=context.getRealPath("images/foodmenu");
 		HashMap<String,Object>result=new HashMap<String,Object>();
 		
 		try {
