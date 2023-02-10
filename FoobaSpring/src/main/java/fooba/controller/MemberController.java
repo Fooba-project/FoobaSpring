@@ -80,7 +80,7 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
 	public String method(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result,
 			HttpServletRequest request, HttpSession session, Model model,
-			@RequestParam(value="userreid", required=false) String userreid,
+			@RequestParam(value="reid", required=false) String reid,
 			@RequestParam(value="userpwdchk", required=false) String userpwdchk) {
 		if( result.getFieldError("id")!=null)
 			model.addAttribute("message", result.getFieldError("id").getDefaultMessage() );
@@ -92,7 +92,7 @@ public class MemberController {
 			model.addAttribute("message", result.getFieldError("phone").getDefaultMessage() );
 		else if( result.getFieldError("email")!=null)
 			model.addAttribute("message", result.getFieldError("email").getDefaultMessage() );
-		else if( userreid == null || (   userreid != null && !userreid.equals(mvo.getId() ) ) )
+		else if( reid == null || ( reid != null && !reid.equals(mvo.getId() ) ) )
 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
 		else if( userpwdchk == null || (  userpwdchk != null && !userpwdchk.equals(mvo.getPwd() ) ) ) 
 			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");

@@ -21,7 +21,7 @@
 	                    opener.document.member_join_send_form.id.value="";
 	                    opener.document.member_join_send_form.reid.value="";
 				</script>
-	                ${id}는 이미 사용중인 아이디입니다.
+	                ${userid}는 이미 사용중인 아이디입니다.
 			</c:if>
             <c:if test="${result == -1}">
                 ${id}는 사용 가능한 ID입니다.    
