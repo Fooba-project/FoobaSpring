@@ -19,6 +19,6 @@
 
 	<select id="FimagebyRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{	CALL FimagebyRseq(#{rseq},
-		#{fimage ,mode=OUT,  jdbcType=varchar})}
+		#{fimage ,mode=OUT,  jdbcType=VARCHAR})}
 	</select>
 </mapper>
