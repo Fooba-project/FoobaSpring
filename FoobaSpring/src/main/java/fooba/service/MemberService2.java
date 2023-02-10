@@ -103,9 +103,10 @@ public class MemberService2 {
 	}
 
 	private void CartListSum(ArrayList<HashMap<String, Object>> cpricelist) {
-		for(HashMap<String,Object>cprice:cpricelist) {
+		for(HashMap<String,Object>cp:cpricelist) {
 			HashMap<String, Object> cm = new HashMap<>();
-			int rtip=Integer.parseInt(cprice.get("RTIP")+"");
+			int cprice=Integer.parseInt(cp.get("CPRICE")+"");
+			cm.put("cprice", cprice);
 		}
 		
 	}
