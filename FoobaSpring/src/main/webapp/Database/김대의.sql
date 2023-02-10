@@ -20,7 +20,7 @@ begin
         select*from review where rseq=p_rseq;
 end;
 
-create or replace procedure getRes(
+create or replace procedure resFindId(
     p_rname in restaurant.rname%type,
     p_cur out sys_refcursor
 )
@@ -35,6 +35,6 @@ alter table restaurant add zip_num varchar2(100);
 alter table restaurant add raddress2 varchar2(100);
 alter table restaurant add raddress3 varchar2(100);
 
-update restaurant set raddress2='999µ¿ 999È£', raddress3='½ÅÃÌ±æ',zip_num='01234';
+update restaurant set raddress2='999ï¿½ï¿½ 999È£', raddress3='ï¿½ï¿½ï¿½Ì±ï¿½',zip_num='01234';
 
 select*from restaurant;
