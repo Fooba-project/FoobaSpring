@@ -40,7 +40,7 @@
         </table><br>
         <table id="admin_list_table">
             <tr><th>번호</th><th>가게명</th><th>가입현황</th><th>승인현황</th></tr>       
-        <c:forEach items="${resList}" var="RestaurantVO">
+        <c:forEach items="${list}" var="RestaurantVO">
                 <tr>
                     <td height="23" align="center">${RestaurantVO.RSEQ}</td>
                     <td style="text-align:left; padding-left:40px;">

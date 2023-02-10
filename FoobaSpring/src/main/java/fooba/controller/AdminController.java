@@ -53,7 +53,7 @@ public class AdminController {
 
 	
 	@RequestMapping("/admin_login")
-	public String admin_login(	HttpServletRequest request, HttpSession session, Model model,
+	public String admin_login(	HttpSession session, Model model,
 			@RequestParam("adminId") String adminId, @RequestParam("adminPw") String adminPw) {
 		
 		HashMap<String, Object> prm = new HashMap<>();
@@ -62,18 +62,16 @@ public class AdminController {
 		as.getAdmin(prm);
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		
-		if(list.size()==0) {
-			model.addAttribute("message", "아이디가 없습니다.");
-			return "admin/admin_login";
+		if(list.size()==0) model.addAttribute("message", "아이디가 없습니다.");
+		else {
+			HashMap<String,Object> hm = list.get(0);
+			if (hm.get("PWD")==null) model.addAttribute("message", "DB오류 관리자에게 문의하세요");
+			else if(adminPw.equals((String)hm.get("PWD"))) {
+				session.setAttribute("loginAdmin", hm);
+				session.removeAttribute("message");
+				return "redirect:/adminList?table=r&first=y";
+			} else model.addAttribute("message", "비밀번호가 틀렸습니다.");
 		}
-		
-		HashMap<String,Object> hm = list.get(0);
-		if (hm.get("PWD")==null) model.addAttribute("message", "DB오류 관리자에게 문의하세요");
-		else if(adminPw.equals((String)hm.get("PWD"))) {
-			session.setAttribute("loginAdmin", hm);
-			session.removeAttribute("message");
-			return "redirect:/adminList?table=r&first=y";
-		} else model.addAttribute("message", "비밀번호가 틀렸습니다.");
 		return "admin/admin_login";
 	}
 	
@@ -90,23 +88,12 @@ public class AdminController {
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		model.addAttribute("paging", (Paging)prm.get("paging"));
 		model.addAttribute("key", (String)prm.get("key"));
-		if(table.equals("r")) {
-			model.addAttribute("resList", list);
-			return "admin/admin_reslist";
-		} else if(table.equals("o")) {
-			model.addAttribute("orderList", list);
-			return "admin/admin_orderlist";
-		} else if(table.equals("m")) {
-			model.addAttribute("memberList", list);
-			return "admin/admin_memlist";
-		} else if(table.equals("q")) {
-			model.addAttribute("qnaList", list);
-			return "admin/admin_qnalist";
-		} else {
-			model.addAttribute("bannerList", list);
-			return "admin/admin_bannerlist";
-		}
-		
+		model.addAttribute("list", list);
+		if(table.equals("r")) return "admin/admin_reslist";
+		else if(table.equals("o")) return "admin/admin_orderlist";
+		else if(table.equals("m"))	return "admin/admin_memlist";
+		else if(table.equals("q")) return "admin/admin_qnalist";
+		else	return "admin/admin_bannerlist";		
 	}
 	
 	
@@ -137,9 +124,8 @@ public class AdminController {
 	@RequestMapping("/admin_qnaWriteForm")
 	public String admin_qnaWriteForm(HttpSession session) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-			return "admin/admin_qnaWrite";
+		return "admin/admin_qnaWrite";
 	}
-	
 	
 	
 	@RequestMapping("/adminQna")
@@ -153,7 +139,6 @@ public class AdminController {
 		else if(!procedure.equals("delete") && result.getFieldError("CONTENT")!=null)
 			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
 		else {
-			System.out.println("1");
 			HashMap<String, Object> prm = new HashMap<>();
 			prm.put("procedure", procedure);
 			prm.put("qvo", qvo);
@@ -185,8 +170,7 @@ public class AdminController {
 		else return "admin/admin_qnaDetail";
 	}
 	
-}	
-
 	
+}
 	
 

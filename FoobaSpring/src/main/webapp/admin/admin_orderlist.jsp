@@ -30,7 +30,7 @@
 	</table><br>
 	<table id="admin_list_table">
 		<tr><th>주문번호</th><th>주문자 ID</th><th>가게이름</th><th>가격</th><th>주문시간</th><th>주문상태</th></tr>      
-		<c:forEach items="${orderList}" var="OrderViewVO">
+		<c:forEach items="${list}" var="OrderViewVO">
 			<tr>
 				<td style="text-align:center;">${OrderViewVO.OSEQ}</td>
 				<td style="text-align:center;">${OrderViewVO.ID}</td>

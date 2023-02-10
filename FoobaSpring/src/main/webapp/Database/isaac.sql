@@ -8,20 +8,7 @@ BEGIN
     select * from admin where id = p_id;
 END;
 
-create or replace procedure adminGetDetail (
-p_procedure in varchar2,
-p_invar in number,
-p_rc out sys_refcursor )
-IS
-BEGIN
-    if (p_procedure='resdetail' ) then
-        open p_rc for
-        select * from admin where id = p_invar;
-    if (p_procedure='qnadetail' ) then
-        open p_rc for
-        select * from admin where id = p_invar;        
-    end if;
-END;
+
 
 create or replace procedure adminGetAllCount(
 p_table in varchar2,
@@ -108,3 +95,17 @@ BEGIN
 END;
 
 
+create or replace procedure adminDetail (
+p_procedure in varchar2,
+p_var in number,
+p_rc out sys_refcursor )
+IS
+BEGIN
+    if (p_procedure='res' ) then
+        open p_rc for
+        select*from restaurant where rseq=p_var;
+    else
+        open p_rc for
+        select*from qna where qseq=p_var;  
+    end if;
+END;

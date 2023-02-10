@@ -28,7 +28,7 @@
         </table><br>
         <table id="admin_list_table">
             <tr><th>회원 ID</th><th>회원 닉네임</th><th>전화번호</th><th>이메일</th><th>가입날짜</th></tr>       
-        <c:forEach items="${memberList}" var="MemberVO">
+        <c:forEach items="${list}" var="MemberVO">
                 <tr>
                     <td style="text-align:center;">${MemberVO.ID}</td>
                     <td style="text-align:center;">${MemberVO.NICK}</td>

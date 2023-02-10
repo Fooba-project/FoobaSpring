@@ -36,7 +36,7 @@ function go_total(){
         </table><br>
         <table id="admin_list_table">
             <tr><th>질문번호</th><th>제목</th></tr>
-        <c:forEach items="${qnaList}" var="QnaVO">
+        <c:forEach items="${list}" var="QnaVO">
                 <tr>
                     <td style="text-align:center;">${QnaVO.QSEQ}</td>
                     <td style="text-align:left; padding-left:20px;">
