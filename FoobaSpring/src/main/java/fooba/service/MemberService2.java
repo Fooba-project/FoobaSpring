@@ -27,10 +27,20 @@ public class MemberService2 {
 	public void SearchResList(HashMap<String, Object> prm) {
 		HttpServletRequest request	= (HttpServletRequest)prm.get("request");
 		HttpSession session = request.getSession();		
-		
-		String search = "";
-		if( request.getParameter("search") != null ) search = request.getParameter("search");
-		prm.put("searchtext", search);
+		String search="";
+		String searchtext = "";
+		if( request.getParameter("searchtext") != null ) {
+			searchtext = request.getParameter("searchtext");
+			search=searchtext;
+		}
+				
+		String hash = "";
+		if( request.getParameter("hash") != null ) {
+			searchtext = request.getParameter("hash");
+			search="#"+searchtext;
+		}
+		prm.put("search", search);
+		prm.put("searchtext", searchtext);
 		
 		mdao.SearchResList(prm);
 		
@@ -39,17 +49,16 @@ public class MemberService2 {
 		for(HashMap<String,Object> a : list) {
 			int rseq=Integer.parseInt(a.get("RSEQ")+"");
 			prm.put("rseq", rseq);
-			prm.put("fimage", "" );
 			mdao.FimagebyRseq(prm);
-			String fimage=(String)prm.get("fimage");
-			a.put("RIMAGE",fimage);
+			ArrayList< HashMap<String,Object> > fimageList 
+			= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
+			HashMap<String,Object> one = fimageList.get(0);
+			String fimage=(String)one.get("FIMAGE");
+			a.put("FIMAGE",fimage);
 		}
 		
-		String hash = "";
-		if( request.getParameter("hash") != null ) search = request.getParameter("hash");
-		prm.put("searchtext", search);
+		prm.put("list", list);
 		
-		mdao.SearchResList(prm);
 	}
 	
 }

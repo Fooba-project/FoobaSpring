@@ -25,6 +25,11 @@ public class MemberController2 {
 	@Autowired
 	MemberService2 ms;
 	
+	@RequestMapping("/index")
+	public String index() {
+		return "main";
+	}
+	
 	/*
 	// 기본 프레임
 	@RequestMapping("/")
@@ -147,6 +152,13 @@ public class MemberController2 {
 		 ms.SearchResList(prm);
 		 String search = (String)prm.get("search");
 		 model.addAttribute("search",search);
+		 
+		 ArrayList< HashMap<String,Object> > list 
+			= (ArrayList<HashMap<String, Object>>) prm.get("list");
+		 
+		 model.addAttribute("RList",list);
+		 
+		 
 		 return "main/resList";
 	}
 	 
