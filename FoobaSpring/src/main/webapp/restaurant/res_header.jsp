@@ -21,7 +21,7 @@ $(function(){
 		var formselect = $("#fileupForm")[0];   
 		var formdata = new FormData(formselect); 
 		$.ajax({    
-			url:"<%=request.getContextPath() %>/fileup", // 해당 컨트롤러의 requestMapping 목적지 설정 
+			url:"<%=request.getContextPath() %>/ResImgfileUp",
 			type:"POST",
 			enctype:"multipart/form-data",
 			async: false,
