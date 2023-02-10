@@ -11,9 +11,7 @@
         <div id="res_menuall_a">
         
         
-            	<div id="res_menuinfo">
-
-	            	<div id="res_menu1">	
+            	
 	            	      <form id="res_menuall_a" name="food_menu" method="post"  >
 					      	<input type="hidden" name="rseq" value="${RestaurantVO.RSEQ}"> 
 					      	<input type="hidden" name="fseq" value="${FoodmenuVO.FSEQ}"> 
@@ -72,23 +70,19 @@
                                 <input type="file" name="fimage" /> --%>
                                                            
                             <div id="res_tab">
-            					<input type="button" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0);"
+            					<input type="button" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:-200px"
          						 value="수정">                              
                     		</div>	
                     		
 	        			</form>
-	        			
-	        			<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
+	        				
+	        				<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
 							<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
 							</form> 
 	        			 	
 							
 							 
-	                </div>               
-            
-              
-             </div>
-          
+	             
             
             </div>
            
