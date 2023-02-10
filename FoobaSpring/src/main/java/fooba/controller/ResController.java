@@ -86,7 +86,7 @@ public class ResController {
 			else if(Rvo.get("RYN").equals("0")) 
 				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
 			else if(Rvo.get("RPWD").equals(rvo.getRpwd())) {
-				session.setAttribute("loginRes",rvo);
+				session.setAttribute("loginRes",Rvo);
 				url="redirect:/res_foodmenu";
 				
 				paramMap.put("rseq",Rvo.get("RSEQ"));
