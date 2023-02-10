@@ -15,11 +15,21 @@
 		{CALL selectFood( #{fseq},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2}}
 	</select>
 	
+	<update id="updateFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL addFoodMenu( #{rseq},#{fseq},#{fname},#{price},#{content},#{fside1},#{fsideprice1},
+			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3}) }
+	</update>
 	
-	<insert id="addFoodMenu" statementType="CALLABLE">
+	
+	<insert id="addFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL addFoodMenu( #{rseq},#{fseq},#{fname},#{price},#{content},#{fside1},#{fsideprice1},
 			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3}) }
 	</insert>
+	
+	<delete id="deleteFoodeMenu" statementType="CALLABLE">
+		{ CALL deleteFoodMenu(#{fseq})}
+		
+	</delete>
 	
 	
 

@@ -11,9 +11,12 @@ public interface IResDao2 {
 
 	void selectFood(HashMap<String, Object> paramMap);
 	
-
+	void updateFoodMenu(HashMap<String, Object> paramMap);
+	
 	void addFoodMenu(HashMap<String, Object> paramMap);
 
 	void deleteFoodMenu(HashMap<String, Object> paramMap);
+
+	
 
 }

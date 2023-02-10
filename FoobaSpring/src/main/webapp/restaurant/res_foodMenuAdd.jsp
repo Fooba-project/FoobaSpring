@@ -3,15 +3,15 @@
 <%@ include file="/restaurant/res_subhead.jsp"%>
 
         <div id="res_tab">
-            <div class="res_infotab" onclick="location.href='fooba.do?command=res_foodmenu'" >메뉴</div>
+            <div class="res_infotab" onclick="res_foodmenu'" >메뉴</div>
             <div class="res_infotab" onclick="#" style="color:white;">
             메뉴 추가</div>
         </div>
         
         <div id="res_menuall_a">
         
-        <form id="res_menuall_a" name="food_menu" method="post" enctype="multipart/form-data" >
-        	<input type="hidden" name="rseq" value="${RestaurantVO.rseq}"> 
+        <form id="res_menuall_a" name="food_menu" method="post" action="res_foodmenuAdd">
+        	<input type="hidden" name="rseq" value="${RestaurantVO.RSEQ}"> 
             	<div id="res_menuinfo">
 
 	            	<div id="res_menu1">	                	
@@ -64,8 +64,8 @@
                             </div><hr>
                                 
                             <div id="res_tab">
-            					<div class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0);"
-            					onclick="menu_insert()" >등록</div>                                
+            					<input type="submit" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0);"
+            					value="등록" >                                
                     		</div>
 	        
 	                </div>               

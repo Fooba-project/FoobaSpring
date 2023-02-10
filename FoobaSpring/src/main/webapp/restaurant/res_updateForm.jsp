@@ -5,15 +5,15 @@
 <!-- 가게 정보 수정 폼  -->
         <div id="res_tab">
             <div class="res_infotab" 
-             onclick="location.href='fooba.do?command=res_show'">돌아가기</div>
-            <div class="res_infotab" onclick="location.href='fooba.do?command=res_editForm'" style="color:white;">정보수정</div>
+             onclick="location.href='res_show'">돌아가기</div>
+            <div class="res_infotab" onclick="res_editForm'" style="color:white;">정보수정</div>
         </div>
 
 			<div id="res_menuall" style="overflow-x:hidden;">
 			
-				<form id="res_menuall_a" name="food_menu" method="post" enctype="multipart/form-data" action="fooba.do?command=res_Update">
-					<input type="hidden" name="rseq" value="${RestaurantVO.rseq}">	
-					<input type="hidden" name="oldImage" value="${RestaurantVO.rimage}">
+				<form id="res_menuall_a" name="food_menu" method="post" action="res_Update">
+					<input type="hidden" name="rseq" value="${RestaurantVO.RSEQ}">	
+					<input type="hidden" name="oldImage" value="${RestaurantVO.RIMAGE}">
            		
            		 <div id="info_rev">
 	       	    	<div id="rest_info">
@@ -25,14 +25,14 @@
 	                    </div><br>
                     	<div id="res_num">
 	                        <h3>업체 정보</h3><hr>
-	                        <a class="basic">사업자 번호</a>&nbsp; ${RestaurantVO.rbiznum}
-	                        	<input type="hidden" name="rbiznum" value="${loginRes.rbiznum}"><br><hr>                    
+	                        <a class="basic">사업자 번호</a>&nbsp; ${RestaurantVO.RBIZNUM}
+	                        	<input type="hidden" name="rbiznum" value="${loginRes.RBIZNUM}"><br><hr>                    
 	                        <a class="basic">전화 번호</a>&nbsp;
 	                        	<input type="text" name="rphone" style="border-radius:5px; width:170px; height:20px;"
-	                        	 value="${RestaurantVO.rphone}"  maxlength="13" id="rphone" onkeyup="chkPhoneCode(event)"/><br><hr>
+	                        	 value="${RestaurantVO.RPHONE}"  maxlength="13" id="rphone" onkeyup="chkPhoneCode(event)"/><br><hr>
 	                        <a class="basic">가게 주소</a>&nbsp; 
 	                        	<input type="text" name="raddress" style="border-radius:5px; width:310px; height:20px;"
-	                        	value="${RestaurantVO.raddress}"/><br><hr>
+	                        	value="${RestaurantVO.RADDRESS}"/><br><hr>
                     	</div>
                     	
                     	<div id="res_cont">
@@ -41,12 +41,12 @@
 	                        <a class="basic">결제 방법</a>&nbsp;&nbsp; 신용카드, 현금<br><hr>                    
 	                        <a class="basic">배달 팁</a>&nbsp;&nbsp;&nbsp;
 	                        	<input type="text" name="rtip" style="border-radius:5px; width:100px; height:20px;"
-	                        	 value="${RestaurantVO.rtip}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /> 원<br><hr>
+	                        	 value="${RestaurantVO.RTIP}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /> 원<br><hr>
 	                        <a class="basic">해시태그</a>&nbsp; 
 	                        	# <input type="text" name="hash" style="border-radius:5px; width:100px; height:20px;"
-	                        	value="${RestaurantVO.hash}"/><br><hr>
+	                        	value="${RestaurantVO.HASH}"/><br><hr>
 	                        <a class="basic">가게로고</a>&nbsp; 
-	                        		<img src="images/title/${RestaurantVO.rimage}" width="100px"><br>            
+	                        		<img src="images/title/${RestaurantVO.RIMAGE}" width="100px"><br>            
                                 <input type="file" name="fimage"/><br><hr>
 	                        	
 	                    </div><br>
