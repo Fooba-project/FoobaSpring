@@ -81,13 +81,14 @@ public class MemberController {
 	public String method(@ModelAttribute("mvo") @Valid MemberVO mvo, BindingResult result, 
 			 HttpSession session, Model model ) {
 		String url = "member/memberJoin"; 
-		if (result.getFieldErrors()!=null) 	model.addAttribute("message", "빈칸 없이 입력하세요" );
+		if (result.getFieldErrors()!=null ) 	model.addAttribute("message", "빈칸 없이 입력하세요" );
 		else if( mvo.getReid() == null || ( mvo.getReid() != null && !mvo.getReid().equals(mvo.getId() ) ) )
 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
+		
 		else if( mvo.getUserpwdchk() == null || (  mvo.getUserpwdchk() != null && !mvo.getUserpwdchk().equals(mvo.getPwd() ) ) ) 
 			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
 		else {
-			ms.insertMember( mvo );
+			ms.insertMember( mvo);
 			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
 			url = "member/memberLogin";
 		}
