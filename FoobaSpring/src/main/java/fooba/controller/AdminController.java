@@ -83,7 +83,7 @@ public class AdminController {
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		model.addAttribute("paging", (Paging)prm.get("paging"));
 		model.addAttribute("key", (String)prm.get("key"));
-		if(table.equals("r")) { 
+		if(table.equals("r")) {
 			model.addAttribute("resList", list);
 			return "admin/admin_reslist";
 		} else if(table.equals("o")) {
@@ -99,6 +99,7 @@ public class AdminController {
 			model.addAttribute("bannerList", list);
 			return "admin/admin_bannerlist";
 		}
+		
 	}
 	
 	@RequestMapping("/admin_resOx")

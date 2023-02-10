@@ -29,6 +29,7 @@ end if;
 END;
 
 
+
 create or replace procedure adminList(
 p_table in varchar2,
 p_key in varchar2,
@@ -43,7 +44,7 @@ if p_table= 'r' then
     select * from (select * from (select rownum as rn, b.* from ((select * from restaurant where rname like '%'|| p_key ||'%' order by rseq desc) b)) where rn>=p_startNum) where rn<=p_endNum;
 elsif p_table= 'o' then
     open p_rc for
-    select * from (select * from (select rownum as rn, b.* from ((select * from order_view where id like '%'|| p_key ||'%' or rname like '%'|| p_key ||'%' order by odseq desc) b)) where rn>=p_startNum) where rn<=p_endNum;
+    select * from (select * from (select rownum as rn, b.* from ((select distinct oseq, id, rname, totalprice, indate, result from order_view where id like '%'|| p_key ||'%' or rname like '%'|| p_key ||'%' order by oseq desc) b)) where rn>=p_startNum) where rn<=p_endNum;
 elsif p_table= 'm' then
     open p_rc for
     select * from (select * from (select rownum as rn, b.* from ((select * from member where id like '%'|| p_key ||'%' order by indate desc) b)) where rn>=p_startNum) where rn<=p_endNum;
@@ -65,3 +66,14 @@ BEGIN
     commit;
 END;
 
+
+
+create or replace procedure admin_orderLR( p_result in number, p_oseq in number )
+IS
+BEGIN
+    update orders set result=p_result where oseq=p_oseq;
+    if (p_result=3) then
+        delete from review where oseq=p_oseq;
+    end if;
+    commit;
+END;

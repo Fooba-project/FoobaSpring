@@ -50,18 +50,23 @@ public class AdminService {
 		paging.setPage(page);
 		prm.put("cnt", 0);
 		prm.put("key", key);
+		adao.adminGetAllCount(prm);
 		int count = Integer.parseInt( prm.get("cnt")+"" );
 		paging.setTotalCount(count);
 		paging.paging();
+		System.out.println("count:"+count);
 		
 		prm.put("startNum", paging.getStartNum());
 		prm.put("endNum", paging.getEndNum());
 		prm.put("paging", paging);
 		
+		System.out.println("paging begin: "+paging.getBeginPage());
+		System.out.println("paging end: "+paging.getEndPage());
+		System.out.println("paging page: "+paging.getPage());
+		System.out.println("paging total: "+paging.getTotalCount());
+		System.out.println("paging display: "+paging.getDisplayRow());
 		adao.adminList(prm);
 	}
-
-	
 
 	public void admin_resOx(HashMap<String, Object> prm) {
 		adao.admin_resOx(prm);

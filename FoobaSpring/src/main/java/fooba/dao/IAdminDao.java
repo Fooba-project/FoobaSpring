@@ -15,4 +15,6 @@ public interface IAdminDao {
 
 	void admin_orderLR(HashMap<String, Object> prm);
 
+	void adminGetAllCount(HashMap<String, Object> prm);
+
 }
