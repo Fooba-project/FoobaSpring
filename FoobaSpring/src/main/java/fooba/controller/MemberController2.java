@@ -28,6 +28,12 @@ public class MemberController2 {
 	@Autowired
 	MemberService2 ms;
 	
+	@Autowired
+	ResService2 rs2;
+	 
+	@Autowired
+	ResService rs;
+	
 	@RequestMapping("/index")
 	public String index() {
 		return "main";
@@ -183,11 +189,7 @@ public class MemberController2 {
 		 return "etc/fooba_tos";
 	 }
 	 
-	 @Autowired
-	 ResService2 rs2;
 	 
-	 @Autowired
-	 ResService rs;
 	 
 	 
 	 
@@ -197,65 +199,53 @@ public class MemberController2 {
 		 return "etc/fooba_privacy";
 	 }
 	 
-	 @RequestMapping("/restaurantDetail")
-	 public String restaurant_detail(HttpServletRequest request, HttpSession session,
-			 Model model, @RequestParam("rseq")int rseq) {
+	@RequestMapping("/restaurantDetail")
+	public String restaurant_detail(HttpServletRequest request, HttpSession session,
+	Model model, @RequestParam("rseq")int rseq) {
 		 
-		 int carttotalprice=0; 
-		 HashMap<String,Object> rvo =new HashMap<String,Object>();
+		int carttotalprice=0; 
 		 
 		 HashMap<String, Object> prm = new HashMap<>();
-		 prm.put("rseq", rseq);		 
+		 prm.put("rseq", rseq);	 
 		 prm.put("ref_cursor", null);
 		 prm.put("ref_cursor1", null);
 		 prm.put("ref_cursor2", null);
-		 prm.put("ref_cursor3", null);
-		 		 
+		 
 		 rs2.foodList(prm);
 		 ms.resInf(prm);
 		 ms.reviewList(prm);
 		 	 
-		 
 		 ArrayList<HashMap<String, Object>> list
 			=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
 		 
-		 
 		 ArrayList<HashMap<String,Object>>list1
 			=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
-		  rvo =list1.get(0);
+		 HashMap<String,Object> rvo =list1.get(0);
 		 
 		 ArrayList<HashMap<String,Object>>list2
 			=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
 		 
-		 HashMap<String,Object> mvo=
-				 (HashMap<String,Object>) session.getAttribute("loginUser");
+		 HashMap<String,Object> vo=
+				 (HashMap<String,Object>)session.getAttribute("loginUser");
 				 
-		 
-		 if(mvo != null) {
-			 
-			 prm.put("id", mvo.get("ID"));
+		 if(vo != null) {
+			 prm.put("id", vo.get("ID")+"");
+			 int sum = 0;
+			 prm.put("ref_cursor3", null);
 			 ms.cartList(prm);
-			 
-			 ArrayList<HashMap<String,Object>>list3
-				=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
-			 prm.put("sum", null); 
+			 ArrayList<HashMap<String,Object>> list3
+				= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
+			 for (HashMap<String,Object> cart : list3)
+				sum += Integer.parseInt(cart.get("CPRICE")+"");
 			 model.addAttribute("clist",list3);
-			// int sum=ms.CartListSum(prm);
-			// carttotalprice=sum+Integer.parseInt((String)rvo.get("Rtip"));
-		// } else {
-
-//			carttotalprice=carttotalprice+Integer.parseInt((String)rvo.get("Rtip"));
+			 model.addAttribute("carttotalprice",
+					 sum + Integer.parseInt(rvo.get("RTIP")+""));
 		 }
 	
 		 /*가게 별점*/
-		 
-		double star=0;
 		rs.starAvg(prm);
-		int intstar=(int)star;
-		double doublestar=(int)(star*10)/(double)10;
 		session.setAttribute("intstar",prm.get("intstar")); //별 개수
 		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)
-		 
 		
 		 model.addAttribute("FoodmenuList",list);
 		 model.addAttribute("RestaurantVO",rvo);

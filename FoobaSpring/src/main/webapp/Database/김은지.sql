@@ -80,16 +80,17 @@ end;
 CREATE OR REPLACE PROCEDURE CartListSum( p_id IN cart.id%type, p_rseq IN cart.rseq%type, p_sum OUT NUMBER)
 IS
 v_sum SYS_REFCURSOR;
-v_cprice NUMBER;
+v_cprice NUMBER(10);
+
 BEGIN
         -- p_sum:=0;
         OPEN v_sum FOR
             select * from cart where id=p_id and rseq=p_rseq;
-        close v_sum;
         
         LOOP
                 FETCH v_sum INTO v_cprice;    
                 EXIT WHEN v_sum%NOTFOUND;    
+                select cprice into v_cprice from cart;
                 p_sum := p_sum+v_cprice;
         END LOOP;
 end;

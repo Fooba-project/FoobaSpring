@@ -42,9 +42,4 @@
 	#{ref_cursor3 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
-	<select id="CartListSum" statementType="CALLABLE" resultType='Integer' parameterType="java.util.HashMap">
-		{CALL CartListSum(#{id},#{rseq},
-		#{sum ,mode=OUT, jdbcType=INTEGER, javaType=int})}
-	</select>
-	
 </mapper>

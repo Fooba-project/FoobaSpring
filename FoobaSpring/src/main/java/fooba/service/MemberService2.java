@@ -95,32 +95,8 @@ public class MemberService2 {
 
 	public void cartList(HashMap<String, Object> prm) {		
 		mdao.cartList(prm);
-		
-		ArrayList< HashMap<String,Object> > cpricelist 
-		= (ArrayList<HashMap<String, Object>>) prm.get("sum");
-		
-		CartListSum(cpricelist);
-	}
-
-	private void CartListSum(ArrayList<HashMap<String, Object>> cpricelist) {
-		for(HashMap<String,Object>cp:cpricelist) {
-			HashMap<String, Object> cm = new HashMap<>();
-			int cprice=Integer.parseInt(cp.get("CPRICE")+"");
-			cm.put("cprice", cprice);
-		}
-		
 	}
 
 
-	/*
-	  public int CartListSum(HashMap<String, Object> prm) { int sum= 0;
-	  
-	  for(HashMap<String,Object> cprice: prm )
-	 
-	  return sum; }
-	 */
-
-
-	
 	
 }

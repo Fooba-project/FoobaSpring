@@ -21,8 +21,5 @@ public interface IMemberDao2 {
 
 	void cartList(HashMap<String, Object> prm);
 
-	int CartListSum(HashMap<String, Object> prm);
-
-
 
 }
