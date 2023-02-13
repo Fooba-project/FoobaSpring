@@ -162,13 +162,13 @@ function idcheck(){
 
 
 function loginCheck(){
-	if(document.loginForm.userid.value==""){
+	if(document.loginForm.ID.value==""){
 		alert("아이디는 필수입력사항입니다");
-		document.loginForm.userid.focus();
+		document.loginForm.ID.focus();
 		return false;
-	}else if(document.loginForm.userpw.value==""){
+	}else if(document.loginForm.PWD.value==""){
 		alert("비밀번호는 필수입력사항입니다");
-		document.loginForm.userpw.focus();
+		document.loginForm.PWD.focus();
 		return false;
 	}else{
 		return true;	
@@ -201,9 +201,9 @@ function result( zip_num, sido, gugun, dong){
 
 
 function go_update(){
-	if ((document.member_update_form.userpwd.value != document.member_update_form.userpwdchk.value)) {
+	if ((document.member_update_form.PWD.value != document.member_update_form.userpwdchk.value)) {
 	    alert("비밀번호가 일치하지 않습니다.");
-	    document.member_update_form.userpwd.focus();
+	    document.member_update_form.PWD.focus();
 	}
 	else {
 	    document.member_update_form.action = "memberUpdate";

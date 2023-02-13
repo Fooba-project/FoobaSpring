@@ -98,4 +98,8 @@ public class MemberController {
 		return url;
 	}
 	
+	@RequestMapping("/memberFindIdForm")
+	public String memberFindIdForm() {
+		return"member/memberFindId";
+	}
 }
