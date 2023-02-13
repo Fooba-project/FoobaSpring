@@ -11,25 +11,25 @@ import lombok.Data;
 public class MemberVO {
 	@NotNull(message="아이디를 입력해주세요")
 	@NotEmpty(message="아이디를 입력해주세요")
-	private String id;
+	private String ID;
 	@NotNull(message="비밀번호를 입력해주세요")
 	@NotEmpty(message="비밀번호를 입력해주세요")
-	private String pwd;
+	private String PWD;
 	@NotNull(message="이름을 입력해주세요")
 	@NotEmpty(message="이름을 입력해주세요")
-	private String name;
+	private String NAME;
 	@NotNull(message="전화번호를 입력해주세요")
 	@NotEmpty(message="전화번호를 입력해주세요")
-	private String phone;
+	private String PHONE;
 	@NotNull(message="이메일을 입력해주세요")
 	@NotEmpty(message="이메일을 입력해주세요")
-	private String email;
-	private String zip_num;
-	private String address1;
-	private String address2;
-	private String address3;
-	private Timestamp indate;
-	private String nick;
-	private String reid;
-	private String userpwdchk;
+	private String EMAIL;
+	private String ZIP_NUM;
+	private String ADDRESS1;
+	private String ADDRESS2;
+	private String ADDRESS3;
+	private Timestamp INDATE;
+	private String NICK;
+	private String REID;
+	private String USERPWDCHK;
 }

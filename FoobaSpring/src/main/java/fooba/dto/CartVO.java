@@ -6,18 +6,17 @@ import lombok.Data;
 
 @Data
 public class CartVO {
-		private Integer cseq;
-		private Integer quantity;
-		private String id;
-		private Integer fseq;
-		private String sideyn1;
-		private String sideyn2;
-		private String sideyn3;
-		private int cprice;
-		private Timestamp indate;
-		private String cfname;
-		private int rseq;
-		
-
+		private Integer CSEQ;
+		private Integer QUANTITY;
+		private String ID;
+		private Integer FSEQ;
+		private String SIDEYN1;
+		private String SIDEYN2;
+		private String SIDEYN3;
+		private int CPRICE;
+		private Timestamp INDATE;
+		private String CFNAME;
+		private int RSEQ;
+	
 
 }

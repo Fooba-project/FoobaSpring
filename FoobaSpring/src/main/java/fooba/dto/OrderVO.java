@@ -6,22 +6,23 @@ import lombok.Data;
 
 @Data
 public class OrderVO {
-	private int oseq;
-	private Timestamp indate;
-	private String id;
-	private int rideryn;
-	private int plasticyn;
-	private int payment;
-	private int result;
-	private String Oname;
-	private String address1;
-	private String address2;
-	private int totalprice;
-	private String phone;
-	private String rname;
-	private String rimage;
-	private int rseq;
-	private String nick;
+	private int OSEQ;
+	private Timestamp INDATE;
+	private String ID;
+	private int RIDERYN;
+	private int PLASTICYN;
+	private int PAYMENT;
+	private int RESULT;
+	private String ONAME;
+	private String ADDRESS1;
+	private String ADDRESS2;
+	private String ADDRESS3;
+	private int TOTALPRICE;
+	private String PHONE;
+	private String RNAME;
+	private String RIMAGE;
+	private int RSEQ;
+	private String NICK;
 
 	
 }

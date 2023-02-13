@@ -54,10 +54,10 @@ public class AdminController {
 	
 	@RequestMapping("/admin_login")
 	public String admin_login(	HttpSession session, Model model,
-			@RequestParam("adminId") String adminId, @RequestParam("adminPw") String adminPw) {
+			@RequestParam("ADMINID") String ADMINID, @RequestParam("ADMINPW") String ADMINPW) {
 		
 		HashMap<String, Object> prm = new HashMap<>();
-		prm.put("adminId", adminId);
+		prm.put("ADMINID", ADMINID);
 		prm.put("ref_cursor", null);
 		as.getAdmin(prm);
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
@@ -66,7 +66,7 @@ public class AdminController {
 		else {
 			HashMap<String,Object> hm = list.get(0);
 			if (hm.get("PWD")==null) model.addAttribute("message", "DB오류 관리자에게 문의하세요");
-			else if(adminPw.equals((String)hm.get("PWD"))) {
+			else if(ADMINPW.equals((String)hm.get("PWD"))) {
 				session.setAttribute("loginAdmin", hm);
 				session.removeAttribute("message");
 				return "redirect:/adminList?table=r&first=y";

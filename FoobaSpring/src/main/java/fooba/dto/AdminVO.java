@@ -5,10 +5,9 @@ import lombok.Data;
 @Data
 public class AdminVO {
 
-	private String id;
-	private String pwd;
-	private String name;
-	private String phone;
+	private String ID;
+	private String PWD;
+	private String NAME;
+	private String PHONE;
 	
-
 }

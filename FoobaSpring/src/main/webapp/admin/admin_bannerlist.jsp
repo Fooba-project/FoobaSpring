@@ -34,4 +34,5 @@
 <jsp:param name="command" value="adminList?table=m"/>
 </jsp:include>
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
 <%@ include file="admin_footer.jsp"%>
