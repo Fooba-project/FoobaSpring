@@ -11,7 +11,7 @@
 	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 			CALL getMember( 
-				#{ id, mode=IN }, 
+				#{ ID, mode=IN }, 
 				#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
 			)
 		}
@@ -20,7 +20,7 @@
 	<insert id="insertMember" statementType="CALLABLE" parameterType="fooba.dto.MemberVO" >
 		{ 
 			CALL insertMember( 
-				#{id},#{pwd},#{name},#{email},#{phone},#{zip_num},#{address1},#{address2},#{address3},#{nick}
+				#{ID},#{PWD},#{NAME},#{EMAIL},#{PHONE},#{ZIP_NUM},#{ADDRESS1},#{ADDRESS2},#{ADDRESS3},#{NICK}
 			) 
 		}
 	</insert>

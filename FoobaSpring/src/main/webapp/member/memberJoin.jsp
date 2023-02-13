@@ -7,59 +7,59 @@
         <form name="member_join_send_form" id="member_join_send_form" method="post" action="memberJoin">
             <table class="member_join_table">
                 <div class="join_list">
-                    <input type="text" class="input_text" style="width: 490px;" name="id" placeholder="아이디" onkeyup="chkIdCode(event)" value="${dto.id}"/>
-                    <input type="hidden" name="reid" value="${reid}"/>
+                    <input type="text" class="input_text" style="width: 490px;" name="ID" placeholder="아이디" onkeyup="chkIdCode(event)" value="${vo.ID}"/>
+                    <input type="hidden" name="REID" value="${REID}"/>
                     <input type="button" id="id_btn" value="중복 확인" onclick="idcheck()" >
                 </div>
 
                 <div class="join_list">
-                    <input type="password" class="input_text" name="userpwd" 
+                    <input type="password" class="input_text" name="PWD" 
                     id="userpwd"
-                    placeholder="비밀번호"/>
+                    placeholder="비밀번호" value="${vo.PWD}"/>
                 </div>
 
                 <div class="join_list">
-                    <input type="password" class="input_text" name="userpwdchk" id="userpwdchk" placeholder="비밀번호 확인"/>
+                    <input type="password" class="input_text" name="USERPWDCHK" id="userpwdchk" placeholder="비밀번호 확인" value="${vo.USERPWDCHK}"/>
                 </div>
 
                 <p class="error_text" id="error1"></p>
     
                 <div class="join_list">
-                    <input type="text" class="input_text" name="username" placeholder="이름" value="${dto.name}"/>
+                    <input type="text" class="input_text" name="NAME" placeholder="이름" value="${vo.NAME}"/>
                 </div>
 
                 <div class="join_list">
-                    <input type="text" id="userphone" class="input_text" name="userphone" placeholder="전화번호" maxlength="13"  
-                    value="${dto.phone}" onkeyup="chkPhoneCode(event)"/>
+                    <input type="text" id="userphone" class="input_text" name="PHONE" placeholder="전화번호" maxlength="13"  
+                    value="${vo.PHONE}" onkeyup="chkPhoneCode(event)"/>
                 </div>
 
                 <div class="join_list">
-                    <input type="text" class="input_text" name="useremail"
+                    <input type="text" class="input_text" name="EMAIL"
                     id="useremail"
-                    placeholder="이메일" value="${dto.email}"/>
+                    placeholder="이메일" value="${vo.EMAIL}"/>
                 </div>
 
                 <p class="error_text" id="error2"></p>
 
                 <div class="join_list">
-                    <input type="text" class="input_text" style="width: 490px;" name="zip_num" placeholder="우편번호"  value="${dto.zip_num}" id="sample6_postcode" readonly />
+                    <input type="text" class="input_text" style="width: 490px;" name="ZIP_NUM" placeholder="우편번호"  value="${vo.ZIP_NUM}" id="sample6_postcode" readonly />
                     <input type="button" id="id_btn" value="우편번호 검색" onclick="sample6_execDaumPostcode()"> 
                 </div>
 
                 <div class="join_list">
-                    <input type="text" class="input_text" name="address1" placeholder="주소"  value="${dto.address1}" id="sample6_address"  readonly />
+                    <input type="text" class="input_text" name="ADDRESS1" placeholder="주소"  value="${vo.ADDRESS1}" id="sample6_address"  readonly />
                 </div>
 
                 <div class="join_list">
-                    <input type="text" class="input_text" name="address2" placeholder="상세 주소"  value="${dto.address2}"  id="sample6_detailAddress" />
+                    <input type="text" class="input_text" name="ADDRESS2" placeholder="상세 주소"  value="${vo.ADDRESS2}"  id="sample6_detailAddress" />
                 </div>
 
 				<div class="join_list">
-                    <input type="text" class="input_text" name="address3" placeholder="구 주소"  value="${dto.address2}"  id="sample6_extraAddress" />
+                    <input type="text" class="input_text" name="ADDRESS3" placeholder="구 주소"  value="${vo.ADDRESS3}"  id="sample6_extraAddress" />
                 </div>
                 
                 <div class="join_list" margin="20px">
-                    <input type="text" class="input_text" name="nick" placeholder="닉네임(별명)" value="${dto.nick}"/>
+                    <input type="text" class="input_text" name="NICK" placeholder="닉네임(별명)" value="${vo.NICK}"/>
                 </div>
 
                 <p class="error_text">* 입력하지 않을 시 이름으로 사용됩니다.</p>

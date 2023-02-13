@@ -49,13 +49,13 @@ public class MemberController {
 		return "main";
 	}
 
-	@RequestMapping("/memberIdCheckForm")
-		public String member_id_check_form( 
-				@RequestParam("id") String id,
+	@RequestMapping("/memberIdCheck")
+		public String member_id_check( 
+				@RequestParam("ID") String ID,
 				Model model, 
 				HttpServletRequest request ) {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("id", id);
+		paramMap.put("ID", ID);
 		paramMap.put("ref_cursor", null);
 		ms.getMember( paramMap );
 		
@@ -65,7 +65,7 @@ public class MemberController {
 		if( list.size()==0 ) model.addAttribute("result" , -1);
 		else model.addAttribute("result" , 1);
 		
-		model.addAttribute("id", id);		
+		model.addAttribute("ID", ID);		
 		return "member/memberIdCheck";
 	}
 	
@@ -78,10 +78,14 @@ public class MemberController {
 	
 	
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
-	public String method(@ModelAttribute("mvo") @Valid MemberVO mvo, BindingResult result, 
-			 HttpSession session, Model model ) {
+	public String method(@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, 
+		Model model ) {
 		String url = "member/memberJoin"; 
-		if (result.getFieldErrors()!=null ) 	model.addAttribute("message", "빈칸 없이 입력하세요" );
+		if (result.getFieldError("ID")!=null ) 	model.addAttribute("message", "아이디를 입력하세요" );
+		else if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", "비밀번호를 입력하세요" );
+		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message", "이름을 입력하세요" );
+		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", "전화번호를 입력하세요" );
+		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", "이메일을 입력하세요" );
 		else if( mvo.getREID() == null || ( mvo.getREID() != null && !mvo.getREID().equals(mvo.getID() ) ) )
 			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
 		else if( mvo.getUSERPWDCHK() == null || (  mvo.getUSERPWDCHK() != null && !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) ) 
@@ -91,7 +95,7 @@ public class MemberController {
 			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
 			url = "member/memberLogin";
 		}
-		return "redirect:/";
+		return url;
 	}
 	
 }
