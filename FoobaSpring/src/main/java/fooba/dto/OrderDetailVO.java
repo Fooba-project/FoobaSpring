@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class OrderDetailVO {
-	private int odseq;
-	private int quantity;
-	private int oseq;
-	private int fseq;
-	private int sideyn1;
-	private int sideyn2;
-	private int sideyn3;
+	private int ODSEQ;
+	private int QUANTITY;
+	private int OSEQ;
+	private int FSEQ;
+	private int SIDEYN1;
+	private int SIDEYN2;
+	private int SIDEYN3;
 	
 }

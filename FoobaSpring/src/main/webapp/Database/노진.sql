@@ -23,6 +23,8 @@ CREATE OR REPLACE PROCEDURE insertMember(
 IS
 BEGIN
     INSERT INTO member( id, pwd, name, email, phone, zip_num, address1, address2, address3, nick)
-    VALUES( p_id, p_pwd, p_name, p_email, p_phone, p_zip_num, p_address1, p_address2, p_address3, nick );
+    VALUES( p_id, p_pwd, p_name, p_email, p_phone, p_zip_num, p_address1, p_address2, p_address3, p_nick );
     COMMIT;
 END;
+
+select*from member;

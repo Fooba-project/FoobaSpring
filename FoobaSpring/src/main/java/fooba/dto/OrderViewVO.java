@@ -6,46 +6,46 @@ import lombok.Data;
 
 @Data
 public class OrderViewVO {
-	private int oseq;
-	private int result;
-	private Timestamp indate;
-	private String id;
-	private int rideryn;
-	private int plasticyn;
-	private int payment;
-	private String oadd1;
-	private String oadd2;
-	private String ophone;
-	private int totalprice;
+	private int OSEQ;
+	private int RESULT;
+	private Timestamp INDATE;
+	private String ID;
+	private int RIDERYN;
+	private int PLASTICYN;
+	private int PAYMENT;
+	private String OADD1;
+	private String OADD2;
+	private String OPHONE;
+	private int TOTALPRICE;
 	
-	private int odseq;
-	private int quantity;
-	private int fseq;
-	private int sideyn1;
-	private int sideyn2;
-	private int sideyn3;
+	private int ODSEQ;
+	private int QUANTITY;
+	private int FSEQ;
+	private int SIDEYN1;
+	private int SIDEYN2;
+	private int SIDEYN3;
 
-	private String nick;
-	private String madd1;
-	private String madd2;
-	private String mphone;
+	private String NICK;
+	private String MADD1;
+	private String MADD2;
+	private String MPHONE;
 	
-	private String fname;
-	private int fprice;
-	private String fside1;
-	private int fsideprice1;
-	private String fside2;
-	private int fsideprice2;
-	private String fside3;
-	private int fsideprice3;
-	private String fimage;
-	private String fcontent;
+	private String FNAME;
+	private int FPRICE;
+	private String FSIDE1;
+	private int FSIDEPRICE1;
+	private String FSIDE2;
+	private int FSIDEPRICE2;
+	private String FSIDE3;
+	private int FSIDEPRICE3;
+	private String FIMAGE;
+	private String FCONTENT;
 	
-	private String rname;
-	private int rseq;
-	private String rimage;
-	private int rtip;
-	private int ryn;
+	private String RNAME;
+	private int RSEQ;
+	private String RIMAGE;
+	private int RTIP;
+	private int RYN;
 	
 	
 }

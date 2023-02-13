@@ -76,7 +76,7 @@ public class MemberController {
 	}
 	
 	
-	
+	/*
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
 	public String method(@ModelAttribute("mvo") @Valid MemberVO mvo, BindingResult result, 
 			 HttpSession session, Model model ) {
@@ -91,8 +91,8 @@ public class MemberController {
 			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
 			url = "member/memberLogin";
 		}
-		return url;
-	}	
-
+		return "redirect:/";
+	}
+*/
 	
 }
