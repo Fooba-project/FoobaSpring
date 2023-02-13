@@ -8,7 +8,7 @@
 	<resultMap id="memberMap2" type="java.util.HashMap"></resultMap>
 
 	<select id="getMember"  statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL getMemberFooba(#{id},
+		{	CALL getMemberFooba(#{ID},
 				#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 } )	}
 	</select>	
 
@@ -18,32 +18,32 @@
 	</select>
 
 	<select id="FimagebyRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL FimagebyRseq(#{rseq},
+		{	CALL FimagebyRseq(#{RSEQ},
 		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="searchKind" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL searchKind(#{kind},
+		{	CALL searchKind(#{KIND},
 		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="resInf" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{	CALL resInf(#{rseq},
+	{	CALL resInf(#{RSEQ},
 	#{ref_cursor1 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="reviewList" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{ CALL reviewList(#{rseq},
+	{ CALL reviewList(#{RSEQ},
 	#{ref_cursor2 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="cartList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL cartList(#{rseq}, #{id},
+		{ CALL cartList(#{RSEQ}, #{ID},
 	#{ref_cursor3 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="getFoodDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL getFoodDetail(#{fseq},
+		{CALL getFoodDetail(#{FSEQ},
 		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	

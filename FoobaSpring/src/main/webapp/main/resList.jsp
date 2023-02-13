@@ -3,7 +3,7 @@
 <%@ include file="sub_head.jsp"%>
 <div class="row">
 	<c:forEach items="${RList}" var="RestaurantVO">
-   		<div class="resList">        	<a href="restaurantDetail?rseq=${RestaurantVO.RSEQ }&search=&hash=" class="rimage">                
+   		<div class="resList">        	<a href="restaurantDetail?RSEQ=${RestaurantVO.RSEQ }&search=&hash=" class="rimage">                
 	          	<div class="res_imgbox">
           	 	<img src="images/foodmenu/${RestaurantVO.FIMAGE}" alt="${RestaurantVO.FIMAGE}" id="rtitle">
     	        </div>

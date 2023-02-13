@@ -69,13 +69,13 @@ public class MemberController2 {
 			   BindingResult result, HttpSession session, Model model) {
 	      
 	      String url = "member/memberLogin";
-	      if(result.getFieldError("id")!=null)
-	         model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
-	      else if (result.getFieldError("pwd")!=null)
-	         model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+	      if(result.getFieldError("ID")!=null)
+	         model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+	      else if (result.getFieldError("PWD")!=null)
+	         model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 	      else {
 	         HashMap<String, Object> prm = new HashMap<>();
-	         prm.put("id", mvo.getID());
+	         prm.put("ID", mvo.getID());
 	         prm.put("ref_cursor", null);
 	         
 	         ms.getMember(prm);
@@ -114,19 +114,19 @@ public class MemberController2 {
 	 @RequestMapping("/miniLogin")
 	 public String miniLogin(@ModelAttribute("dto") @Valid MemberVO membervo, BindingResult result, 
 	         HttpServletRequest request, Model model,
-	         @RequestParam("fseq") String fseq) {
+	         @RequestParam("FSEQ") String FSEQ) {
 		 
 		 String url="member/memberMiniLogin";
 		 
 		 model.addAttribute("check", "1");
 		 
-		 if(result.getFieldError("id")!=null)
-	         model.addAttribute("message", result.getFieldError("id").getDefaultMessage());
-	      else if (result.getFieldError("pwd")!=null)
-	         model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
+		 if(result.getFieldError("ID")!=null)
+	         model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+	      else if (result.getFieldError("PWD")!=null)
+	         model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 	      else {
 	         HashMap<String, Object> prm = new HashMap<String, Object>();
-	         prm.put("id", membervo.getID());
+	         prm.put("ID", membervo.getID());
 	         prm.put("ref_cursor", null);
 	         
 	         ms.getMember(prm);
@@ -197,12 +197,12 @@ public class MemberController2 {
 	 
 	@RequestMapping("/restaurantDetail")
 	public String restaurant_detail(HttpServletRequest request, HttpSession session,
-	Model model, @RequestParam("rseq")int rseq) {
+	Model model, @RequestParam("RSEQ")int RSEQ) {
 		 
 		int carttotalprice=0; 
 		 
 		 HashMap<String, Object> prm = new HashMap<>();
-		 prm.put("rseq", rseq);	 
+		 prm.put("RSEQ", RSEQ);	 
 		 prm.put("ref_cursor", null);
 		 prm.put("ref_cursor1", null);
 		 prm.put("ref_cursor2", null);
@@ -225,7 +225,7 @@ public class MemberController2 {
 				 (HashMap<String,Object>)session.getAttribute("loginUser");
 				 
 		 if(vo != null) {
-			 prm.put("id", vo.get("ID")+"");
+			 prm.put("ID", vo.get("ID")+"");
 			 int sum = 0;
 			 prm.put("ref_cursor3", null);
 			 ms.cartList(prm);
@@ -252,9 +252,9 @@ public class MemberController2 {
 	
 	@RequestMapping("/menupopup")
 	public String memu_popup(HttpServletRequest request, HttpSession session,
-			Model model, @RequestParam("fseq")int fseq) {
+			Model model, @RequestParam("FSEQ")int FSEQ) {
 	HashMap<String, Object> prm = new HashMap<>();
-	prm.put("fseq", fseq);
+	prm.put("FSEQ", FSEQ);
 	prm.put("ref_cursor", null);
 	
 	ms.getFoodDetail(prm);

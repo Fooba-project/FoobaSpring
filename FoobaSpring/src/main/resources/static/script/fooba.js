@@ -242,8 +242,8 @@ function go_search2(){
 	document.search.submit();
 }
 
-function go_search(hash){
-	var url = "search?hash="+ hash;  
+function go_search(HASH){
+	var url = "search?HASH="+ HASH;  
 	document.search.action = url;
 	document.search.submit();
 }       
@@ -257,15 +257,15 @@ function go_search(hash){
 	}
 }
 
- function menupopup(fseq){
+ function menupopup(FSEQ){
   
 	var popupX = (window.screen.width / 2) - 230;
-     window.open("menupopup?fseq="+fseq,"메뉴 상세","width=462, height=786, menubar=no, status=no, toolbar=no, top=100 , left="+ popupX);
+     window.open("menupopup?FSEQ="+FSEQ,"메뉴 상세","width=462, height=786, menubar=no, status=no, toolbar=no, top=100 , left="+ popupX);
  } 
   
-  function deleteejb(cseq,rseq){
+  function deleteejb(CSEQ,RSEQ){
 	var ok=confirm("장바구니에서 삭제하시겠습니까?");
-	if(ok) location.href="deleteCartmenu?cseq="+cseq+"&rseq="+rseq;
+	if(ok) location.href="deleteCartmenu?CSEQ="+CSEQ+"&RSEQ="+RSEQ;
     else return;
    }
    

@@ -36,8 +36,8 @@ public class MemberService2 {
 		}
 				
 		String hash = "";
-		if( request.getParameter("hash") != null ) {
-			searchtext = request.getParameter("hash");
+		if( request.getParameter("HASH") != null ) {
+			searchtext = request.getParameter("HASH");
 			search="#"+searchtext;
 		}
 		prm.put("search", search);
@@ -58,8 +58,8 @@ public class MemberService2 {
 		HttpServletRequest request	= (HttpServletRequest)prm.get("request");
 		HttpSession session = request.getSession();		
 		
-		int kind =Integer.parseInt(request.getParameter("kind")); 
-		prm.put("kind",kind);
+		int kind =Integer.parseInt(request.getParameter("KIND")); 
+		prm.put("KIND",kind);
 		
 		mdao.searchKind(prm);
 		
@@ -75,7 +75,7 @@ public class MemberService2 {
 		for(HashMap<String,Object> a : list) {
 			HashMap<String, Object> hm = new HashMap<>();
 			int rseq=Integer.parseInt(a.get("RSEQ")+"");
-			hm.put("rseq", rseq);
+			hm.put("RSEQ", rseq);
 			mdao.FimagebyRseq(hm);
 			ArrayList< HashMap<String,Object> > fimageList 
 			= (ArrayList<HashMap<String, Object>>) hm.get("ref_cursor");
