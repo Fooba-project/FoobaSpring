@@ -17,6 +17,8 @@ public class CartVO {
 		private Timestamp INDATE;
 		private String CFNAME;
 		private int RSEQ;
-	
+		private String FSIDE1;
+		private String FSIDE2;
+		private String FSIDE3;
 
 }
