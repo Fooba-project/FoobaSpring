@@ -38,3 +38,31 @@ alter table restaurant add raddress3 varchar2(100);
 update restaurant set raddress2='999�� 999ȣ', raddress3='���̱�',zip_num='01234';
 
 select*from restaurant;
+
+create or replace procedure joinRes(
+    p_rid in varchar2,
+    p_rpwd in varchar2,
+    p_rname in varchar2,
+    p_ownername in varchar2,
+    p_rphone in varchar2,
+    p_zip_num in varchar2,
+    p_raddress in varchar2,
+    p_raddress2 in varchar2,
+    p_raddress3 in varchar2,
+    p_rimage in varchar2,
+    p_content in varchar2,
+    p_hash in varchar2,
+    p_rbiznum in varchar2,
+    p_kind in number,
+    p_rtip in number
+)
+is
+begin
+    insert into restaurant(rseq,rid,rpwd,rname,ownername,rphone,zip_num,
+    raddress,raddress2,raddress3,rimage,content,hash,rbiznum,kind,rtip ,ryn) 
+    values(restaurant_seq.nextVal,p_rid,p_rpwd,p_rname,p_ownername,p_rphone,p_zip_num,
+    p_raddress,p_raddress2,p_raddress3,
+    p_rimage,p_content,p_hash,p_rbiznum,p_kind,p_rtip,0 );
+    commit;
+end;
+

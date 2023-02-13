@@ -22,7 +22,7 @@ function idok( rid ){
     <div id="idcheck_text">
         <h1>ID 중복 확인</h1>
         <form method="post" name="res_idCheckForm" action="res_idCheckForm">
-    	아이디 : <input type="text" name="rid" value="${rid}" >
+    	아이디 : <input type="text" name="RID" value="${RID}" id="rid">
 	    <input type="submit" value="검색" class="submit"><br><br><br>
 	
 		<c:if test="${result == 1}">
@@ -30,11 +30,11 @@ function idok( rid ){
 				opener.document.res_join_send_form.rid.value="";
 				opener.document.res_join_send_form.reid.value="";
 			</script>
-			${rid}는 이미 사용중인 아이디입니다.
+			${RID}는 이미 사용중인 아이디입니다.
 		</c:if>
 		<c:if test="${result == -1}">
-			${rid}는 사용 가능한 ID입니다.    
-			<input type="button" value="사용" class="cancel" onclick="idok('${rid}');">
+			${RID}는 사용 가능한 ID입니다.    
+			<input type="button" value="사용" class="cancel" onclick="idok('${RID}');">
         </c:if>
         
 		</form>

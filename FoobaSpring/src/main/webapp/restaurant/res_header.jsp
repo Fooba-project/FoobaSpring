@@ -16,6 +16,7 @@
 
 
 
+
 $(function(){
 	$('#myButton').click( function(){
 		var formselect = $("#fileupForm")[0];   
@@ -267,8 +268,8 @@ line-height: 60px; margin:0 auto; font-family: Verdana; border: 1; border-radius
 .res_join_title { text-align: left; font-size: 26px;font-weight: bold; }
 .error_text { font-family: Verdana, Geneva, Tahoma, sans-serif; margin: 0; margin-left: 20px; font-size: 60%; padding: 0;}
 .input_text {overflow: hidden;position: relative;display: block; width: 100%;padding: 10px 13px; background: #ffffff;box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box;font-size: 15px;color: #616161;font-weight: 900;-webkit-transition: all .3s;transition: all .3s;border-radius: 3px;-webkit-border-radius: 3px; border: 1px solid #BCBCBC;}
-.join_list #id_btn {  position: absolute;  width: 180px;  height: 45px;  top: 0px; right: 0;  border: 0; border-radius: 3px;}
-.join_list #id_btn:hover { outline: 0px solid #9191dfab; background-color:rgb(248, 225, 225);}
+#id_btn {  position: absolute;  width: 180px;  height: 45px;  top: 0px; right: 0;  border: 0; border-radius: 3px;}
+#id_btn:hover { outline: 0px solid #9191dfab; background-color:rgb(248, 225, 225);}
 #join_btn {margin-left: 200px;}
 #join_btn .join_btn {width: 150px; height: 50px; border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 100%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color:  rgb(255,204,0); line-height: 40px; color:#fff; border: 1px solid white; text-align: center;}
 #join_btn .join_btn:hover {background-color: white; color:  rgb(255,204,0); cursor: pointer; border:2px solid  rgb(255,204,0)}
@@ -285,6 +286,8 @@ line-height: 60px; margin:0 auto; font-family: Verdana; border: 1; border-radius
 #zipcodee td{ border-bottom:1px solid rgb(201, 199, 199) ; border-right: 1px solid rgb(201, 199, 199); height: 30px;}
 .zipa{color: black; text-decoration: none;}
 #zipcodee td:hover{background-color: rgb(248, 225, 225); }
+#re_btn {  width: 100px;  height: 30px;    border: 0; border-radius: 5px;  background-color:rgb(237, 235, 235);}
+#re_btn:hover { outline: 0px solid #9191dfab; background-color:rgb(248, 225, 225);}
 /* 레스토랑 주문확인 css */
 
 #res_OrderListimg img{cursor: pointer;}

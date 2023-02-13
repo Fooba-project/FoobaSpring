@@ -2,11 +2,11 @@
 <%@ include file="/restaurant/res_header.jsp"%>
 <%@ include file="/restaurant/res_subhead.jsp"%>
 
-<!-- RestaurantVO, FoodmenuList, ReviewList-->
+<!-- RestaurantloginRes, FoodmenuList, ReviewList-->
 
         <div id="res_tab">
             <div class="res_infotab" style="color:white;" >정보</div>
-            <div class="res_infotab" onclick="location.href='res_editForm'">정보수정</div>
+            <div class="res_infotab" onclick="location.href='res_updateForm'">정보수정</div>
         </div>
 
 			<div id="res_menuall" style="overflow-x:hidden;">
@@ -16,21 +16,21 @@
                     <div id="res_cont">
                     	<br>
                         <h3>사장님 알림</h3><hr>
-                        ${vo.CONTENT}
+                        ${loginRes.CONTENT}
                     </div>
                     
                     <br>
                     
                     <div id="res_num">
                         <h3>업체 정보</h3><hr><br>
-                        <a class="basic">사업자 번호</a>&nbsp; ${vo.RBIZNUM}<br>
-                        <a class="basic">전화 번호</a>&nbsp; ${vo.RPHONE}<br>
+                        <a class="basic">사업자 번호</a>&nbsp; ${loginRes.RBIZNUM}<br>
+                        <a class="basic">전화 번호</a>&nbsp; ${loginRes.RPHONE}<br>
                         <a class="basic">운영 정보</a>&nbsp;
-                        	<c:if test="${vo.RYN==0}"> 운영 준비중입니다</c:if>
-                        	<c:if test="${vo.RYN==1}"> 운영 중입니다</c:if>
-                        	<c:if test="${vo.RYN==2}"> 당분간 영업을 중지 합니다.</c:if>
-                        	<c:if test="${vo.RYN==3}"> 휴업 중입니다.</c:if><br>
-                        <a class="basic">가게 주소</a>&nbsp; ${vo.RADDRESS}<br><br>
+                        	<c:if test="${loginRes.RYN==0}"> 운영 준비중입니다</c:if>
+                        	<c:if test="${loginRes.RYN==1}"> 운영 중입니다</c:if>
+                        	<c:if test="${loginRes.RYN==2}"> 당분간 영업을 중지 합니다.</c:if>
+                        	<c:if test="${loginRes.RYN==3}"> 휴업 중입니다.</c:if><br>
+                        <a class="basic">가게 주소</a>&nbsp; ${loginRes.RADDRESS}<br><br>
                         <hr>
                     </div>
                     

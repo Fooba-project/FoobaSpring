@@ -24,12 +24,10 @@ public class ResService {
 	}
 
 	public void starAvg(HashMap<String, Object> paramMap) {
-		HashMap<String ,Object>starMap=new HashMap<String,Object>();
-		starMap.put("rseq",paramMap.get("RSEQ"));
-		starMap.put("ref_cursor",null);
-		rdao.starAvg(starMap);
+		
+		rdao.starAvg(paramMap);
 		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) starMap.get("ref_cursor");
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
 		int stars=0;
 		int sum=0;
 		double star=0;

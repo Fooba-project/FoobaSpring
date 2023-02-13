@@ -16,7 +16,7 @@
 	<select id="starAvg" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 			CALL starAvg(
-				#{rseq},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+				#{RSEQ},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
 			)
 		}
 	</select>
@@ -27,5 +27,11 @@
 				)}
 	</select>
 
+	<insert id="joinRes" statementType="CALLABLE" parameterType="fooba.dto.RestaurantVO">
+		{CALL joinRes (
+			#{RID},#{RPWD},#{RNAME},#{OWNERNAME},#{RPHONE},#{ZIP_NUM},#{RADDRESS},#{RADDRESS2},#{RADDRESS3}
+			,#{RIMAGE},#{CONTENT},#{HASH},#{RBIZNUM},#{KIND},#{RTIP}
+		)}
+	</insert>
 </mapper>
 

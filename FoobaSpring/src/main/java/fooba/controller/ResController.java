@@ -83,7 +83,7 @@ public class ResController {
 			HashMap<String,Object>Rvo=list.get(0);
 			if(!Rvo.get("RPWD").equals(vo.getRPWD()))
 				model.addAttribute("message","비번이 틀립니다.");
-			else if(Rvo.get("RYN").equals("0")) 
+			else if(Integer.parseInt(Rvo.get("RYN")+"")==0)
 				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
 			else if(Rvo.get("RPWD").equals(vo.getRPWD())) {
 				session.setAttribute("loginRes",Rvo);
@@ -91,6 +91,7 @@ public class ResController {
 				
 				paramMap.put("RSEQ",Rvo.get("RSEQ"));
 				rs.starAvg(paramMap);
+				System.out.println("123");
 				session.setAttribute("intstar",paramMap.get("intstar")); //별 개수
 				session.setAttribute("doublestar",paramMap.get("doublestar")); //별점(소수점까지)
 				/**/
@@ -169,10 +170,8 @@ public class ResController {
 	}
 	
 	@RequestMapping("/res_show")
-	public String res_show(HttpSession session,Model model) {
+	public String res_show(HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
-		model.addAttribute("vo",rvo);
 		return "restaurant/res_show";
 		
 	}
@@ -225,6 +224,9 @@ public class ResController {
 			@RequestParam(value="reid",required=false)String reid, 
 			@RequestParam(value="respwdchk",required=false)String respwdchk,Model model) {
 		
+		model.addAttribute("reid",reid);
+		model.addAttribute("respwdchk",respwdchk);
+		
 		if(result.getFieldError("RID")!=null) {
 			model.addAttribute("message",result.getFieldError("RID").getDefaultMessage());			
 		}else if(result.getFieldError("RPWD")!=null) {
@@ -265,4 +267,15 @@ public class ResController {
 		return "restaurant/res_join";
 	}
 	
+	@RequestMapping("/res_updateForm")
+	public String res_updateForm(HttpSession session) {
+		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
+		return "restaurant/res_updateForm";
+	}
+	
+	@RequestMapping(value="/res_update",method=RequestMethod.POST)
+	public String res_update(HttpSession session) {
+		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
+		return " ";
+	}
 }
