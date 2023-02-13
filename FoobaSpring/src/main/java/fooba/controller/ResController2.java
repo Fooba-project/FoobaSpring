@@ -110,14 +110,14 @@ public class ResController2 {
 	
 	
 	@RequestMapping("/res_foodmenuAddForm")
-	public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session, Model model) {
+		public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session, Model model) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		return "restaurant/res_foodMenuAdd";
 	}
 
 		
 	@RequestMapping("/res_foodmenuDelete")
-	public String res_foodmenuDelete(HttpServletRequest request, HttpSession session, Model model,
+		public String res_foodmenuDelete(HttpServletRequest request, HttpSession session, Model model,
 			@RequestParam("FSEQ") int FSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -125,6 +125,25 @@ public class ResController2 {
 		rs.deleteFoodMenu(paramMap);
 		return "redirect:/res_foodmenu";
 	}
+	
+	@RequestMapping("/res_fooba_tosAction")
+		public String res_fooba_tosAction() {
+		return "restaurant/res_fooba_tos";
+	}
+	
+	@RequestMapping("/res_fooba_privacy")
+		public String res_fooba_privacy() {
+		return "restaurant/res_fooba_privacy";
+	}
+	
+	@RequestMapping("/res_qnalist_footer")
+		public String res_qnalist_footer() {
+		return "restaurant/res_qnalist_footer";
+	}
+	
+	@RequestMapping("/")
+	
+	
 	
 	
 }

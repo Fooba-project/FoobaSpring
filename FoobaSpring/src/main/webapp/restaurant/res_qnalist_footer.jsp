@@ -39,7 +39,7 @@
     </article> 
 <br>
 <jsp:include page="/member/paging/paging.jsp">
-<jsp:param name="command" value="fooba.do?command=res_qnalist_footer"/>
+<jsp:param name="command" value="res_qnalist_footer"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br>
 <%@ include file="res_footer.jsp"%>
