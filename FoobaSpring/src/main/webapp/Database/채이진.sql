@@ -106,4 +106,4 @@ begin
         select*from review where rseq=p_rseq;
 end;
 
-
+select*from foodmenu;

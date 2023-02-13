@@ -9,7 +9,7 @@
     </div>
     <div id="res_menuall">
         <div id="res_menuinfo">
-        	<c:forEach items="${FoodList}" var="FoodmenuVO">
+        	<c:forEach items="${list}" var="FoodmenuVO">
              <div id="res_menu">	                	
                  	<h3>${FoodmenuVO.FNAME }
                  		<img id="res_menu_icon" src="images/update.png" onClick="location.href='res_foodmenuUpdateForm?fseq=${FoodmenuVO.FSEQ}'">	 

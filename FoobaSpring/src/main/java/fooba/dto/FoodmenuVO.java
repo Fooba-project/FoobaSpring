@@ -8,35 +8,35 @@ import lombok.Data;
 @Data
 public class FoodmenuVO {
 
-	private int rseq;
+	private int RSEQ;
 	
-	private int fseq;
+	private int FSEQ;
 	@NotNull
 	@NotEmpty
-	private String fname;
+	private String FNAME;
 	@NotNull
-	private int fprice;
-	@NotNull
-	@NotEmpty
-	private String fimage;
+	private int FPRICE;
 	@NotNull
 	@NotEmpty
-	private String fcontent;
+	private String FIMAGE;
 	@NotNull
 	@NotEmpty
-	private String fside1;
-	@NotNull
-	private int fsideprice1;
+	private String FCONTENT;
 	@NotNull
 	@NotEmpty
-	private String fside2;
+	private String FSIDE1;
 	@NotNull
-	private int fsideprice2;
+	private int FSIDEPRICE1;
 	@NotNull
 	@NotEmpty
-	private String fside3;
+	private String FSIDE2;
 	@NotNull
-	private int fsideprice3;
+	private int FSIDEPRICE2;
+	@NotNull
+	@NotEmpty
+	private String FSIDE3;
+	@NotNull
+	private int FSIDEPRICE3;
 	
 	
 }

@@ -16,8 +16,8 @@
 	</select>
 	
 	<update id="updateFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL updateFoodMenu(#{fseq},#{fname},#{fprice},#{fcontent},#{fside1},#{fsideprice1},
-			#{fside2},#{fsideprice2},#{fside3},#{fsideprice3},#{fimage}) }
+		{ CALL updateFoodMenu(#{FSEQ},#{FNAME},#{FPRICE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},
+			#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3},#{FIMAGE}) }
 	</update>
 	
 	

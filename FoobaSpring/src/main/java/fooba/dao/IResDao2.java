@@ -2,7 +2,11 @@ package fooba.dao;
 
 import java.util.HashMap;
 
+import javax.validation.Valid;
+
 import org.apache.ibatis.annotations.Mapper;
+
+import fooba.dto.FoodmenuVO;
 
 @Mapper
 public interface IResDao2 {
@@ -11,11 +15,13 @@ public interface IResDao2 {
 
 	void selectFood(HashMap<String, Object> paramMap);
 	
-	void updateFoodMenu(HashMap<String, Object> paramMap);
+	void updateFoodMenu(FoodmenuVO vo);
 	
-	void addFoodMenu(HashMap<String, Object> paramMap);
+	void addFoodMenu(FoodmenuVO vo);
 
 	void deleteFoodMenu(HashMap<String, Object> paramMap);
+
+	
 
 	
 
