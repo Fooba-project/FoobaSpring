@@ -102,7 +102,33 @@ public class MemberController {
 	public String memberFindIdForm() {
 		return"member/memberFindId";
 	}
-	
+	/*
+	@RequestMapping(value="res_FindId")
+	public String res_FindId(
+			@RequestParam(value="NAME" ,required=false)String rname,
+			@RequestParam(value="PHONE",required=false)String rphone,Model model) {
+		HashMap<String,Object>paramMap=new HashMap<String,Object>();
+		paramMap.put("rname",rname);
+		paramMap.put("ref_cursor",null);
+		ms.memberFindId(paramMap);
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+		if(list.size()==0) {
+			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요1.");
+			return "restaurant/res_FindId";
+		}else {
+			HashMap<String,Object> rvo=list.get(0);
+			if(!rvo.get("RPHONE").equals(rphone)) {
+				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요2.");
+				return "restaurant/res_FindId";
+			}
+			else {
+				model.addAttribute("message","귀하의 아이디는 '"+rvo.get("RID")+"'입니다.");
+				return  "restaurant/res_login";
+			}
+		}
+	}
+	*/
 	@RequestMapping("/memberFindPwForm")
 	public String memberFindPwForm() {
 		return"member/memberFindPw";
