@@ -14,6 +14,7 @@ public interface IMemberDao {
 	void getMember(HashMap<String, Object> paramMap);
 	void insertMember(MemberVO mvo);
 	void memberFindId(HashMap<String, Object> prm);
+	void memberFindPw(HashMap<String, Object> prm);
 
 	
 }

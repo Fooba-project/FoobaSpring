@@ -29,6 +29,11 @@ public class MemberService {
 		mdao.memberFindId(prm);
 		
 	}
+
+	public void memberFindPw(HashMap<String, Object> prm) {
+		mdao.memberFindPw(prm);
+		
+	}
 		
 	}
 

@@ -135,4 +135,34 @@ public class MemberController {
 	public String memberFindPwForm() {
 		return"member/memberFindPw";
 	}
+	
+	@RequestMapping(value="memberFindPw")
+	public String memberFindPw(
+			@RequestParam(value="ID" ,required=false)String ID,
+			@RequestParam(value="NAME" ,required=false)String NAME,
+			@RequestParam(value="PHONE",required=false)String PHONE, Model model) {
+		HashMap<String,Object>prm =new HashMap<String,Object>();
+		
+		prm.put("ID",ID);
+		prm.put("ref_cursor",null);
+		ms.memberFindPw(prm);
+		
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		
+		if(list.size()==0) {
+			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+			return "member/memberFindPw";
+		}else {
+			HashMap<String,Object> mvo=list.get(0);
+			if(!mvo.get("PHONE").equals(PHONE)||!mvo.get("NAME").equals(NAME)) {
+				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+				return "member/memberFindPw";
+			}
+			else {
+				model.addAttribute("message","귀하의 비밀번호는 '"+mvo.get("PWD")+"'입니다.");
+				return  "member/memberLogin";
+			}
+		}
+	}
 }
