@@ -27,4 +27,13 @@ BEGIN
     COMMIT;
 END;
 
-select*from member;
+create or replace procedure memberFindId(
+    p_name in member.name%type,
+    p_curvar OUT SYS_REFCURSOR
+)
+is
+    
+begin
+    open p_curvar for
+        select * from member where name=p_name;
+end;

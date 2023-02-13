@@ -2,7 +2,6 @@ package fooba.service;
 
 import java.util.HashMap;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,8 +24,7 @@ public class MemberService {
 		mdao.insertMember(mvo);
 		
 	}
+		
+	}
 
-	
-	
-	
-}
+
