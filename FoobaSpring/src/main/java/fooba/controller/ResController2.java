@@ -50,11 +50,11 @@ public class ResController2 {
 	
 	@RequestMapping("/res_foodmenuUpdateForm")
 		public String res_foodmenuUpdateForm(HttpSession session, Model model,
-				@RequestParam("fseq") int fseq) {
+				@RequestParam("FSEQ") int FSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();
-		paramMap.put("fseq", fseq);
+		paramMap.put("FSEQ", FSEQ);
 		paramMap.put("ref_cursor", null);
 		rs.selectFood(paramMap);
 		ArrayList<HashMap<String, Object>> list
@@ -65,18 +65,25 @@ public class ResController2 {
 	}
 	
 	@RequestMapping("/res_foodmenuUA")
-		public String res_foodmenuUpdate(@ModelAttribute("vo") @Valid FoodmenuVO vo, BindingResult result,
+		public String res_foodmenuUA(@ModelAttribute("vo") @Valid FoodmenuVO vo, BindingResult result,
 			HttpSession session, Model model, @RequestParam("procedure") String procedure,
-			@RequestParam(value="oldImage", required=false) String oldImage) {
+			@RequestParam(value="OLDIMAGE", required=false) String OLDIMAGE) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		
 		String url = "restaurant/res_foodMenuAdd";
 		if(procedure.equals("update")) {
-			if(vo.getFIMAGE()==null||vo.getFIMAGE().equals("")) vo.setFIMAGE(oldImage);
-			url = "retaurant/res_foodmenuUpdateForm";
+			if(vo.getFIMAGE()==null||vo.getFIMAGE().equals("")) vo.setFIMAGE(OLDIMAGE);
+			url = "restaurant/res_foodmenuUpdateForm";
 		}
-		
-		if(result.getFieldErrors()!= null) model.addAttribute("messagex","빈칸을 채워주세요.");
+		if(result.getFieldError("FNAME")!=null) model.addAttribute("messagex","FNAME");
+		else if(result.getFieldError("FPRICE")!=null) model.addAttribute("messagex","FPRICE");
+		else if(result.getFieldError("FCONTENT")!=null) model.addAttribute("messagex","FCONTENT");
+		else if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","FIMAGE");
+		else if(result.getFieldError("FSIDE1")!=null) model.addAttribute("messagex","FSIDE1");
+		else if(result.getFieldError("FSIDEPRICE1")!=null) model.addAttribute("messagex","FSIDEPRICE1");
+		else if(result.getFieldError("FSIDE2")!=null) model.addAttribute("messagex","FSIDE2");
+		else if(result.getFieldError("FSIDEPRICE2")!=null) model.addAttribute("messagex","FSIDEPRICE2");
+		else if(result.getFieldError("FSIDE3")!=null) model.addAttribute("messagex","FSIDE3");
+		else if(result.getFieldError("FSIDEPRICE3")!=null) model.addAttribute("messagex","FSIDEPRICE3");
 		else {
 			url = "redirect:/res_foodmenu";
 			if(procedure.equals("update")) rs.updateFoodMenu(vo);
@@ -111,10 +118,10 @@ public class ResController2 {
 		
 	@RequestMapping("/res_foodmenuDelete")
 	public String res_foodmenuDelete(HttpServletRequest request, HttpSession session, Model model,
-			@RequestParam("fseq") int fseq) {
+			@RequestParam("FSEQ") int FSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("fseq", fseq);
+		paramMap.put("FSEQ", FSEQ);
 		rs.deleteFoodMenu(paramMap);
 		return "redirect:/res_foodmenu";
 	}

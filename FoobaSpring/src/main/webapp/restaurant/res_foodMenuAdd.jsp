@@ -15,7 +15,7 @@
             	<div id="res_menuinfo">
 
 	            	<div id="res_menu1">	                	
-	                    	<h2>메뉴 정보</h2><hr>
+	                    	<h2>메뉴 정보 <span style="color:blue;text-align:center;">&nbsp;&nbsp;&nbsp;${messagex}</span></h2><hr>
                             <h3>메뉴 이름</h3>
                             <div id="food_text">
                                 <input type="text" class="food_text" name="FNAME" value="${vo.FNAME}" placeholder=" 예) 떡볶이"/>
@@ -29,12 +29,12 @@
                             
                             <h3>메뉴 소개</h3>
                             <div id="food_text">
-                            	<textarea name="fcontent"  value="${vo.FCONTENT}" rows="5" cols="50" style="border-radius:10px;  resize:none;" maxlength="60" > </textarea>
+                            	<textarea name="FCONTENT" rows="5" cols="50" style="border-radius:10px;  resize:none;" maxlength="60" >${vo.FCONTENT}</textarea>
                                 
                             </div><hr>
 	                    			  
                             <h3>메뉴 사진</h3>                    
-                                <input type="file" name="FIMAGE" value="${vo.FIMAGE}"/>
+                                <input type="text" name="FIMAGE" value="d5.png"/>
                                 
                              <h3>사이드메뉴 1</h3>
                             <div id="food_text">

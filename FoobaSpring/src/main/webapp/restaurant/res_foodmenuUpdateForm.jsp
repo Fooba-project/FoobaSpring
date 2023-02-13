@@ -14,17 +14,17 @@
 	            	      <form id="res_menuall_a" name="food_menu" method="post" action="res_foodmenuUA?procedure=update" >
 					      	<input type="hidden" name="RSEQ" value="${vo.RSEQ}"> 
 					      	<input type="hidden" name="FSEQ" value="${vo.FSEQ}"> 
-					      	<input type="hidden" name="oldImage" value="${vo.FIMAGE}">          	
-	                    	<h2>메뉴 수정 <span style="color:red;text-align:center;">&nbsp;&nbsp;&nbsp;${messagex}</span></h2><hr>
+					      	<input type="hidden" name="OLDIMAGE" value="${vo.FIMAGE}">          	
+	                    	<h2>메뉴 수정 <span style="color:blue;text-align:center;">&nbsp;&nbsp;&nbsp;${messagex}</span></h2><hr>
                             <h3>메뉴 이름</h3>
                             <div id="food_text">
-                                <input type="text" class="food_text" name="fname" value="${vo.FNAME}"/>
+                                <input type="text" class="food_text" name="FNAME" value="${vo.FNAME}"/>
                             </div><hr>
                             
 
                             <h3>메뉴 가격</h3>
                             <div id="food_text">
-                                <input type="text" class="food_text" name="fprice" value="${vo.FPRICE}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" > 원
+                                <input type="text" class="food_text" name="FPRICE" value="${vo.FPRICE}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" > 원
                             </div><hr>
                             
                             <h3>메뉴 소개</h3>
@@ -63,7 +63,7 @@
                             </div><hr>
                             
                             <h3>메뉴 사진</h3>        
-                            	<input type="hidden" name="fimage" id="fileimage" >
+                            	<input type="hidden" name="FIMAGE" id="fileimage" >
    								<div id="filename"></div>
 							<%--<img src="images/foodmenu/${vo.FIMAGE}" width="100px"><br>            
                                 <input type="file" name="fimage" /> --%>

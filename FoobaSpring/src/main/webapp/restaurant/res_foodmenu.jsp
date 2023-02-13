@@ -12,7 +12,7 @@
         	<c:forEach items="${list}" var="FoodmenuVO">
              <div id="res_menu">	                	
                  	<h3>${FoodmenuVO.FNAME }
-                 		<img id="res_menu_icon" src="images/update.png" onClick="location.href='res_foodmenuUpdateForm?fseq=${FoodmenuVO.FSEQ}'">	 
+                 		<img id="res_menu_icon" src="images/update.png" onClick="location.href='res_foodmenuUpdateForm?FSEQ=${FoodmenuVO.FSEQ}'">	 
                  		<img id="res_menu_icon" src="images/delete.png" onClick="deletefm(${FoodmenuVO.FSEQ})">	                    
                  	</h3>
                  			  
