@@ -53,10 +53,10 @@ function autoHypenPhone(str){
      
         
         $( function(){
-            $("#userpwdchk").keyup( function(event){
+            $("#USERPWDCHK").keyup( function(event){
                 event.target.value = event.target.value.trim();
-                let pass1 = $("#userpwd").val();
-                let pass2 = $("#userpwdchk").val();
+                let pass1 = $("#PWD").val();
+                let pass2 = $("#USERPWDCHK").val();
                 if (pass1 != "" || pass2 != ""){
                     if (pass1 == pass2){
                         $("#error1").html('');
@@ -67,10 +67,10 @@ function autoHypenPhone(str){
                 }
             })
 
-            $("#userpwd").keyup( function(event){
+            $("#PWD").keyup( function(event){
                 event.target.value = event.target.value.trim();
-                let pass1 = $("#userpwd").val();
-                let pass2 = $("#userpwdchk").val();
+                let pass1 = $("#PWD").val();
+                let pass2 = $("#USERPWDCHK").val();
                 if (pass1 != '' && pass2 != ''){
                     if (pass1 == pass2){
                         $("#error1").html('');
@@ -81,13 +81,13 @@ function autoHypenPhone(str){
                 }
             })
  
-            $("#useremail").keyup( function(event){
+            $("#EMAIL").keyup( function(event){
                 const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
                 event.target.value = event.target.value.trim();
                 if (regExp.test(event.target.value)) {
                     event.target.value = event.target.value.replace(regExp, '');
                 }
-                let email = $("#useremail").val();
+                let email = $("#EMAIL").val();
                 var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
                 if (!reg_email.test(email)){
                     $("#error2").html('이메일 형식이 잘못되었습니다.');
@@ -100,45 +100,45 @@ function autoHypenPhone(str){
         
         
  function joincheck() {
-		if(document.member_join_send_form.id.value.length==0){
+		if(document.member_join_send_form.ID.value.length==0){
 			alert("아이디를 입력하세요");
-			document.member_join_send_form.id.focus();
+			document.member_join_send_form.ID.focus();
 		}
-		else if(document.member_join_send_form.reid.value.length==0){
+		else if(document.member_join_send_form.REID.value.length==0){
 			alert("아이디 중복확인을 하지 않았습니다.");
-			document.member_join_send_form.id.focus();		
+			document.member_join_send_form.ID.focus();		
 		}
-		else if(document.member_join_send_form.reid.value != document.member_join_send_form.id.value){
+		else if(document.member_join_send_form.REID.value != document.member_join_send_form.ID.value){
 			alert("아이디 중복확인을 하지 않았습니다.");
-			document.member_join_send_form.id.focus();	
+			document.member_join_send_form.ID.focus();	
 		}
-		else if(document.member_join_send_form.userpwd.value.length==0){
+		else if(document.member_join_send_form.PWD.value.length==0){
 			alert("비밀번호를 입력하세요.");
-			document.member_join_send_form.userpwd.focus();
+			document.member_join_send_form.PWD.focus();
 		}
-		else if(document.member_join_send_form.userpwd.value != document.member_join_send_form.userpwdchk.value){
+		else if(document.member_join_send_form.PWD.value != document.member_join_send_form.USERPWDCHK.value){
 			alert("비밀번호 확인이 일치하지 않습니다.");
-			document.member_join_send_form.userpwdchk.focus();
+			document.member_join_send_form.USERPWDCHK.focus();
 		}
-		else if(document.member_join_send_form.username.length==0){
+		else if(document.member_join_send_form.NAME.length==0){
 			alert("이름을 입력하세요.");
-			document.member_join_send_form.username.focus();
+			document.member_join_send_form.NAME.focus();
 		}
-		else if(document.member_join_send_form.userphone.value.length==0){
+		else if(document.member_join_send_form.PHONE.value.length==0){
 			alert("전화번호를 입력하세요.");
-			document.member_join_send_form.userphone.focus();
+			document.member_join_send_form.PHONE.focus();
 		} 
-		else if(document.member_join_send_form.useremail.value.length==0){
+		else if(document.member_join_send_form.EMAIL.value.length==0){
 			alert("이메일을 입력하세요.");
-			document.member_join_send_form.useremail.focus();
+			document.member_join_send_form.EMAIL.focus();
 		}
-		else if(document.member_join_send_form.useraddress1.value.length==0){
+		else if(document.member_join_send_form.ADDRESS1.value.length==0){
 			alert("주소를 입력하세요.");
 			post_zip();
 		}
-		else if(document.member_join_send_form.useraddress2.value.length==0){
+		else if(document.member_join_send_form.ADDRESS2.value.length==0){
 			alert("주소를 입력하세요.");
-			document.member_join_send_form.useraddress2.focus();
+			document.member_join_send_form.ADDRESS2.focus();
 		}
 		else if( document.member_join_send_form.useragree.checked==false){
 			alert("약관에 동의하셔야 회원가입이 가능합니다.");

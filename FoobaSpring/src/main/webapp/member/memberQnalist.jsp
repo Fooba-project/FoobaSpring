@@ -20,14 +20,14 @@
                 <tr> 
                     <div class="qna_box">
                         <div class="qna_title">
-                             Q : ${QnaVO.subject} 
+                             Q : ${QnaVO.SUBJECT} 
                         </div>
                     </div>
                 </tr>
                 <tr> 
                     <div class="qna_box">
                         <div class="qna_content">
-                             A : ${QnaVO.content} 
+                             A : ${QnaVO.SUBJECT} 
                         </div>
                     </div>
                 </tr>
