@@ -93,7 +93,7 @@ public class AdminController {
 		else if(table.equals("o")) return "admin/admin_orderlist";
 		else if(table.equals("m"))	return "admin/admin_memlist";
 		else if(table.equals("q")) return "admin/admin_qnalist";
-		else	return "admin/admin_bannerlist";		
+		else	return "admin/admin_bannerlist";
 	}
 	
 	
