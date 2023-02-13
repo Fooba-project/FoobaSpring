@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fooba.dao.IMemberDao2;
+import fooba.dto.CartVO;
 
 @Service
 public class MemberService2 {
@@ -95,6 +96,16 @@ public class MemberService2 {
 
 	public void cartList(HashMap<String, Object> prm) {		
 		mdao.cartList(prm);
+	}
+
+	public void getFoodDetail(HashMap<String, Object> prm) {
+		mdao.getFoodDetail(prm);
+		
+	}
+
+	public void insertCart(CartVO cvo) {
+		mdao.insertCart(cvo);
+		
 	}
 
 

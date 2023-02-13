@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fooba.dto.CartVO;
 import fooba.dto.MemberVO;
-import fooba.dto.Paging;
 import fooba.service.MemberService2;
 import fooba.service.ResService;
 import fooba.service.ResService2;
@@ -75,7 +75,7 @@ public class MemberController2 {
 	         model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
 	      else {
 	         HashMap<String, Object> prm = new HashMap<>();
-	         prm.put("id", mvo.getId());
+	         prm.put("id", mvo.getID());
 	         prm.put("ref_cursor", null);
 	         
 	         ms.getMember(prm);
@@ -87,9 +87,9 @@ public class MemberController2 {
 	            return "member/memberLogin";   
 	         }
 	         HashMap<String, Object> hvo = list.get(0);
-	         if(!hvo.get("PWD").equals(mvo.getPwd()))
+	         if(!hvo.get("PWD").equals(mvo.getPWD()))
 	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (hvo.get("PWD").equals(mvo.getPwd())) {
+	         else if (hvo.get("PWD").equals(mvo.getPWD())) {
 	            session.setAttribute("loginUser", hvo);
 	            url = "redirect:/";
 	         }	   
@@ -126,7 +126,7 @@ public class MemberController2 {
 	         model.addAttribute("message", result.getFieldError("pwd").getDefaultMessage());
 	      else {
 	         HashMap<String, Object> prm = new HashMap<String, Object>();
-	         prm.put("id", membervo.getId());
+	         prm.put("id", membervo.getID());
 	         prm.put("ref_cursor", null);
 	         
 	         ms.getMember(prm);
@@ -138,9 +138,9 @@ public class MemberController2 {
 	            return "member/memberLogin";   
 	         }
 	         HashMap<String, Object> mvo = list.get(0);
-	         if(!mvo.get("PWD").equals(membervo.getPwd()))
+	         if(!mvo.get("PWD").equals(membervo.getPWD()))
 	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (mvo.get("PWD").equals(membervo.getPwd())) {
+	         else if (mvo.get("PWD").equals(membervo.getPWD())) {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("loginUser", mvo);
 	            url = "redirect:/";
@@ -188,10 +188,6 @@ public class MemberController2 {
 		 
 		 return "etc/fooba_tos";
 	 }
-	 
-	 
-	 
-	 
 	 
 	 @RequestMapping("/fooba_privacy")
 	 public String fooba_privacy(HttpServletRequest request) {
@@ -253,5 +249,37 @@ public class MemberController2 {
 		 
 		 return "main/menuDetail";
 	 }
+	
+	@RequestMapping("/menupopup")
+	public String memu_popup(HttpServletRequest request, HttpSession session,
+			Model model, @RequestParam("fseq")int fseq) {
+	HashMap<String, Object> prm = new HashMap<>();
+	prm.put("fseq", fseq);
+	prm.put("ref_cursor", null);
+	
+	ms.getFoodDetail(prm);
+	
+	ArrayList<HashMap<String, Object>> list
+	=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
+	HashMap<String, Object>fvo=list.get(0);
+	
+	model.addAttribute("FoodmenuVO", fvo);
+		return "main/popupMenu";
+	}
+	
+	@RequestMapping("/jangbaguni")
+	public String jangbaguni(CartVO cvo, HttpSession session, Model model) {
+		if(session.getAttribute("loginUser")==null) return "member/memberMiniLogin";
+		
+		if(cvo.getSIDEYN1() != null) cvo.setSIDEYN1(cvo.getFSIDE1());
+		if(cvo.getSIDEYN2() != null) cvo.setSIDEYN2(cvo.getFSIDE2());
+		if(cvo.getSIDEYN3() != null) cvo.setSIDEYN3(cvo.getFSIDE3());	
+		
+		ms.insertCart(cvo);
+		
+		model.addAttribute("jangresult", "1");
+		model.addAttribute("rseq", cvo.getRSEQ());
+		return "redirect:/menuDetail";
+	}
 	
 }

@@ -77,25 +77,27 @@ BEGIN
         END LOOP;
 end;
 
-CREATE OR REPLACE PROCEDURE CartListSum( p_id IN cart.id%type, p_rseq IN cart.rseq%type, p_sum OUT NUMBER)
+CREATE OR REPLACE  PROCEDURE getFoodDetail(p_fseq IN foodmenu.fseq%TYPE, p_cur OUT SYS_REFCURSOR )
 IS
-v_sum SYS_REFCURSOR;
-v_cprice NUMBER(10);
+BEGIN
+    OPEN  p_cur  FOR 
+        select*from foodmenu where fseq=p_fseq;
+END;
+#{id}, #{fseq},#{sideyn1},#{sideyn2},#{sideyn3},#{quantity}
+
+CREATE OR REPLACE PROCEDURE insertCart(
+    
+    p_id  IN cart.id%type,
+    p_fseq IN cart.fseq%type,
+    p_sideyn1 IN cart.sideyn1%type,
+    p_sideyn2 IN cart.sideyn2%type,
+    p_sideyn3 IN cart.sideyn3%type,
+    p_quantity  IN cart.quantity%type
+)
+IS
 
 BEGIN
-        -- p_sum:=0;
-        OPEN v_sum FOR
-            select * from cart where id=p_id and rseq=p_rseq;
-        
-        LOOP
-                FETCH v_sum INTO v_cprice;    
-                EXIT WHEN v_sum%NOTFOUND;    
-                select cprice into v_cprice from cart;
-                p_sum := p_sum+v_cprice;
-        END LOOP;
-end;
-
-
-insert into cart(cseq,quantity,id,fseq,cprice,cfname,rseq)values(cart_seq.nextval,1,'bsc1234',243,7000,'시나몬 밀크쉐이크',48);
-
-select * from cart;
+    INSERT INTO cart(cseq, id, fseq, sideyn1, sideyn2, sideyn3, quantity ) 
+    VALUES(cart_seq.nextVal, p_id, p_fseq, p_sideyn1, p_sideyn2, p_sideyn3, p_quantity);
+    commit;
+END;
