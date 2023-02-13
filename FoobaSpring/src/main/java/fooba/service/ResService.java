@@ -3,10 +3,13 @@ package fooba.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fooba.dao.IResDao;
+import fooba.dto.RestaurantVO;
 
 @Service
 public class ResService {
@@ -22,7 +25,7 @@ public class ResService {
 
 	public void starAvg(HashMap<String, Object> paramMap) {
 		HashMap<String ,Object>starMap=new HashMap<String,Object>();
-		starMap.put("rseq",paramMap.get("rseq"));
+		starMap.put("rseq",paramMap.get("RSEQ"));
 		starMap.put("ref_cursor",null);
 		rdao.starAvg(starMap);
 		ArrayList<HashMap<String,Object>> list
@@ -44,6 +47,11 @@ public class ResService {
 
 	public void resFindId(HashMap<String, Object> paramMap) {
 		rdao.resFindId(paramMap);
+		
+	}
+
+	public void joinRes(RestaurantVO vo) {
+		rdao.joinRes(vo);
 		
 	} 
 	

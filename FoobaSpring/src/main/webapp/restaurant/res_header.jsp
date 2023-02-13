@@ -58,16 +58,11 @@ function res_idcheck(){
 			documnet.res_join_send_form.rid.focus();
 			return;
 		}
-		var url = "res_idCheckForm?rid=" + document.res_join_send_form.rid.value;
+		var url = "res_idCheckForm?RID=" + document.res_join_send_form.rid.value;
 		var opt = "toolbar=no, menubar=no, resizable=no, width=550, height=400, top=100, left=700, scrollbars=no";
 		window.open(url, "IdCheck", opt);	
 	}
 
-function res_post_zip(){
-	var url = "res_findZipNum";
-	var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500, top=100, left=700";
-	window.open( url, "우편번호 찾기", opt);
-}
 
 function menu_insert(){	
 	if(document.food_menu.fname.value.length==0){
@@ -350,7 +345,7 @@ background-color: black; margin-top: 10px; float: right; margin-right:10px; }
 
     <div class="headback" id="resheadback">
         <div id="mainlogo">
-            <a href="fooba.do?command=index"><img src="images/mainlogo1.png"></a>
+            <a href="index"><img src="images/mainlogo1.png"></a>
         </div>
     </div>
     
@@ -361,11 +356,11 @@ background-color: black; margin-top: 10px; float: right; margin-right:10px; }
 	    		<input type="button" value="Home" class="headbutton" name="userJoin" onclick="location.href='res_loginForm'">
     		</c:when>
     		<c:otherwise>
-    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='res_logout?page=1&search=&key='">
-	    		<input type="button" value="주문관리" class="headbutton" onclick="location.href='res_order?page=1&search=&key='">
+    			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='res_logout'">
+	    		<input type="button" value="주문관리" class="headbutton" onclick="location.href='res_order'">
 	    		<input type="button" value="리뷰관리" class="headbutton" onclick="location.href='res_review?key=2'">
-	    		<input type="button" value="메뉴관리" class="headbutton" onclick="location.href='res_foodmenu?page=1&search=&key='">
-	    		 <input type="button" value="정보관리" class="headbutton" onclick="location.href='res_show?page=1&search=&key='">   		
+	    		<input type="button" value="메뉴관리" class="headbutton" onclick="location.href='res_foodmenu'">
+	    		 <input type="button" value="정보관리" class="headbutton" onclick="location.href='res_show'">   		
 	    	</c:otherwise>
     	</c:choose>
     </div>

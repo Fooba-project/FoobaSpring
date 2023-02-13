@@ -13,11 +13,11 @@
 	        <div id="login_box">
 	            <div id="text_button_box">
 	                <div id="login_idpw_box">
-	                    <input type="text" id="login_id" name="rid" placeholder="아이디" 
-	                maxlength="30">
+	                    <input type="text" id="login_id" name="RID" placeholder="아이디" 
+	                maxlength="30" value="${loginRes.RID }">
 	    
-	                    <input type="password" id="login_pw" name="rpwd" placeholder="비밀번호" 
-	                maxlength="16">
+	                    <input type="password" id="login_pw" name="RPWD" placeholder="비밀번호" 
+	                maxlength="16" value="${loginRes.RPWD }">
 	                </div>
 	    
 	                <div id="log_buttonbox">

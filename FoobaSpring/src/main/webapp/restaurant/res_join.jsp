@@ -40,72 +40,7 @@ $( function(){
 
 
 
-function joincheck() {
-	if(document.res_join_send_form.rid.value.length==0){
-		alert("아이디를 입력하세요");
-		document.res_join_send_form.rid.focus();
-	}
-	else if(document.res_join_send_form.reid.value.length==0){
-		alert("아이디 중복확인을 하지 않았습니다.");
-		document.res_join_send_form.rid.focus();		
-	}
-	else if(document.res_join_send_form.reid.value != document.res_join_send_form.rid.value){
-		alert("아이디 중복확인을 하지 않았습니다.");
-		document.res_join_send_form.rid.focus();	
-	}
-	else if(document.res_join_send_form.rpwd.value.length==0){
-		alert("비밀번호를 입력하세요.");
-		document.res_join_send_form.rpwd.focus();
-	}
-	else if(document.res_join_send_form.rpwd.value != document.res_join_send_form.respwdchk.value){
-		alert("비밀번호 확인이 일치하지 않습니다.");
-		document.res_join_send_form.respwdchk.focus();
-	}
-	else if(document.res_join_send_form.ownername.length==0){
-		alert("사업자 이름을 입력하세요.");
-		document.res_join_send_form.ownername.focus();
-	}
-	else if(document.res_join_send_form.rname.length==0){
-		alert("가게 이름을 입력하세요.");
-		document.res_join_send_form.rname.focus();
-	}
-	else if(document.res_join_send_form.rbiznum.length==0){
-		alert("사업자 등록번호를 입력하세요.");
-		document.res_join_send_form.rbiznum.focus();
-	}
-	else if(document.res_join_send_form.rphone.value.length==0){
-		alert("가게 전화번호를 입력하세요.");
-		document.res_join_send_form.rphone.focus();
-	} 
-	else if(document.res_join_send_form.raddress1.value.length==0){
-		alert("주소를 입력하세요.");
-		res_post_zip();
-	}
-	else if(document.res_join_send_form.raddress2.value.length==0){
-		alert("상세 주소를 입력하세요.");
-		document.res_join_send_form.raddress2.focus();
-	}
-	else if(document.res_join_send_form.rimage.value.length==0){
-		alert("가게 대표이미지가 필요합니다.");
-		document.res_join_send_form.rimage.focus();
-	}
-	else if(document.res_join_send_form.content.value.length==0){
-		alert("가게 소개를 입력하세요.");
-		document.res_join_send_form.content.focus();
-	}
 
-	else if(document.res_join_send_form.rtip.value.length==0){
-		alert("기본 배달료를 설정해주세요.");
-		document.res_join_send_form.rtip.focus();
-	}
-	else if( document.res_join_send_form.res_agree.checked==false){
-		alert("약관에 동의하셔야 회원가입이 가능합니다.");
-		document.res_join_send_form.res_agree.focus();
-	}
-	else {
-		document.res_join_send_form.submit();
-	}
-}
 
 function chkIdCode(event) {
     const regExp = /[^0-9a-zA-Z]/g;
@@ -118,19 +53,19 @@ function chkIdCode(event) {
    
 </script>
 <div class="res_join">
-    <div class="res_join_title">사업자 회원가입</div>
+    <div class="res_join_title">사업자 회원가입 <span style="color:red;font-size:14px; ">${message }</span></div>
     <div style="border-top: 2px solid  rgb(255,204,0); margin-top:15px;"></div>
     <form name="res_join_send_form" id="res_join_send_form" method="post" action="res_join" >
         <table class="member_join_table">
             <div class="join_list">
-                <input type="text" class="input_text" style="width: 490px;" name="rid" placeholder="아이디" onkeyup="chkIdCode(event)"/>
-                <input type="hidden" name="reid" value=""/>
+                <input type="text" class="input_text" style="width: 490px;" id="rid" name="RID" placeholder="아이디" onkeyup="chkIdCode(event)" value="${vo.RID}"/>
+                <input type="hidden" name="reid" value="${reid}" id="reid"/>
                 <input type="button" id="id_btn" value="중복 확인" onclick="res_idcheck()">
             </div>
 
             <div class="join_list">
-                <input type="password" class="input_text" name="rpwd" 
-                id="rpwd"
+                <input type="password" class="input_text" name="RPWD" 
+                id="rpwd" value="${vo.RPWD }"
                 placeholder="비밀번호"/>
             </div>
 
@@ -141,43 +76,43 @@ function chkIdCode(event) {
             <p class="error_text" id="error1"></p>
     
             <div class="join_list">
-                <input type="text" class="input_text" name="ownername" placeholder="사업자 이름"/>
+                <input type="text" class="input_text" name="OWNERNAME" placeholder="사업자 이름" value="${vo.OWNERNAME}"/>
             </div>
 
             <div class="join_list">
-                <input type="text" class="input_text" name="rname" placeholder="가게 이름"/>
+                <input type="text" class="input_text" name="RNAME" placeholder="가게 이름"  value="${vo.RNAME }"/>
             </div>
 
             <div class="join_list">
-                <input type="text" id="rbiznum" class="input_text" name="rbiznum" maxlength="12" placeholder="사업자 등록번호" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+                <input type="text" id="rbiznum" class="input_text" name="RBIZNUM" value="${vo.RBIZNUM}" maxlength="12" placeholder="사업자 등록번호" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
             </div>
 
             <div class="join_list">
-                <input type="text" class="input_text" name="rphone"
-                maxlength="13" id="rphone"
+                <input type="text" class="input_text" name="RPHONE"
+                maxlength="13" id="rphone" value="${RPHONE}"
                  placeholder="가게 전화번호" onkeyup="chkPhoneCode(event)"/>
             </div>
 
             <div class="join_list">
-                <input type="text"  id="sample6_postcode" class="input_text" style="width: 490px;" name="zip_num" placeholder="우편번호" value="${dto.zip_num}" readonly/>
+                <input type="text"  id="sample6_postcode" class="input_text" style="width: 490px;" name="ZIP_NUM" placeholder="우편번호" value="${vo.ZIP_NUM}" readonly/>
                 <input type="button" id="id_btn"  onclick="sample6_execDaumPostcode()" class="dup" value="우편번호 찾기"> 
             </div>
 			
 			<div class="join_list">
-                <input type="text" class="input_text" name="raddress1"
-                id="raddress1" id="sample6_address"   value="${dto.address1}"
+                <input type="text" class="input_text" name="RADDRESS"
+                id="raddress1" id="sample6_address"   value="${vo.RADDRESS}"
                  placeholder="사업장 주소" readonly/>
             </div>
             
 			<div class="join_list">
-                <input type="text" class="input_text" name="raddress2"
-                id="raddress2"  id="sample6_detailAddress"   value="${dto.address2}"
+                <input type="text" class="input_text" name="RADDRESS2"
+                id="raddress2"  id="sample6_detailAddress"   value="${vo.RADDRESS2}"
                  placeholder="상세 주소"/>
             </div>
             
             <div class="join_list">
-                <input type="text" class="input_text" name="raddress3"
-                id="raddress2" id="sample6_extraAddress" value="${dto.address3}"
+                <input type="text" class="input_text" name="RADDRESS3"
+                id="raddress2" id="sample6_extraAddress" value="${vo.RADDRESS3}"
                  placeholder="추가 주소"/>
             </div>
             
@@ -245,7 +180,7 @@ function chkIdCode(event) {
                 <div class="res_text_boxs">
                     사업장 업종 분류 &nbsp;&nbsp;&nbsp;
                 
-                    <select style="width:60px;" name="kind">
+                    <select style="width:60px;" name="KIND" >
                         <option value="1">한식</option>
                         <option value="2">중식</option>
                         <option value="3">양식</option>
@@ -258,20 +193,20 @@ function chkIdCode(event) {
                 </div>
                  
                 <div id="textarea_box">
-                    <textarea placeholder="사업장 소개글을 작성해주세요(100자 이내)" name="content" maxlength="100" style="resize:none; font-weight: 900;" ></textarea>
+                    <textarea placeholder="사업장 소개글을 작성해주세요(100자 이내)" name="CONTENT" maxlength="100" style="resize:none; font-weight: 900;" >${vo.CONTENT }</textarea>
                 </div>
                 <div class="join_list">
-                    <input type="text" class="input_text" name="rtip" maxlength="4" placeholder="기본배달료를 입력하세요" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                    <input type="text" class="input_text" name="RTIP" maxlength="4" placeholder="기본배달료를 입력하세요" value="${vo.RTIP }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                 </div>
                 <div class="join_list">
-                    <input type="text" class="input_text" name="hash" placeholder="해시태그 예시) &nbsp; 국물음식, 건강한, 가성비">
+                    <input type="text" class="input_text" name="HASH" value="${vo.HASH }" placeholder="해시태그 예시) &nbsp; 국물음식, 건강한, 가성비">
                 </div>
                 
                  <div class="res_text_boxs">
                      가게 대표이미지
                 </div> 
                     <div id="images_upload_box" style="height:200px">
-                         <input type="hidden" class="input_text" name="fimage" id="image">
+                         <input type="hidden" class="input_text" name="RIMAGE" id="image">
                          <div id="filename">
                     </div>
                 

@@ -57,18 +57,18 @@ public class ResController {
 	}
 	
 	@RequestMapping(value="/res_login",method=RequestMethod.POST)
-	public String res_login(@ModelAttribute("dto")@Valid RestaurantVO rvo,
+	public String res_login(@ModelAttribute("loginRes")@Valid RestaurantVO vo,
 			 BindingResult result, HttpSession session, Model model) { 
 		
 		String url="restaurant/res_login"; 
-		if(result.getFieldError("rid")!=null)
-			model.addAttribute("message",result.getFieldError("rid").getDefaultMessage());
-		else if(result.getFieldError("rpwd")!=null)
-			model.addAttribute("message",result.getFieldError("rpwd").getDefaultMessage());
+		if(result.getFieldError("RID")!=null)
+			model.addAttribute("message",result.getFieldError("RID").getDefaultMessage());
+		else if(result.getFieldError("RPWD")!=null)
+			model.addAttribute("message",result.getFieldError("RPWD").getDefaultMessage());
 		else {
 
 			HashMap<String,Object>paramMap=new HashMap<String,Object>();
-			paramMap.put("rid",rvo.getRid());
+			paramMap.put("RID",vo.getRID());
 			paramMap.put("ref_cursor",null);
 			
 			rs.getRes(paramMap);
@@ -78,18 +78,18 @@ public class ResController {
 			
 			if(list.size()==0) {
 				model.addAttribute("message","아이디가 없습니다.");
-				return "restaurant/res_login";
+				return url;
 			}
 			HashMap<String,Object>Rvo=list.get(0);
-			if(!Rvo.get("RPWD").equals(rvo.getRpwd()))
+			if(!Rvo.get("RPWD").equals(vo.getRPWD()))
 				model.addAttribute("message","비번이 틀립니다.");
 			else if(Rvo.get("RYN").equals("0")) 
 				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
-			else if(Rvo.get("RPWD").equals(rvo.getRpwd())) {
+			else if(Rvo.get("RPWD").equals(vo.getRPWD())) {
 				session.setAttribute("loginRes",Rvo);
 				url="redirect:/res_foodmenu";
 				
-				paramMap.put("rseq",Rvo.get("RSEQ"));
+				paramMap.put("RSEQ",Rvo.get("RSEQ"));
 				rs.starAvg(paramMap);
 				session.setAttribute("intstar",paramMap.get("intstar")); //별 개수
 				session.setAttribute("doublestar",paramMap.get("doublestar")); //별점(소수점까지)
@@ -114,8 +114,8 @@ public class ResController {
 		return"restaurant/res_FindId";
 	}
 	
-	@RequestMapping(value="res_FindId",method=RequestMethod.POST)
-	public String res_FindId(@RequestParam("rname")String rname,@RequestParam("rphone")String rphone,Model model) {
+	@RequestMapping(value="res_FindId")
+	public String res_FindId(@RequestParam(value="rname" ,required=false)String rname,@RequestParam(value="rphone",required=false)String rphone,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
 		paramMap.put("rname",rname);
 		paramMap.put("ref_cursor",null);
@@ -144,7 +144,7 @@ public class ResController {
 	}
 	
 	@RequestMapping(value="/res_FindPw",method=RequestMethod.POST)
-	public String res_FindPw(@RequestParam("rname")String rname,@RequestParam("rphone")String rphone,
+	public String res_FindPw(@RequestParam(value="rname",required=false)String rname,@RequestParam(value="rphone",required=false)String rphone,
 			@RequestParam("rid")String rid,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
 		paramMap.put("rid",rid);
@@ -172,7 +172,7 @@ public class ResController {
 	public String res_show(HttpSession session,Model model) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		HashMap<String , Object> rvo=(HashMap<String, Object>)session.getAttribute("loginRes");
-		model.addAttribute("RestaurantVO",rvo);
+		model.addAttribute("vo",rvo);
 		return "restaurant/res_show";
 		
 	}
@@ -205,10 +205,10 @@ public class ResController {
 		return result; //result는 목적지의 매개변수 data객체로 전달된다.
 	}
 	
-	@RequestMapping(value="/res_idCheckForm",method=RequestMethod.POST)
-	public String res_idCheckForm(@RequestParam@ModelAttribute("rid")String rid,Model model) {
+	@RequestMapping(value="/res_idCheckForm")
+	public String res_idCheckForm(@RequestParam("RID")String rid,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
-		paramMap.put("rid",rid);
+		paramMap.put("RID",rid);
 		paramMap.put("ref_cursor",null);
 		rs.getRes(paramMap);
 		ArrayList<HashMap<String,Object>> list
@@ -216,15 +216,53 @@ public class ResController {
 		if(list.size()==0)
 			model.addAttribute("result",-1);
 		else model.addAttribute("result",1);
+		model.addAttribute("RID",rid);
 		return "restaurant/res_idcheck";
 	}
 	
 	@RequestMapping(value="/res_join",method=RequestMethod.POST)
-	public String res_join(@ModelAttribute("dto")@Valid RestaurantVO resvo,BindingResult result,
-			@RequestParam(value="reid",required=false)String reid,
-			@RequestParam(value="respwdchk",required=false)String respwdchk) {
-		return "";
+	public String res_join(@ModelAttribute("vo")@Valid RestaurantVO vo,BindingResult result,
+			@RequestParam(value="reid",required=false)String reid, 
+			@RequestParam(value="respwdchk",required=false)String respwdchk,Model model) {
+		
+		if(result.getFieldError("RID")!=null) {
+			model.addAttribute("message",result.getFieldError("RID").getDefaultMessage());			
+		}else if(result.getFieldError("RPWD")!=null) {
+			model.addAttribute("message",result.getFieldError("RPWD").getDefaultMessage());			
+		}else if(result.getFieldError("OWNERNAME")!=null) {
+			model.addAttribute("message",result.getFieldError("OWNERNAME").getDefaultMessage());					
+		}else if(result.getFieldError("RNAME")!=null) {
+			model.addAttribute("message",result.getFieldError("RBIZNUM").getDefaultMessage());	
+		}else if(result.getFieldError("RBIZNUM")!=null) {
+			model.addAttribute("message",result.getFieldError("RNAME").getDefaultMessage());
+		}else if(result.getFieldError("RPHONE")!=null) {
+			model.addAttribute("message",result.getFieldError("RPHONE").getDefaultMessage());
+		}else if(result.getFieldError("ZIP_NUM")!=null) {
+			model.addAttribute("message",result.getFieldError("ZIP_NUM").getDefaultMessage());
+		}else if(result.getFieldError("RADDRESS")!=null) {
+			model.addAttribute("message",result.getFieldError("RADDRESS").getDefaultMessage());
+		}else if(result.getFieldError("RADDRESS2")!=null) {
+			model.addAttribute("message",result.getFieldError("RADDRESS2").getDefaultMessage());
+		}else if(result.getFieldError("KIND")!=null) {
+			model.addAttribute("message",result.getFieldError("KIND").getDefaultMessage());
+		}else if(result.getFieldError("CONTENT")!=null) {
+			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
+		}else if(result.getFieldError("RTIP")!=null) {
+			model.addAttribute("message",result.getFieldError("RTIP").getDefaultMessage());
+		}else if(result.getFieldError("HASH")!=null) {
+			model.addAttribute("message",result.getFieldError("HASH").getDefaultMessage());
+		}else if(result.getFieldError("RIMAGE")!=null) {
+			model.addAttribute("message",result.getFieldError("RIMAGE").getDefaultMessage());
+		}else if(!reid.equals(vo.getRID())){
+			model.addAttribute("message","아이디 중복확인을 하세요.");	
+		}else if(!respwdchk.equals(vo.getRPWD())){
+			model.addAttribute("message","비밀번호가 일치하지 않습니다.");	
+		}else {
+			rs.joinRes(vo);
+			model.addAttribute("message","회원가입이 완료되었습니다.");
+			return "restaurant/res_login";
+		}
+		return "restaurant/res_join";
 	}
-	
 	
 }
