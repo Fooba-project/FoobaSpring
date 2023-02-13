@@ -24,13 +24,13 @@
 	        <div id="login_box" style="width:450px;">
 	            <div id="text_button_box" style="right:20px;">
 	                <div id="login_idpw_box">
-	                    <input type="text" id="login_id" name="userid" placeholder="아이디" title="아이디"
+	                    <input type="text" id="login_id" name="USERID" placeholder="아이디" title="아이디"
 	                maxlength="30" value="">
 	    
-	                    <input type="password" id="login_pw" name="userpw" placeholder="비밀번호" title="비밀번호"
+	                    <input type="password" id="login_pw" name="USERPW" placeholder="비밀번호" title="비밀번호"
 	                maxlength="16" value="">
 	                </div>
-	    			<input type="hidden" name="fseq" value="${param.fseq}" >
+	    			<input type="hidden" name="FSEQ" value="${param.FSEQ}" >
 	                <div id="log_buttonbox">
 	                    <button type="submit" id="log_button" >
 	                        <span class="btn_text">로그인</span>

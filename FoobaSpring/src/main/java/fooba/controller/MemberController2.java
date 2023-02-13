@@ -120,13 +120,13 @@ public class MemberController2 {
 		 
 		 model.addAttribute("check", "1");
 		 
-		 if(result.getFieldError("ID")!=null)
-	         model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
-	      else if (result.getFieldError("PWD")!=null)
-	         model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+		 if(result.getFieldError("USERID")!=null)
+	         model.addAttribute("message", result.getFieldError("USERID").getDefaultMessage());
+	      else if (result.getFieldError("USERPW")!=null)
+	         model.addAttribute("message", result.getFieldError("USERPW").getDefaultMessage());
 	      else {
 	         HashMap<String, Object> prm = new HashMap<String, Object>();
-	         prm.put("ID", membervo.getID());
+	         prm.put("USERID", membervo.getID());
 	         prm.put("ref_cursor", null);
 	         
 	         ms.getMember(prm);
@@ -138,9 +138,9 @@ public class MemberController2 {
 	            return "member/memberLogin";   
 	         }
 	         HashMap<String, Object> mvo = list.get(0);
-	         if(!mvo.get("PWD").equals(membervo.getPWD()))
+	         if(!mvo.get("USERPW").equals(membervo.getPWD()))
 	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (mvo.get("PWD").equals(membervo.getPWD())) {
+	         else if (mvo.get("USERPW").equals(membervo.getPWD())) {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("loginUser", mvo);
 	            url = "redirect:/";
@@ -269,7 +269,9 @@ public class MemberController2 {
 	
 	@RequestMapping("/jangbaguni")
 	public String jangbaguni(CartVO cvo, HttpSession session, Model model) {
-		if(session.getAttribute("loginUser")==null) return "member/memberMiniLogin";
+		 HashMap<String,Object> loginUser=
+				 (HashMap<String,Object>)session.getAttribute("loginUser");
+		if(loginUser==null) return "member/memberMiniLogin";
 		
 		if(cvo.getSIDEYN1() != null) cvo.setSIDEYN1(cvo.getFSIDE1());
 		if(cvo.getSIDEYN2() != null) cvo.setSIDEYN2(cvo.getFSIDE2());
@@ -278,7 +280,7 @@ public class MemberController2 {
 		ms.insertCart(cvo);
 		
 		model.addAttribute("jangresult", "1");
-		model.addAttribute("rseq", cvo.getRSEQ());
+		model.addAttribute("RSEQ", cvo.getRSEQ());
 		return "redirect:/menuDetail";
 	}
 	

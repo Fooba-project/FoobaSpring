@@ -48,6 +48,6 @@
 	</select>
 	
 	<insert id="insertCart" statementType="CALLABLE" parameterType="fooba.dto.CartVO">
-	{CALL insertCart(#{cvo.ID}, #{cvo.FSEQ},#{cvo.SIDEYN1},#{cvo.SIDEYN2},#{cvo.SIDEYN3},#{cvo.QUANTITY})}
+	{CALL insertCart(#{cvo.ID}, #{cvo.FSEQ},#{cvo.SIDEYN1},#{cvo.SIDEYN2},#{cvo.SIDEYN3},#{cvo.QUANTITY},#{cvo.CPRICE},#{cvo.CFNAME},#{cvo.RSEQ})}
 	</insert>
 </mapper>
