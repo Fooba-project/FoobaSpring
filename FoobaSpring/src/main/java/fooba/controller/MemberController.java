@@ -102,4 +102,9 @@ public class MemberController {
 	public String memberFindIdForm() {
 		return"member/memberFindId";
 	}
+	
+	@RequestMapping("/memberFindPwForm")
+	public String memberFindPwForm() {
+		return"member/memberFindPw";
+	}
 }
