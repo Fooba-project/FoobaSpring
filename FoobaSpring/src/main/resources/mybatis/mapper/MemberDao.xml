@@ -25,5 +25,13 @@
 		}
 	</insert>
 	
+	<select id="memberFindId" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{
+				CALL memberFindId(
+		#{NAME},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+									)
+		}
+	</select>
+	
 </mapper>
 

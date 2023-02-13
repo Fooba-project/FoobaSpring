@@ -24,6 +24,11 @@ public class MemberService {
 		mdao.insertMember(mvo);
 		
 	}
+
+	public void memberFindId(HashMap<String, Object> prm) {
+		mdao.memberFindId(prm);
+		
+	}
 		
 	}
 

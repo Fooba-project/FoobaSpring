@@ -102,33 +102,35 @@ public class MemberController {
 	public String memberFindIdForm() {
 		return"member/memberFindId";
 	}
-	/*
-	@RequestMapping(value="res_FindId")
-	public String res_FindId(
-			@RequestParam(value="NAME" ,required=false)String rname,
-			@RequestParam(value="PHONE",required=false)String rphone,Model model) {
-		HashMap<String,Object>paramMap=new HashMap<String,Object>();
-		paramMap.put("rname",rname);
-		paramMap.put("ref_cursor",null);
-		ms.memberFindId(paramMap);
+	
+	@RequestMapping(value="memberFindId")
+	public String memberFindId(
+			@RequestParam(value="NAME" ,required=false)String NAME,
+			@RequestParam(value="PHONE",required=false)String PHONE, Model model) {
+		HashMap<String,Object>prm =new HashMap<String,Object>();
+		prm.put("NAME",NAME);
+		prm.put("ref_cursor",null);
+		ms.memberFindId(prm);
+		
 		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		
 		if(list.size()==0) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요1.");
-			return "restaurant/res_FindId";
+			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+			return "member/memberFindId";
 		}else {
-			HashMap<String,Object> rvo=list.get(0);
-			if(!rvo.get("RPHONE").equals(rphone)) {
-				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요2.");
-				return "restaurant/res_FindId";
+			HashMap<String,Object> mvo=list.get(0);
+			if(!mvo.get("PHONE").equals(PHONE)) {
+				model.addAttribute("message","휴대폰 번호가 틀렸습니다. 다시 입력하세요.");
+				return "member/memberFindId";
 			}
 			else {
-				model.addAttribute("message","귀하의 아이디는 '"+rvo.get("RID")+"'입니다.");
-				return  "restaurant/res_login";
+				model.addAttribute("message","귀하의 아이디는 '"+mvo.get("ID")+"'입니다.");
+				return  "member/memberLogin";
 			}
 		}
 	}
-	*/
+	
 	@RequestMapping("/memberFindPwForm")
 	public String memberFindPwForm() {
 		return"member/memberFindPw";
