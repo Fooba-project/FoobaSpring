@@ -27,7 +27,7 @@
                 <tr> 
                     <div class="qna_box">
                         <div class="qna_content">
-                             A : ${QnaVO.SUBJECT} 
+                             A : ${QnaVO.CONTENT} 
                         </div>
                     </div>
                 </tr>

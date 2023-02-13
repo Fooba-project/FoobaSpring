@@ -34,6 +34,11 @@ public class MemberService {
 		mdao.memberFindPw(prm);
 		
 	}
+
+	public void memberQnaList(HashMap<String, Object> prm) {
+		mdao.memberQnaList(prm);
+		
+	}
 		
 	}
 

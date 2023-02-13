@@ -37,3 +37,12 @@ begin
     open p_curvar for
         select * from member where name=p_name;
 end;
+
+create or replace procedure memberQnaList(
+p_rc out sys_refcursor
+)
+IS
+BEGIN
+	 open p_rc for
+	select * from qna order by qseq desc;
+END;

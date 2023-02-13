@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fooba.dto.MemberVO;
+import fooba.dto.Paging;
 import fooba.service.MemberService;
 
 @Controller
@@ -164,5 +165,19 @@ public class MemberController {
 				return  "member/memberLogin";
 			}
 		}
+	}
+	
+	@RequestMapping("/memberQnalist")
+	public String memberQnalist(Model model) {
+		
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("ref_cursor", null);
+		
+		ms.memberQnaList(prm);
+		ArrayList<HashMap<String,Object>> list = 
+				(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		
+		model.addAttribute("list", list);
+		return"member/memberQnalist";
 	}
 }
