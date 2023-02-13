@@ -141,7 +141,7 @@ public class ResController2 {
 		return "restaurant/res_qnalist_footer";
 	}
 	
-	@RequestMapping("/")
+	//@RequestMapping("/")
 	
 	
 	
