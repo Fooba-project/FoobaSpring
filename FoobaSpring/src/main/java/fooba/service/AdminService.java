@@ -80,6 +80,10 @@ public class AdminService {
 		adao.adminDetail(prm);
 	}
 
+	public void admin_bupdown(HashMap<String, Object> prm) {
+		adao.admin_bupdown(prm);
+	}
+
 
 
 	

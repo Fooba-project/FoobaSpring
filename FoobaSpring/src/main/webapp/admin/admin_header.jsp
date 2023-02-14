@@ -19,8 +19,8 @@ body {margin: 0; position:relative;}
 #mainlogo {position: relative; text-align: center; width: 150px; height: 100px; margin: auto auto;}
 #mainlogo img {width: 100px; height: 100px;}
 
-.headbuttons {position:absolute; width: 380px; top:23px; left:calc(50% + 300px); }
-.headbutton {width: 70px; height: 50px;border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 90%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #fff; line-height: 50px; color:#fff; background-color: transparent; border: 2px solid white; }
+.headbuttons {position:absolute; width: 450px; top:23px; left:calc(50% + 250px); }
+.headbutton {cursor:pointer; width: 70px; height: 50px;border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 90%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #fff; line-height: 50px; color:#fff; background-color: transparent; border: 2px solid white; }
 .headbutton:hover {background-color: white; color: rgb(23,55,94); cursor: pointer;}
 
 .footerbox{position:relative; height: 100px; width: 100%; background-color: white; }
@@ -53,7 +53,7 @@ body {margin: 0; position:relative;}
 .admin_list{text-align: center; margin-top:30px;}
 #admin_searchres {margin:auto;  width:700px;}
 #admin_searchres td {font-weight: 700; }
-.admin_searchres_btn{height:35px; background-color: rgb(76, 94, 134); float: right; margin-right: 5px; border: 2px solid black ; color: white; box-shadow: 1px 1px black; border-radius: 4px;  }   
+.admin_searchres_btn{cursor: pointer; height:35px; background-color: rgb(76, 94, 134); float: right; margin-right: 5px; border: 2px solid black ; color: white; box-shadow: 1px 1px black; border-radius: 4px;  }   
 #admin_list_table{margin: auto; border: 1px solid; width:810px;}
 #admin_list_table th{background-color:rgb(99, 123, 153); font-size: 17px; color: white;}
 
@@ -101,14 +101,15 @@ body {margin: 0; position:relative;}
 .qna_buttons{position: relative;  width: 210px; margin: auto; }
 .qna_button{position: relative; margin: auto; margin-top: 11px; background-color: #304170; font-size: 16px; border-radius: 6px; color:white; height: 50px; width: 100px; border: 1px white;}
 
-.banner_div {position: relative; width: 70%; margin: 0 auto; height: 85px; margin-top: 10px; overflow:hidden }
+.banner_div {position: relative; width: 800px; margin: 0 auto; height: 85px; margin-top: 10px; overflow:hidden }
 .bnseq {position: absolute; left: 0; top: 0; height: 85px; width: 85px; line-height: 85px; text-align: center; font-family: Verdana; font-size: 200%; border-radius: 10px; background-color: rgba(255, 30, 0, 0.563);}
 .bnseqnone {position: absolute; left: 0; top: 0; height: 85px; width: 100px;}
 .banner_img {position: absolute; width: 200px; height: 85px; left: 90px; top: 0; border-radius: 10px; overflow: hidden;}
 .banner_img img {width: 200px;}
 .banner_text {position: absolute; left: 295px; top:0; height: 85px; width: 290px; font-size: 90%;}
-.banner_button {position: absolute; right: 0; top:0; height: 85px; width: 100px; text-align: center; }
-.bbtn {border: none; cursor: pointer; margin: 2px; background-color: rgb(230, 207, 254); height: 25px; width: 25px;}
+.banner_button {position: absolute; right: 100px; top:0; height: 85px; width: 100px; text-align: center; padding-top: 3px;}
+.banner_button2 {position: absolute; right: 0; top:0; height: 85px; width: 100px; text-align: center;} 
+.bbtn {border: none; cursor: pointer; margin: 2px 3px; background-color: rgb(230, 207, 254); height: 25px; width: 25px;}
 .bbtn:hover {background-color: blueviolet;}
 #bbtnud {width: 90px;}
 </style>
@@ -131,7 +132,7 @@ body {margin: 0; position:relative;}
 			<input type="button" value="가게관리" class="headbutton" onclick="location.href='adminList?table=r&first=y'">
 			<input type="button" value="회원관리" class="headbutton" onclick="location.href='adminList?table=m&first=y'">
 			<input type="button" value="주문관리" class="headbutton" onclick="location.href='adminList?table=o&first=y'">
-			<input type="button" value="QnA관리" class="headbutton" onclick="location.href='adminList?table=q&first=y'">
+			<input type="button" value="QnA" class="headbutton" onclick="location.href='adminList?table=q&first=y'">
 			<input type="button" value="배너관리" class="headbutton" onclick="location.href='adminList?table=b&first=y'">
 		</c:otherwise>
 	</c:choose>

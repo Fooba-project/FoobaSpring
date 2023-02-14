@@ -26,7 +26,7 @@ elsif p_table='m' then
 elsif p_table='q' then
     select count(*) into p_cnt from qna where content like '%'|| p_key ||'%' or subject like '%'|| p_key ||'%';
 elsif p_table= 'b' then
-    select count(rownum) into p_cnt from banner;
+    select count(rownum) into p_cnt from bannerf where bname like  '%'|| p_key ||'%';
 end if;
 END;
 
@@ -54,7 +54,7 @@ elsif p_table= 'q' then
     select * from (select * from (select rownum as rn, b.* from ((select * from qna where content like '%'|| p_key ||'%' or subject like '%'|| p_key ||'%' order by qseq desc) b)) where rn>=p_startNum) where rn<=p_endNum;
 elsif p_table= 'b' then
     open p_rc for
-    select * from banner order by useyn desc, order_seq asc;
+    select * from bannerf order by border asc;
 end if;
 END;
 

@@ -239,7 +239,8 @@ where a.oseq=b.oseq and a.id = c.id and b.fseq=d.fseq and d.rseq=e.rseq;
 drop table bannerf;
 CREATE TABLE bannerf
 (
-	border number(5) primary key,
+	bseq number(5) primary key,
+	border number(5),
 	bimage varchar2(20) NOT NULL,
 	bname varchar2(20) NOT NULL,
 	indate date DEFAULT sysdate

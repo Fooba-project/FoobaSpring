@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="admin_header.jsp"%>
 <script type="text/javascript">
-function bsequpdown(bseq, num) {
-	location.href="admin_bseqUpDown?BSEQ="+BSEQ+"&num="+num;
+function bupdown(bseq, num) {
+	
 }
 </script>
+<h2 class="admin_list">배너 리스트</h2>  
 <article>
 	<c:forEach items="${list}" var="vo">
 		<div class="banner_div">
@@ -13,7 +14,7 @@ function bsequpdown(bseq, num) {
 					${vo.BORDER }
 				</div>
 			</c:if>
-			<c:if test="${vo.BSEQ>=4}">
+			<c:if test="${vo.BORDER>=4}">
 				<div class="bnseqnone"></div>
 			</c:if>
 			<div class="banner_img">
@@ -24,11 +25,15 @@ function bsequpdown(bseq, num) {
 				<p>등록일자 : ${vo.INDATE }</p>
 			</div>
 			<div class="banner_button">
-				<input class="bbtn" id="bbtnud" type="button" value="▲" onclick="bsequpdown('${vo.BSEQ}', 4)"><br>
-				<input class="bbtn" id="bbtnud" type="button" value="▼" onclick="bsequpdown('${vo.BSEQ}', 5)"><br>
-				<input class="bbtn" type="button" value="1" onclick="bsequpdown('${vo.BSEQ}', 1)">
-				<input class="bbtn" type="button" value="2" onclick="bsequpdown('${vo.BSEQ}', 2)">
-				<input class="bbtn" type="button" value="3" onclick="bsequpdown('${vo.BSEQ}', 3)">
+				<c:if test="${vo.BORDER<=3}">
+					<input class="bbtn" id="bbtnud" type="button" value="▲" onclick="location.href='admin_bupdown?BSEQ=${vo.BSEQ}&num=4''"><br><br>
+					<input class="bbtn" id="bbtnud" type="button" value="▼" onclick="location.href='admin_bupdown?BSEQ=${vo.BSEQ}&num=5''">
+				</c:if>
+			</div>
+			<div class="banner_button2">
+				<input class="bbtn" type="button" value="1" onclick="location.href='admin_bupdown?BSEQ=${vo.BSEQ}&num=1''"><input class="bbtn" type="button" value="2" onclick="location.href='admin_bupdown?BSEQ=${vo.BSEQ}&num=2''"><input class="bbtn" type="button" value="3" onclick="location.href='admin_bupdown?BSEQ=${vo.BSEQ}&num=3''"><br>
+				<input class="bbtn" id="bbtnud" type="button" value="수정" onclick="bannerupdate('${vo.BSEQ}')"><br>
+				<input class="bbtn" id="bbtnud" type="button" value="삭제" onclick="bannerdelete('${vo.BSEQ}')">
 			</div>
 		</div>
 	</c:forEach>

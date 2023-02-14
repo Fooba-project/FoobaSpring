@@ -88,7 +88,6 @@ public class AdminController {
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		model.addAttribute("paging", (Paging)prm.get("paging"));
 		model.addAttribute("key", (String)prm.get("key"));
-		if(table.equals("b")) list.remove(0);
 		model.addAttribute("list", list);
 		if(table.equals("r")) return "admin/admin_reslist";
 		else if(table.equals("o")) return "admin/admin_orderlist";
@@ -169,8 +168,21 @@ public class AdminController {
 		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
 		else return "admin/admin_qnaDetail";
 	}
+	
+	
+	@RequestMapping("/admin_bupdown")
+	public String admin_bupdown(HttpSession session, @RequestParam("BSEQ") int BSEQ, @RequestParam("num") int num) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("BSEQ", BSEQ);
+		prm.put("num", num);
+		as.admin_bupdown(prm);
+		System.out.println(1);
+		return "redirect:/adminList?table=b";
+	}
 
+	
 }
 	
 

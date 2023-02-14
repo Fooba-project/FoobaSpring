@@ -7,7 +7,6 @@ function go_detail( QSEQ ){
 	document.frm.submit();
 }
 
-
 function go_search(){
 		document.frm.action = "adminList?table=q";
 }

@@ -43,7 +43,9 @@
 		{ CALL adminQna ( #{procedure}, #{qvo.QSEQ}, #{qvo.SUBJECT}, #{qvo.CONTENT} )}
 	</update>
 
-	
+	<update id="admin_bupdown" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL admin_bupdown (#{BSEQ}, #{num} )}
+	</update>
 	
 </mapper>
 

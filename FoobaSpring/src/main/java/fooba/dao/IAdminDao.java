@@ -22,4 +22,6 @@ public interface IAdminDao {
 	void adminQna(HashMap<String, Object> prm);
 
 	void adminDetail(HashMap<String, Object> prm);
+
+	void admin_bupdown(HashMap<String, Object> prm);
 }

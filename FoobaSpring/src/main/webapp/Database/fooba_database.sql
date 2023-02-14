@@ -20,6 +20,8 @@ create sequence restaurant_seq start with 1;
 drop sequence foodmenu_seq;
 create sequence foodmenu_seq start with 1;
 
+drop sequence banner_seq;
+create sequence banner_seq start with 1;
 ------ 샘플 데이터 입력--------
 
 -- 관리자 입력(2명)
@@ -1447,7 +1449,6 @@ values(order_detail_seq.nextVal,2,119,2,1,0,1);
 insert into review(review_seq,id,rseq,star,content,oseq,nick)
 values(review_seq_seq.nextVal,'abc1234',48,5,'왈왈왈왈!!',1,'맛있으면 짖는 개');
 
-insert into bannerf (border, bimage, bname) values (0, '0', '영');
-insert into bannerf (border, bimage, bname) values (1, 'background1.jpg', '꼬치구이');
-insert into bannerf (border, bimage, bname) values (2, 'background2.jpg', '고기야채볶음');
-insert into bannerf (border, bimage, bname) values (3, 'background3.jpg', '샐러드');
+insert into bannerf (bseq, border, bimage, bname) values (banner_seq.nextVal, 1, 'background1.jpg', '꼬치구이');
+insert into bannerf (bseq, border, bimage, bname) values (banner_seq.nextVal, 2, 'background2.jpg', '고기야채볶음');
+insert into bannerf (bseq, bimage, bname) values (banner_seq.nextVal, 'background3.jpg', '샐러드');
