@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import fooba.dao.IMemberDao2;
 import fooba.dto.CartVO;
 import fooba.dto.MemberVO;
+import fooba.dto.OrderVO;
 
 @Service
 public class MemberService2 {
@@ -95,8 +96,8 @@ public class MemberService2 {
 		
 	}
 
-	public void cartList(HashMap<String, Object> prm) {		
-		mdao.cartList(prm);
+	public void CartList(HashMap<String, Object> prm) {		
+		mdao.CartList(prm);
 	}
 
 	public void getFoodDetail(HashMap<String, Object> prm) {
@@ -113,11 +114,27 @@ public class MemberService2 {
 		mdao.deletecart(prm);		
 	}
 
-	public void CartList(HashMap<String, Object>prm) {
-		mdao.CartList(prm);
-		
+	public void cartList(HashMap<String, Object> prm) {
+		mdao.cartList(prm);
 	}
 
+//	public void insertOrders(OrderVO ovo) {
+//		mdao.insertOrders(ovo);
+		
+//	}
+
+	/*
+	public void insertOrder(ArrayList<HashMap<String, Object>> list, String id) {
+		
+		for(HashMap<String, Object> item : list) {
+			mdao.insertOrder(item,id);
+		}
+		// mdao.insertOrder(list,id);
+		
+	}
+*/
+	
+	
 	
 
 	

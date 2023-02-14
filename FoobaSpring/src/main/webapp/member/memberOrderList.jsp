@@ -14,11 +14,11 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 <div id="memberOrderListdiv">
 		<article  id="orderArticle">
 			<h2>
-	            ${memberOrderListT } 주문내역
+	            ${ molist } 주문내역
 	         </h2>
             <hr><br>
             <table id="memberOrderList">
-                <c:forEach items="${memberOrderList }" var="ovo">
+                <c:forEach items="${ molist }" var="ovo">
                     <tr>
                         <td style="width:20%">
                             <div id="memberOrderListimg">
@@ -40,22 +40,22 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
                         <td style="width:30%">
                             <div id="memberOrderListStatement" style="margin: 10px">
 	                            <c:choose>
-			                    	<c:when test="${ovo.result==0}">
+			                    	<c:when test="${ovo.RESULT==0}">
 			                    		주문확인중
 			                    	</c:when>
-			                    	<c:when test="${ovo.result==1}">
+			                    	<c:when test="${ovo.RESULT==1}">
 			                    		배달중
 			                    	</c:when>
-			                    	<c:when test="${ovo.result==2}">
+			                    	<c:when test="${ovo.RESULT==2}">
 			                    		배달완료
 			                    	</c:when>
-			                    	<c:when test="${ovo.result==3}">
+			                    	<c:when test="${ovo.RESULT==3}">
 			                    		후기작성완료
 			                    	</c:when>
 		                    	</c:choose>	
                             </div>
                             <div id="memberOrderListDetail" margin="10" >
-                                <input type="button" value="주문상세" id="memberOrderDetailButton" onclick="location.href='memberOrderDetail?oseq=${ovo.OSEQ}'"/>
+                                <input type="button" value="주문상세" id="memberOrderDetailButton" onclick="location.href='memberOrderDetail?OSEQ=${ovo.OSEQ}'"/>
                             </div>            
                         </td>
                     </tr>
@@ -65,7 +65,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
              <c:if test="${orderList=='ing'}">
 					<div id="paging" style="font-size:110%; font-weight:bold; margin-left:60%;">
 						<c:if test="${paging.prev}">
-							<a href="fooba.do?command=memberOrderList&page=${paging.beginPage-1}">◀</a>&nbsp;
+							<a href="memberOrderList?page=${paging.beginPage-1}">◀</a>&nbsp;
 						</c:if>
 						<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
 							<c:choose>
@@ -73,19 +73,19 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 									<span style="color:red">${index}&nbsp;</span>
 								</c:when>
 								<c:otherwise>
-									<a href="fooba.do?command=memberOrderList&page=${index}" style="text-decoration: none; color:black;">${index}</a>&nbsp;
+									<a href="memberOrderList?page=${index}" style="text-decoration: none; color:black;">${index}</a>&nbsp;
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						<c:if test="${paging.next}">
-							<a href="fooba.do?command=memberOrderList&page=${paging.endPage+1}">▶</a>&nbsp;
+							<a href="memberOrderList?page=${paging.endPage+1}">▶</a>&nbsp;
 						</c:if>
 				</div>
 			</c:if>
             <c:if test="${orderList=='all'}">
 					<div id="paging" style="font-size:110%; font-weight:bold; margin-left:60%;">
 						<c:if test="${paging.prev}">
-							<a href="fooba.do?command=memberOrderAll&page=${paging.beginPage-1}">◀</a>&nbsp;
+							<a href="memberOrderAll?page=${paging.beginPage-1}">◀</a>&nbsp;
 						</c:if>
 						<c:forEach begin="${paging.beginPage}" end="${paging.endPage}" var="index">
 							<c:choose>
@@ -93,12 +93,12 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 									<span style="color:red">${index}&nbsp;</span>
 								</c:when>
 								<c:otherwise>
-									<a href="fooba.do?command=memberOrderAll&page=${index}" style="text-decoration: none; color:black;">${index}</a>&nbsp;
+									<a href="memberOrderAll?page=${index}" style="text-decoration: none; color:black;">${index}</a>&nbsp;
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
 						<c:if test="${paging.next}">
-							<a href="fooba.do?command=memberOrderAll&page=${paging.endPage+1}">▶</a>&nbsp;
+							<a href="memberOrderAll?page=${paging.endPage+1}">▶</a>&nbsp;
 						</c:if>
 				</div>
 			</c:if>

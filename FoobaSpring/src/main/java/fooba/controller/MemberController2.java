@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import fooba.dto.CartVO;
 import fooba.dto.FoodmenuVO;
 import fooba.dto.MemberVO;
+import fooba.dto.OrderVO;
 import fooba.service.MemberService2;
 import fooba.service.ResService;
 import fooba.service.ResService2;
@@ -229,10 +230,10 @@ public class MemberController2 {
 		 if(vo != null) {
 			 prm.put("ID", vo.get("ID")+"");
 			 int sum = 0;
-			 prm.put("ref_cursor3", null);
+			 prm.put("ref_cursor", null);
 			 ms.cartList(prm);
 			 ArrayList<HashMap<String,Object>> list3
-				= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
+				= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 			 for (HashMap<String,Object> cart : list3)
 				sum += Integer.parseInt(cart.get("CPRICE")+"");
 			 model.addAttribute("clist",list3);
@@ -311,26 +312,73 @@ public class MemberController2 {
 		
 		HashMap<String,Object> loginUser=(HashMap<String,Object>) session.getAttribute("loginUser");
 		
-		if(mvo==null) return "member/memberLogin";
+		if(loginUser==null) return "member/memberLogin";
 		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("RSEQ", RSEQ);
 		prm.put("ID",ID);
 		prm.put("ref_cursor", null);
-		
-		ms.CartList(prm);
+		System.out.println("RSEQ : "+RSEQ);
+		System.out.println("ID : "+ ID);
+		ms.cartList(prm);
 		
 		 ArrayList<HashMap<String,Object>> list 
          = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		 
-		 request.setAttribute("RTIP", RTIP);
+		 System.out.println("list사이즈 : "+list.size());
+		 model.addAttribute("RTIP", RTIP);
 		 model.addAttribute("RSEQ", RSEQ);
 		 model.addAttribute("list", list);
-
 		 model.addAttribute("carttotalprice", carttotalprice);
-		 model.addAttribute("loginUser", loginUser);
 		 
 		 return "main/menuorder";
+	}
+	
+	@RequestMapping("order")
+	public String order(HttpServletRequest request,HttpSession session,Model model,
+			@RequestParam("RSEQ")int RSEQ,@RequestParam("TOTALPRICE")int TOTALPRICE,
+			OrderVO ovo) {
+		
+		HashMap<String,Object> loginUser=(HashMap<String,Object>) session.getAttribute("loginUser");
+		
+		if(loginUser==null) return "member/memberLogin";
+		
+		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("ID", loginUser.get("ID"));
+		prm.put("RSEQ", RSEQ);
+		prm.put("ref_cursor", null);
+		
+		ovo.setID(loginUser.get("ID")+"");
+		System.out.println("rideryn : "+ovo.getRIDERYN() );
+		ovo.setRIDERYN( ovo.getRIDERYN() );
+		ovo.setPLASTICYN( ovo.getPLASTICYN() );
+		ovo.setPAYMENT( ovo.getPAYMENT() );
+		if(Integer.parseInt(request.getParameter("bdjs"))==0) {
+			ovo.setADDRESS1(ovo.getADDRESS1());
+			ovo.setADDRESS2(ovo.getADDRESS2());
+			ovo.setADDRESS3(ovo.getADDRESS3());
+			ovo.setPHONE(ovo.getPHONE());
+		}else {
+			ovo.setADDRESS1(request.getParameter("useraddress1"));
+			ovo.setADDRESS2(request.getParameter("useraddress2"));
+			ovo.setADDRESS3(request.getParameter("useraddress3"));
+			ovo.setPHONE(loginUser.get("PHONE")+"");
+		}		
+		ovo.setTOTALPRICE(TOTALPRICE);
+		
+		prm.put("ovo", ovo);
+		
+		ms.cartList(prm);
+		
+		 ArrayList<HashMap<String,Object>> list 
+         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		System.out.println(list.size());
+		prm.put("list", list);
+		
+		if(list.size()!=0) {
+			// ms.insertOrders(prm);
+			// ms.insertOrder(list,loginUser.get("ID")+"");
+		}	
+		return "member/memberOrderList";
 	}
 	
 }

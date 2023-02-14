@@ -6,7 +6,7 @@
   
 <mapper namespace="fooba.dao.IMemberDao2">
 	<resultMap id="memberMap2" type="java.util.HashMap"></resultMap>
-
+	
 	<select id="getMember"  statementType="CALLABLE" parameterType="java.util.HashMap">
 		{	CALL getMemberFooba(#{ID},
 				#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 } )	}
@@ -39,7 +39,7 @@
 	
 	<select id="cartList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL cartList(#{RSEQ}, #{ID},
-	#{ref_cursor3 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+	#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="getFoodDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -54,10 +54,19 @@
 	<delete id="deletecart">
 	{CALL deletecartFooba(#{CSEQ},#{RSEQ})}
 	</delete>
+
 	
-	<select id="CartList" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{CALL CartListFooba(#{ID},#{RSEQ},
+	<!-- 
+	<insert id="insertOrders" statementType="CALLABLE" parameterType="java.util.HashMap">
+	{CALL insertOrdersFooba(#{ID},#{RIDERYN},#{PLASTICYN},#{PAYMENT},#{ADDRESS1},
+	#{ADDRESS2},#{ADDRESS3},#{PHONE},#{TOTALPRICE},
 	#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
-	</select>
+	</insert>
+	
+	<insert id="insertOrder" statementType="CALLABLE" parameterType="java.util.HashMap">
+	{CALL insertOrderFooba(#{ID},#{OSEQ},#{QUANTITY},#{FSEQ},#{SIDEYN1},#{SIDEYN2},#{SIDEYN3}) }
+	</insert> -->
+	
+	
 	
 </mapper>
