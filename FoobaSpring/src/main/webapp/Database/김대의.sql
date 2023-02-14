@@ -92,6 +92,6 @@ create or replace procedure withdrawal(
 )
 is 
 begin
-    update restaurant set ryn=2 where rid=p_rid;
+    update restaurant set ryn=4 where rid=p_rid;
     COMMIT;
 end;
