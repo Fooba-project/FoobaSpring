@@ -51,6 +51,11 @@ public class ResService {
 	public void joinRes(RestaurantVO vo) {
 		rdao.joinRes(vo);
 		
+	}
+
+	public void updateRes(RestaurantVO vo) {
+		rdao.updateRes(vo);
+		
 	} 
 	
 }

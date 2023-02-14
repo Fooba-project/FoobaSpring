@@ -17,11 +17,12 @@
            		 	<form id="res_menuall_a" name="food_menu" method="post" action="res_update">
 					<input type="hidden" name="RSEQ" value="${loginRes.RSEQ}">	
 					<input type="hidden" name="oldImage" value="${loginRes.RIMAGE}">
+					<input type="hidden" name="RID" value="${loginRes.RID}">	
 	       	    	<div id="rest_info">
                 
 	                    <div id="res_cont">
 	                    	<br>
-	                        <h3>사장님 알림</h3><hr>
+	                        <h3>사장님 알림 &nbsp;&nbsp;<span style="color:red;font-size:14px; ">${message }</span></h3><hr>
 	                        <textarea name="CONTENT" rows="5" cols="50" style="border-radius:2px; resize:none" maxlength="100" >${loginRes.CONTENT}</textarea>
 	                    </div><br>
                     	<div id="res_num">
@@ -57,26 +58,27 @@
 	                        	# <input type="text" name="HASH" style="border-radius:5px; width:100px; height:20px;"
 	                        	value="${loginRes.HASH}"/><br><hr>
 	                        <a class="basic">가게로고</a>&nbsp; 
-	                        		<img src="images/title/${loginRes.RIMAGE}" width="100px"><br>            
-                                <input type="file" name="fimage"/>
+	                        		            
                                 <div id="images_upload_box" style="height:200px">
+                                	<img src="images/title/${loginRes.RIMAGE}" height="150px" id="oldImg">
 			                         <input type="hidden" class="input_text" name="RIMAGE" id="fileimage">
 			                         <div id="filename"></div>
 	                        	
-	                    </div><br><hr>
-	                    <input type="submit" value="수정 완료" class="res_infotab"  style="width:700px;">
+	                    </div><br>
+	                    <input type="submit" value="수정 완료" class="res_infotab"  style="width:700px; position:absolute; bottom:-50px;">
 	                    </div>
                     	
 					</div>
 				</form>
 				
-				<div style="position:absolute; bottom:400px;">
+				<div style="position:absolute; bottom:-270px; left:10px;">
 					<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
 								&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
 					</form>
 				</div>
             </div>            
         </div>
+       </div>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript">
 

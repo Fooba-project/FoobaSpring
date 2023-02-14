@@ -17,4 +17,6 @@ public interface IResDao {
 
 	void joinRes(RestaurantVO vo);
 
+	void updateRes(RestaurantVO vo);
+
 }

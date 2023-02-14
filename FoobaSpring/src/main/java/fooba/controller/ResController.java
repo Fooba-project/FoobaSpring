@@ -185,9 +185,6 @@ public class ResController {
 	@RequestMapping(value="fileup",method=RequestMethod.POST)
 	@ResponseBody	
 	public HashMap<String , Object>fileup(Model model,HttpServletRequest request){
-		//현재 메서드는 다른 메서드처럼 jsp 파일이름을 리턴해서 파일이름.jsp로 이동하는 메서드가 아니다.
-		//ajax에 의해서 호출된 지점으로 다시 되돌아가서 화면 이동없이 운영이 계속되어야 하기때문에 이동할때
-		//가져갈 데이터가 리턴된다.
 		
 		String path=context.getRealPath("images/foodmenu");
 		HashMap<String,Object>result=new HashMap<String,Object>();
@@ -274,8 +271,46 @@ public class ResController {
 	}
 	
 	@RequestMapping(value="/res_update",method=RequestMethod.POST)
-	public String res_update(HttpSession session) {
+	public String res_update(HttpSession session,@ModelAttribute("loginRes")@Valid RestaurantVO vo,
+			BindingResult result,Model model ,@RequestParam("oldImage")String oldImage) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		return " ";
+		System.out.println(vo.getRIMAGE());
+		if(result.getFieldError("CONTENT")!=null) {
+			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
+		}else if(result.getFieldError("RPHONE")!=null) {
+			model.addAttribute("message",result.getFieldError("RPHONE").getDefaultMessage());
+		}else if(result.getFieldError("RPHONE")!=null) {
+			model.addAttribute("message",result.getFieldError("RPHONE").getDefaultMessage());
+		}else if(result.getFieldError("ZIP_NUM")!=null) {
+			model.addAttribute("message",result.getFieldError("ZIP_NUM").getDefaultMessage());
+		}else if(result.getFieldError("RADDRESS")!=null) {
+			model.addAttribute("message",result.getFieldError("RADDRESS").getDefaultMessage());
+		}else if(result.getFieldError("RADDRESS2")!=null) {
+			model.addAttribute("message",result.getFieldError("RADDRESS2").getDefaultMessage());
+		}else if(result.getFieldError("RTIP")!=null) {
+			model.addAttribute("message","배달팁을 입력하세요");
+		}else if(result.getFieldError("HASH")!=null) {
+			model.addAttribute("message",result.getFieldError("HASH").getDefaultMessage());
+		}else{
+			if(vo.getRIMAGE()==null)vo.setRIMAGE(oldImage);
+			rs.updateRes(vo);
+			System.out.println("xx  "+vo.getRIMAGE());
+			
+			session.removeAttribute("loginRes");
+			
+			HashMap<String,Object>paramMap=new HashMap<String,Object>();
+			paramMap.put("RID",vo.getRID());
+			paramMap.put("ref_cursor",null);
+			rs.getRes(paramMap);
+			ArrayList<HashMap<String,Object>> list
+			=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+			session.setAttribute("loginRes",list.get(0));
+			
+			return "restaurant/res_show";
+			
+		}
+		return "restaurant/res_updateForm";
 	}
+		
 }
+

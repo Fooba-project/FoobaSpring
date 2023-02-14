@@ -66,3 +66,24 @@ begin
     commit;
 end;
 
+select*from restaurant;
+
+create or replace procedure updateRes(
+    p_rid in varchar2,
+    p_content in varchar2,
+    p_rphone in varchar2,
+    p_zip_num in varchar2,
+    p_raddress in varchar2,
+    p_raddress2 in varchar2,
+    p_raddress3 in varchar2,
+    p_rtip in number,
+    p_hash in varchar2,
+    p_rimage in varchar2
+)
+is
+begin
+    update restaurant set content=p_content,rphone=p_rphone,zip_num=p_zip_num,raddress=p_raddress,raddress2=p_raddress2,
+    raddress3=p_raddress3,rtip=p_rtip,hash=p_hash,rimage=p_rimage where rid=p_rid;
+    commit;
+end;
+

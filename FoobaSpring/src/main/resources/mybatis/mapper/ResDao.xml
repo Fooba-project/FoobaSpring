@@ -33,5 +33,24 @@
 			,#{RIMAGE},#{CONTENT},#{HASH},#{RBIZNUM},#{KIND},#{RTIP}
 		)}
 	</insert>
+	
+	<update id="updateRes" statementType="CALLABLE" parameterType="fooba.dto.RestaurantVO">
+		{CALL updateRes(
+			#{RSEQ},#{CONTENT},#{RPHONE},#{ZIP_NUM},#{RADDRESS},#{RADDRESS2},#{RADDRESS3},#{RTIP},#{HASH},
+			#{RIMAGE}
+		)}
+	</update>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
 
