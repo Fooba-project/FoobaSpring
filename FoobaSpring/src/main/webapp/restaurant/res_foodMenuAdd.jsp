@@ -31,10 +31,7 @@
                             <div id="food_text">
                             	<textarea name="FCONTENT" rows="5" cols="50" style="border-radius:10px;  resize:none;" maxlength="60" >${vo.FCONTENT}</textarea>
                                 
-                            </div><hr>
-	                    			  
-                            <h3>메뉴 사진</h3>                    
-                                <input type="text" name="FIMAGE" value="d5.png"/>
+                            </div><hr>		  
                                 
                              <h3>사이드메뉴 1</h3>
                             <div id="food_text">
@@ -61,19 +58,25 @@
                            		&nbsp;
                                 <input type="text" class="food_text" 
                                 style="width:120px; height:35px;" name="FSIDEPRICE3" value="${vo.FSIDEPRICE3}" placeholder=" 예) 3000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /> 원
-                            </div><hr>
+                            </div>
+                            
+                            <h3>메뉴 사진</h3>        
+                            	<input type="hidden" name="FIMAGE" id="fileimage" >
+   								<div id="filename"></div>
                                 
                             <div id="res_tab">
-            					<input type="submit" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0);"
+            					<input type="submit" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0);  position:absolute; bottom:-970px"
             					value="등록" >                                
-                    		</div>
-	        
-	                </div>               
-              
-              
-             </div>
-          
-            </form>
+                    		</div>          		                          
+             	</div>
+             </div>    
+            </form>   
+            <div style="position:absolute; bottom:75px; left:20px;">
+       			<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
+					<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
+				</form> 
+      		</div>
+            
             </div>   
         </div>
         

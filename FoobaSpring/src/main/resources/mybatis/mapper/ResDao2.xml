@@ -27,9 +27,12 @@
 	</insert>
 	
 	<delete id="deleteFoodeMenu" statementType="CALLABLE">
-		{ CALL deleteFoodMenu(#{FSEQ})}
-		
+		{ CALL deleteFoodMenu(#{FSEQ})}	
 	</delete>
+	
+	<select id="restRes" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL restRes( #{RSEQ},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2})}
+	</select>
 	
 	
 

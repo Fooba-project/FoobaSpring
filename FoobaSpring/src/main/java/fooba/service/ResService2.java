@@ -37,6 +37,15 @@ public class ResService2 {
 		rdao.deleteFoodMenu(paramMap);
 	}
 
+	public void restRes(HashMap<String, Object> paramMap) {
+		rdao.restRes(paramMap);
+	}
+
+	public void returnRes(HashMap<String, Object> paramMap) {
+		rdao.returnRes(paramMap);
+		
+	}
+
 	
 	
 }

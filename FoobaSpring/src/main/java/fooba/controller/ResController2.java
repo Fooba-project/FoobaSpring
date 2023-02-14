@@ -73,11 +73,10 @@ public class ResController2 {
 		if(procedure.equals("update")) {
 			if(vo.getFIMAGE()==null||vo.getFIMAGE().equals("")) vo.setFIMAGE(OLDIMAGE);
 			url = "restaurant/res_foodmenuUpdateForm";
-		}
+		}else {if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","FIMAGE");}
 		if(result.getFieldError("FNAME")!=null) model.addAttribute("messagex","FNAME");
 		else if(result.getFieldError("FPRICE")!=null) model.addAttribute("messagex","FPRICE");
 		else if(result.getFieldError("FCONTENT")!=null) model.addAttribute("messagex","FCONTENT");
-		else if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","FIMAGE");
 		else if(result.getFieldError("FSIDE1")!=null) model.addAttribute("messagex","FSIDE1");
 		else if(result.getFieldError("FSIDEPRICE1")!=null) model.addAttribute("messagex","FSIDEPRICE1");
 		else if(result.getFieldError("FSIDE2")!=null) model.addAttribute("messagex","FSIDE2");
@@ -141,7 +140,27 @@ public class ResController2 {
 		return "restaurant/res_qnalist_footer";
 	}
 	
-	//@RequestMapping("/")
+	@RequestMapping("/res_restaurantRest") // 휴업으로 변경
+		public String res_restaurantRest(HttpServletRequest request, HttpSession session, Model model) {
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		paramMap.put("RSEQ", loginRes.get("RSEQ"));
+		
+		rs.restRes( paramMap );
+		return"restaurant/res_foodmenu";
+	}
+	
+	@RequestMapping("/res_restaurantReturn") // 휴업으로 변경
+		public String res_restaurantReturn(HttpServletRequest request, HttpSession session, Model model) {
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		paramMap.put("RSEQ", loginRes.get("RSEQ"));
+		
+		rs.returnRes( paramMap );
+		return"restaurant/res_foodmenu";
+}
 	
 	
 	

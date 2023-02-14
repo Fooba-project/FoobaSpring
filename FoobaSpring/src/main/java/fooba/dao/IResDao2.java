@@ -21,6 +21,10 @@ public interface IResDao2 {
 
 	void deleteFoodMenu(HashMap<String, Object> paramMap);
 
+	void restRes(HashMap<String, Object> paramMap);
+
+	void returnRes(HashMap<String, Object> paramMap);
+
 	
 
 	
