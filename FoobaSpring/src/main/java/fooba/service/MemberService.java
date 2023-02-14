@@ -47,6 +47,13 @@ public class MemberService {
 		
 	}
 
+	public void withdrawalMember(String ID) {
+		mdao.withdrawalMember(ID);
+		
+	}
+
+
+
 		
 	}
 

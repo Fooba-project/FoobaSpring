@@ -62,8 +62,18 @@ create or replace procedure memberUpdate(
 )
 IS
 BEGIN
-     UPDATE member SET pwd=p_pwd, name=p_name, email=p_email, phone=p_phone,
+    UPDATE member SET pwd=p_pwd, name=p_name, email=p_email, phone=p_phone,
     zip_num = p_zip_num, address1=p_address1, address2=p_address2, address3=p_address3, nick=p_nick
     WHERE id=p_id;
     COMMIT;
+    OPEN p_curvar For select * from member where id=p_id;
 END;
+
+create or replace procedure withdrawalMember(
+    p_id IN member.id%TYPE
+)
+is 
+begin
+    delete from member where id=p_id;
+    COMMIT;
+end;

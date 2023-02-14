@@ -57,5 +57,12 @@
 		}
 	</update>
 	
+	<delete id="withdrawalMember" statementType="CALLABLE" >
+		{CALL withdrawalMember(
+			#{PARAM1}
+		)}
+	</delete>
+	
+	
 </mapper>
 

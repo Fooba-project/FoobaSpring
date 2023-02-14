@@ -17,6 +17,7 @@ public interface IMemberDao {
 	void memberFindPw(HashMap<String, Object> prm);
 	void memberQnaList(HashMap<String, Object> prm);
 	void memberUpdate(HashMap<String, Object> prm);
+	void withdrawalMember(String iD);
 
 	
 }

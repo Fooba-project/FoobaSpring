@@ -227,4 +227,16 @@ public class MemberController {
 		return "member/memberUpdate";
 	}
 	
+	@RequestMapping("/withdrawalMember")
+	public String res_withdrawal(HttpSession session,Model model) {
+		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
+		HashMap<String , Object> loginUser = (HashMap<String , Object>)session.getAttribute("loginUser");
+		ms.withdrawalMember((String)loginUser.get("ID"));
+		session.removeAttribute("loginUser");
+		model.addAttribute("message","아이디가 정지 되었습니다. 복구요청은 고객센터에 전화주세요");
+		return "member/memberLogin";
+	}
+	
+	
+	
 }
