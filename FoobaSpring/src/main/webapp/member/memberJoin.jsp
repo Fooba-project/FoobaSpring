@@ -15,7 +15,7 @@
                 <div class="join_list">
                     <input type="password" class="input_text" name="PWD" 
                     id="userpwd"
-                    placeholder="비밀번호" value="${vo.PWD} "/>
+                    placeholder="비밀번호" value="${vo.PWD}"/>
                 </div>
 
                 <div class="join_list">

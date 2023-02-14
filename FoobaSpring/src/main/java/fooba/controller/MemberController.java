@@ -198,8 +198,7 @@ public class MemberController {
 			@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model ) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
 		
-		if (result.getFieldError("ID")!=null ) 	model.addAttribute("message", "아이디를 입력하세요" );
-		else if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", "비밀번호를 입력하세요" );
+		if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", "비밀번호를 입력하세요" );
 		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message", "이름을 입력하세요" );
 		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", "전화번호를 입력하세요" );
 		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", "이메일을 입력하세요" );
@@ -207,15 +206,24 @@ public class MemberController {
 			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
 		else {
 			HashMap<String, Object> prm = new HashMap<String, Object>();		
-			prm.put("mvo", mvo);
-			prm.put("ref_cursor",null);
 			
+			prm.put("mvo", mvo);
+			mvo.setID( mvo.getID().replace("id : ", "").replace(" (수정 불가)", "") );
+			mvo.setNAME( mvo.getNAME().replace("이름 : ", "").replace(" (수정 불가)", "") );
+			
+			prm.put("ref_cursor",null);
+			System.out.println("ADDRESS1"+ mvo.getADDRESS1());
 			ms.memberUpdate( prm);
-			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			
+			ArrayList<HashMap<String,Object>> list 
+			= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			System.out.println(list.size()+"list.size()");
+			if(list.size()!=0) {
 			HashMap<String,Object> loginUser = list.get(0);
 			session.setAttribute("loginUser", loginUser);
 			return "member/memberUpdate";
-		}
+			}
+			}
 		return "member/memberUpdate";
 	}
 	
