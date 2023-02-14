@@ -84,29 +84,34 @@ BEGIN
 end;
 
 
-create or replace procedure getRes(
-    p_rid in restaurant.rid%type,
-    p_cur out sys_refcursor
+
+
+
+
+CREATE OR REPLACE PROCEDURE restRes(
+    p_rseq IN foodmenu.rseq%type
 )
-is
-    
-begin
-    open p_cur for
-        select * from restaurant where rid=p_rid;
+IS
+
+BEGIN
+            update restaurant set ryn=3 where rseq = p_rseq;
+            commit;
 end;
 
 
-create or replace procedure starAvg(
-    p_rseq in number,
-    p_cur out sys_refcursor
+CREATE OR REPLACE PROCEDURE returnRes(
+    p_rseq IN foodmenu.rseq%type,
+    p_ryn IN restaurant.ryn%type
 )
-is
-begin
-    open p_cur for
-        select*from review where rseq=p_rseq;
+IS
+
+BEGIN
+            update restaurant set ryn=p_ryn where rseq = p_rseq;
+            commit;
 end;
 
-select*from foodmenu;
+
+
 
 
 

@@ -4,13 +4,13 @@
 		<form  method="post" name="frmm">
 			
       		<c:if test="${loginRes.RYN==1}">
-      			${loginRes.RNAME}&nbsp;&nbsp;<input type="button" value="휴업신청" name="ryn" onClick="update_ryn('${loginRes.rseq}');" style="border:none; background-color:rgb(248, 246, 138); width:80px; height:30px; border-radius: 5px; box-shadow: 1px 1px rgb(185, 181, 181); cursor:pointer;">
+      			${loginRes.RNAME}&nbsp;&nbsp;<input type="button" value="휴업신청" name="RYN" onClick="update_ryn('${loginRes.RSEQ}');" style="border:none; background-color:rgb(248, 246, 138); width:80px; height:30px; border-radius: 5px; box-shadow: 1px 1px rgb(185, 181, 181); cursor:pointer;">
       		</c:if>
       		<c:if test="${loginRes.RYN==3}">
-      			${loginRes.RNAME}&nbsp;&nbsp;<input type="button" value="영업개시" name="ryn" onClick="return_ryn('${loginRes.rseq}');"  style="border:none; background-color:rgb(248, 246, 138); width:80px; height:30px; border-radius: 5px; box-shadow: 1px 1px rgb(185, 181, 181); cursor:pointer;">
+      			${loginRes.RNAME}&nbsp;&nbsp;<input type="button" value="영업개시" name="RYN" onClick="update_ryn('${loginRes.RSEQ}');"  style="border:none; background-color:rgb(248, 246, 138); width:80px; height:30px; border-radius: 5px; box-shadow: 1px 1px rgb(185, 181, 181); cursor:pointer;">
       		</c:if>
       		<c:if test="${loginRes.RYN==2}">
-      			${loginRes.RNAME}&nbsp;&nbsp;<input type="button" value="영업정지중" name="ryn" style="border:none; background-color:rgb(248, 246, 138); width:80px; height:30px; border-radius: 5px; box-shadow: 1px 1px rgb(185, 181, 181);">
+      			${loginRes.RNAME}&nbsp;&nbsp;<input type="button" value="영업정지중" name="RYN" style="border:none; background-color:rgb(248, 246, 138); width:80px; height:30px; border-radius: 5px; box-shadow: 1px 1px rgb(185, 181, 181);">
       		</c:if>
       	</form>
 	</div>

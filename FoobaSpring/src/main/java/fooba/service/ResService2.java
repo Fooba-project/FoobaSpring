@@ -41,10 +41,6 @@ public class ResService2 {
 		rdao.restRes(paramMap);
 	}
 
-	public void returnRes(HashMap<String, Object> paramMap) {
-		rdao.returnRes(paramMap);
-		
-	}
 
 	
 	

@@ -23,6 +23,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import fooba.dto.FoodmenuVO;
+import fooba.service.ResService;
 import fooba.service.ResService2;
 
 @Controller
@@ -73,16 +74,16 @@ public class ResController2 {
 		if(procedure.equals("update")) {
 			if(vo.getFIMAGE()==null||vo.getFIMAGE().equals("")) vo.setFIMAGE(OLDIMAGE);
 			url = "restaurant/res_foodmenuUpdateForm";
-		}else {if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","FIMAGE");}
-		if(result.getFieldError("FNAME")!=null) model.addAttribute("messagex","FNAME");
-		else if(result.getFieldError("FPRICE")!=null) model.addAttribute("messagex","FPRICE");
-		else if(result.getFieldError("FCONTENT")!=null) model.addAttribute("messagex","FCONTENT");
-		else if(result.getFieldError("FSIDE1")!=null) model.addAttribute("messagex","FSIDE1");
-		else if(result.getFieldError("FSIDEPRICE1")!=null) model.addAttribute("messagex","FSIDEPRICE1");
-		else if(result.getFieldError("FSIDE2")!=null) model.addAttribute("messagex","FSIDE2");
-		else if(result.getFieldError("FSIDEPRICE2")!=null) model.addAttribute("messagex","FSIDEPRICE2");
-		else if(result.getFieldError("FSIDE3")!=null) model.addAttribute("messagex","FSIDE3");
-		else if(result.getFieldError("FSIDEPRICE3")!=null) model.addAttribute("messagex","FSIDEPRICE3");
+		}else {if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","내용을 입력하세요.");}
+		if(result.getFieldError("FNAME")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FPRICE")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FCONTENT")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDE1")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDEPRICE1")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDE2")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDEPRICE2")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDE3")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDEPRICE3")!=null) model.addAttribute("messagex","내용을 입력하세요.");
 		else {
 			url = "redirect:/res_foodmenu";
 			if(procedure.equals("update")) rs.updateFoodMenu(vo);
@@ -140,29 +141,29 @@ public class ResController2 {
 		return "restaurant/res_qnalist_footer";
 	}
 	
-	@RequestMapping("/res_restaurantRest") // 휴업으로 변경
-		public String res_restaurantRest(HttpServletRequest request, HttpSession session, Model model) {
+	@Autowired
+	ResService rs1;
+	
+	@RequestMapping("/res_restaurantRestReturn") // 휴업으로 변경
+		public String res_restaurantRestReturn(HttpServletRequest request, HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();
 		paramMap.put("RSEQ", loginRes.get("RSEQ"));
-		
+		int ryn=0;
+		if(Integer.parseInt(loginRes.get("RYN")+"")==1) ryn=3;
+		else if(Integer.parseInt(loginRes.get("RYN")+"")==3) ryn=1;
+		paramMap.put("RYN", ryn);
 		rs.restRes( paramMap );
-		return"restaurant/res_foodmenu";
-	}
-	
-	@RequestMapping("/res_restaurantReturn") // 휴업으로 변경
-		public String res_restaurantReturn(HttpServletRequest request, HttpSession session, Model model) {
-		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
-		HashMap<String , Object> paramMap = new HashMap<String , Object>();
-		paramMap.put("RSEQ", loginRes.get("RSEQ"));
 		
-		rs.returnRes( paramMap );
-		return"restaurant/res_foodmenu";
-}
-	
-	
-	
+		session.removeAttribute("loginRes");
+		paramMap.put("RID",loginRes.get("RID"));
+		paramMap.put("ref_cursor",null);
+		rs1.getRes(paramMap);
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+		session.setAttribute("loginRes",list.get(0));		
+		return"redirect:/res_foodmenu";
+	}	
 	
 }

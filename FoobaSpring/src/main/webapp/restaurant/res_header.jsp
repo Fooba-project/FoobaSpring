@@ -117,14 +117,14 @@ function deletefm(fseq){
 }
 
 function update_ryn( rseq ){
-	document.frmm.action = "fooba.do?command=res_restaurantRest&rseq="+rseq;
+	document.frmm.action = "res_restaurantRestReturn?RSEQ="+rseq;
 	document.frmm.submit();
 } 
 
-function return_ryn( rseq ){
-	document.frmm.action = "fooba.do?command=res_restaurantReturn&rseq="+rseq;
+/* function return_ryn( rseq ){
+	document.frmm.action = "res_restaurantReturn?RSEQ="+rseq;
 	document.frmm.submit();
-} 
+}  */
 
 function autoHypenPhone(str){
     str = str.replace(/[^0-9]/g, '');
