@@ -26,7 +26,7 @@ function qnaDelete(qseq){
 		<input type="hidden" value="${vo.SUBJECT}" name="SUBJECT">
 		<input type="hidden" value="${vo.CONTENT}" name="CONTENT">
 		<div id="join_btn" style="margin: auto; width: 470px;">
-			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="수정" onclick="location.href='adminDetail?procedure=qnaUp&seq=${vo.QSEQ}'">
+			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="수정" onclick="location.href='adminDetail?procedure=qnaUp&SEQ=${vo.QSEQ}'">
 			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="목록" onclick="location.href='adminList?table=q'">
 			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="submit" value="삭제" onclick="return qnaDelete()">
 		</div>

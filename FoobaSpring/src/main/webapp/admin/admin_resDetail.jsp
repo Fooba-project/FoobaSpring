@@ -7,6 +7,9 @@
     <div style="border-top: 2px solid rgb(23,55,94); margin-top:15px;"></div>
     <form name="res_join_send_form" id="res_join_send_form" method="post">
         <table class="member_join_table">
+        	<div class="join_list">
+                <input type="text" class="input_text1" value="레스토랑 이름 : ${vo.RNAME}" readonly/>            
+            </div>
             <div class="join_list">
                 <input type="text" class="input_text1" value="아이디 : ${vo.RID}" readonly/>            
             </div> 

@@ -8,7 +8,7 @@
 	<resultMap id="adminMap" type="java.util.HashMap"></resultMap>
 	
 	<select id="getAdmin" statementType="CALLABLE" >
-		{CALL getAdmin( #{adminId }, #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}) }
+		{CALL getAdmin( #{ADMINID }, #{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap}) }
 	</select>
 	
 	<!-- res, member, order, qna, banner 통합 -->
@@ -24,18 +24,18 @@
 	
 	<!-- qnaDetail, resDetail 통합 -->
 	<select id="adminDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL adminDetail (#{procedure}, #{seq},
+		{ CALL adminDetail (#{procedure}, #{SEQ},
 		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
 	</select>
 
 	<!-- accept, reject 통합 -->
 	<update id="admin_resOx" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL admin_resOx (#{ox}, #{rseq} )}
+		{ CALL admin_resOx (#{ox}, #{RSEQ} )}
 	</update>
 	
 	<!-- left, right 통합 -->
 	<update id="admin_orderLR" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL admin_orderLR (#{result}, #{oseq} )}
+		{ CALL admin_orderLR (#{result}, #{OSEQ} )}
 	</update>
 	
 	<!-- insert, update, delete 통합 -->

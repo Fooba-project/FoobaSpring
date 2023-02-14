@@ -88,6 +88,7 @@ public class AdminController {
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		model.addAttribute("paging", (Paging)prm.get("paging"));
 		model.addAttribute("key", (String)prm.get("key"));
+		if(table.equals("b")) list.remove(0);
 		model.addAttribute("list", list);
 		if(table.equals("r")) return "admin/admin_reslist";
 		else if(table.equals("o")) return "admin/admin_orderlist";
@@ -98,24 +99,24 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin_resOx")
-	public String admin_restaurantOk(	HttpSession session, @RequestParam("ox") int ox, @RequestParam("rseq") int rseq) {
+	public String admin_restaurantOk(	HttpSession session, @RequestParam("ox") int ox, @RequestParam("RSEQ") int RSEQ) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("ox", ox);
-		prm.put("rseq", rseq);
+		prm.put("RSEQ", RSEQ);
 		as.admin_resOx(prm);
 		return "redirect:/adminList?table=r";
 	}
 	
 	
 	@RequestMapping("/admin_orderLR")
-	public String admin_orderLR(	HttpSession session, @RequestParam("result") int result, @RequestParam("oseq") int oseq) {
+	public String admin_orderLR(	HttpSession session, @RequestParam("result") int result, @RequestParam("OSEQ") int OSEQ) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("result", result);
-		prm.put("oseq", oseq);
+		prm.put("OSEQ", OSEQ);
 		as.admin_orderLR(prm);
 		return "redirect:/adminList?table=o";
 	}
@@ -143,7 +144,7 @@ public class AdminController {
 			prm.put("procedure", procedure);
 			prm.put("qvo", qvo);
 			as.adminQna(prm);
-			if(procedure.equals("update")) url = "redirect:/adminDetail?procedure=qna&seq="+qvo.getQSEQ();
+			if(procedure.equals("update")) url = "redirect:/adminDetail?procedure=qna&SEQ="+qvo.getQSEQ();
 			else url = "redirect:/adminList?table=q";
 		}
 		return url;
@@ -152,12 +153,12 @@ public class AdminController {
 	
 	@RequestMapping("/adminDetail")
 	public String adminDetail(HttpSession session, Model model,
-			@RequestParam("procedure") String procedure, @RequestParam("seq") int seq ) {
+			@RequestParam("procedure") String procedure, @RequestParam("SEQ") int SEQ ) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("procedure", procedure);
-		prm.put("seq", seq);
+		prm.put("SEQ", SEQ);
 		prm.put("ref_cursor", null);
 		as.adminDetail(prm);
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
@@ -168,7 +169,8 @@ public class AdminController {
 		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
 		else return "admin/admin_qnaDetail";
 	}
-	
+
+
 }
 	
 

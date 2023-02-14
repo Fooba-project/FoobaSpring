@@ -2,8 +2,8 @@
 <%@ include file="admin_header.jsp"%>
  
  <script type="text/javascript">
- function go_detail( rseq ){
-	document.frm.action =  "adminDetail?procedure=res&seq="+rseq;
+ function go_detail( RSEQ ){
+	document.frm.action =  "adminDetail?procedure=res&SEQ="+RSEQ;
 	document.frm.submit();
 }
  
@@ -16,7 +16,7 @@
 		document.frm.submit();
 } 
 	function res_ox( ox, rseq ){
-		document.frm.action = "admin_resOx?ox="+ox+"&rseq="+rseq;
+		document.frm.action = "admin_resOx?ox="+ox+"&RSEQ="+RSEQ;
 		document.frm.submit();
 }
 	
@@ -40,24 +40,24 @@
         </table><br>
         <table id="admin_list_table">
             <tr><th>번호</th><th>가게명</th><th>가입현황</th><th>승인현황</th></tr>       
-        <c:forEach items="${list}" var="RestaurantVO">
+        <c:forEach items="${list}" var="vo">
                 <tr>
-                    <td height="23" align="center">${RestaurantVO.RSEQ}</td>
+                    <td height="23" align="center">${vo.RSEQ}</td>
                     <td style="text-align:left; padding-left:40px;">
-                        <a style="text-decoration-line: none;"href="#" onClick="go_detail('${RestaurantVO.RSEQ}');">${RestaurantVO.RNAME}</a>
+                        <a style="text-decoration-line: none;"href="#" onClick="go_detail('${vo.RSEQ}');">${vo.RNAME}</a>
                     </td>
                     <td style=text-align:center;>
                         <c:choose>
-                              <c:when test='${RestaurantVO.RYN==1}'>운영중
-   								 <td style="text-align:center;"><input type="button" value="거부" onClick="res_ox(2,'${RestaurantVO.RSEQ}');"></td>
+                              <c:when test='${vo.RYN==1}'>운영중
+   								 <td style="text-align:center;"><input type="button" value="거부" onClick="res_ox(2,'${vo.RSEQ}');"></td>
                               </c:when>
-                              <c:when test='${RestaurantVO.RYN==0}'>미승인           
-	                              <td style="text-align:center;"><input type="button" value="승인" onClick="res_ox(1,'${RestaurantVO.RSEQ}')">
-	                              <input type="button" value="거부" onClick="res_ox(2,'${RestaurantVO.RSEQ}')"></td>
+                              <c:when test='${vo.RYN==0}'>미승인           
+	                              <td style="text-align:center;"><input type="button" value="승인" onClick="res_ox(1,'${vo.RSEQ}')">
+	                              <input type="button" value="거부" onClick="res_ox(2,'${vo.RSEQ}')"></td>
 	                   		  </c:when>
-	                   		  <c:when test='${RestaurantVO.RYN==3}'>휴업중
+	                   		  <c:when test='${vo.RYN==3}'>휴업중
 	                   		  </c:when>
-                              <c:otherwise>승인거부<td style="text-align:center;"><input type="button" value="복구" onClick="res_ox(1,'${RestaurantVO.RSEQ}')"></td></c:otherwise>
+                              <c:otherwise>승인거부<td style="text-align:center;"><input type="button" value="복구" onClick="res_ox(1,'${vo.RSEQ}')"></td></c:otherwise>
                         </c:choose>
                     </td> 
                 </tr>

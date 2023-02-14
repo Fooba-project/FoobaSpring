@@ -50,6 +50,7 @@ public class AdminService {
 		
 		Paging paging = new Paging();
 		paging.setPage(page);
+		if ((prm.get("table")+"").equals("b")) paging.setDisplayRow(5);
 		prm.put("cnt", 0);
 		prm.put("key", key);
 		adao.adminGetAllCount(prm);

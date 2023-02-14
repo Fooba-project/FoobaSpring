@@ -16,13 +16,13 @@
 		</table><br>
 		<table id="admin_list_table">
 			<tr><th>회원 ID</th><th>회원 닉네임</th><th>전화번호</th><th>이메일</th><th>가입날짜</th></tr>       
-			<c:forEach items="${list}" var="MemberVO">
+			<c:forEach items="${list}" var="vo">
 				<tr>
-					<td style="text-align:center;">${MemberVO.ID}</td>
-					<td style="text-align:center;">${MemberVO.NICK}</td>
-					<td style="text-align:center;">${MemberVO.PHONE}</td>
-					<td style="text-align:center;">${MemberVO.EMAIL}</td>                    
-					<td style=text-align:center;><fmt:formatDate value="${MemberVO.INDATE}"/></td> 
+					<td style="text-align:center;">${vo.ID}</td>
+					<td style="text-align:center;">${vo.NICK}</td>
+					<td style="text-align:center;">${vo.PHONE}</td>
+					<td style="text-align:center;">${vo.EMAIL}</td>                    
+					<td style=text-align:center;><fmt:formatDate value="${vo.INDATE}"/></td> 
 				</tr>
 			</c:forEach>
 		</table>

@@ -2,8 +2,8 @@
 <%@ include file="admin_header.jsp"%>
 
 <script type="text/javascript">
-function go_detail( qseq ){
-	document.frm.action = "adminDetail?procedure=qna&seq="+qseq;
+function go_detail( QSEQ ){
+	document.frm.action = "adminDetail?procedure=qna&SEQ="+QSEQ;
 	document.frm.submit();
 }
 
@@ -33,11 +33,11 @@ function go_total(){
 		</table><br>
 		<table id="admin_list_table">
 			<tr><th>질문번호</th><th>제목</th></tr>
-			<c:forEach items="${list}" var="QnaVO">
+			<c:forEach items="${list}" var="vo">
 				<tr>
-					<td style="text-align:center;">${QnaVO.QSEQ}</td>
+					<td style="text-align:center;">${vo.QSEQ}</td>
 					<td style="text-align:left; padding-left:20px;">
-					<a style="text-decoration-line: none;"href="#" onClick="go_detail('${QnaVO.QSEQ}');">${QnaVO.SUBJECT}</a>                
+					<a style="text-decoration-line: none;"href="#" onClick="go_detail('${vo.QSEQ}');">${vo.SUBJECT}</a>                
 				</tr>
 			</c:forEach>
 		</table>

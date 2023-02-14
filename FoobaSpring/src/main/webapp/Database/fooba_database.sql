@@ -1446,3 +1446,8 @@ values(order_detail_seq.nextVal,2,119,2,1,0,1);
 
 insert into review(review_seq,id,rseq,star,content,oseq,nick)
 values(review_seq_seq.nextVal,'abc1234',48,5,'왈왈왈왈!!',1,'맛있으면 짖는 개');
+
+insert into bannerf (border, bimage, bname) values (0, '0', '영');
+insert into bannerf (border, bimage, bname) values (1, 'background1.jpg', '꼬치구이');
+insert into bannerf (border, bimage, bname) values (2, 'background2.jpg', '고기야채볶음');
+insert into bannerf (border, bimage, bname) values (3, 'background3.jpg', '샐러드');

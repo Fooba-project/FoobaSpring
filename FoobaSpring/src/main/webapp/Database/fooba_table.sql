@@ -113,6 +113,7 @@ CREATE TABLE qna
 );
 
 
+
 CREATE TABLE restaurant
 (
 	rseq number(5) NOT NULL,
@@ -234,3 +235,12 @@ where a.oseq=b.oseq and a.id = c.id and b.fseq=d.fseq and d.rseq=e.rseq;
       b.fname, b.fimage
    from restaurant a, foodmenu b
    where a.rseq=b.rseq;
+   
+drop table bannerf;
+CREATE TABLE bannerf
+(
+	border number(5) primary key,
+	bimage varchar2(20) NOT NULL,
+	bname varchar2(20) NOT NULL,
+	indate date DEFAULT sysdate
+);
