@@ -28,7 +28,7 @@
 	<select id="memberFindId" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 				CALL memberFindId(
-		#{NAME},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+		#{NAME},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
 									)
 		}
 	</select>
@@ -36,14 +36,14 @@
 	<select id="memberFindPw" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{
 				CALL memberFindPw(
-		#{ID},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+		#{ID},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
 									)
 		}
 	</select>
 	
 	<select id="memberQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL memberQnaList (
-		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } 
+		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
 		 )}
 	</select>
 	

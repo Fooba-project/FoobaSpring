@@ -170,14 +170,15 @@ public class MemberController {
 	@RequestMapping("/memberQnalist")
 	public String memberQnalist(Model model) {
 		
-		HashMap<String, Object> prm = new HashMap<>();
-		prm.put("ref_cursor", null);
+		HashMap<String, Object> prm = new HashMap<String, Object>();
 		
+		prm.put("ref_cursor", null);
 		ms.memberQnaList(prm);
-		ArrayList<HashMap<String,Object>> list = 
+		
+		ArrayList<HashMap<String,Object>> list = 		
 				(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		
-		model.addAttribute("list", list);
+		model.addAttribute("qnaList", list);
 		return"member/memberQnalist";
 	}
 }
