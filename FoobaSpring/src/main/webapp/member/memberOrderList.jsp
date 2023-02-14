@@ -22,19 +22,19 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
                     <tr>
                         <td style="width:20%">
                             <div id="memberOrderListimg">
-                                <a href="restaurantDetail?rseq=${ovo.rseq }"><img src="images/title/${ovo.rimage }" width="80" height="80"></a>
+                                <a href="restaurantDetail?rseq=${ovo.RSEQ }"><img src="images/title/${ovo.RIMAGE}" width="80" height="80"></a>
                             </div>
-                            <div>${ovo.rname }</div>
+                            <div>${ovo.ENAME }</div>
                         </td>
                         <td style="width:60%">
                             <div id="memberOrderListIntime" style="text-align: left; font-size: 70%; margin: 10px;">
-                                <fmt:formatDate value="${ovo.indate }" type="date"/>
+                                <fmt:formatDate value="${ovo.INDATE}" type="date"/>
                             </div>
                             <div id="memberOrderListMenu" style="text-align: left; margin: 10px;">
-                                ${ovo.oname }
+                                ${ovo.ONAME}
                             </div>
                             <div id="memberOrderListPrice" style="text-align: left; margin: 10px;">
-                                 <fmt:formatNumber value="${ovo.totalprice }" pattern="#,###"/>원
+                                 <fmt:formatNumber value="${ovo.TOTALPRICE}" pattern="#,###"/>원
                             </div>
                         </td>
                         <td style="width:30%">
@@ -55,7 +55,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 		                    	</c:choose>	
                             </div>
                             <div id="memberOrderListDetail" margin="10" >
-                                <input type="button" value="주문상세" id="memberOrderDetailButton" onclick="location.href='memberOrderDetail?oseq=${ovo.oseq}'"/>
+                                <input type="button" value="주문상세" id="memberOrderDetailButton" onclick="location.href='memberOrderDetail?oseq=${ovo.OSEQ}'"/>
                             </div>            
                         </td>
                     </tr>

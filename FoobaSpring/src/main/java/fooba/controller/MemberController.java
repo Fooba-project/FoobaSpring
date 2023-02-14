@@ -181,4 +181,7 @@ public class MemberController {
 		model.addAttribute("qnaList", list);
 		return"member/memberQnalist";
 	}
+	
+	
+	
 }
