@@ -2,6 +2,7 @@ package fooba.service;
 
 import java.util.HashMap;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,13 @@ public class MemberService {
 		mdao.memberQnaList(prm);
 		
 	}
+
+
+	public void memberUpdate(HashMap<String, Object> prm) {
+		mdao.memberUpdate(prm);
+		
+	}
+
 		
 	}
 

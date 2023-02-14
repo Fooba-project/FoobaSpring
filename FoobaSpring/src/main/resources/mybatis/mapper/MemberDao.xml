@@ -47,5 +47,15 @@
 		 )}
 	</select>
 	
+	<update id="memberUpdate" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{ 
+			CALL memberUpdate( 
+				#{mvo.ID}, #{mvo.PWD}, #{mvo.NAME}, #{mvo.EMAIL}, #{mvo.PHONE}, 
+				#{mvo.ZIP_NUM},#{mvo.ADDRESS1}, #{mvo.ADDRESS2}, #{mvo.ADDRESS3}, #{mvo.NICK},
+				#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
+			) 
+		}
+	</update>
+	
 </mapper>
 
