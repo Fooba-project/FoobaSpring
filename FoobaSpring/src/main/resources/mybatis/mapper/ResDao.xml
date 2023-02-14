@@ -40,6 +40,14 @@
 			#{RIMAGE}
 		)}
 	</update>
+	
+	<delete id="withdrawal" statementType="CALLABLE" >
+		{CALL withdrawal(
+			#{PARAM1}
+		)}
+	</delete>
+	
+	
 </mapper>
 
 

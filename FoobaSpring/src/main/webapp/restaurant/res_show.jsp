@@ -34,6 +34,12 @@
                         <hr>
                     </div>
                     
+                    
+                    <input type="button" onclick="res_withdrawal()" value="회원 탈퇴" 
+                    style="background-color: rgb(255,204,0);border :1px solid lightyellow;
+                    line-height: 50px; text-align: center; font-weight: bold;font-size: 110%;
+                    height:50px; width:100px; border-radius:6px; cursor:pointer;" >
+                    
                 </div>
                 
                

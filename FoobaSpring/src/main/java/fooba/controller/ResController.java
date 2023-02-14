@@ -83,8 +83,10 @@ public class ResController {
 			HashMap<String,Object>Rvo=list.get(0);
 			if(!Rvo.get("RPWD").equals(vo.getRPWD()))
 				model.addAttribute("message","비번이 틀립니다.");
+			else if(Integer.parseInt(Rvo.get("RYN")+"")==4)
+				model.addAttribute("message","정지계정입니다 관리자에게 문의하세요!");
 			else if(Integer.parseInt(Rvo.get("RYN")+"")==0)
-				model.addAttribute("message","휴면계정입니다 관리자에게 문의하세요!");
+				model.addAttribute("message","등급심사중입니다. 조금만 기다려주세요.");
 			else if(Rvo.get("RPWD").equals(vo.getRPWD())) {
 				session.setAttribute("loginRes",Rvo);
 				url="redirect:/res_foodmenu";
@@ -270,6 +272,25 @@ public class ResController {
 		return "restaurant/res_updateForm";
 	}
 	
+	@RequestMapping(value="fileup2",method=RequestMethod.POST)
+	@ResponseBody	
+	public HashMap<String , Object>fileup2(Model model,HttpServletRequest request){
+		
+		String path=context.getRealPath("images/title/");
+		HashMap<String,Object>result=new HashMap<String,Object>();
+		
+		try {
+			MultipartRequest multi =new MultipartRequest(
+					request,path,5*1024*1024,"UTF-8",new DefaultFileRenamePolicy()
+			);
+			result.put("STATUS",1);
+			result.put("FILENAME", multi.getFilesystemName("fileimage"));
+		} catch (IOException e) {	e.printStackTrace();
+		}
+		
+		return result;
+	}
+	
 	@RequestMapping(value="/res_update",method=RequestMethod.POST)
 	public String res_update(HttpSession session,@ModelAttribute("loginRes")@Valid RestaurantVO vo,
 			BindingResult result,Model model ,@RequestParam("oldImage")String oldImage) {
@@ -311,6 +332,16 @@ public class ResController {
 		}
 		return "restaurant/res_updateForm";
 	}
+	@RequestMapping("/res_withdrawal")
+	public String res_withdrawal(HttpSession session,Model model) {
+		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
+		rs.withdrawal((String)loginRes.get("RID"));
+		session.removeAttribute("loginRes");
+		model.addAttribute("message","아이디가 정지 되었습니다. 복구요청은 고객센터에 전화주세요");
+		return "restaurant/res_login";
+	}
+	
 		
 }
 

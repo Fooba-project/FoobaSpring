@@ -43,6 +43,32 @@ $(function(){
 	});
 });
 
+$(function(){
+	$('#myButton2').click( function(){
+		var formselect = $("#fileupForm2")[0];   
+		var formdata = new FormData(formselect); 
+		$.ajax({    
+			url:"<%=request.getContextPath() %>/fileup2",
+			type:"POST",
+			enctype:"multipart/form-data",
+			async: false,
+			data: formdata,
+	    	timeout: 10000,
+	    	contentType : false,
+	        processData : false,
+	        success : function(data){
+	            if(data.STATUS == 1){  	
+	            	$("#filename").append("<div>"+data.FILENAME+"</div>");
+	            	$("#fileimage").val(data.FILENAME);
+	            	$("#filename").html("<img src='images/title/"+data.FILENAME+"' height='150'/>");
+	            	$('#oldImg').hide();
+	            }
+	        },
+	        error: function() {	alert("업로드 실패");}
+		});
+	});
+});
+
 
 function resCheck(){
 
@@ -120,6 +146,15 @@ function update_ryn( rseq ){
 	document.frmm.action = "res_restaurantRestReturn?RSEQ="+rseq;
 	document.frmm.submit();
 } 
+
+function res_withdrawal(){
+	if (confirm("정말 탈퇴하시겠습니까??") == true){
+		location.href='res_withdrawal';
+	}else{
+		return false;
+	}
+
+}
 
 /* function return_ryn( rseq ){
 	document.frmm.action = "res_restaurantReturn?RSEQ="+rseq;

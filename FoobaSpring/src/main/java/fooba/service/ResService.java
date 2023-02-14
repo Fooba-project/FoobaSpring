@@ -56,6 +56,11 @@ public class ResService {
 	public void updateRes(RestaurantVO vo) {
 		rdao.updateRes(vo);
 		
+	}
+
+	public void withdrawal(String RID) {
+		rdao.withdrawal(RID);
+		
 	} 
 	
 }

@@ -72,8 +72,8 @@
 				</form>
 				
 				<div style="position:absolute; bottom:-270px; left:10px;">
-					<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
-								&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
+					<form name="fromm" id="fileupForm2" method="post" enctype="multipart/form-data">
+								&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton2" value="추가">
 					</form>
 				</div>
             </div>            

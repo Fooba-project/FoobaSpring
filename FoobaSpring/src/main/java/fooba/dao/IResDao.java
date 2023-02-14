@@ -19,4 +19,6 @@ public interface IResDao {
 
 	void updateRes(RestaurantVO vo);
 
+	void withdrawal(String RID);
+
 }
