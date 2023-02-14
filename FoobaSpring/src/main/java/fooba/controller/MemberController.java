@@ -210,14 +210,10 @@ public class MemberController {
 			prm.put("mvo", mvo);
 			mvo.setID( mvo.getID().replace("id : ", "").replace(" (수정 불가)", "") );
 			mvo.setNAME( mvo.getNAME().replace("이름 : ", "").replace(" (수정 불가)", "") );
-			
 			prm.put("ref_cursor",null);
-			System.out.println("ADDRESS1"+ mvo.getADDRESS1());
 			ms.memberUpdate( prm);
-			
 			ArrayList<HashMap<String,Object>> list 
 			= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-			System.out.println(list.size()+"list.size()");
 			if(list.size()!=0) {
 			HashMap<String,Object> loginUser = list.get(0);
 			session.setAttribute("loginUser", loginUser);

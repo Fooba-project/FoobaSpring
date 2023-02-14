@@ -253,7 +253,7 @@ function go_search(HASH){
  function withdrawalMember(){
  	var ok=confirm("정말 탈퇴하겠습니까?");
  	if(ok){
-		location.href="memberWithdrawal";
+		location.href="withdrawalMember";
 	}
 }
 
