@@ -69,7 +69,7 @@ BEGIN
         select*from foodmenu where fseq=p_fseq;
 END;
 
-CREATE OR REPLACE PROCEDURE insertCart(
+CREATE OR REPLACE PROCEDURE insertCartFooba(
     
     p_id  IN cart.id%type,
     p_fseq IN cart.fseq%type,
@@ -87,6 +87,15 @@ BEGIN
     insert into cart(cseq,id,fseq,sideyn1,sideyn2,sideyn3,quantity,cprice,cfname,rseq)
 	values(cart_seq.nextVal,p_id,p_fseq,p_sideyn1,p_sideyn2,p_sideyn3,p_quantity,p_cprice,p_cfname,p_rseq);
     commit;
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE deletecartFooba( p_cseq IN cart.cseq%TYPE , p_rseq IN cart.rseq%TYPE )
+IS
+BEGIN
+            SELECT*FROM cart WHERE cseq = p_cseq;
+            DELETE FROM cart WHERE cseq = p_cseq;    
 END;
 
 select*from cart;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import fooba.dao.IMemberDao2;
 import fooba.dto.CartVO;
+import fooba.dto.MemberVO;
 
 @Service
 public class MemberService2 {
@@ -108,6 +109,16 @@ public class MemberService2 {
 		
 	}
 
+	public void deletecart(HashMap<String, Object> prm) {
+		mdao.deletecart(prm);		
+	}
+
+	public void CartList(HashMap<String, Object>prm) {
+		mdao.CartList(prm);
+		
+	}
+
+	
 
 	
 }

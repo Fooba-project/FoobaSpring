@@ -6,8 +6,9 @@
 </style>
 <form name="member_join_send_form" id="member_join_send_form" method="post" >
 <input type="hidden" value="order" name="command">
-<input type="hidden" value="${rseq }" name="rseq">
-<input type="hidden" value="${rtip }" id="rtip">
+<input type="hidden" value="${RSEQ }" name="RSEQ">
+<input type="hidden" value="${RTIP }" id="RTIP">
+
 <div id="realjenche2">
         <div id="jenche2">
             <div id="gumae">구매하기</div>
@@ -18,22 +19,22 @@
             <div id="tul2">
                 <div id="juso1">
                     <a class="grayy2">우편번호</a>
-                    &nbsp; ${mvo.zip_num }<br>
+                    &nbsp; ${loginUser.ZIP_NUM }<br>
                     <a class="grayy2">주소</a>
-                    &nbsp;${mvo.address1 }<br>
+                    &nbsp;${loginUser.ADDRESS1 }<br>
                     <a class="grayy2">상세주소</a>
-                    &nbsp;${mvo.address2 }
+                    &nbsp;${loginUser.ADDRESS2 }
 
                     <br>
-                    <a class="grayy2">전화번호</a>&nbsp; ${mvo.phone }
+                    <a class="grayy2">전화번호</a>&nbsp; ${loginUser.PHONE }
     
                 </div>
                 <div id="juso2">
-                    <input type="text" class="gumaeinput_text" style="width: 490px;" name="userzip_num" placeholder="우편번호 : ${mvo.zip_num}" readonly/>
+                    <input type="text" class="gumaeinput_text" style="width: 490px;" name="userzip_num" placeholder="우편번호 : ${loginUser.ZIP_NUM}" readonly/>
                     <input type="button" id="oopyon" value="우편번호 검색" onclick="post_zip()"> 
-                    <input type="text" class="gumaeinput_text" name="useraddress1" placeholder="주소 : ${mvo.address1 }" readonly/>
-                    <input type="text" class="gumaeinput_text" name="useraddress2" placeholder="상세 주소 : ${mvo.address2 }"/>
-                    <input type="text" class="gumaeinput_text" name="phone" placeholder="전화번호 : ${mvo.phone }" onkeyup="chkPhoneCode(event)" maxlength="13" />
+                    <input type="text" class="gumaeinput_text" name="useraddress1" placeholder="주소 : ${loginUser.ADDRESS1 }" readonly/>
+                    <input type="text" class="gumaeinput_text" name="useraddress2" placeholder="상세 주소 : ${loginUser.ADDRESS2 }"/>
+                    <input type="text" class="gumaeinput_text" name="phone" placeholder="전화번호 : ${loginUser.PHONE }" onkeyup="chkPhoneCode(event)" maxlength="13" />
 
                 </div>    
             </div>
@@ -43,9 +44,9 @@
         <div id="xxxx">
         	<div class="toggle1">
 				&nbsp;배달/포장 &nbsp;
-				<input type="radio" id="toggle1-1" name="rideryn" value="0" checked onclick="baedal('${rtip}')" class="pointer">
+				<input type="radio" id="toggle1-1" name="rideryn" value="0" checked onclick="baedal('${RTIP}')" class="pointer">
 				<label for="toggle1-1">배달</label>&nbsp;&nbsp;
-				<input type="radio" id="toggle1-2" name="rideryn" value="1" onclick="pojang('${rtip}');" class="pointer">
+				<input type="radio" id="toggle1-2" name="rideryn" value="1" onclick="pojang('${RTIP}');" class="pointer">
 				<label for="toggle1-2">포장</label>
 			</div>
 		
@@ -69,11 +70,11 @@
 
         <div id="jangbagunitul2">
             <div id="jbtitle2">주문표</div>
-            <c:forEach items="${clist }" var="CartVO">
+            <c:forEach items="${ list }" var="CartVO">
             <div class="jbitem2" id="jb">
-                <a class="jbitemname">${CartVO.cfname} x ${CartVO.quantity }&nbsp;&nbsp;&nbsp;</a><a class="jbitemsub">${CartVO.sideyn1}&nbsp;&nbsp; ${CartVO.sideyn2} &nbsp;&nbsp;${CartVO.sideyn3}</a><br>
+                <a class="jbitemname">${CartVO.CFNAME} x ${CartVO.QUANTITY }&nbsp;&nbsp;&nbsp;</a><a class="jbitemsub">${CartVO.SIDEYN1}&nbsp;&nbsp; ${CartVO.SIDEYN2} &nbsp;&nbsp;${CartVO.SIDEYN3}</a><br>
                 <div class="jbitemprice">
-                   ${CartVO.cprice} 원&nbsp;
+                   ${CartVO.CPRICE} 원&nbsp;
                 </div>
             </div>
             </c:forEach>

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.apache.ibatis.annotations.Mapper;
 
 import fooba.dto.CartVO;
+import fooba.dto.MemberVO;
 
 @Mapper
 public interface IMemberDao2 {
@@ -26,6 +27,10 @@ public interface IMemberDao2 {
 	void getFoodDetail(HashMap<String, Object> prm);
 
 	void insertCart(CartVO cvo);
+
+	void deletecart(HashMap<String, Object> prm);
+
+	void CartList(HashMap<String, Object> prm);
 
 
 }

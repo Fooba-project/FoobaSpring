@@ -233,59 +233,54 @@
         
     </script>
   </head>
-  <c:if test="${jangresult=='1' }">
-  		<script type="text/javascript">
-  				opener.location.href='restaurantDetail?RSEQ='+${RSEQ};
-  		  		self.close();
-  		</script>
-  </c:if>
+  
+  
   <body>
-  	  	
     <form method="post" name="jangbaguni">
-    <input type="hidden" value="${cvo.RSEQ}" name="RSEQ">
-    <input type="hidden" value="${cvo.FSEQ}" name="FSEQ">
-    <input type="hidden" value="${loginUser.ID}" name="ID">
+    <input type="hidden" value="${vo.RSEQ}" name="RSEQ">
+    <input type="hidden" value="${vo.FSEQ}" name="FSEQ">
+    <input type="hidden" value="${loginUser.ID}" name="ID"> 
     
     <div class="popup">
       <div class="popupheader">메뉴상세</div>
       <div class="popupcontext">
         <img class="popupimgg"
-          src="images/foodmenu/${FoodmenuVO.FIMAGE}"
+          src="images/foodmenu/${vo.FIMAGE}"
         />
         <div id="contextsub">
-        	<input type="hidden" name="FNAME" value="${FoodmenuVO.FNAME }">
-          <h2 class="contextsub2">${FoodmenuVO.FNAME }</h2>
+        	<input type="hidden" name="CFNAME" value="${vo.FNAME }">
+          <h2 class="contextsub2">${vo.FNAME }</h2>
           <p>
-				${FoodmenuVO.FCONTENT }
+				${vo.FCONTENT }
           </p>
         </div>
         <div class="contextprice">
           <div class="contextprice1">&nbsp; 가격</div>
-          <div class="contextprice2">${FoodmenuVO.FPRICE}원 &nbsp;</div>
+          <div class="contextprice2">${vo.FPRICE}원 &nbsp;</div>
         </div>
         <div class="contextoption">
           <div class="optionnn">&nbsp; 옵션&nbsp;(추가선택 가능)</div>
-          <input type="hidden" value="${FoodmenuVO.FPRICE}" id="nomal" name="FPRICE"><!--value 음식가격 -->
+          <input type="hidden" value="${vo.FPRICE}" id="nomal" name="FPRICE"><!--value 음식가격 -->
           <div class="popupchecks">
-            <input type="checkbox" class="c" onclick="calc()" value="${FoodmenuVO.FSIDEPRICE1}" name="SIDEYN1"/>
-            <input type="hidden" value="${FoodmenuVO.FSIDE1 }" name="FSIDE1">
-            ${FoodmenuVO.FSIDE1 }
-              <div class="optionprice">+${FoodmenuVO.FSIDEPRICE1 }원 &nbsp;</div>
+            <input type="checkbox" class="c" onclick="calc()" value="${vo.FSIDEPRICE1}" name="SIDEYN1"/>
+            <input type="hidden" value="${vo.FSIDE1 }" name="FSIDE1">
+            ${vo.FSIDE1 }
+              <div class="optionprice">+${vo.FSIDEPRICE1 }원 &nbsp;</div>
           </div>
 
           <div class="popupchecks">
             
-            <input type="checkbox" class="c" onclick="calc()" value="${FoodmenuVO.FSIDEPRICE2}" name="SIDEYN2"/>
-            <input type="hidden" value="${FoodmenuVO.FSIDE2 }" name="FSIDE2">
-           ${FoodmenuVO.FSIDE2 }
-              <div class="optionprice">+${FoodmenuVO.FSIDEPRICE2 }원 &nbsp;</div>
+            <input type="checkbox" class="c" onclick="calc()" value="${vo.FSIDEPRICE2}" name="SIDEYN2"/>
+            <input type="hidden" value="${vo.FSIDE2 }" name="FSIDE2">
+           ${vo.FSIDE2 }
+              <div class="optionprice">+${vo.FSIDEPRICE2 }원 &nbsp;</div>
           </div>
 
           <div class="popupchecks">
-            <input class="c" type="checkbox"  onclick="calc()" value="${FoodmenuVO.FSIDEPRICE3 }" name="SIDEYN3"/>
-             <input type="hidden" value="${FoodmenuVO.FSIDE3 }" name="FSIDE3">
-            ${FoodmenuVO.FSIDE3 }
-              <div class="optionprice">+${FoodmenuVO.FSIDEPRICE3 }원 &nbsp;</div>
+            <input class="c" type="checkbox"  onclick="calc()" value="${vo.FSIDEPRICE3 }" name="SIDEYN3"/>
+             <input type="hidden" value="${vo.FSIDE3 }" name="FSIDE3">
+            ${vo.FSIDE3 }
+              <div class="optionprice">+${vo.FSIDEPRICE3 }원 &nbsp;</div>
           </div>
         </div>
 
@@ -309,14 +304,14 @@
 
         <div class="popuptotal">
           <div class="ptotal">&nbsp; 총 주문금액</div>
-          <input id="sumprice" value="${FoodmenuVO.FPRICE }" class="pwon" size="6" readonly name="totalprice">
+          <input id="sumprice" value="${vo.FPRICE }" class="pwon" size="6" readonly name="CPRICE">
           <a class="pwon" id="sumwon">원</a>
         </div>
       </div>
 
       <div class="popupbutton">
         <input type="button" id="plbutton" value="주문표에 추가"  onclick="closee()">
-
+			
       </div>
     </div>
     </form>

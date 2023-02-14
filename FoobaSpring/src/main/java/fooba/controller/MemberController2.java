@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fooba.dto.CartVO;
+import fooba.dto.FoodmenuVO;
 import fooba.dto.MemberVO;
 import fooba.service.MemberService2;
 import fooba.service.ResService;
@@ -119,16 +120,17 @@ public class MemberController2 {
 		 String url="member/memberMiniLogin";
 		 
 		 model.addAttribute("check", "1");
+		 model.addAttribute("FSEQ",FSEQ);
 		 
-		 if(result.getFieldError("USERID")!=null)
-	         model.addAttribute("message", result.getFieldError("USERID").getDefaultMessage());
-	      else if (result.getFieldError("USERPW")!=null)
-	         model.addAttribute("message", result.getFieldError("USERPW").getDefaultMessage());
+		 if(result.getFieldError("ID")!=null)
+	         model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+	      else if (result.getFieldError("PWD")!=null)
+	         model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 	      else {
 	         HashMap<String, Object> prm = new HashMap<String, Object>();
-	         prm.put("USERID", membervo.getID());
+	         prm.put("ID", membervo.getID());
 	         prm.put("ref_cursor", null);
-	         
+	         prm.put("FSEQ", FSEQ);
 	         ms.getMember(prm);
 	         
 	         ArrayList<HashMap<String,Object>> list 
@@ -138,12 +140,12 @@ public class MemberController2 {
 	            return "member/memberLogin";   
 	         }
 	         HashMap<String, Object> mvo = list.get(0);
-	         if(!mvo.get("USERPW").equals(membervo.getPWD()))
+	         if(!mvo.get("PWD").equals(membervo.getPWD()))
 	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (mvo.get("USERPW").equals(membervo.getPWD())) {
+	         else if (mvo.get("PWD").equals(membervo.getPWD())) {
 	            HttpSession session = request.getSession();
 	            session.setAttribute("loginUser", mvo);
-	            url = "redirect:/";
+	            url = "redirect:/menupopup?FSEQ="+FSEQ;
 	         }	   	 
 	      }
 		 return url;
@@ -247,7 +249,7 @@ public class MemberController2 {
 		 model.addAttribute("RestaurantVO",rvo);
 		 model.addAttribute("ReviewList",list2);
 		 
-		 return "main/menuDetail";
+		 return "main/restaurantDetail";
 	 }
 	
 	@RequestMapping("/menupopup")
@@ -263,25 +265,72 @@ public class MemberController2 {
 	=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
 	HashMap<String, Object>fvo=list.get(0);
 	
-	model.addAttribute("FoodmenuVO", fvo);
+	model.addAttribute("vo", fvo);
 		return "main/popupMenu";
 	}
 	
 	@RequestMapping("/jangbaguni")
-	public String jangbaguni(CartVO cvo, HttpSession session, Model model) {
+	public String jangbaguni(CartVO cvo, FoodmenuVO fvo, HttpSession session, Model model) {
 		 HashMap<String,Object> loginUser=
 				 (HashMap<String,Object>)session.getAttribute("loginUser");
 		if(loginUser==null) return "member/memberMiniLogin";
 		
 		if(cvo.getSIDEYN1() != null) cvo.setSIDEYN1(cvo.getFSIDE1());
+		else cvo.setSIDEYN1(" ");
 		if(cvo.getSIDEYN2() != null) cvo.setSIDEYN2(cvo.getFSIDE2());
-		if(cvo.getSIDEYN3() != null) cvo.setSIDEYN3(cvo.getFSIDE3());	
+		else cvo.setSIDEYN2(" ");
+		if(cvo.getSIDEYN3() != null) cvo.setSIDEYN3(cvo.getFSIDE3());
+		else cvo.setSIDEYN3(" ");
 		
 		ms.insertCart(cvo);
 		
-		model.addAttribute("jangresult", "1");
-		model.addAttribute("RSEQ", cvo.getRSEQ());
-		return "redirect:/menuDetail";
+
+		model.addAttribute("vo", cvo);
+		return "main/popupMenuClose";
+	}
+	
+	@RequestMapping("deleteCartmenu")
+	public String delete_cartmenu(HttpServletRequest request,HttpSession session,Model model,
+			@RequestParam("CSEQ")int CSEQ,@RequestParam("RSEQ")int RSEQ) {
+		HashMap<String,Object> loginUser=
+				 (HashMap<String,Object>)session.getAttribute("loginUser");
+		if(loginUser==null) return "member/memberLogin";
+		
+		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("CSEQ", CSEQ);
+		prm.put("RSEQ", RSEQ);
+		
+		ms.deletecart(prm);
+		
+		return "redirect:/restaurantDetail?RSEQ="+RSEQ;
+	}
+	
+	@RequestMapping("orderForm")
+	public String orderForm(HttpServletRequest request, MemberVO mvo, CartVO cvo, HttpSession session,Model model,
+	@RequestParam("RSEQ")int RSEQ, @RequestParam("carttotalprice")int carttotalprice, @RequestParam("RTIP")int RTIP, @RequestParam("ID")String ID) {
+		
+		HashMap<String,Object> loginUser=(HashMap<String,Object>) session.getAttribute("loginUser");
+		
+		if(mvo==null) return "member/memberLogin";
+		
+		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("RSEQ", RSEQ);
+		prm.put("ID",ID);
+		prm.put("ref_cursor", null);
+		
+		ms.CartList(prm);
+		
+		 ArrayList<HashMap<String,Object>> list 
+         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		 
+		 request.setAttribute("RTIP", RTIP);
+		 model.addAttribute("RSEQ", RSEQ);
+		 model.addAttribute("list", list);
+
+		 model.addAttribute("carttotalprice", carttotalprice);
+		 model.addAttribute("loginUser", loginUser);
+		 
+		 return "main/menuorder";
 	}
 	
 }
