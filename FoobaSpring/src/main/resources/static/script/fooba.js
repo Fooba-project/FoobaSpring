@@ -325,7 +325,7 @@ function jusochoice(){
 	if(document.getElementById("bdjs").value==1){
 		if(document.member_join_send_form.useraddress1.value.length==0){
 			alert("주소를 입력하세요.");
-			post_zip();
+			sample6_execDaumPostcode();
 			return false;
 		}else if(document.member_join_send_form.useraddress2.value.length==0){
 			alert("상세 주소를 입력하세요.");
@@ -340,4 +340,36 @@ function jusochoice(){
 	var ok=confirm("결제하시겠습니까?");
 	return ok;
 }
+
+ function sample6_execDaumPostcode() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		                var addr = ''; 
+		                var extraAddr = ''; 
+		                if (data.userSelectedType === 'R') {
+		                    addr = data.roadAddress;
+		                } else { 
+		                    addr = data.jibunAddress;
+		                }
+		                if(data.userSelectedType === 'R'){
+		                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                        extraAddr += data.bname;
+		                    }
+		                    if(data.buildingName !== '' && data.apartment === 'Y'){
+		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                    }
+		                    if(extraAddr !== ''){
+		                        extraAddr = ' (' + extraAddr + ')';
+		                    }
+		                    document.getElementById("sample6_extraAddress").value = extraAddr;
+		                
+		                } else {
+		                    document.getElementById("sample6_extraAddress").value = '';
+		                }
+		                document.getElementById('sample6_postcode').value = data.zonecode;
+		                document.getElementById("sample6_address").value = addr;
+		                document.getElementById("sample6_detailAddress").focus();
+		            }
+		        }).open();
+		    }
  

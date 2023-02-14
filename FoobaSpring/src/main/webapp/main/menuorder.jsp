@@ -31,7 +31,7 @@
                 </div>
                 <div id="juso2">
                     <input type="text" class="gumaeinput_text" style="width: 490px;" name="userzip_num" placeholder="우편번호 : ${loginUser.ZIP_NUM}" readonly/>
-                    <input type="button" id="oopyon" value="우편번호 검색" onclick="post_zip()"> 
+                    <input type="button" id="oopyon" value="우편번호 검색" onclick="sample6_execDaumPostcode()"> 
                     <input type="text" class="gumaeinput_text" name="useraddress1" placeholder="주소 : ${loginUser.ADDRESS1 }" readonly/>
                     <input type="text" class="gumaeinput_text" name="useraddress2" placeholder="상세 주소 : ${loginUser.ADDRESS2 }"/>
                     <input type="text" class="gumaeinput_text" name="phone" placeholder="전화번호 : ${loginUser.PHONE }" onkeyup="chkPhoneCode(event)" maxlength="13" />
@@ -86,5 +86,40 @@
         </div>
     </div>
 </form>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+			<script>
+		    function sample6_execDaumPostcode() {
+		        new daum.Postcode({
+		            oncomplete: function(data) {
+		                var addr = ''; 
+		                var extraAddr = ''; 
+		                if (data.userSelectedType === 'R') {
+		                    addr = data.roadAddress;
+		                } else { 
+		                    addr = data.jibunAddress;
+		                }
+		                if(data.userSelectedType === 'R'){
+		                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+		                        extraAddr += data.bname;
+		                    }
+		                    if(data.buildingName !== '' && data.apartment === 'Y'){
+		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+		                    }
+		                    if(extraAddr !== ''){
+		                        extraAddr = ' (' + extraAddr + ')';
+		                    }
+		                    document.getElementById("sample6_extraAddress").value = extraAddr;
+		                
+		                } else {
+		                    document.getElementById("sample6_extraAddress").value = '';
+		                }
+		                document.getElementById('sample6_postcode').value = data.zonecode;
+		                document.getElementById("sample6_address").value = addr;
+		                document.getElementById("sample6_detailAddress").focus();
+		            }
+		        }).open();
+		    }
+		</script>
 
 <%@ include file="../footer.jsp"%>
