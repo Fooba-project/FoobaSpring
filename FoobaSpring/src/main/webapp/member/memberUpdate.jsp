@@ -8,7 +8,7 @@
     <div class="member_join">
         <div class="member_join_title">회원정보수정</div>
         <div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
-        <form name="member_update_form" id="member_join_send_form" method="post">
+        <form name="member_update_form" id="member_join_send_form" method="post" action="memberUpdate">
             <table class="member_join_table">
                 <div class="join_list" >
                     <input type="text" class="input_text" name="ID" value="id : ${loginUser.ID} (수정 불가)" style="color:black" readonly/>
@@ -64,7 +64,7 @@
             </table>
             <br><br>
             <div id="join_btn">
-            <input class="join_btn" type="button" value="정보수정" class="submit" onclick="go_update();"> 
+            <input class="join_btn" type="submit" value="정보수정" class="submit" onclick="go_update();"> 
 			<input class="join_btn" type="reset" value="취소" class="cancel" onclick="location.href='index'"></div>
             </div>
         </form>
