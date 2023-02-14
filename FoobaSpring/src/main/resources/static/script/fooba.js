@@ -201,7 +201,7 @@ function result( zip_num, sido, gugun, dong){
 
 
 function go_update(){
-	if ((document.member_update_form.PWD.value != document.member_update_form.userpwdchk.value)) {
+	if ((document.member_update_form.PWD.value != document.member_update_form.USERPWDCHK.value)) {
 	    alert("비밀번호가 일치하지 않습니다.");
 	    document.member_update_form.PWD.focus();
 	}
