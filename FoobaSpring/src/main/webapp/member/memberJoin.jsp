@@ -51,11 +51,11 @@
                 </div>
 
                 <div class="join_list">
-                    <input type="text" class="input_text" name="ADDRESS2" placeholder="상세 주소"  value="${vo.ADDRESS2}"  id="sample6_detailAddress" />
+                    <input type="text" class="input_text" name="ADDRESS2" placeholder="상세 주소1"  value="${vo.ADDRESS2}"  id="sample6_detailAddress" />
                 </div>
 
 				<div class="join_list">
-                    <input type="text" class="input_text" name="ADDRESS3" placeholder="구 주소"  value="${vo.ADDRESS3}"  id="sample6_extraAddress" />
+                    <input type="text" class="input_text" name="ADDRESS3" placeholder="상세 주소2"  value="${vo.ADDRESS3}"  id="sample6_extraAddress" />
                 </div>
                 
                 <div class="join_list" margin="20px">
