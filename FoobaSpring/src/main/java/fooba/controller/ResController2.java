@@ -110,14 +110,14 @@ public class ResController2 {
 	
 	
 	@RequestMapping("/res_foodmenuAddForm")
-		public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session, Model model) {
+		public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		return "restaurant/res_foodMenuAdd";
 	}
 
 		
 	@RequestMapping("/res_foodmenuDelete")
-		public String res_foodmenuDelete(HttpServletRequest request, HttpSession session, Model model,
+		public String res_foodmenuDelete(HttpServletRequest request, HttpSession session,
 			@RequestParam("FSEQ") int FSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
@@ -164,5 +164,49 @@ public class ResController2 {
 		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
 		session.setAttribute("loginRes",list.get(0));		
 		return"redirect:/res_foodmenu";
-	}	
+	}
+	
+	@RequestMapping("/res_review")
+		public String res_review(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		paramMap.put("ref_cursor", null);
+		
+		
+		return "restaurant/res_reviewList";
+	}
+	
+	
+	
+	
+	/*
+	@RequestMapping("/res_order")
+		public String res_order(HttpServletRequest request, HttpSession session){
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		
+		return "restaurant/res_orderList";
+		
+	}
+	
+	
+	@RequestMapping("/res_orderAll")
+		public String res_orderAll(HttpServletRequest request, HttpSession session){
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		
+		return "restaurant/res_orderList";
+		
+	}
+	*/
+	
+	@RequestMapping("/res_orderComplete")
+		public String res_orderComplete(HttpServletRequest request, HttpSession session, Model model, 
+				@RequestParam("OSEQ") int OSEQ){
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("OSEQ", OSEQ);
+		rs.nextOrderStatement(paramMap);
+		return "redirect:/res_orderList";
+		
+	}
+	
 }

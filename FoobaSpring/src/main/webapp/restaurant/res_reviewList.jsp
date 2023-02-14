@@ -4,10 +4,10 @@
 
             <div id="res_tab">
                 <div class="res_infotab" 
-                onclick="location.href='fooba.do?command=res_review&key=2'">
+                onclick="res_review&key=2'">
                 전체답변</div>      
                 <div class="res_infotab" 
-                onclick="location.href='fooba.do?command=res_review&key=1'">
+                onclick="res_review&key=1'">
                 미답변</div>
             </div>
 		
@@ -67,7 +67,7 @@
                                         </script>                            
                                     <textarea class="sa_thank_text" name="reply" rows="5" cols="50" id="${ReviewVO.review_seq }"  maxlength="100" ></textarea><br>
                                     <input type="hidden" value="${ReviewVO.review_seq }" name="rv">
-                                    <input type="hidden" value="${key }" name="key">
+                                    <input type="hidden" value="${key}" name="key">
                                     <div id="rev_buttonbox" >
                                         <input type="submit" value="답글 달기" id="rev_button" style="box-shadow: 2px 1px rgb(231, 231, 151);"  
                                         onclick="return addReply('${ReviewVO.review_seq }')">   

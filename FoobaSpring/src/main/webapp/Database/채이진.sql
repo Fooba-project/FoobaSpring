@@ -85,23 +85,9 @@ end;
 
 
 
-
-
-
 CREATE OR REPLACE PROCEDURE restRes(
-    p_rseq IN foodmenu.rseq%type
-)
-IS
-
-BEGIN
-            update restaurant set ryn=3 where rseq = p_rseq;
-            commit;
-end;
-
-
-CREATE OR REPLACE PROCEDURE returnRes(
     p_rseq IN foodmenu.rseq%type,
-    p_ryn IN restaurant.ryn%type
+     p_ryn IN restaurant.ryn%type
 )
 IS
 
@@ -111,7 +97,14 @@ BEGIN
 end;
 
 
+CREATE OR REPLACE PROCEDURE nextOrderStatement(
+    p_oseq IN orders.oseq%type
 
+)
+IS
 
+BEGIN
+        update orders set result=result+1 where oseq=p_oseq;
 
+end;
 

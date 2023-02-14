@@ -23,7 +23,8 @@ public interface IResDao2 {
 
 	void restRes(HashMap<String, Object> paramMap);
 
-	void returnRes(HashMap<String, Object> paramMap);
+	void nextOrderStatement(HashMap<String, Object> paramMap);
+	
 
 	
 

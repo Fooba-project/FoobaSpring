@@ -33,6 +33,10 @@
 	<update id="restRes" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL restRes( #{RSEQ}, #{RYN})}
 	</update>
+	
+	<update id="nextOrderStatement" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL restRes( #{OSEQ})}
+	</update>
 
 	
 
