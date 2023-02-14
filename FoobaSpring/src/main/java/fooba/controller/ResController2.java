@@ -165,5 +165,4 @@ public class ResController2 {
 		session.setAttribute("loginRes",list.get(0));		
 		return"redirect:/res_foodmenu";
 	}	
-	
 }
