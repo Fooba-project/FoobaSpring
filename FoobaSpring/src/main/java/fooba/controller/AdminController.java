@@ -203,36 +203,26 @@ public class AdminController {
 	@RequestMapping(value="/bannerFileup", method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> fileup(HttpServletRequest request) throws IOException {
-		System.out.println(1);
 		String path = context.getRealPath("images");
 		HashMap<String, Object> prm = new HashMap<>();
 		MultipartRequest multi = new MultipartRequest (
 				request,path,5*1024*1024,"UTF-8",new DefaultFileRenamePolicy()
 		);
-		prm.put("STATUS", 1);
-		prm.put("FILENAME", multi.getFilesystemName("fileimage"));
+		if (!multi.getFilesystemName("bannerImage").equals("")) prm.put("STATUS", 1);
+		prm.put("FILENAME", multi.getFilesystemName("bannerImage"));
 		return prm;
 	}
 	
 	
 	@RequestMapping("/admin_bannerWrite")
-	public String admin_bannerWrite(HttpServletRequest request, HttpSession session, Model model) throws IOException {
+	public String admin_bannerWrite(@ModelAttribute("vo") @Valid BannerVO bvo, BindingResult result, HttpSession session, Model model) throws IOException {
 		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
-		String path = context.getRealPath("images");
 		
-		MultipartRequest multi = new MultipartRequest(
-		request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 	);
-		
-		model.addAttribute("BNAME", multi.getParameter("BNAME"));
-		
-		if( multi.getParameter("BNAME")==null || multi.getParameter("BNAME").equals("") )
-			model.addAttribute("message","배너 이름을 입력하세요");
-		else if (multi.getFilesystemName("BIMAGE")==null || multi.getFilesystemName("BIMAGE").equals(""))
-			model.addAttribute("message","배너 이미지를 등록하세요");
+		if( result.getFieldError("BNAME")!=null ) model.addAttribute("message","배너 이름을 입력하세요");
+		else if( result.getFieldError("BIMAGE")!=null ) model.addAttribute("message","배너 이미지를 등록하세요");
 		else {
 			HashMap<String, Object> prm = new HashMap<>();
-			prm.put("BNAME", multi.getParameter("BNAME"));
-			prm.put("BIMAGE", multi.getFilesystemName("BIMAGE"));
+			prm.put("vo", bvo);
 			as.admin_bannerWrite(prm);
 			model.addAttribute("result", 1);
 		}
@@ -242,24 +232,24 @@ public class AdminController {
 	
 	
 	@RequestMapping("/admin_bannerUpdate")
-	public String admin_bannerUpdate(HttpServletRequest request, HttpSession session, Model model) throws IOException {
+	public String admin_bannerUpdate(@Valid BannerVO bvo, BindingResult result, @RequestParam("OLDBIMAGE") String OLDBIMAGE,
+			HttpSession session, Model model) throws IOException {
 	//	if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-		String path = context.getRealPath("images");
-		MultipartRequest multi = new MultipartRequest(
-				request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 	);
-		HashMap<String, Object> prm = new HashMap<>();
-		prm.put("BNAME", multi.getParameter("BNAME"));
-		prm.put("BSEQ", Integer.parseInt( multi.getParameter("BSEQ") ));
-		prm.put("BIMAGE", multi.getParameter("OLDIMAGE"));
-		model.addAttribute("vo", prm);
+
+		String NEWBIMAGE = bvo.getBIMAGE();
 		
-		if( multi.getParameter("BNAME")==null || multi.getParameter("BNAME").equals("") )
-			model.addAttribute("message","배너 이름을 입력하세요");
-		else {
-			if( multi.getFilesystemName("BIMAGE")!=null) prm.put("BIMAGE", multi.getFilesystemName("BIMAGE"));
+		if( bvo.getBIMAGE().equals("") ) bvo.setBIMAGE(OLDBIMAGE);
+		else model.addAttribute("NEWBIMAGE", NEWBIMAGE);
+		
+		if( result.getFieldError("BNAME")!=null ) { model.addAttribute("message","배너 이름을 입력하세요");
+			if( !NEWBIMAGE.equals("")  ) 	bvo.setBIMAGE(OLDBIMAGE);
+		} else {
+			HashMap<String, Object> prm = new HashMap<>();
+			prm.put("vo", bvo);
 			as.admin_bannerUpdate(prm);
 			model.addAttribute("result", 1);
 		}
+		model.addAttribute("vo", bvo);
 		return "admin/admin_bannerUpdate";
 	}
 	
@@ -273,6 +263,8 @@ public class AdminController {
 		as.admin_bannerDelete(prm);
 		return "redirect:/adminList?table=b";
 	}
+	
+	
 }
 	
 

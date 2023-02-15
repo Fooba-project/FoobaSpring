@@ -6,14 +6,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="css/fooba.css" rel="stylesheet">
+<style type="text/css">
+body {position:relative; margin:0;}
+#bimageForm {position:absolute; margin-left:30px; top:400px;}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-function abab(){
-	alert('b');
-}
-
 $(function(){
-	$('#myButton').click( function(){
-		alert('aa');
+	$('#fileupload').change( function(){
 		var formselect = $("#bimageForm")[0];   // 지목된 폼을 변수에 저장
 		var formdata = new FormData(formselect);   // 전송용 폼객에 다시 저장
 		$.ajax({    // 웹페이지 이동 또는 새로고침이 필요없는 request요청
@@ -26,10 +26,9 @@ $(function(){
 	    	contentType : false,
 	        processData : false,
 	        success : function(data){
-				if(data.STATUS == 1){  	//동적으로 div태그 달아주기.
-					$("#previewimage").html("<div>"+data.FILENAME+"</div>");
+				if(data.STATUS == 1){
 					$("#BIMAGE").val(data.FILENAME);
-					$("#previewimage").html("<img src='images/"+data.FILENAME+"' height='85' width='200'/>");
+					$("#previewimage").html("<br><img src='images/"+data.FILENAME+"' height='170' width='400'/>");
 				}
 			},
 			error: function() {alert("실패");}
@@ -42,23 +41,27 @@ $(function(){
 
 <div id="idcheck_box">
 	<div id="idcheck_text">
-		<form method="post" action="admin_bannerUpdate" enctype="multipart/form-data">
-			<input type="hidden" name="OLDIMAGE" value="${vo.BIMAGE}">
+		<form method="post" action="admin_bannerUpdate">
+			<input type="hidden" name="OLDBIMAGE" value="${vo.BIMAGE}">
 			<input type="hidden" name="BSEQ" value="${vo.BSEQ }">
 			<h1 id="idcheckline">배너 수정</h1>
-			배너 이름 : <input type="text" name="BNAME" style="font-size: 20px;" value="${vo.BNAME }"><br><br>
+			배너 이름 : <input type="text" name="BNAME" style="font-size: 20px;" value="${vo.BNAME}"><br><br>
 			기존 이미지<br>
-			<img src="images/${vo.BIMAGE}" style="border-radius:5px; width:200px; height:85px"/>
+			<img src="images/${vo.BIMAGE}" style="border-radius:5px; width:400px; height:170px"/>
 			<br><br>
-			<input type="hidden" name="BIMAGE" id="BIMAGE" value="">
-	   		<div id="previewimage"></div>
-			<input type="submit" id="bannersubmit" style="display:none">&nbsp;&nbsp;&nbsp;
-			<label for="bannersubmit" style="cursor:pointer; font-size: 17px;">수정</label>
+			<label for="fileupload" style="cursor:pointer">이미지 등록 </label><br>
+			<input type="hidden" name="BIMAGE" id="BIMAGE" value="${NEWBIMAGE }">
+	   		<div id="previewimage">
+	   			<c:if test="${not empty NEWBIMAGE}">
+	   				<br><img src='images/${NEWBIMAGE }' height='170' width='400'/>
+	   			</c:if>
+	   		</div><br><br>
+			<input type="submit" value="수정" style="cursor:pointer; font-size: 17px; background:blue; color:white; border:none; width:400px; height:30px;">
 			<h3>${message }</h3>
 		</form>
 	</div>
 	<form id="bimageForm" method="post" enctype="multipart/form-data">
-		<input type="file" name="bannerImage"><input type="button" id="myButton" value="추가">
+		<input type="file" name="bannerImage" id="fileupload" style="display:none">
 	</form>
 </div>
 
@@ -68,5 +71,6 @@ $(function(){
 		self.close();
 	</script>
 </c:if>
+
 </body>
 </html>

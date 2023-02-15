@@ -48,11 +48,11 @@
 	</update>
 	
 	<insert id="admin_bannerWrite" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL admin_bannerWrite (#{BNAME}, #{BIMAGE} )}
+		{ CALL admin_bannerWrite (#{vo.BNAME}, #{vo.BIMAGE} )}
 	</insert>
 	
 	<update id="admin_bannerUpdate" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL admin_bannerUpdate (#{BNAME}, #{BIMAGE}, #{BSEQ} )}
+		{ CALL admin_bannerUpdate (#{vo.BNAME}, #{vo.BIMAGE}, #{vo.BSEQ} )}
 	</update>
 	
 	<delete id="admin_bannerDelete" statementType="CALLABLE" parameterType="java.util.HashMap">

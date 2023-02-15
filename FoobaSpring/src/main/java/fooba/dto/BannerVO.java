@@ -15,6 +15,8 @@ public class BannerVO {
 	@NotNull
 	@NotEmpty
 	private String BNAME;
+	@NotNull
+	@NotEmpty
 	private String BIMAGE;
 	private Timestamp INDATE;
 	

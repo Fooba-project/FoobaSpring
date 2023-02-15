@@ -166,3 +166,14 @@ BEGIN
     update bannerf set bname=p_bname, bimage=p_bimage where bseq=p_bseq;
     commit;
 END;
+
+
+
+create or replace procedure admin_bannerDelete (
+p_bseq in number
+)
+IS
+BEGIN
+    delete from bannerf where bseq=p_bseq;
+    commit;
+END;

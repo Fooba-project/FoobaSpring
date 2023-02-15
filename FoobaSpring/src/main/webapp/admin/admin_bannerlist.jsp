@@ -2,11 +2,11 @@
 <%@ include file="admin_header.jsp"%>
 <script type="text/javascript">
 function admin_bannerWriteForm(){
-	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=300";
+	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=550";
 	window.open("admin_bannerWriteForm", "banner write", opt);	
 }
 function admin_bannerUpdateForm(BSEQ){
-	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=400";
+	var opt = "toolbar=no, menubar=no, resizable=no, width=500, height=700";
 	window.open("adminDetail?procedure=bannerUp&SEQ="+BSEQ, "banner update", opt);	
 }
 function admin_bannerDelete(BSEQ){
