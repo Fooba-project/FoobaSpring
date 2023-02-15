@@ -57,7 +57,7 @@
 
 	
 	<insert id="insertOrders" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{CALL insertOrders(#{ovo.ID},#{ovo.RIDERYN},#{ovo.PLASTICYN},#{ovo.PAYMENT},
+	{CALL insertOrders(#{ovo.RSEQ}, #{ovo.ID},#{ovo.RIDERYN},#{ovo.PLASTICYN},#{ovo.PAYMENT},
 	#{ovo.ADDRESS1},#{ovo.ADDRESS2},#{ovo.PHONE},#{ovo.TOTALPRICE},
 	#{OSEQ, mode=OUT,jdbcType=INTEGER})}
 	</insert>
