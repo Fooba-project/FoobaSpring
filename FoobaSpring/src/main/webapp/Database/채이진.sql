@@ -108,3 +108,4 @@ BEGIN
 
 end;
 
+select * from order_view;

@@ -170,19 +170,17 @@ public class ResController2 {
 	
 	
 	@RequestMapping("/res_order")
-		public String res_order(OrderVO ovo, OrderViewVO ovvo, BindingResult result,
-				HttpServletRequest request, HttpSession session){
+		public String res_order(OrderVO ovo, OrderViewVO ovvo,
+				HttpServletRequest request, HttpSession session, Model model){
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();
-		ArrayList<HashMap<String,Object>> finalList
-		=(ArrayList<HashMap<String,Object>>) paramMap.get("finalList");
 		
-		paramMap.put("finalList", null);
-		
-		
-		
-		
+		paramMap.put("RSEQ", loginRes.get("RSEQ"));
+		paramMap.put("OSEQ", ovo.getOSEQ());
+		rs.selectOrdersIngByRseq(paramMap);
+		//model.addAttribute("res_OrderList",finalList);
+	
 		return "restaurant/res_orderList";
 		
 	}

@@ -1,13 +1,11 @@
 package fooba.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import fooba.dao.IMemberDao;
 import fooba.dao.IResDao2;
 import fooba.dto.FoodmenuVO;
 
@@ -46,7 +44,15 @@ public class ResService2 {
 		
 	}
 
-
+	public void selectOrdersIngByRseq(HashMap<String, Object> paramMap) {
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor1");
+		paramMap.put("ref_cursor1", null );
 	
+			
+			
+		//rdao.selectOrdersIngByRseq(paramMap);
+		//rdao.selectOrderViewByOseq(paramMap);
+	}	
 	
 }

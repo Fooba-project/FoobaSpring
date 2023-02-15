@@ -13,7 +13,7 @@ create sequence review_seq_seq start with 1;
 
 drop sequence cart_seq;
 create sequence cart_seq start with 1;
-
+ 
 drop sequence restaurant_seq;
 create sequence restaurant_seq start with 1;
 
