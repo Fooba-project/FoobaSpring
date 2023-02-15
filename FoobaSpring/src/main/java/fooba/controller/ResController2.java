@@ -126,7 +126,7 @@ public class ResController2 {
 		return "redirect:/res_foodmenu";
 	}
 	
-	@RequestMapping("/res_fooba_tosAction")
+	@RequestMapping("/res_fooba_tos")
 		public String res_fooba_tosAction() {
 		return "restaurant/res_fooba_tos";
 	}
@@ -167,12 +167,19 @@ public class ResController2 {
 	}
 	
 	@RequestMapping("/res_review")
-		public String res_review(HttpServletRequest request, HttpSession session) {
+		public String res_review(@ModelAttribute("vo") HttpSession session, Model model,
+				@RequestParam("RSEQ") int RSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();
 		paramMap.put("ref_cursor", null);
+		paramMap.put("RSEQ",loginRes.get("RSEQ"));
 		
-		
+		ArrayList<HashMap<String, Object>> list
+		=(ArrayList<HashMap<String, Object>>)paramMap.get("ref_cursor");
+		model.addAttribute("ReviewList",list);
+		model.addAttribute("key",paramMap.get("key"));
+
 		return "restaurant/res_reviewList";
 	}
 	
@@ -196,7 +203,7 @@ public class ResController2 {
 		return "restaurant/res_orderList";
 		
 	}
-	*/
+	
 	
 	@RequestMapping("/res_orderComplete")
 		public String res_orderComplete(HttpServletRequest request, HttpSession session, Model model, 
@@ -205,8 +212,7 @@ public class ResController2 {
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("OSEQ", OSEQ);
 		rs.nextOrderStatement(paramMap);
-		return "redirect:/res_orderList";
-		
+		return "redirect:/res_orderList";	
 	}
-	
+	*/
 }
