@@ -343,8 +343,6 @@ public class MemberController2 {
 		
 		return "member/memberOrderList";
 	}
-	
-	
-	
+		
 	
 }

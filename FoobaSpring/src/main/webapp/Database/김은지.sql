@@ -136,7 +136,7 @@ END;
  CREATE OR REPLACE PROCEDURE insertOrders(p_rseq IN orders.rseq%type, p_id IN orders.id%type, p_rideryn IN orders.rideryn%type,
     p_plasticyn IN orders.plasticyn%type, p_payment IN orders.payment%type, p_address1  IN orders.address1%type, p_address2  IN orders.address2%type,
     p_phone  IN orders.phone%type,p_totalprice  IN orders.totalprice%type,    p_oseq OUT orders.oseq%type )
-IS
+ IS
     temp_cur SYS_REFCURSOR;
     v_oseq orders.oseq%type;
     v_cseq cart.cseq%type;
@@ -155,7 +155,7 @@ BEGIN
      OPEN temp_cur FOR SELECT cseq, quantity, fseq, sideyn1, sideyn2, sideyn3 FROM cart WHERE id = p_id ;    
     LOOP
         FETCH temp_cur INTO v_cseq, v_fseq, v_quantity, v_sideyn1, v_sideyn2, v_sideyn3 ;
-        EXIT WHEN temp_cur%NOTFOUND;        --20ÁÙ
+        EXIT WHEN temp_cur%NOTFOUND;        --20ï¿½ï¿½
         if(v_sideyn1 is null) then v_sideyn1_1 := 0;
         else v_sideyn1_1 := 1;
         end if;
@@ -173,6 +173,7 @@ BEGIN
     p_oseq := v_oseq;
 END;
 
+
 alter table orders add oname varchar2(100);
 
 
@@ -187,7 +188,33 @@ from orders a, order_detail b, member c, foodmenu d, restaurant e
 where a.oseq=b.oseq and a.id = c.id and b.fseq=d.fseq and d.rseq=e.rseq;
 
 select*from order_detail ;
-select*from cart;
+select*from orders;
 
 INSERT INTO order_detail(odseq, oseq, quantity, fseq, sideyn1, sideyn2, sideyn3 )
 VALUES(order_detail_seq.nextVal, 1, v_quantity, v_fseq, v_sideyn1, v_sideyn2, v_sideyn3);
+
+create or replace procedure bannerx(p_cur out sys_refcursor)
+is
+begin
+    open p_cur for
+        select*from bannerf where border<=3 order by border;
+end;
+
+CREATE OR REPLACE PROCEDURE insertMember(
+    p_id IN member.id%TYPE,
+    p_pwd IN member.pwd%TYPE,
+    p_name IN member.name%TYPE,
+    p_email IN member.email%TYPE,
+    p_phone IN member.phone%TYPE,
+    p_zip_num IN member.zip_num%TYPE,
+    p_address1 IN member.address1%TYPE,
+    p_address2 IN member.address2%TYPE,
+    p_address3 IN member.address3%TYPE,
+    p_nick IN member.nick%TYPE 
+)
+IS
+BEGIN
+    INSERT INTO member( id, pwd, name, email, phone, zip_num, address1, address2, address3, nick)
+    VALUES( p_id, p_pwd, p_name, p_email, p_phone, p_zip_num, p_address1, p_address2, p_address3, p_nick );
+    COMMIT;
+END;

@@ -121,8 +121,4 @@ public class MemberService2 {
 
 
 	
-	
-	
-
-	
 }
