@@ -44,8 +44,8 @@
                         
                         <div class="menuorderdetaildiv">
                             <div id="menuorderdetaildiv3">닉네임 : ${ovo.NICK}</div>
-                            <div id="menuorderdetaildiv3">배달주소 : ${ovo.ADDRESS1}&nbsp;${ovo.ADDRESS2}</div>
-                            <div id="menuorderdetaildiv3">전화번호 : ${ovo.PHONE}</div>
+                            <div id="menuorderdetaildiv3">배달주소 : ${ovo.OADD1}&nbsp;${ovo.OADD2}</div>
+                            <div id="menuorderdetaildiv3">전화번호 : ${ovo.OPHONE}</div>
                             <div id="menuorderdetaildiv3">배달/포장여부 : 
                                 <c:if test="${ovo.RIDERYN==0}">
                                     배달

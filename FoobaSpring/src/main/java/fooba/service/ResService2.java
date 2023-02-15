@@ -45,14 +45,12 @@ public class ResService2 {
 	}
 
 	public void selectOrdersIngByRseq(HashMap<String, Object> paramMap) {
-		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor1");
-		paramMap.put("ref_cursor1", null );
-	
-			
-			
-		//rdao.selectOrdersIngByRseq(paramMap);
-		//rdao.selectOrderViewByOseq(paramMap);
+		rdao.selectOrdersIngByRseq(paramMap);
+	}
+
+	public void selectOrdersAllByRseq(HashMap<String, Object> paramMap) {
+		rdao.selectOrdersAllByRseq(paramMap);
+		
 	}	
 	
 }

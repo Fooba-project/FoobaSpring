@@ -29,13 +29,18 @@
 	<delete id="deleteFoodeMenu" statementType="CALLABLE">
 		{ CALL deleteFoodMenu(#{FSEQ})}	
 	</delete>
+
+	<select id="selectOrdersIngByRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL selectOrdersIngByRseq( #{RSEQ},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2})}
+	</select>
 	
-	<update id="restRes" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL restRes( #{RSEQ}, #{RYN})}
-	</update>
+	<select id="selectOrdersAllByRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL selectOrdersAllByRseq( #{RSEQ},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2})}
+	</select>
 	
+
 	<update id="nextOrderStatement" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL restRes( #{OSEQ})}
+		{CALL nextOrderStatement( #{OSEQ})}
 	</update>
 
 	

@@ -170,30 +170,36 @@ public class ResController2 {
 	
 	
 	@RequestMapping("/res_order")
-		public String res_order(OrderVO ovo, OrderViewVO ovvo,
-				HttpServletRequest request, HttpSession session, Model model){
+		public String res_order( HttpSession session, Model model){
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		HashMap<String , Object> paramMap = new HashMap<String , Object>();
-		
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();	
 		paramMap.put("RSEQ", loginRes.get("RSEQ"));
-		paramMap.put("OSEQ", ovo.getOSEQ());
+		paramMap.put("ref_cursor",null);
 		rs.selectOrdersIngByRseq(paramMap);
-		//model.addAttribute("res_OrderList",finalList);
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+		model.addAttribute("res_OrderList",list);
 	
-		return "restaurant/res_orderList";
-		
+		return "restaurant/res_orderList";		
 	}
 	
-	/*
+	
 	@RequestMapping("/res_orderAll")
-		public String res_orderAll(HttpServletRequest request, HttpSession session){
+		public String res_orderAll(HttpServletRequest request, HttpSession session, Model model){
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();	
+		paramMap.put("RSEQ", loginRes.get("RSEQ"));
+		paramMap.put("ref_cursor",null);
+		rs.selectOrdersAllByRseq(paramMap);
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+		model.addAttribute("res_OrderList",list);
 		return "restaurant/res_orderList";
 		
 	}
-	*/
+	
 	
 	@RequestMapping("/res_orderComplete")
 		public String res_orderComplete(HttpServletRequest request, HttpSession session, Model model, 

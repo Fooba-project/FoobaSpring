@@ -108,4 +108,36 @@ BEGIN
 
 end;
 
-select * from order_view;
+
+
+
+CREATE OR REPLACE PROCEDURE selectOrdersIngByRseq(
+    p_rseq IN number,
+    p_cur OUT SYS_REFCURSOR
+
+)
+IS
+
+BEGIN
+ open p_cur for
+    select DISTINCT oseq, indate,totalprice,result,nick,oname,oadd1,oadd2,ophone, rideryn from order_view where rseq=p_rseq and result in (0,1) order by oseq desc;
+
+end;
+
+select  DISTINCT oseq, indate,totalprice,result,nick,oadd1,oadd2,ophone, rideryn  from order_view where rseq=23 and result in (0,1) order by oseq desc;
+
+
+
+--alter table orders add oname varchar2(100);
+
+--create or replace view order_view
+--as
+--select a.oseq, a.result, a.oname, a.indate, a.id, a.rideryn, a.plasticyn, a.payment, a.address1 as oadd1, a.address2 as oadd2, a.phone as ophone, a.totalprice,
+--      b.odseq, b.quantity, b.fseq, b.sideyn1, b.sideyn2, b.sideyn3,
+--      c.nick, c.address1 as madd1, c.address2 as madd2, c.phone as mphone,
+--      d.fname, d.fprice, d.fside1, d.fside2, d.fside3, d.fsideprice1, d.fsideprice2, d.fsideprice3, d.fimage, d.fcontent,
+--      e.rname, e.rseq, e.rimage, e.rtip, e.ryn
+--from orders a, order_detail b, member c, foodmenu d, restaurant e
+--where a.oseq=b.oseq and a.id = c.id and b.fseq=d.fseq and d.rseq=e.rseq;
+
+
