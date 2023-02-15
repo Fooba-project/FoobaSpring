@@ -23,6 +23,8 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import fooba.dto.FoodmenuVO;
+import fooba.dto.OrderVO;
+import fooba.dto.OrderViewVO;
 import fooba.service.ResService;
 import fooba.service.ResService2;
 
@@ -164,38 +166,28 @@ public class ResController2 {
 		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
 		session.setAttribute("loginRes",list.get(0));		
 		return"redirect:/res_foodmenu";
-	}
-	
-	@RequestMapping("/res_review")
-		public String res_review(@ModelAttribute("vo") HttpSession session, Model model,
-				@RequestParam("RSEQ") int RSEQ) {
-		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
-		HashMap<String , Object> paramMap = new HashMap<String , Object>();
-		paramMap.put("ref_cursor", null);
-		paramMap.put("RSEQ",loginRes.get("RSEQ"));
-		
-		ArrayList<HashMap<String, Object>> list
-		=(ArrayList<HashMap<String, Object>>)paramMap.get("ref_cursor");
-		model.addAttribute("ReviewList",list);
-		model.addAttribute("key",paramMap.get("key"));
-
-		return "restaurant/res_reviewList";
-	}
+	}	
 	
 	
-	
-	
-	/*
 	@RequestMapping("/res_order")
-		public String res_order(HttpServletRequest request, HttpSession session){
+		public String res_order(OrderVO ovo, OrderViewVO ovvo, BindingResult result,
+				HttpServletRequest request, HttpSession session){
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		ArrayList<HashMap<String,Object>> finalList
+		=(ArrayList<HashMap<String,Object>>) paramMap.get("finalList");
+		
+		paramMap.put("finalList", null);
+		
+		
+		
 		
 		return "restaurant/res_orderList";
 		
 	}
 	
-	
+	/*
 	@RequestMapping("/res_orderAll")
 		public String res_orderAll(HttpServletRequest request, HttpSession session){
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
@@ -203,7 +195,7 @@ public class ResController2 {
 		return "restaurant/res_orderList";
 		
 	}
-	
+	*/
 	
 	@RequestMapping("/res_orderComplete")
 		public String res_orderComplete(HttpServletRequest request, HttpSession session, Model model, 
@@ -214,5 +206,5 @@ public class ResController2 {
 		rs.nextOrderStatement(paramMap);
 		return "redirect:/res_orderList";	
 	}
-	*/
+	
 }
