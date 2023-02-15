@@ -115,8 +115,8 @@ public class MemberService2 {
 	}
 
 	public void insertOrders(HashMap<String, Object> prm) {
-		mdao.insertOrders(prm);
-		
+
+		mdao.insertOrders(prm);		
 	}
 
 
