@@ -52,6 +52,11 @@ public class MemberService {
 		
 	}
 
+	public void banner(HashMap<String, Object> prm) {
+		mdao.banner(prm);
+		
+	}
+
 
 
 		

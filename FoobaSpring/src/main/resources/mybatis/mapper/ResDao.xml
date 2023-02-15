@@ -47,6 +47,17 @@
 		)}
 	</delete>
 	
+	<select id="selectReview" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL selectReview(
+			#{RSEQ},#{key},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
+		)}
+	</select>
+	
+	<update id="updateReply" statementType="CALLABLE">
+		{CALL updateReply(
+			#{r_seq},#{reply}
+		)}
+	</update>
 	
 </mapper>
 

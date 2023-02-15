@@ -341,7 +341,40 @@ public class ResController {
 		model.addAttribute("message","아이디가 정지 되었습니다. 복구요청은 고객센터에 전화주세요");
 		return "restaurant/res_login";
 	}
-	
+		
+		@RequestMapping("/res_review")
+		public String res_review( HttpSession session, Model model, @ModelAttribute("key")int key) {
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
+		HashMap<String , Object> paramMap = new HashMap<String , Object>();
+		
+		paramMap.put("ref_cursor", null);
+		paramMap.put("RSEQ",loginRes.get("RSEQ"));
+		paramMap.put("key", key);
+		rs.selectReview(paramMap); 
+		ArrayList<HashMap<String, Object>> list
+		=(ArrayList<HashMap<String, Object>>)paramMap.get("ref_cursor");
+		model.addAttribute("list",list);
+		if(session.getAttribute("x")!=null) {model.addAttribute("message","답글을 입력해주세요");
+		session.removeAttribute("x");
+		}
+		
+		
+		return "restaurant/res_reviewList";
+	}
+
+		@RequestMapping(value="res_reviewReplyWrite",method=RequestMethod.POST)
+		public String res_reviewReplyWrite(@RequestParam(value="REVIEW_SEQ",required=false)String r_seq, 
+				@RequestParam(value="REPLY",required=false)String reply, Model model,HttpSession session) {
+			HashMap<String , Object> paramMap = new HashMap<String , Object>();
+			paramMap.put("r_seq",r_seq);
+			paramMap.put("reply",reply);
+			System.out.println(reply+"yyyy");
+			if (reply==null||reply.equals("")) session.setAttribute("x", 1);
+			else rs.updateReply(paramMap);
+			return "redirect:/res_review?key=2";
+			
+		}
 		
 }
 

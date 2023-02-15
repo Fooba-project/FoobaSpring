@@ -17,13 +17,66 @@ $(function() {
 		
 	});
 });
-</script>	
+</script>
+
+<c:if test="${size==1}">
+	
 <div id="maintextbox">
-	<img src="images/background1.jpg">
-    <span id="maintext">음식은 푸바, 
-        배달은 푸바!
-     </span>
+	<div id="imgss" 
+		style="position:absolute; left:0px; top:0px; width:1920px;text-align:left;">
+			<c:forEach items="${bannerList }"  var="bannerVO">
+				<img src="images/${bannerVO.IMAGE}" style="width:1920px;height:500px;" >
+			</c:forEach>
+		    <span id="maintext">음식은 푸바, 
+		        배달은 푸바!
+		    </span>
+     </div>
 </div>
+</c:if>
+
+
+<c:if test="${size==2}">	
+<div id="maintextbox">
+	<div id="imgss" 
+		style="position:absolute; left:0px; top:0px; width:3842px;text-align:left; height:500px"><c:forEach items="${bannerList }"  var="bannerVO"><img src="images/${bannerVO.BIMAGE}" style="width:1920px; height:500px" ></c:forEach></div>
+     	<span id="maintext">음식은 푸바, 
+		        배달은 푸바!
+		    </span>
+</div>
+<script type="text/javascript">
+$(function(){
+	var num=0;
+	setInterval(function(){
+        $('#imgss').animate({ left : num * -1920 },2000);
+            num++;
+            if(num==2)num=0;
+    }, 4000);
+});
+</script>	
+</c:if>
+
+
+<c:if test="${size==3}">
+	
+<div id="maintextbox">
+	<div id="imgss" 
+		style="position:absolute; left:0px; top:0px; width:5763px;text-align:left; height:500px"><c:forEach items="${bannerList }"  var="bannerVO"><img src="images/${bannerVO.BIMAGE}" style="width:1920px; height:500px" ></c:forEach></div>
+     	<span id="maintext">음식은 푸바, 
+		        배달은 푸바!
+		    </span>
+</div>
+<script type="text/javascript">
+$(function(){
+	var num=0;
+	setInterval(function(){
+        $('#imgss').animate({ left : num * -1920 },2000);
+            num++;
+            if(num==3)num=0;
+    }, 6000);
+});
+</script>	
+</c:if>
+
      
 <div id="hash">
     <div class="hashboxes">

@@ -61,6 +61,17 @@ public class ResService {
 	public void withdrawal(String RID) {
 		rdao.withdrawal(RID);
 		
+	}
+
+	public void selectReview(HashMap<String, Object> paramMap) {
+		rdao.selectReview(paramMap);
+		
+	}
+
+	
+	public void updateReply(HashMap<String, Object> paramMap) {
+		rdao.updateReply(paramMap);
+		
 	} 
 	
 }

@@ -1,3 +1,13 @@
+create or replace procedure bannerx(
+    p_cur out sys_refcursor
+)
+is
+begin
+    open p_cur for
+        select*from bannerf where border<=3 order by border;
+end;
+
+
 create or replace procedure getMember(
     p_id IN member.id%type,
     p_curvar OUT SYS_REFCURSOR

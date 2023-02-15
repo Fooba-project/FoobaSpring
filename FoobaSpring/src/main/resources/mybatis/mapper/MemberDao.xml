@@ -7,6 +7,12 @@
 <mapper namespace="fooba.dao.IMemberDao">
 	<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
 	
+	<select id="banner" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL bannerx(
+			#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
+		)}		
+	</select>
+	
 	
 	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{

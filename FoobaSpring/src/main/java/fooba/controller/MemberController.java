@@ -46,7 +46,14 @@ public class MemberController {
 	}
 	*/
 	@RequestMapping("/")
-	public String main() {
+	public String main(Model model) {
+		HashMap<String,Object>prm=new HashMap<String,Object>();
+		prm.put("ref_cursor",null);
+		ms.banner(prm);
+		ArrayList<HashMap<String,Object>> list
+		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		model.addAttribute("bannerList",list);
+		model.addAttribute("size",list.size());
 		return "main";
 	}
 

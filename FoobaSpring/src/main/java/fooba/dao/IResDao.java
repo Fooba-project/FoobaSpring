@@ -21,4 +21,9 @@ public interface IResDao {
 
 	void withdrawal(String RID);
 
+	void selectReview(HashMap<String, Object> paramMap);
+
+	void updateReply(HashMap<String, Object> paramMap);
+	
+
 }

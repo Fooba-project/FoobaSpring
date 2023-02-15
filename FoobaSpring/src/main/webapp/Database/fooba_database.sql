@@ -1449,6 +1449,9 @@ values(order_detail_seq.nextVal,2,119,2,1,0,1);
 insert into review(review_seq,id,rseq,star,content,oseq,nick)
 values(review_seq_seq.nextVal,'abc1234',48,5,'왈왈왈왈!!',1,'맛있으면 짖는 개');
 
+
+update restaurant set raddress2='999동 999호', raddress3='딩댕동',zip_num='01234';
+
 insert into bannerf (bseq, border, bimage, bname) values (banner_seq.nextVal, 1, 'background1.jpg', '꼬치구이');
 insert into bannerf (bseq, border, bimage, bname) values (banner_seq.nextVal, 2, 'background2.jpg', '고기야채볶음');
 insert into bannerf (bseq, bimage, bname) values (banner_seq.nextVal, 'background3.jpg', '샐러드');
