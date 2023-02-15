@@ -84,6 +84,10 @@ public class AdminService {
 		adao.admin_bupdown(prm);
 	}
 
+	public void admin_bannerWrite(HashMap<String, Object> prm) {
+		adao.admin_bannerWrite(prm);
+	}
+
 
 
 	

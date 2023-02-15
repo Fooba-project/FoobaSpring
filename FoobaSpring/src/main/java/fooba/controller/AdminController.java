@@ -1,8 +1,10 @@
 package fooba.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import fooba.dto.Paging;
 import fooba.dto.QnaVO;
 import fooba.service.AdminService;
@@ -25,6 +30,8 @@ public class AdminController {
 	@Autowired
 	AdminService as;
 
+	@Autowired
+	ServletContext context;
 	
 	@RequestMapping("/admin_tos")
 	public String admin_tos() {
@@ -78,7 +85,7 @@ public class AdminController {
 	
 	@RequestMapping("/adminList")
 	public String adminList(HttpServletRequest request, HttpSession session, Model model, @RequestParam("table") String table) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("table", table);
@@ -172,16 +179,42 @@ public class AdminController {
 	
 	@RequestMapping("/admin_bupdown")
 	public String admin_bupdown(HttpSession session, @RequestParam("BSEQ") int BSEQ, @RequestParam("num") int num) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
-
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("BSEQ", BSEQ);
 		prm.put("num", num);
 		as.admin_bupdown(prm);
-		System.out.println(1);
+		
 		return "redirect:/adminList?table=b";
 	}
-
+	
+	@RequestMapping("/bannerWriteForm")
+	public String bannerWriteForm() {
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+		return "admin/admin_bannerWrite";
+	}
+	
+	@RequestMapping("/bannerWrite")
+	public String bannerWrite(HttpServletRequest request, HttpSession session, Model model) throws IOException {
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+		String path = context.getRealPath("images");
+		
+		MultipartRequest multi = new MultipartRequest(
+			request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 	);
+		
+		if( multi.getParameter("BNAME")==null || multi.getParameter("BNAME").equals("") )
+			model.addAttribute("message","배너 이름을 입력하세요");
+		else if (multi.getFilesystemName("BIMAGE")==null || multi.getFilesystemName("BIMAGE").equals(""))
+			model.addAttribute("message","배너 이미지를 등록하세요");
+		else {
+			HashMap<String, Object> prm = new HashMap<>();
+			prm.put("BNAME", multi.getParameter("BNAME"));
+			prm.put("BIMAGE", multi.getFilesystemName("BIMAGE"));
+			as.admin_bannerWrite(prm);
+			model.addAttribute("result", 1);
+		}
+		return "admin/admin_bannerWrite";
+	}
 	
 }
 	

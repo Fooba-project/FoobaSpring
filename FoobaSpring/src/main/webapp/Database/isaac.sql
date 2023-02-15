@@ -30,7 +30,6 @@ elsif p_table= 'b' then
 end if;
 END;
 
-
 create or replace procedure adminList(
 p_table in varchar2,
 p_key in varchar2,
@@ -54,10 +53,9 @@ elsif p_table= 'q' then
     select * from (select * from (select rownum as rn, b.* from ((select * from qna where content like '%'|| p_key ||'%' or subject like '%'|| p_key ||'%' order by qseq desc) b)) where rn>=p_startNum) where rn<=p_endNum;
 elsif p_table= 'b' then
     open p_rc for
-    select * from bannerf order by border asc;
+    select * from (select * from (select rownum as rn, b.* from ((select * from bannerf where bname like  '%'|| p_key ||'%' order by border asc, indate desc) b)) where rn>=p_startNum) where rn<=p_endNum;
 end if;
 END;
-
 
 
 create or replace procedure admin_resOx( p_ox in number, p_rseq in number )
@@ -108,4 +106,26 @@ BEGIN
         open p_rc for
         select*from qna where qseq=p_var;  
     end if;
+END;
+
+create or replace procedure admin_bupdown( p_bseq in number, p_num in number )
+IS
+BEGIN
+    if (p_num=1) then
+        update bannerf set border=4 where border=1;
+        update bannerf set border=1 where bseq=p_bseq;
+    elsif (p_num=2) then 
+        update bannerf set border=4 where border=2;
+        update bannerf set border=2 where bseq=p_bseq;
+    elsif (p_num=3) then 
+        update bannerf set border=4 where border=3;
+        update bannerf set border=3 where bseq=p_bseq;
+    elsif (p_num=4) then 
+        update bannerf set border=border-1 where border in (1,2,3);        
+        update bannerf set border=3 where border=0;
+    elsif (p_num=5) then 
+        update bannerf set border=0 where border=3;
+        update bannerf set border=border+1 where border in (0,1,2);        
+    end if;
+    commit;
 END;

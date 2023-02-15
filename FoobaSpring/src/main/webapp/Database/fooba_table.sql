@@ -240,7 +240,7 @@ drop table bannerf;
 CREATE TABLE bannerf
 (
 	bseq number(5) primary key,
-	border number(5),
+	border number(5) DEFAULT 4,
 	bimage varchar2(20) NOT NULL,
 	bname varchar2(20) NOT NULL,
 	indate date DEFAULT sysdate
