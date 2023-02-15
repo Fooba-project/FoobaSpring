@@ -75,6 +75,7 @@ CREATE TABLE member
 CREATE TABLE orders
 (
 	oseq number(5) NOT NULL,
+	rseq number(5),
 	indate date DEFAULT sysdate,
 	id varchar2(20) NOT NULL,
 	rideryn number(2) DEFAULT 0 NOT NULL,
@@ -165,6 +166,10 @@ ALTER TABLE orders
 	REFERENCES Member (id)
 ;
 
+ALTER TABLE orders
+	ADD FOREIGN KEY (rseq)
+	REFERENCES restaurant (rseq)
+;
 
 ALTER TABLE review
 	ADD FOREIGN KEY (id)

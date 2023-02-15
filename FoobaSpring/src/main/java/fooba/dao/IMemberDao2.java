@@ -30,13 +30,9 @@ public interface IMemberDao2 {
 
 	void deletecart(HashMap<String, Object> prm);
 
-	void CartList(HashMap<String, Object> prm);
-
-	void insertOrders(OrderVO ovo);
-
-	void insertOrder(HashMap<String, Object> item , String id);
-
 	void cartList(HashMap<String, Object> prm);
+
+	void insertOrders(HashMap<String, Object> prm);
 
 
 

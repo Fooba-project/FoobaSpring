@@ -96,10 +96,6 @@ public class MemberService2 {
 		
 	}
 
-	public void CartList(HashMap<String, Object> prm) {		
-		mdao.CartList(prm);
-	}
-
 	public void getFoodDetail(HashMap<String, Object> prm) {
 		mdao.getFoodDetail(prm);
 		
@@ -118,21 +114,12 @@ public class MemberService2 {
 		mdao.cartList(prm);
 	}
 
-//	public void insertOrders(OrderVO ovo) {
-//		mdao.insertOrders(ovo);
-		
-//	}
-
-	/*
-	public void insertOrder(ArrayList<HashMap<String, Object>> list, String id) {
-		
-		for(HashMap<String, Object> item : list) {
-			mdao.insertOrder(item,id);
-		}
-		// mdao.insertOrder(list,id);
+	public void insertOrders(HashMap<String, Object> prm) {
+		mdao.insertOrders(prm);
 		
 	}
-*/
+
+
 	
 	
 	

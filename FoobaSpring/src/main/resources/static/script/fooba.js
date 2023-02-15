@@ -270,31 +270,35 @@ function go_search(HASH){
    }
    
    
+var nummx=0;
+function jusomove(x){
+   if(x==-1&&nummx==0)return;
+   if(x==1&&nummx==1)return;
+
+   if(x==-1){nummx--;
+       document.getElementById("jusotabb").style.background='#fa6146';
+       document.getElementById("jusotabb").style.border='1px solid #fa6146';
+       document.getElementById("newjusotabb").style.background='#ffb6a9';
+       document.getElementById("newjusotabb").style.border='1px solid #ffb6a9';
+       document.getElementById("bdjs").value=0;
+	   document.getElementById("sample6_address").value=document.getElementById("ORADD1").value;
+       document.getElementById("sample6_detailAddress").value=document.getElementById("ORADD2").value;
+       document.getElementById("PHONE").value=document.getElementById("ORP").value;
+   }
+   if(x==1){nummx++;
+       document.getElementById("jusotabb").style.background='#ffb6a9';
+       document.getElementById("jusotabb").style.border='1px solid #ffb6a9';
+       document.getElementById("newjusotabb").style.background='#fa6146';
+       document.getElementById("newjusotabb").style.border='1px solid #fa6146';
+       document.getElementById("bdjs").value=1;
+       document.getElementById("sample6_address").value="";
+       document.getElementById("sample6_detailAddress").value="";
+        document.getElementById("PHONE").value="";
+   }
+   var dist=nummx*600*-1;
+   document.getElementById("tul2").style.left=dist+'px';
+}
     
-    var nummx=0;
-     function jusomove(x){
-        if(x==-1&&nummx==0)return;
-        if(x==1&&nummx==1)return;
-
-        if(x==-1){nummx--;
-            document.getElementById("jusotabb").style.background='#fa6146';
-            document.getElementById("jusotabb").style.border='1px solid #fa6146';
-            document.getElementById("newjusotabb").style.background='#ffb6a9';
-            document.getElementById("newjusotabb").style.border='1px solid #ffb6a9';
-            document.getElementById("bdjs").value=0;
-
-        }
-        if(x==1){nummx++;
-            document.getElementById("jusotabb").style.background='#ffb6a9';
-            document.getElementById("jusotabb").style.border='1px solid #ffb6a9';
-            document.getElementById("newjusotabb").style.background='#fa6146';
-            document.getElementById("newjusotabb").style.border='1px solid #fa6146';
-            document.getElementById("bdjs").value=1;
-            
-        }
-        var dist=nummx*600*-1;
-        document.getElementById("tul2").style.left=dist+'px';
-    }
     
  function goPay(a,b){
  	

@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
+
 <style type=text/css>
 .gumaeinput_text{opacity:70%;}
 </style>
 <form name="member_join_send_form" id="member_join_send_form" method="post" action="order">
 <input type="hidden" value="${ RSEQ }" name="RSEQ">
-<input type="hidden" value="${ RTIP }" id="RTIP">
+<input type="hidden" value="${ loginUser.ID }" name="ID">
+<input type="hidden" value="${ loginUser.PHONE }" id="ORP">
+<input type="hidden" value="${ loginUser.ADDRESS1 }" id="ORADD1">
+<input type="hidden" value="${ loginUser.ADDRESS2 }" id="ORADD2">
+<input type="hidden" value="${ loginUser.ADDRESS3 }" id="ORADD3">
 
 <div id="realjenche2">
         <div id="jenche2">
@@ -29,12 +34,11 @@
     
                 </div>
                 <div id="juso2">
-                    <input type="text" class="gumaeinput_text" style="width: 490px;" name="userzip_num" id="sample6_postcode"  placeholder="우편번호 : ${loginUser.ZIP_NUM}" readonly/>
+                    <input type="text" class="gumaeinput_text" style="width: 490px; color:black;" name="ZIP_NUM"  value="${loginUser.ZIP_NUM }" id="sample6_postcode"  placeholder="우편번호 : ${loginUser.ZIP_NUM}" readonly />
                     <input type="button" id="oopyon" value="우편번호 검색" onclick="sample6_execDaumPostcode()"> 
-                    <input type="text" class="gumaeinput_text" name="useraddress1" id="sample6_address" placeholder="주소 : ${loginUser.ADDRESS1 }" readonly/>
-                    <input type="text" class="gumaeinput_text" name="useraddress2" id="sample6_detailAddress"  placeholder="상세 주소 1 : ${loginUser.ADDRESS2 }"/>
-                    <input type="text" class="gumaeinput_text" name="useraddress3" id="sample6_extraAddress"  placeholder="상세 주소 2 : ${loginUser.ADDRESS3 }"/>
-                    <input type="text" class="gumaeinput_text" name="PHONE" placeholder="전화번호 : ${loginUser.PHONE }" onkeyup="chkPhoneCode(event)" maxlength="13" />
+                    <input type="text" class="gumaeinput_text" name="ADDRESS1" value="${loginUser.ADDRESS1 }" id="sample6_address" placeholder="주소 : ${loginUser.ADDRESS1 }" readonly style="color:black;"/>
+                    <input type="text" class="gumaeinput_text" name="ADDRESS2" value="${loginUser.ADDRESS2 }" id="sample6_detailAddress"  placeholder="상세 주소 1 : ${loginUser.ADDRESS2 }" style="color:black;"/>
+                    <input type="text" class="gumaeinput_text" name="PHONE" value="${loginUser.PHONE }" id="PHONE" placeholder="전화번호 : ${loginUser.PHONE }" onkeyup="chkPhoneCode(event)" maxlength="13" style="color:black;"/>
 
                 </div>    
             </div>
@@ -79,7 +83,7 @@
             </div>
             </c:forEach>
             <input type="hidden" value="0" id="bdjs" name="bdjs">
-            <div class="baedaltip"><input type="text" value="배달요금 : 1000원 별도&nbsp;&nbsp;&nbsp;" id="badal" readonly></div>
+            <div class="baedaltip"><input type="text" value="배달요금 : ${RTIP}원 별도&nbsp;&nbsp;&nbsp;" id="badal" readonly></div>
             <div class="jbtotal">합계 : <input type="text" value="${carttotalprice }" id="jbtotalprice" name="TOTALPRICE" readonly>원&nbsp;&nbsp;</div>
             <input type="submit" value="결제" class="jbwanryo2" onclick="return jusochoice();">
 			
@@ -106,14 +110,8 @@
 		                    if(data.buildingName !== '' && data.apartment === 'Y'){
 		                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
 		                    }
-		                    if(extraAddr !== ''){
-		                        extraAddr = ' (' + extraAddr + ')';
-		                    }
-		                    document.getElementById("sample6_extraAddress").value = extraAddr;
 		                
-		                } else {
-		                    document.getElementById("sample6_extraAddress").value = '';
-		                }
+		                } 
 		                document.getElementById('sample6_postcode').value = data.zonecode;
 		                document.getElementById("sample6_address").value = addr;
 		                document.getElementById("sample6_detailAddress").focus();
