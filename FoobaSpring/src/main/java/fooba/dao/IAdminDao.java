@@ -26,4 +26,8 @@ public interface IAdminDao {
 	void admin_bupdown(HashMap<String, Object> prm);
 
 	void admin_bannerWrite(HashMap<String, Object> prm);
+
+	void admin_bannerUpdate(HashMap<String, Object> prm);
+
+	void admin_bannerDelete(HashMap<String, Object> prm);
 }

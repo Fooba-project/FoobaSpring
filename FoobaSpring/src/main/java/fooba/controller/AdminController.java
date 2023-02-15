@@ -15,11 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import fooba.dto.BannerVO;
 import fooba.dto.Paging;
 import fooba.dto.QnaVO;
 import fooba.service.AdminService;
@@ -106,7 +109,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin_resOx")
 	public String admin_restaurantOk(	HttpSession session, @RequestParam("ox") int ox, @RequestParam("RSEQ") int RSEQ) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("ox", ox);
@@ -118,7 +121,7 @@ public class AdminController {
 	
 	@RequestMapping("/admin_orderLR")
 	public String admin_orderLR(	HttpSession session, @RequestParam("result") int result, @RequestParam("OSEQ") int OSEQ) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("result", result);
@@ -130,14 +133,14 @@ public class AdminController {
 	
 	@RequestMapping("/admin_qnaWriteForm")
 	public String admin_qnaWriteForm(HttpSession session) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		return "admin/admin_qnaWrite";
 	}
 	
 	
 	@RequestMapping("/adminQna")
 	public String admin_qnaWrite(@ModelAttribute("vo") @Valid QnaVO qvo, BindingResult result, HttpSession session, Model model, @RequestParam("procedure") String procedure) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		String url = "admin/admin_qnaWrite";
 		if(procedure.equals("update")) url = "admin/admin_qnaUpdate";
 		
@@ -160,7 +163,7 @@ public class AdminController {
 	@RequestMapping("/adminDetail")
 	public String adminDetail(HttpSession session, Model model,
 			@RequestParam("procedure") String procedure, @RequestParam("SEQ") int SEQ ) {
-		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("procedure", procedure);
@@ -170,9 +173,10 @@ public class AdminController {
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		HashMap<String,Object> vo = list.get(0);
 		model.addAttribute("vo", vo);
-		
+
 		if (procedure.equals("res")) return "admin/admin_resDetail";
 		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
+		if (procedure.equals("bannerUp")) return "admin/admin_bannerUpdate";
 		else return "admin/admin_qnaDetail";
 	}
 	
@@ -188,19 +192,38 @@ public class AdminController {
 		return "redirect:/adminList?table=b";
 	}
 	
-	@RequestMapping("/bannerWriteForm")
-	public String bannerWriteForm() {
+	
+	@RequestMapping("/admin_bannerWriteForm")
+	public String admin_bannerWriteForm() {
 		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		return "admin/admin_bannerWrite";
 	}
 	
-	@RequestMapping("/bannerWrite")
-	public String bannerWrite(HttpServletRequest request, HttpSession session, Model model) throws IOException {
+	
+	@RequestMapping(value="/bannerFileup", method=RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String,Object> fileup(HttpServletRequest request) throws IOException {
+		System.out.println(1);
+		String path = context.getRealPath("images");
+		HashMap<String, Object> prm = new HashMap<>();
+		MultipartRequest multi = new MultipartRequest (
+				request,path,5*1024*1024,"UTF-8",new DefaultFileRenamePolicy()
+		);
+		prm.put("STATUS", 1);
+		prm.put("FILENAME", multi.getFilesystemName("fileimage"));
+		return prm;
+	}
+	
+	
+	@RequestMapping("/admin_bannerWrite")
+	public String admin_bannerWrite(HttpServletRequest request, HttpSession session, Model model) throws IOException {
 		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		String path = context.getRealPath("images");
 		
 		MultipartRequest multi = new MultipartRequest(
-			request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 	);
+		request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 	);
+		
+		model.addAttribute("BNAME", multi.getParameter("BNAME"));
 		
 		if( multi.getParameter("BNAME")==null || multi.getParameter("BNAME").equals("") )
 			model.addAttribute("message","배너 이름을 입력하세요");
@@ -216,6 +239,40 @@ public class AdminController {
 		return "admin/admin_bannerWrite";
 	}
 	
+	
+	
+	@RequestMapping("/admin_bannerUpdate")
+	public String admin_bannerUpdate(HttpServletRequest request, HttpSession session, Model model) throws IOException {
+	//	if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		String path = context.getRealPath("images");
+		MultipartRequest multi = new MultipartRequest(
+				request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy() 	);
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("BNAME", multi.getParameter("BNAME"));
+		prm.put("BSEQ", Integer.parseInt( multi.getParameter("BSEQ") ));
+		prm.put("BIMAGE", multi.getParameter("OLDIMAGE"));
+		model.addAttribute("vo", prm);
+		
+		if( multi.getParameter("BNAME")==null || multi.getParameter("BNAME").equals("") )
+			model.addAttribute("message","배너 이름을 입력하세요");
+		else {
+			if( multi.getFilesystemName("BIMAGE")!=null) prm.put("BIMAGE", multi.getFilesystemName("BIMAGE"));
+			as.admin_bannerUpdate(prm);
+			model.addAttribute("result", 1);
+		}
+		return "admin/admin_bannerUpdate";
+	}
+	
+	
+	@RequestMapping("/admin_bannerDelete")
+	public String admin_bannerDelete( HttpSession session, @RequestParam("BSEQ") int BSEQ ) throws IOException {
+	//	if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("BSEQ", BSEQ );
+		as.admin_bannerDelete(prm);
+		return "redirect:/adminList?table=b";
+	}
 }
 	
 

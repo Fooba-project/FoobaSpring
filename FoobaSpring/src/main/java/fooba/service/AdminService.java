@@ -88,6 +88,14 @@ public class AdminService {
 		adao.admin_bannerWrite(prm);
 	}
 
+	public void admin_bannerUpdate(HashMap<String, Object> prm) {
+		adao.admin_bannerUpdate(prm);
+	}
+
+	public void admin_bannerDelete(HashMap<String, Object> prm) {
+		adao.admin_bannerDelete(prm);
+	}
+
 
 
 	

@@ -47,10 +47,17 @@
 		{ CALL admin_bupdown (#{BSEQ}, #{num} )}
 	</update>
 	
-	<update id="admin_bannerWrite" statementType="CALLABLE" parameterType="java.util.HashMap">
+	<insert id="admin_bannerWrite" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL admin_bannerWrite (#{BNAME}, #{BIMAGE} )}
+	</insert>
+	
+	<update id="admin_bannerUpdate" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL admin_bannerUpdate (#{BNAME}, #{BIMAGE}, #{BSEQ} )}
 	</update>
 	
+	<delete id="admin_bannerDelete" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL admin_bannerDelete ( #{BSEQ} ) }
+	</delete>
 	
 </mapper>
 

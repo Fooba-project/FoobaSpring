@@ -102,6 +102,9 @@ BEGIN
     if (p_procedure='res' ) then
         open p_rc for
         select*from restaurant where rseq=p_var;
+    elsif (p_procedure='bannerUp' ) then
+        open p_rc for
+        select*from bannerf where bseq=p_var;
     else
         open p_rc for
         select*from qna where qseq=p_var;  
@@ -110,7 +113,9 @@ END;
 
 create or replace procedure admin_bupdown( p_bseq in number, p_num in number )
 IS
+v_border number;
 BEGIN
+    select border into v_border from bannerf where bseq=p_bseq;
     if (p_num=1) then
         update bannerf set border=4 where border=1;
         update bannerf set border=1 where bseq=p_bseq;
@@ -121,11 +126,43 @@ BEGIN
         update bannerf set border=4 where border=3;
         update bannerf set border=3 where bseq=p_bseq;
     elsif (p_num=4) then 
-        update bannerf set border=border-1 where border in (1,2,3);        
-        update bannerf set border=3 where border=0;
+        if (v_border=2) then
+            update bannerf set border=2 where border=1;
+            update bannerf set border=1 where bseq=p_bseq;    
+        elsif (v_border=3) then
+            update bannerf set border=3 where border=2;
+            update bannerf set border=2 where bseq=p_bseq; 
+        end if;
     elsif (p_num=5) then 
-        update bannerf set border=0 where border=3;
-        update bannerf set border=border+1 where border in (0,1,2);        
+        if (v_border=1) then
+            update bannerf set border=1 where border=2;
+            update bannerf set border=2 where bseq=p_bseq;    
+        elsif (v_border=2) then
+            update bannerf set border=2 where border=3;
+            update bannerf set border=3 where bseq=p_bseq; 
+        end if;       
     end if;
+    commit;
+END;
+
+
+create or replace procedure admin_bannerWrite (
+p_bname in varchar2,
+p_image in varchar2
+)
+IS
+BEGIN
+    insert into bannerf (bseq, bname, bimage) values (banner_seq.nextVal, p_bname, p_image);
+    commit;
+END;
+
+create or replace procedure admin_bannerUpdate (
+p_bname in varchar2,
+p_bimage in varchar2,
+p_bseq in number
+)
+IS
+BEGIN
+    update bannerf set bname=p_bname, bimage=p_bimage where bseq=p_bseq;
     commit;
 END;
