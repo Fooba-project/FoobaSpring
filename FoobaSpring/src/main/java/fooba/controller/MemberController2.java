@@ -20,6 +20,7 @@ import fooba.dto.CartVO;
 import fooba.dto.FoodmenuVO;
 import fooba.dto.MemberVO;
 import fooba.dto.OrderVO;
+import fooba.dto.Paging;
 import fooba.service.MemberService2;
 import fooba.service.ResService;
 import fooba.service.ResService2;
@@ -322,9 +323,21 @@ public class MemberController2 {
 		
 		return "member/memberOrderList";
 	}
-	/*	
+/*		
 	@RequestMapping("memberQnalist")
-	public String member_qnalist() {
+	public String member_qnalist(HttpServletRequest request,HttpSession session,Model model) {
+		
+		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("request", request);
+		prm.put("ref_cursor", null);	
+		
+		ms.memberQnaList(prm);
+		
+		ArrayList<HashMap<String,Object>> qnaList 
+        = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		
+		model.addAttribute("qnaList", qnaList);
+		model.addAttribute("paging", (Paging)prm.get("paging")); 
 		
 		return "member/memberQnalist";
 	}

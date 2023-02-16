@@ -34,6 +34,10 @@ public interface IMemberDao2 {
 
 	void insertOrders(HashMap<String, Object> prm);
 
+	void memberGetAllCount(HashMap<String, Object> cntMap);
+
+	//void memberQnaList(HashMap<String, Object> prm);
+
 
 
 }

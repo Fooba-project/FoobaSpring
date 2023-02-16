@@ -46,7 +46,7 @@
 									)
 		}
 	</select>
-	
+	 
 	<select id="memberQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{ CALL memberQnaList (
 		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 

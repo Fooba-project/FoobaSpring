@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 
 import fooba.dao.IMemberDao2;
 import fooba.dto.CartVO;
-import fooba.dto.MemberVO;
-import fooba.dto.OrderVO;
+import fooba.dto.Paging;
 
 @Service
 public class MemberService2 {
@@ -149,7 +148,43 @@ public class MemberService2 {
 		 prm.put("oname",oname);
 		mdao.insertOrders(prm);		
 	}
+/*
+	public void memberQnaList(HashMap<String, Object> prm) {
+		HttpServletRequest request = (HttpServletRequest)prm.get("request");
+		HttpSession session = request.getSession();
+		
+		if( request.getParameter("first")!=null) {
+			session.removeAttribute("page");
+		}
+		
+		int page=1;
+		if( request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+			session.setAttribute("page", page);
+		}else if( session.getAttribute("page") != null ) {
+			page = (Integer)session.getAttribute("page");
+		}else {
+			session.removeAttribute("page");
+		}
+				
+		Paging paging = new Paging();
+		paging.setPage(page);
 
+		prm.put("cnt", 0);
+		mdao.memberGetAllCount(prm);
+		
+		int count = Integer.parseInt( prm.get("cnt")+"" );
+		paging.setTotalCount(count);
+		paging.paging();
+
+		prm.put("startNum", paging.getStartNum());
+		prm.put("endNum", paging.getEndNum());
+		mdao.memberQnaList(prm);	
+		
+		prm.put("paging", paging);
+		
+	}
+*/
 
 	
 }

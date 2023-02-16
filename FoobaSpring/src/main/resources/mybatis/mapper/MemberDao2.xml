@@ -62,4 +62,13 @@
 	#{OSEQ, mode=OUT,jdbcType=INTEGER})}
 	</insert>
 	
+	<select id="memberGetAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL memberGetAllCount(#{cnt , mode=OUT, jdbcType=INTEGER })	  }
+	</select>
+	
+	<!-- <select id="memberQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL memberQnaList( #{startNum},#{endNum},
+		#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 }	  }
+	</select> -->
+	
 </mapper>
