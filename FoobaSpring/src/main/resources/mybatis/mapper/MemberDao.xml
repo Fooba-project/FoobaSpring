@@ -69,6 +69,22 @@
 		)}
 	</delete>
 	
+	<select id="getOrderbyOseq" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{CALL getOrderbyOseq(
+			#{OSEQ},#{ ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
+		)}
+	</select>
 	
+	<select id="selectOrderViewByOseq" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{CALL selectOrderViewByOseq(
+			#{OSEQ},#{ ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
+		)}
+	</select>
+	
+	<select id="getOrderReviewByOseq" statementType="CALLABLE" parameterType="java.util.HashMap" >
+		{CALL getOrderReviewByOseq(
+			#{OSEQ},#{ ref_cursor3, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
+		)}
+	</select>
 </mapper>
 

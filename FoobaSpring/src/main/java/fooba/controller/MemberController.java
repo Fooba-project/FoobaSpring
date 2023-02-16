@@ -39,8 +39,6 @@ public class MemberController {
 		ms.banner(prm);
 		ArrayList<HashMap<String,Object>> list
 		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
-		System.out.println(list.get(0).get("BIMAGE"));
-		//System.out.println(list.get(0).get("BIMAGE")+" / "+list.get(1).get("BIMAGE")+" / "+ list.get(2).get("BIMAGE")+" / ");
 		model.addAttribute("bannerList",list);
 		model.addAttribute("size",list.size());
 		return "main";
@@ -228,6 +226,31 @@ public class MemberController {
 		model.addAttribute("message","아이디가 정지 되었습니다. 복구요청은 고객센터에 전화주세요");
 		return "member/memberLogin";
 	}
+	
+	@RequestMapping("/memberOrderDetail")
+	public String memberOrderDetail(HttpSession session,Model model,@RequestParam("OSEQ")int OSEQ) {
+		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
+		HashMap<String, Object> prm = new HashMap<String, Object>();		
+		prm.put("OSEQ", OSEQ);
+		prm.put("ref_cursor1",null);
+		prm.put("ref_cursor2",null);
+		prm.put("ref_curso3",null);
+		
+		ms.getOrderDetail(prm);
+		
+		ArrayList<HashMap<String,Object>> list1 
+		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		ArrayList<HashMap<String,Object>> list2 
+		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		ArrayList<HashMap<String,Object>> list3 
+		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		model.addAttribute("ovo", list1.get(0));
+		model.addAttribute("ovList", list2);
+		model.addAttribute("review", list3.get(0));
+		return "member/memberOrderDetail";
+	}
+	
+	
 	
 	
 	

@@ -57,6 +57,12 @@ public class MemberService {
 		
 	}
 
+	public void getOrderDetail(HashMap<String, Object> prm) {
+		mdao.getOrderbyOseq(prm);
+		mdao.selectOrderViewByOseq(prm);
+		mdao.getOrderReviewByOseq(prm);
+	}
+
 
 
 		

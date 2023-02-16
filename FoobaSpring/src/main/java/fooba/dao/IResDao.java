@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import fooba.dto.FoodmenuVO;
 import fooba.dto.RestaurantVO;
 
 @Mapper
@@ -25,5 +26,21 @@ public interface IResDao {
 
 	void updateReply(HashMap<String, Object> paramMap);
 	
+	void nextOrderStatement(int OSEQ);
 
+	void selectOrdersIngByRseq(HashMap<String, Object> paramMap);
+
+	void selectOrdersAllByRseq(HashMap<String, Object> paramMap);
+	
+	void foodList(HashMap<String, Object> paramMap);
+
+	void selectFood(HashMap<String, Object> paramMap);
+	
+	void updateFoodMenu(FoodmenuVO vo);
+	
+	void addFoodMenu(FoodmenuVO vo);
+
+	void deleteFoodMenu(HashMap<String, Object> paramMap);
+
+	void restRes(HashMap<String, Object> paramMap);
 }

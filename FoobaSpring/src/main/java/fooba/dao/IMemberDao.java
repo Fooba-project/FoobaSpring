@@ -19,6 +19,9 @@ public interface IMemberDao {
 	void memberUpdate(HashMap<String, Object> prm);
 	void withdrawalMember(String iD);
 	void banner(HashMap<String, Object> prm);
+	void getOrderbyOseq(HashMap<String, Object> prm);
+	void selectOrderViewByOseq(HashMap<String, Object> prm);
+	void getOrderReviewByOseq(HashMap<String, Object> prm);
 
 	
 }

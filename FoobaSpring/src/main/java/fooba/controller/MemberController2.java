@@ -20,20 +20,15 @@ import fooba.dto.CartVO;
 import fooba.dto.FoodmenuVO;
 import fooba.dto.MemberVO;
 import fooba.dto.OrderVO;
-import fooba.dto.Paging;
 import fooba.service.MemberService2;
 import fooba.service.ResService;
-import fooba.service.ResService2;
 
 @Controller
 public class MemberController2 {
 	
 	@Autowired
 	MemberService2 ms;
-	
-	@Autowired
-	ResService2 rs2;
-	 
+		 
 	@Autowired
 	ResService rs;
 	
@@ -187,7 +182,7 @@ public class MemberController2 {
 		 prm.put("ref_cursor1", null);
 		 prm.put("ref_cursor2", null);
 		 
-		 rs2.foodList(prm);
+		 rs.foodList(prm);
 		 ms.resInf(prm);
 		 ms.reviewList(prm);
 		 	 

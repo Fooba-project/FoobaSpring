@@ -4,10 +4,10 @@
 
             <div id="res_tab">
                 <div class="res_infotab" 
-                onclick="res_review&key=2'">
+                onclick="location.href='res_review?key=2'">
                 전체답변</div>      
                 <div class="res_infotab" 
-                onclick="res_review&key=1'">
+                onclick="location.href='res_review?key=1'">
                 미답변</div>
             </div>
 		
