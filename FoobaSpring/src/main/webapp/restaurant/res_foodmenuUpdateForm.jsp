@@ -63,10 +63,10 @@
                             </div><hr>
                             
                             <h3>메뉴 사진</h3>
-                            	<img src="images/foodmenu/${vo.FIMAGE}" height="150px" id="OLDIMAGE">          
+                            	<img src="images/foodmenu/${vo.FIMAGE}" height="150px" id="OLDIMAGE">      
                             	<input type="hidden" name="FIMAGE" id="fileimage">
                             	
-   								<div id="filename">
+   								<div id="filename" style="float:left; margin-right:30px;">
    									<c:if test="${not empty NEWFIMAGE}">
 		   								<img src='images/foodmenu/${NEWFIMAGE}' height='150'/>
 		   							</c:if>

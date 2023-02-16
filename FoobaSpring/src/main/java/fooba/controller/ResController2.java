@@ -82,25 +82,28 @@ public class ResController2 {
 			else model.addAttribute("NEWFIMAGE",NEWFIMAGE);
 			
 			url = "restaurant/res_foodmenuUpdateForm";
-		}else {if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","내용을 입력하세요.");}
+		}else {if(result.getFieldError("FIMAGE")!=null) {model.addAttribute("messagex","이미지를 넣어주세요.");
+			return "restaurant/res_foodMenuAdd";}
+		 
+		}
 
-		if(result.getFieldError("FNAME")!=null) { model.addAttribute("messagex","내용을 입력하세요.");
+		if(result.getFieldError("FNAME")!=null) { model.addAttribute("messagex","이름을 입력하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FPRICE")!=null) { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FPRICE")!=null) { model.addAttribute("messagex","가격을 입력하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
 		else if(result.getFieldError("FCONTENT")!=null) { model.addAttribute("messagex","내용을 입력하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FSIDE1")!=null)  { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDE1")!=null)  { model.addAttribute("messagex","메뉴를 추가하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FSIDEPRICE1")!=null)  { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDEPRICE1")!=null)  { model.addAttribute("messagex","가격을 입력하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FSIDE2")!=null)  { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDE2")!=null)  { model.addAttribute("messagex","메뉴를 추가하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FSIDEPRICE2")!=null)  { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDEPRICE2")!=null)  { model.addAttribute("messagex","가격을 입력하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FSIDE3")!=null)  { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDE3")!=null)  { model.addAttribute("messagex","메뉴를 추가하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
-		else if(result.getFieldError("FSIDEPRICE3")!=null)  { model.addAttribute("messagex","내용을 입력하세요.");
+		else if(result.getFieldError("FSIDEPRICE3")!=null)  { model.addAttribute("messagex","가격을 입력하세요.");
 			if (!NEWFIMAGE.equals(""))vo.setFIMAGE(OLDIMAGE);}
 
 		else {
