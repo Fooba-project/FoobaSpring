@@ -286,20 +286,28 @@ public class ResController {
 		
 		if(result.getFieldError("CONTENT")!=null) {
 			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("RPHONE")!=null) {
 			model.addAttribute("message",result.getFieldError("RPHONE").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("RPHONE")!=null) {
 			model.addAttribute("message",result.getFieldError("RPHONE").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("ZIP_NUM")!=null) {
 			model.addAttribute("message",result.getFieldError("ZIP_NUM").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("RADDRESS")!=null) {
 			model.addAttribute("message",result.getFieldError("RADDRESS").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("RADDRESS2")!=null) {
 			model.addAttribute("message",result.getFieldError("RADDRESS2").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("RTIP")!=null) {
 			model.addAttribute("message","배달팁을 입력하세요");
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else if(result.getFieldError("HASH")!=null) {
 			model.addAttribute("message",result.getFieldError("HASH").getDefaultMessage());
+			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else{
 			rs.updateRes(vo);
 			System.out.println("xx  "+vo.getRIMAGE());

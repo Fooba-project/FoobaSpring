@@ -59,10 +59,10 @@
 	                        	value="${loginRes.HASH}"/><br><hr>
 	                        <a class="basic">가게로고</a>&nbsp; 
 	                        		            
-                                <div id="images_upload_box" style="height:200px">
+                                <div id="images_upload_box" style="height:200px; ">
                                 	<img src="images/title/${loginRes.RIMAGE}" height="150px" >
 			                         <input type="hidden" name="RIMAGE" id="fileimage" value="${NEWRIMAGE }">
-			                         <div id="filename">
+			                         <div id="filename" style="position:absolute; left: 250px;top:750px">
 				                         	<c:if test="${not empty NEWRIMAGE}">
 								   				<br><img src='images/title/${NEWRIMAGE }' height='150'/>
 								   			</c:if>
@@ -77,7 +77,7 @@
 				
 				<div style="position:absolute; bottom:-270px; left:10px;">
 					<form name="fromm" id="fileupForm2" method="post" enctype="multipart/form-data">
-								&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton2" value="추가">
+								&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton2" value="변경">
 					</form>
 				</div>
             </div>            
