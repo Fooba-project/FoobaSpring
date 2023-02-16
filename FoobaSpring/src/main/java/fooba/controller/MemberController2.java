@@ -322,11 +322,11 @@ public class MemberController2 {
 		
 		return "member/memberOrderList";
 	}
-		
+	/*	
 	@RequestMapping("memberQnalist")
 	public String member_qnalist() {
 		
 		return "member/memberQnalist";
 	}
-	
+	*/
 }
