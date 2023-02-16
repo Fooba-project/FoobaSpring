@@ -133,44 +133,110 @@ END;
 --    commit;
 --END;
 
- CREATE OR REPLACE PROCEDURE insertOrders(p_rseq IN orders.rseq%type, p_id IN orders.id%type, p_rideryn IN orders.rideryn%type,
-    p_plasticyn IN orders.plasticyn%type, p_payment IN orders.payment%type, p_address1  IN orders.address1%type, p_address2  IN orders.address2%type,
-    p_phone  IN orders.phone%type,p_totalprice  IN orders.totalprice%type,  p_oname  IN orders.oname%type,  p_oseq OUT orders.oseq%type )
- IS
-    temp_cur SYS_REFCURSOR;
-    v_oseq orders.oseq%type;
-    v_cseq cart.cseq%type;
-    v_quantity cart.quantity%type;
-    v_fseq cart.fseq%type;
-    v_sideyn1 cart.sideyn1%type;
-    v_sideyn2 cart.sideyn2%type;
-    v_sideyn3 cart.sideyn3%type;
-    v_sideyn1_1 number;
-    v_sideyn2_1 number;
-    v_sideyn3_1 number;
-BEGIN  
-    INSERT INTO orders(oseq, rseq, id, rideryn, plasticyn, payment, address1, address2, phone, oname ,totalprice)
-    VALUES(orders_seq.nextVal, p_rseq, p_id, p_rideryn, p_plasticyn, p_payment, p_address1, p_address2, p_phone,p_oname, p_totalprice);
-    select max(oseq) into v_oseq from orders where id=p_id;
-     OPEN temp_cur FOR SELECT cseq, quantity, fseq, sideyn1, sideyn2, sideyn3 FROM cart WHERE id = p_id ;    
-    LOOP
-        FETCH temp_cur INTO v_cseq, v_fseq, v_quantity, v_sideyn1, v_sideyn2, v_sideyn3 ;
-        EXIT WHEN temp_cur%NOTFOUND;        --20ï¿½ï¿½
-        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
-        else v_sideyn1_1 := 1;
+--    temp_cur SYS_REFCURSOR;
+--    v_oseq orders.oseq%type;
+--    v_cseq cart.cseq%type;
+--    v_quantity cart.quantity%type;
+--    v_fseq cart.fseq%type;
+--    v_sideyn1 cart.sideyn1%type;
+--    v_sideyn2 cart.sideyn2%type;
+--    v_sideyn3 cart.sideyn3%type;
+--    v_sideyn1_1 number;
+--    v_sideyn2_1 number;
+--    v_sideyn3_1 number;
+--BEGIN  
+--    INSERT INTO orders(oseq, rseq, id, rideryn, plasticyn, payment, address1, address2, phone, oname ,totalprice)
+--    VALUES(orders_seq.nextVal, p_rseq, p_id, p_rideryn, p_plasticyn, p_payment, p_address1, p_address2, p_phone,p_oname, p_totalprice);
+--    select max(oseq) into v_oseq from orders where id=p_id;
+--     OPEN temp_cur FOR SELECT cseq, quantity, fseq, sideyn1, sideyn2, sideyn3 FROM cart WHERE id = p_id ;    
+--    LOOP
+--        FETCH temp_cur INTO v_cseq, v_fseq, v_quantity, v_sideyn1, v_sideyn2, v_sideyn3 ;
+--        EXIT WHEN temp_cur%NOTFOUND;        --20ÁÙ
+--        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
+--        else v_sideyn1_1 := 1;
+--        end if;
+--        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
+--        else v_sideyn1_1 := 1;
+--        end if;
+--        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
+--        else v_sideyn1_1 := 1;
+--        end if;
+--        INSERT INTO order_detail(odseq, oseq, quantity, fseq, sideyn1, sideyn2, sideyn3 )
+--        VALUES(order_detail_seq.nextVal, v_oseq, v_quantity, v_fseq, v_sideyn1_1, v_sideyn2_1, v_sideyn3_1);
+--        DELETE FROM cart WHERE id=p_id;       
+--    END LOOP;
+--    commit;
+--    p_oseq := v_oseq;
+--END;
+
+CREATE OR REPLACE PROCEDURE lookupOseq(p_id IN orders.id%type, p_oseq OUT orders.oseq%type)
+IS
+BEGIN
+    select max(oseq)  into p_oseq from orders where id=p_id;
+END;
+
+CREATE OR REPLACE PROCEDURE insertOrder_Detail(p_oseq IN order_detail.oseq%type, p_quantity IN order_detail.quantity%type,p_fseq IN order_detail.fseq%type, 
+p_sideyn1 IN varchar2,p_sideyn2 IN varchar2,p_sideyn3 IN varchar2)
+IS
+    v_sideyn1 number;
+    v_sideyn2 number;
+    v_sideyn3 number;
+BEGIN
+     if(p_sideyn1 is null) then v_sideyn1 := 0;
+        else v_sideyn1 := 1;
         end if;
-        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
-        else v_sideyn1_1 := 1;
+        if(p_sideyn2 is null) then v_sideyn2 := 0;
+        else v_sideyn2 := 1;
         end if;
-        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
-        else v_sideyn1_1 := 1;
+        if(p_sideyn3 is null) then v_sideyn3 := 0;
+        else v_sideyn3 := 1;
         end if;
         INSERT INTO order_detail(odseq, oseq, quantity, fseq, sideyn1, sideyn2, sideyn3 )
-        VALUES(order_detail_seq.nextVal, v_oseq, v_quantity, v_fseq, v_sideyn1_1, v_sideyn2_1, v_sideyn3_1);
-        DELETE FROM cart WHERE id=p_id;       
-    END LOOP;
+        VALUES(order_detail_seq.nextVal, p_oseq, p_quantity, p_fseq, v_sideyn1, v_sideyn2, v_sideyn3);
+        commit;
+END;
+
+CREATE OR REPLACE PROCEDURE delCart( p_cseq  IN varchar2   )
+IS
+BEGIN
+    DELETE FROM cart WHERE cseq = p_cseq;
+    COMMIT;    
+END;
+
+CREATE OR REPLACE PROCEDURE insertOrder(p_rseq IN orders.rseq%type, p_id IN orders.id%type, p_rideryn IN orders.rideryn%type,
+    p_plasticyn IN orders.plasticyn%type, p_payment IN orders.payment%type, p_address1  IN orders.address1%type, p_address2  IN orders.address2%type,
+    p_phone  IN orders.phone%type,p_totalprice  IN orders.totalprice%type,  p_oname  IN orders.oname%type)
+IS
+BEGIN
+    INSERT INTO orders(oseq, rseq, id, rideryn, plasticyn, payment, address1, address2, phone, oname ,totalprice)
+    VALUES(orders_seq.nextVal, p_rseq, p_id, p_rideryn, p_plasticyn, p_payment, p_address1, p_address2, p_phone,p_oname, p_totalprice);
     commit;
-    p_oseq := v_oseq;
+END;
+
+
+CREATE OR REPLACE PROCEDURE memberGetAllCount(
+    p_cnt  OUT  NUMBER
+)
+IS
+    v_cnt NUMBER;
+BEGIN
+       SELECT COUNT(*) INTO v_cnt FROM qna;
+       p_cnt := v_cnt;
+END;
+
+CREATE OR REPLACE PROCEDURE memberQnaList(
+    p_startNum IN NUMBER,
+    p_endNum IN NUMBER,
+    p_rc OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+    OPEN p_rc FOR 
+        SELECT*FROM(
+        SELECT*FROM(
+        SELECT rownum as rn, q.*FROM((SELECT*FROM qna ORDER BY qseq desc)q)
+        ) WHERE rn>=p_startNum
+        ) WHERE rn<=p_endNum;
 END;
 
 

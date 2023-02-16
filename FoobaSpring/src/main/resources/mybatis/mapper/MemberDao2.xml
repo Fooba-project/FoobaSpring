@@ -56,10 +56,9 @@
 	</delete>
 
 	
-	<insert id="insertOrders" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{CALL insertOrders(#{ovo.RSEQ}, #{ovo.ID},#{ovo.RIDERYN},#{ovo.PLASTICYN},#{ovo.PAYMENT},
-	#{ovo.ADDRESS1},#{ovo.ADDRESS2},#{ovo.PHONE},#{ovo.TOTALPRICE},#{oname},
-	#{OSEQ, mode=OUT,jdbcType=INTEGER})}
+	<insert id="insertOrder" statementType="CALLABLE" parameterType="java.util.HashMap">
+	{CALL insertOrder(#{ovo.RSEQ}, #{ovo.ID},#{ovo.RIDERYN},#{ovo.PLASTICYN},#{ovo.PAYMENT},
+	#{ovo.ADDRESS1},#{ovo.ADDRESS2},#{ovo.PHONE},#{ovo.TOTALPRICE},#{oname})}
 	</insert>
 	
 	<select id="memberGetAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -70,5 +69,18 @@
 		{ CALL memberQnaList( #{startNum},#{endNum},
 		#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 }	  }
 	</select> -->
+	
+	<select id="lookupOseq" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{ CALL lookupOseq( #{ID},  #{OSEQ, mode=OUT, jdbcType=INTEGER} )}
+	</select>
+
+	<insert id="insertOrder_Detail" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{	CALL insertOrder_Detail( #{OSEQ}, #{hvo.QUANTITY}, #{hvo.FSEQ}, #{hvo.SIDEYN1}, #{hvo.SIDEYN2},#{hvo.SIDEYN3}
+		)}
+	</insert>
+	
+	<delete id="delCart" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{	CALL delCart( #{param1} )}
+	</delete>
 	
 </mapper>

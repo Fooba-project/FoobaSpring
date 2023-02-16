@@ -8,16 +8,21 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import fooba.dao.IMemberDao2;
 import fooba.dto.CartVO;
-import fooba.dto.Paging;
 
 @Service
 public class MemberService2 {
 
 	@Autowired
 	IMemberDao2 mdao;
+	
+	 @Autowired
+	   TransactionTemplate tt;
 	
 
 	public void getMember(HashMap<String, Object> prm) {
@@ -113,78 +118,63 @@ public class MemberService2 {
 		mdao.cartList(prm);
 	}
 
-	public void insertOrders(HashMap<String, Object> prm) {
-		mdao.cartList(prm);
-		 ArrayList<HashMap<String,Object>> cartList 
-         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		 String oname = "";
-		 int i = 0;
-		 int size = cartList.size();
-		 for(HashMap<String,Object> hvo : cartList) {
-			 i++;
-			 oname=oname+hvo.get("CFNAME")+"";
-			 if ( !(""+hvo.get("SIDEYN1")+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("") ) {
-				 oname = oname + " 사이드(";
-        		 if (!(""+hvo.get("SIDEYN1")).trim().equals("")) {
-        			 oname = oname + hvo.get("SIDEYN1");
-        			 if (!(""+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("")) {
-        				 oname = oname + ", ";
-        			 }
-        		 }
-        		 if (!(""+hvo.get("SIDEYN2")).trim().equals("")) {
-        			 oname = oname + hvo.get("SIDEYN2");
-        			 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
-        				 oname = oname + ", ";
-        			 }
-        		 }
-        		 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
-        			 oname = oname + hvo.get("SIDEYN3");
-        		 }
-        		 if(size==i) oname=oname+") "+hvo.get("QUANTITY")+"개"; // 주문한메뉴갯수==반복횟수 일때
-        		 else oname = oname + ") "+hvo.get("QUANTITY")+"개, "; // 주문한메뉴갯수>반복횟수일 때
-		 	}else if (size!=i) oname = oname+" "+hvo.get("QUANTITY")+"개, ";// 주문한메뉴갯수>반복횟수일 때
-		 	else oname = oname+" "+hvo.get("QUANTITY")+"개";
-		 }
-		 prm.put("oname",oname);
-		mdao.insertOrders(prm);		
-	}
-/*
-	public void memberQnaList(HashMap<String, Object> prm) {
-		HttpServletRequest request = (HttpServletRequest)prm.get("request");
-		HttpSession session = request.getSession();
-		
-		if( request.getParameter("first")!=null) {
-			session.removeAttribute("page");
+	public void insertOrders(HashMap<String, Object> prm) {	
+		int result = 1;
+		try {
+			tt.execute( new TransactionCallbackWithoutResult(){
+				@Override
+				protected void doInTransactionWithoutResult(TransactionStatus status) {
+					
+					mdao.cartList(prm);
+					ArrayList<HashMap<String,Object>> cartList 
+			         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+					 int i = 0;
+					 int size = cartList.size();
+					 String oname = "";
+					for(HashMap<String,Object> hvo : cartList) {
+						oname=oname+hvo.get("CFNAME")+"";
+						 if ( !(""+hvo.get("SIDEYN1")+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("") ) {
+							 oname = oname + " 사이드(";
+			        		 if (!(""+hvo.get("SIDEYN1")).trim().equals("")) {
+			        			 oname = oname + hvo.get("SIDEYN1");
+			        			 if (!(""+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("")) {
+			        				 oname = oname + ", ";
+			        			 }
+			        		 }
+			        		 if (!(""+hvo.get("SIDEYN2")).trim().equals("")) {
+			        			 oname = oname + hvo.get("SIDEYN2");
+			        			 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
+			        				 oname = oname + ", ";
+			        			 }
+			        		 }
+			        		 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
+			        			 oname = oname + hvo.get("SIDEYN3");
+			        		 }
+			        		 if(size==i) oname=oname+") "+hvo.get("QUANTITY")+"개"; // 주문한메뉴갯수==반복횟수 일때
+			        		 else oname = oname + ") "+hvo.get("QUANTITY")+"개, "; // 주문한메뉴갯수>반복횟수일 때
+					 	}else if (size!=i) oname = oname+" "+hvo.get("QUANTITY")+"개, ";// 주문한메뉴갯수>반복횟수일 때
+					 	else oname = oname+" "+hvo.get("QUANTITY")+"개";						
+					}
+					prm.put("oname", oname);
+					mdao.insertOrder(prm);
+					mdao.lookupOseq(prm);
+					int oseq=Integer.parseInt( prm.get("OSEQ")+"");
+					prm.put("oseq", oseq);
+					for(HashMap<String,Object> hvo : cartList) {
+						prm.put("hvo",hvo);
+						mdao.insertOrder_Detail( prm );
+						mdao.delCart( hvo.get("CSEQ")+"" );
+					}	
+				}
+			});
+			System.out.println("Transaction Commit");
+		}catch( Exception e) {
+			result = 2;
+			System.out.println("Transaction RollBack");
 		}
-		
-		int page=1;
-		if( request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-			session.setAttribute("page", page);
-		}else if( session.getAttribute("page") != null ) {
-			page = (Integer)session.getAttribute("page");
-		}else {
-			session.removeAttribute("page");
-		}
-				
-		Paging paging = new Paging();
-		paging.setPage(page);
-
-		prm.put("cnt", 0);
-		mdao.memberGetAllCount(prm);
-		
-		int count = Integer.parseInt( prm.get("cnt")+"" );
-		paging.setTotalCount(count);
-		paging.paging();
-
-		prm.put("startNum", paging.getStartNum());
-		prm.put("endNum", paging.getEndNum());
-		mdao.memberQnaList(prm);	
-		
-		prm.put("paging", paging);
-		
+		prm.put("result", result);	
 	}
-*/
-
+	
 	
 }
+	

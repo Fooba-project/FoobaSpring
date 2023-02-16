@@ -28,7 +28,7 @@ public class MemberController2 {
 	
 	@Autowired
 	MemberService2 ms;
-		 
+	 
 	@Autowired
 	ResService rs;
 	
@@ -305,36 +305,36 @@ public class MemberController2 {
 	
 	@RequestMapping("order")
 	public String order(HttpServletRequest request,HttpSession session,Model model,
+			OrderVO ovo, CartVO cvo) {
+		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
+		
+		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("RSEQ", ovo.getRSEQ());
+		prm.put("ID", ovo.getID());
+		prm.put("OSEQ", 0);
+		prm.put("ovo", ovo);
+		
+		ms.insertOrders(prm);
+		
+		 int result = Integer.parseInt(prm.get("result") + "");
+         if(result  == 2) return "redirect:/orderForm";
+		
+		return "member/memberOrderList";
+	}
+/*	
+	@RequestMapping("memberOrderList")
+	public String memberOrderList(HttpServletRequest request,HttpSession session,Model model,
 			OrderVO ovo) {
 		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
 		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("ref_cursor", null);
-		prm.put("RSEQ", ovo.getRSEQ());
-		prm.put("ID",ovo.getID());
-		prm.put("ovo", ovo);
 		
-		ms.insertOrders(prm);
+		ArrayList<HashMap<String,Object>> orderList 
+        = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		prm.put("molist" , orderList);
 		
 		return "member/memberOrderList";
 	}
-/*		
-	@RequestMapping("memberQnalist")
-	public String member_qnalist(HttpServletRequest request,HttpSession session,Model model) {
-		
-		HashMap<String,Object> prm = new HashMap<String,Object>();
-		prm.put("request", request);
-		prm.put("ref_cursor", null);	
-		
-		ms.memberQnaList(prm);
-		
-		ArrayList<HashMap<String,Object>> qnaList 
-        = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		
-		model.addAttribute("qnaList", qnaList);
-		model.addAttribute("paging", (Paging)prm.get("paging")); 
-		
-		return "member/memberQnalist";
-	}
-	*/
+*/
 }

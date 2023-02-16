@@ -57,6 +57,8 @@ BEGIN
 	select * from qna order by qseq desc;
 END;
 
+select*from orders;
+
 create or replace procedure memberUpdate(
     p_id IN member.id%TYPE,
     p_pwd IN member.pwd%TYPE,

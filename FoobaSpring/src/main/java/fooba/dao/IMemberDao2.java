@@ -2,6 +2,7 @@ package fooba.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,11 +33,13 @@ public interface IMemberDao2 {
 
 	void cartList(HashMap<String, Object> prm);
 
-	void insertOrders(HashMap<String, Object> prm);
+	void lookupOseq(HashMap<String, Object> prm);
 
-	void memberGetAllCount(HashMap<String, Object> cntMap);
+	void insertOrder_Detail(HashMap<String, Object> prm);
 
-	//void memberQnaList(HashMap<String, Object> prm);
+	void insertOrder(HashMap<String, Object> prm);
+
+	void delCart(String cseq);
 
 
 
