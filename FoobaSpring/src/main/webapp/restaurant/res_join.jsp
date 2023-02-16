@@ -158,9 +158,12 @@ function chkIdCode(event) {
                      가게 대표이미지
                 </div> 
                     <div id="images_upload_box" style="height:200px">
-                         <input type="hidden" class="input_text" name="RIMAGE" id="fileimage">
+                         <input type="hidden" class="input_text" name="RIMAGE" id="fileimage" value="${vo.RIMAGE }">
                          <div id="filename">
-                    </div>
+                         	<c:if test="${not empty vo.RIMAGE}">
+				   				<img src='images/title/${vo.RIMAGE }' height='170' width='400'/>
+				   			</c:if>
+                    	</div>
                 
                 </div>
                 <div id="join_agree_btn">
@@ -182,8 +185,8 @@ function chkIdCode(event) {
     </form>
     
     <div style="position:absolute; bottom:400px;">
-		<form name="fromm" id="fileupForm" method="post" enctype="multipart/form-data">
-					&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton" value="추가">
+		<form name="fromm" id="fileupForm2" method="post" enctype="multipart/form-data">
+					&nbsp;&nbsp;<input type="file" name="fileimage"><input type="button" id="myButton2" value="추가">
 		</form>
 	
 	</div>

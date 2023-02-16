@@ -184,24 +184,7 @@ public class ResController {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping(value="fileup",method=RequestMethod.POST)
-	@ResponseBody	
-	public HashMap<String , Object>fileup(Model model,HttpServletRequest request){
-		
-		String path=context.getRealPath("images/foodmenu");
-		HashMap<String,Object>result=new HashMap<String,Object>();
-		
-		try {
-			MultipartRequest multi =new MultipartRequest(
-					request,path,5*1024*1024,"UTF-8",new DefaultFileRenamePolicy()
-			);
-			result.put("STATUS",1);
-			result.put("FILENAME", multi.getFilesystemName("fileimage"));
-		} catch (IOException e) {	e.printStackTrace();
-		}
-		
-		return result; //result는 목적지의 매개변수 data객체로 전달된다.
-	}
+	
 	
 	@RequestMapping(value="/res_idCheckForm")
 	public String res_idCheckForm(@RequestParam("RID")String rid,Model model) {
@@ -296,6 +279,11 @@ public class ResController {
 			BindingResult result,Model model ,@RequestParam("oldImage")String oldImage) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		System.out.println(vo.getRIMAGE());
+		
+		String NEWRIMAGE = vo.getRIMAGE();
+		if( vo.getRIMAGE().equals("") ) vo.setRIMAGE(oldImage);
+		else model.addAttribute("NEWRIMAGE", NEWRIMAGE);
+		
 		if(result.getFieldError("CONTENT")!=null) {
 			model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
 		}else if(result.getFieldError("RPHONE")!=null) {
@@ -313,7 +301,6 @@ public class ResController {
 		}else if(result.getFieldError("HASH")!=null) {
 			model.addAttribute("message",result.getFieldError("HASH").getDefaultMessage());
 		}else{
-			if(vo.getRIMAGE()==null)vo.setRIMAGE(oldImage);
 			rs.updateRes(vo);
 			System.out.println("xx  "+vo.getRIMAGE());
 			

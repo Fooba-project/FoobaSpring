@@ -27,15 +27,15 @@
 	                    </div><br>
                     	<div id="res_num">
 	                        <h3>업체 정보</h3><hr>
-	                        <a class="basic">사업자 번호</a>&nbsp; ${loginRes.RBIZNUM}
-	                        	<input type="hidden" value="${loginRes.RBIZNUM}"><br><hr>                    
+	                        <a class="basic">사업자 번호</a>&nbsp;
+	                        	<input type="text" value="${loginRes.RBIZNUM}" readonly style=" border:0;"><br><hr>                    
 	                        <a class="basic">전화 번호</a>&nbsp;
 	                        	<input type="text" name="RPHONE" style="border-radius:5px; width:170px; height:20px;"
 	                        	 value="${loginRes.RPHONE}"  maxlength="13" id="rphone" onkeyup="chkPhoneCode(event)"/><br><hr>
 	                        <input type="button" id="re_btn" onclick="sample6_execDaumPostcode()" class="dup" value="우편번호 찾기"> &nbsp; 
 	                        <input type="text"  id="sample6_postcode"  style="width: 50px;  border:0;" name="ZIP_NUM" placeholder="우편번호" value="${loginRes.ZIP_NUM}" readonly/>
                				<br>
-                			<a class="basic">사업자 주소&nbsp;</a> &nbsp; <input type="text"name="RADDRESS" style="  border:0;"
+                			<a class="basic">사업자 주소&nbsp;</a> &nbsp; <input type="text"name="RADDRESS" style=" border:0;"
 				                id="sample6_address"   value="${loginRes.RADDRESS}"
 				                  readonly/>	<br>
 				            <a class="basic">상세 주소 &nbsp;&nbsp;</a>&nbsp;  &nbsp;&nbsp;<input type="text"  name="RADDRESS2" 
@@ -60,9 +60,13 @@
 	                        <a class="basic">가게로고</a>&nbsp; 
 	                        		            
                                 <div id="images_upload_box" style="height:200px">
-                                	<img src="images/title/${loginRes.RIMAGE}" height="150px" id="oldImg">
-			                         <input type="hidden" class="input_text" name="RIMAGE" id="fileimage">
-			                         <div id="filename"></div>
+                                	<img src="images/title/${loginRes.RIMAGE}" height="150px" >
+			                         <input type="hidden" name="RIMAGE" id="fileimage" value="${NEWRIMAGE }">
+			                         <div id="filename">
+				                         	<c:if test="${not empty NEWRIMAGE}">
+								   				<br><img src='images/title/${NEWRIMAGE }' height='150'/>
+								   			</c:if>
+			                         </div>
 	                        	
 	                    </div><br>
 	                    <input type="submit" value="수정 완료" class="res_infotab"  style="width:700px; position:absolute; bottom:-50px;">

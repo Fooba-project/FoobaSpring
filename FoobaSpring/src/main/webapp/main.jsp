@@ -23,14 +23,10 @@ $(function() {
 	
 <div id="maintextbox">
 	<div id="imgss" 
-		style="position:absolute; left:0px; top:0px; width:1920px;text-align:left;">
-			<c:forEach items="${bannerList }"  var="bannerVO">
-				<img src="images/${bannerVO.IMAGE}" style="width:1920px;height:500px;" >
-			</c:forEach>
+		style="position:absolute; left:0px; top:0px; width:1922px;text-align:left;"><c:forEach items="${bannerList }"  var="bannerVO"><img src="images/${bannerVO.BIMAGE}" style="width:1920px; height:500px" ></c:forEach></div>
 		    <span id="maintext">음식은 푸바, 
 		        배달은 푸바!
 		    </span>
-     </div>
 </div>
 </c:if>
 

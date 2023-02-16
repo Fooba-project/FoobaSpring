@@ -39,6 +39,8 @@ public class MemberController {
 		ms.banner(prm);
 		ArrayList<HashMap<String,Object>> list
 		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		System.out.println(list.get(0).get("BIMAGE"));
+		//System.out.println(list.get(0).get("BIMAGE")+" / "+list.get(1).get("BIMAGE")+" / "+ list.get(2).get("BIMAGE")+" / ");
 		model.addAttribute("bannerList",list);
 		model.addAttribute("size",list.size());
 		return "main";
