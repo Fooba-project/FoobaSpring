@@ -140,4 +140,19 @@ select  DISTINCT oseq, indate,totalprice,result,nick,oadd1,oadd2,ophone, rideryn
 --from orders a, order_detail b, member c, foodmenu d, restaurant e
 --where a.oseq=b.oseq and a.id = c.id and b.fseq=d.fseq and d.rseq=e.rseq;
 
+CREATE OR REPLACE PROCEDURE selectOrdersAllByRseq(
+    p_rseq IN number,
+    p_cur OUT SYS_REFCURSOR
+
+)
+IS
+
+BEGIN
+ open p_cur for
+ select * from order_view where rseq=p_rseq order by oseq desc;
+   
+
+end;
+
+
 

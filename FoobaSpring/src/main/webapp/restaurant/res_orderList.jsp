@@ -3,8 +3,8 @@
 <%@ include file="/restaurant/res_subhead.jsp"%>
 
         <div id="res_tab">
-            <div class="res_infotab" onclick="location.href='=res_order'">진행중인 주문 현황</div>      
-            <div class="res_infotab" onclick="location.href='=res_orderAll'">총 주문현황</div>
+            <div class="res_infotab" onclick="location.href='res_order'">진행중인 주문 현황</div>      
+            <div class="res_infotab" onclick="location.href='res_orderAll'">총 주문현황</div>
         </div>
         
         <form id="res_menuall" name="rfm" method="post" >

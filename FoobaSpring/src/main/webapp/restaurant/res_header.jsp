@@ -132,7 +132,7 @@ function menu_update(){
 }
 
 function go_order_save(oseq){
-	document.rfm.action = "fooba.do?command=res_orderComplete&oseq="+oseq;
+	document.rfm.action = "res_orderComplete?OSEQ="+oseq;
 	document.rfm.submit();
 }
 
