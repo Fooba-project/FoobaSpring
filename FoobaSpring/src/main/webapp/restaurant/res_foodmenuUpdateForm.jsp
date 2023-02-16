@@ -64,8 +64,13 @@
                             
                             <h3>메뉴 사진</h3>
                             	<img src="images/foodmenu/${vo.FIMAGE}" height="150px" id="OLDIMAGE">          
-                            	<input type="hidden" name="FIMAGE" id="fileimage" value="${NEWFIMAGE}" >
-   								<div id="filename"></div>
+                            	<input type="hidden" name="FIMAGE" id="fileimage">
+                            	
+   								<div id="filename">
+   									<c:if test="${not empty NEWFIMAGE}">
+		   								<img src='images/foodmenu/${NEWFIMAGE}' height='150'/>
+		   							</c:if>
+   								</div>
                                                            
                             <div id="res_tab">
             					<input type="submit" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:0px"

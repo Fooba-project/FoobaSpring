@@ -33,6 +33,7 @@ $(function(){
 	        success : function(data){
 	            if(data.STATUS == 1){  	
 	            	$("#fileimage").val(data.FILENAME);
+	            	$("#fileimage2").val(data.FILENAME);
 	            	$("#filename").html("<img src='images/foodmenu/"+data.FILENAME+"' height='150'/>");
 	            }
 	        },
