@@ -35,7 +35,8 @@
 	</select>
 	
 	<select id="selectOrdersAllByRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL selectOrdersAllByRseq( #{RSEQ},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2})}
+		{CALL selectOrdersAllByRseq( #{RSEQ},
+		#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap2})}
 	</select>
 	
 

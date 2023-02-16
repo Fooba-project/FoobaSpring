@@ -190,7 +190,7 @@ public class ResController2 {
 	
 	
 	@RequestMapping("/res_order")
-		public String res_order( HttpSession session, Model model){
+		public String res_order( HttpSession session, Model model, OrderVO ovo){
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();	
