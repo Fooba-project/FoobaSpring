@@ -62,11 +62,10 @@
                                 style="width:120px; height:35px;" name="FSIDEPRICE3" value="${vo.FSIDEPRICE3}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" > 원
                             </div><hr>
                             
-                            <h3>메뉴 사진</h3>        
-                            	<input type="hidden" name="FIMAGE" id="fileimage" >
+                            <h3>메뉴 사진</h3>
+                            	<img src="images/foodmenu/${vo.FIMAGE}" height="150px" id="OLDIMAGE">          
+                            	<input type="hidden" name="FIMAGE" id="fileimage" value="${NEWFIMAGE}" >
    								<div id="filename"></div>
-							<%--<img src="images/foodmenu/${vo.FIMAGE}" width="100px"><br>            
-                                <input type="file" name="fimage" /> --%>
                                                            
                             <div id="res_tab">
             					<input type="submit" class="res_infotab"  style="width:100%; height:50px; border-radius:5px; background:rgb(255,204,0); position:absolute; bottom:0px"

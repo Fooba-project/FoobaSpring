@@ -23,7 +23,7 @@ public interface IResDao2 {
 
 	void restRes(HashMap<String, Object> paramMap);
 
-	void nextOrderStatement(HashMap<String, Object> paramMap);
+	void nextOrderStatement(int OSEQ);
 
 	void selectOrdersIngByRseq(HashMap<String, Object> paramMap);
 

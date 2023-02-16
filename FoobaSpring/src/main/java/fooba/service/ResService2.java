@@ -39,8 +39,8 @@ public class ResService2 {
 		rdao.restRes(paramMap);
 	}
 
-	public void nextOrderStatement(HashMap<String, Object> paramMap) {
-		rdao.nextOrderStatement(paramMap);
+	public void nextOrderStatement(int OSEQ) {
+		rdao.nextOrderStatement(OSEQ);
 		
 	}
 

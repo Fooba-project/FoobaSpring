@@ -71,10 +71,16 @@ public class ResController2 {
 		public String res_foodmenuUA(@ModelAttribute("vo") @Valid FoodmenuVO vo, BindingResult result,
 			HttpSession session, Model model, @RequestParam("procedure") String procedure,
 			@RequestParam(value="OLDIMAGE", required=false) String OLDIMAGE) {
+		
+			String NEWFIMAGE = vo.getFIMAGE();
+			
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		String url = "restaurant/res_foodMenuAdd";
+		
 		if(procedure.equals("update")) {
 			if(vo.getFIMAGE()==null||vo.getFIMAGE().equals("")) vo.setFIMAGE(OLDIMAGE);
+			else model.addAttribute("NEWFIMAGE",NEWFIMAGE);
+			
 			url = "restaurant/res_foodmenuUpdateForm";
 		}else {if(result.getFieldError("FIMAGE")!=null) model.addAttribute("messagex","내용을 입력하세요.");}
 		if(result.getFieldError("FNAME")!=null) model.addAttribute("messagex","내용을 입력하세요.");
@@ -86,6 +92,7 @@ public class ResController2 {
 		else if(result.getFieldError("FSIDEPRICE2")!=null) model.addAttribute("messagex","내용을 입력하세요.");
 		else if(result.getFieldError("FSIDE3")!=null) model.addAttribute("messagex","내용을 입력하세요.");
 		else if(result.getFieldError("FSIDEPRICE3")!=null) model.addAttribute("messagex","내용을 입력하세요.");
+
 		else {
 			url = "redirect:/res_foodmenu";
 			if(procedure.equals("update")) rs.updateFoodMenu(vo);
@@ -209,7 +216,7 @@ public class ResController2 {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("OSEQ", OSEQ);
-		rs.nextOrderStatement(paramMap);
+		rs.nextOrderStatement(OSEQ);
 		return "redirect:/res_order";	
 	}
 	

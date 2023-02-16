@@ -3,7 +3,7 @@
 <%@ include file="/restaurant/res_subhead.jsp"%>
 
         <div id="res_tab">
-            <div class="res_infotab" onclick="res_foodmenu'" >메뉴</div>
+            <div class="res_infotab" onclick="location.href='res_foodmenu'" >메뉴</div>
             <div class="res_infotab" onclick="#" style="color:white;">
             메뉴 추가</div>
         </div>
@@ -60,7 +60,7 @@
                                 style="width:120px; height:35px;" name="FSIDEPRICE3" value="${vo.FSIDEPRICE3}" placeholder=" 예) 3000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" /> 원
                             </div>
                             
-                            <h3>메뉴 사진</h3>        
+                            <h3>메뉴 사진</h3>      
                             	<input type="hidden" name="FIMAGE" id="fileimage" >
    								<div id="filename"></div>
                                 
