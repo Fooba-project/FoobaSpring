@@ -86,6 +86,7 @@ CREATE TABLE orders
 	address2 varchar2(100),
 	totalprice number(7),
 	phone varchar2(20),
+	oname varchar2(1000),
 	PRIMARY KEY (oseq)
 );
 

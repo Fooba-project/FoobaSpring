@@ -115,7 +115,38 @@ public class MemberService2 {
 	}
 
 	public void insertOrders(HashMap<String, Object> prm) {
-
+		mdao.cartList(prm);
+		 ArrayList<HashMap<String,Object>> cartList 
+         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		 String oname = "";
+		 int i = 0;
+		 int size = cartList.size();
+		 for(HashMap<String,Object> hvo : cartList) {
+			 i++;
+			 oname=oname+hvo.get("CFNAME")+"";
+			 if ( !(""+hvo.get("SIDEYN1")+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("") ) {
+				 oname = oname + " 사이드(";
+        		 if (!(""+hvo.get("SIDEYN1")).trim().equals("")) {
+        			 oname = oname + hvo.get("SIDEYN1");
+        			 if (!(""+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("")) {
+        				 oname = oname + ", ";
+        			 }
+        		 }
+        		 if (!(""+hvo.get("SIDEYN2")).trim().equals("")) {
+        			 oname = oname + hvo.get("SIDEYN2");
+        			 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
+        				 oname = oname + ", ";
+        			 }
+        		 }
+        		 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
+        			 oname = oname + hvo.get("SIDEYN3");
+        		 }
+        		 if(size==i) oname=oname+") "+hvo.get("QUANTITY")+"개"; // 주문한메뉴갯수==반복횟수 일때
+        		 else oname = oname + ") "+hvo.get("QUANTITY")+"개, "; // 주문한메뉴갯수>반복횟수일 때
+		 	}else if (size!=i) oname = oname+" "+hvo.get("QUANTITY")+"개, ";// 주문한메뉴갯수>반복횟수일 때
+		 	else oname = oname+" "+hvo.get("QUANTITY")+"개";
+		 }
+		 prm.put("oname",oname);
 		mdao.insertOrders(prm);		
 	}
 

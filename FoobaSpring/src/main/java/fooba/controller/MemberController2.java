@@ -297,11 +297,11 @@ public class MemberController2 {
 
 		ms.cartList(prm);
 		
-		 ArrayList<HashMap<String,Object>> list 
+		 ArrayList<HashMap<String,Object>> cartList 
          = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		 model.addAttribute("RTIP", RTIP);
 		 model.addAttribute("RSEQ", RSEQ);
-		 model.addAttribute("list", list);
+		 model.addAttribute("list", cartList);
 		 model.addAttribute("carttotalprice", carttotalprice);
 		 
 		 return "main/menuorder";
@@ -313,6 +313,9 @@ public class MemberController2 {
 		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
 		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("ref_cursor", null);
+		prm.put("RSEQ", ovo.getRSEQ());
+		prm.put("ID",ovo.getID());
 		prm.put("ovo", ovo);
 		
 		ms.insertOrders(prm);
@@ -320,5 +323,10 @@ public class MemberController2 {
 		return "member/memberOrderList";
 	}
 		
+	@RequestMapping("memberQnalist")
+	public String member_qnalist() {
+		
+		return "member/memberQnalist";
+	}
 	
 }

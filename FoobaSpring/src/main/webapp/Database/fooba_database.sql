@@ -1432,18 +1432,11 @@ values(qna_seq.nextVal,'가게와 갈등이 있었어요',
 
 
 -- 오더스1 rideyn 0 배달 1 포장 , plasticyn 0 필요 없어요 1 주세요 payment 0 카드 1 현금 result 0 배달중, 1 배달완료	 (기본값0)
-insert into orders(oseq,id,rideryn,plasticyn,payment,result,address1,address2,totalprice,phone)
-values(orders_seq.nextVal,'abc1234',1,0,1,1,'서울특별시 서대문구','신촌 이젠아카데미 2층 404호', 11000,'010-1234-4321');
+insert into orders(oseq,id,rideryn,plasticyn,payment,result,address1,address2,totalprice,phone,oname)
+values(orders_seq.nextVal,'abc1234',1,0,1,1,'서울특별시 서대문구','신촌 이젠아카데미 2층 404호', 11000,'010-1234-4321','메론아 밀크쉐이크 2개');
 insert into order_detail(odseq,oseq,fseq,quantity,sideyn1,sideyn2,sideyn3)
 values(order_detail_seq.nextVal,1,242,2,0,0,0);
 
--- 오더스 2
-insert into orders(oseq,id,rideryn,plasticyn,payment,result,address1,address2,totalprice,phone)
-values(orders_seq.nextVal,'bsc1234',0,1,1,0,'서울특별시 서대문구','신촌 이젠아카데미 2층 404호', 71000, '010-1234-1234' );
-insert into order_detail(odseq,oseq,fseq,quantity,sideyn1,sideyn2,sideyn3)
-values(order_detail_seq.nextVal,2,118,1,1,1,0);
-insert into order_detail(odseq,oseq,fseq,quantity,sideyn1,sideyn2,sideyn3)
-values(order_detail_seq.nextVal,2,119,2,1,0,1);
 
 
 insert into review(review_seq,id,rseq,star,content,oseq,nick)

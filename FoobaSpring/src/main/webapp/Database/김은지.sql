@@ -135,7 +135,7 @@ END;
 
  CREATE OR REPLACE PROCEDURE insertOrders(p_rseq IN orders.rseq%type, p_id IN orders.id%type, p_rideryn IN orders.rideryn%type,
     p_plasticyn IN orders.plasticyn%type, p_payment IN orders.payment%type, p_address1  IN orders.address1%type, p_address2  IN orders.address2%type,
-    p_phone  IN orders.phone%type,p_totalprice  IN orders.totalprice%type,    p_oseq OUT orders.oseq%type )
+    p_phone  IN orders.phone%type,p_totalprice  IN orders.totalprice%type,  p_oname  IN orders.oname%type,  p_oseq OUT orders.oseq%type )
  IS
     temp_cur SYS_REFCURSOR;
     v_oseq orders.oseq%type;
@@ -149,8 +149,8 @@ END;
     v_sideyn2_1 number;
     v_sideyn3_1 number;
 BEGIN  
-    INSERT INTO orders(oseq, rseq, id, rideryn, plasticyn, payment, address1, address2, phone, totalprice)
-    VALUES(orders_seq.nextVal, p_rseq, p_id, p_rideryn, p_plasticyn, p_payment, p_address1, p_address2, p_phone, p_totalprice);
+    INSERT INTO orders(oseq, rseq, id, rideryn, plasticyn, payment, address1, address2, phone, oname ,totalprice)
+    VALUES(orders_seq.nextVal, p_rseq, p_id, p_rideryn, p_plasticyn, p_payment, p_address1, p_address2, p_phone,p_oname, p_totalprice);
     select max(oseq) into v_oseq from orders where id=p_id;
      OPEN temp_cur FOR SELECT cseq, quantity, fseq, sideyn1, sideyn2, sideyn3 FROM cart WHERE id = p_id ;    
     LOOP
