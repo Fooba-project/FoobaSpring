@@ -284,3 +284,31 @@ BEGIN
     VALUES( p_id, p_pwd, p_name, p_email, p_phone, p_zip_num, p_address1, p_address2, p_address3, p_nick );
     COMMIT;
 END;
+
+
+
+CREATE OR REPLACE PROCEDURE getOrderIngCount( p_id IN orders.id%TYPE, p_cnt  OUT  NUMBER)
+IS
+BEGIN
+       select count(rownum) into p_cnt from orders where id=p_id and result in(0,1);
+END;
+
+
+
+CREATE OR REPLACE PROCEDURE selectOrdersIngById( p_id IN orders.id%TYPE, p_startNum IN NUMBER, p_endNum IN NUMBER, p_cur OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN p_cur FOR
+       select * from ( select * from ( select rownum as rn, b.* from 
+       (( select * from orders where id=p_id and result in(0,1) order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+END;
+
+CREATE OR REPLACE PROCEDURE selectOrderViewByOseq( p_oseq IN order_view.oseq%TYPE, p_cur OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN p_cur FOR
+      select * from order_view where oseq=p_oseq;
+END;
+
+select * from order_view a, orders b where b.id='bsc1234' and a.oseq=b.oseq order by a.oseq desc;
+select * from orders where oseq=2;
