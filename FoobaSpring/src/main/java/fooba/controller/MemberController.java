@@ -176,11 +176,6 @@ public class MemberController {
 		return"member/memberQnalist";
 	}
 	
-	@RequestMapping("/memberOrderList")
-	public String memberOrderList() {
-		return"member/memberOrderList";
-	}
-	
 	
 	@RequestMapping("/memberUpdateForm")
 	public String memberUpdateForm() {

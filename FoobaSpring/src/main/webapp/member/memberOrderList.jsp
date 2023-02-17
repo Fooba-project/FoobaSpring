@@ -24,7 +24,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
                             <div id="memberOrderListimg">
                                 <a href="restaurantDetail?rseq=${ovo.RSEQ }"><img src="images/title/${ovo.RIMAGE}" width="80" height="80"></a>
                             </div>
-                            <div>${ovo.ENAME }</div>
+                            <div>${ovo.RNAME }</div>
                         </td>
                         <td style="width:60%">
                             <div id="memberOrderListIntime" style="text-align: left; font-size: 70%; margin: 10px;">

@@ -20,6 +20,7 @@ import fooba.dto.CartVO;
 import fooba.dto.FoodmenuVO;
 import fooba.dto.MemberVO;
 import fooba.dto.OrderVO;
+import fooba.dto.Paging;
 import fooba.service.MemberService2;
 import fooba.service.ResService;
 
@@ -327,19 +328,20 @@ public class MemberController2 {
 			OrderVO ovo) {
 		HashMap<String, Object> loginUser 
 		= (HashMap<String, Object>)session.getAttribute("loginUser");
-		if( loginUser == null) return "member/memberLogin";
+		if( session.getAttribute("loginUser") == null) return "member/memberLogin";
 		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("request", request);
 		prm.put("orderIngList", null);
 		ms.memberOrderList(prm);
 		
-		ArrayList<HashMap<String,Object>> orderList 	// 주문리스트
+		ArrayList<HashMap<String,Object>> orderIngList 	// 주문리스트
         = (ArrayList<HashMap<String,Object>>)prm.get("orderIngList");
 		
-		model.addAttribute("molist", orderList);
+		model.addAttribute("molist", orderIngList);
 		model.addAttribute("molistT", "진행중인");
 		model.addAttribute("orderList", "ing");
+		model.addAttribute("paging", (Paging)prm.get("paging"));
 	
 		return "member/memberOrderList";
 	}

@@ -83,4 +83,18 @@
 		{	CALL delCart( #{param1} )}
 	</delete>
 	
+	<select id="getOrderIngCount" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{	CALL getOrderIngCount( #{ID}, #{cnt, mode=OUT, jdbcType=INTEGER}) }
+	</select>
+	
+	<select id="selectOrdersIngById" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{	CALL selectOrdersIngById( #{ID}, #{startNum},#{endNum},
+		#{ref_cursor1 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+	</select>
+	
+	<select id="selectOrderViewByOseq" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{	CALL selectOrderViewByOseq( #{OSEQ},
+		#{ref_cursor2 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+	</select>
+	
 </mapper>
