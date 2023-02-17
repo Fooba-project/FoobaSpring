@@ -14,7 +14,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 <div id="memberOrderListdiv">
 		<article  id="orderArticle">
 			<h2>
-	            ${ molist } 주문내역
+	            ${ molistT } 주문내역
 	         </h2>
             <hr><br>
             <table id="memberOrderList">

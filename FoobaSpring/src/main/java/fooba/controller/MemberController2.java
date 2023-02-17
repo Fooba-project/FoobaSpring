@@ -321,20 +321,27 @@ public class MemberController2 {
 		
 		return "member/memberOrderList";
 	}
-/*	
+	
 	@RequestMapping("memberOrderList")
 	public String memberOrderList(HttpServletRequest request,HttpSession session,Model model,
 			OrderVO ovo) {
-		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
+		HashMap<String, Object> loginUser 
+		= (HashMap<String, Object>)session.getAttribute("loginUser");
+		if( loginUser == null) return "member/memberLogin";
 		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
-		prm.put("ref_cursor", null);
+		prm.put("request", request);
+		prm.put("orderIngList", null);
+		ms.memberOrderList(prm);
 		
-		ArrayList<HashMap<String,Object>> orderList 
-        = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		prm.put("molist" , orderList);
+		ArrayList<HashMap<String,Object>> orderList 	// 주문리스트
+        = (ArrayList<HashMap<String,Object>>)prm.get("orderIngList");
 		
+		model.addAttribute("molist", orderList);
+		model.addAttribute("molistT", "진행중인");
+		model.addAttribute("orderList", "ing");
+	
 		return "member/memberOrderList";
 	}
-*/
+
 }
