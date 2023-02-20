@@ -232,7 +232,7 @@ end;
 create or replace procedure withdrawal(p_rid in varchar2)
 is 
 begin
-    update restaurant set ryn=4 where rid=p_rid;
+    update restaurant set ryn=4 where rid = p_rid;
     COMMIT;
 end;
 
