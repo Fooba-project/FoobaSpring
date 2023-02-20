@@ -312,7 +312,6 @@ public class MemberController2 {
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("RSEQ", ovo.getRSEQ());
 		prm.put("ID", ovo.getID());
-		prm.put("OSEQ", 0);
 		prm.put("ovo", ovo);
 		
 		ms.insertOrders(prm);
@@ -320,27 +319,27 @@ public class MemberController2 {
 		 int result = Integer.parseInt(prm.get("result") + "");
          if(result  == 2) return "redirect:/orderForm";
 		
-		return "member/memberOrderList";
+		return "redirect:/memberOrderList";
 	}
 	
 	@RequestMapping("memberOrderList")
 	public String memberOrderList(HttpServletRequest request,HttpSession session,Model model,
-			OrderVO ovo) {
+			OrderVO ovo, @RequestParam("oa") String oa ) {
+		session.setAttribute("oa", oa);
 		HashMap<String, Object> loginUser 
 		= (HashMap<String, Object>)session.getAttribute("loginUser");
-		if( session.getAttribute("loginUser") == null) return "member/memberLogin";
+		if( loginUser == null) return "member/memberLogin";
 		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
+		prm.put("ID", loginUser.get("ID")+"");
+		prm.put("oa", oa);
 		prm.put("request", request);
-		prm.put("orderIngList", null);
 		ms.memberOrderList(prm);
 		
-		ArrayList<HashMap<String,Object>> orderIngList 	// 주문리스트
-        = (ArrayList<HashMap<String,Object>>)prm.get("orderIngList");
+		ArrayList<HashMap<String,Object>> list 	// 주문리스트
+        = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		
-		model.addAttribute("molist", orderIngList);
-		model.addAttribute("molistT", "진행중인");
-		model.addAttribute("orderList", "ing");
+		model.addAttribute("list", list);
 		model.addAttribute("paging", (Paging)prm.get("paging"));
 	
 		return "member/memberOrderList";

@@ -151,7 +151,7 @@ END;
 --     OPEN temp_cur FOR SELECT cseq, quantity, fseq, sideyn1, sideyn2, sideyn3 FROM cart WHERE id = p_id ;    
 --    LOOP
 --        FETCH temp_cur INTO v_cseq, v_fseq, v_quantity, v_sideyn1, v_sideyn2, v_sideyn3 ;
---        EXIT WHEN temp_cur%NOTFOUND;        --20ÁÙ
+--        EXIT WHEN temp_cur%NOTFOUND;        --20ï¿½ï¿½
 --        if(v_sideyn1 is null) then v_sideyn1_1 := 0;
 --        else v_sideyn1_1 := 1;
 --        end if;
@@ -224,6 +224,7 @@ BEGIN
        p_cnt := v_cnt;
 END;
 
+--*****
 CREATE OR REPLACE PROCEDURE memberQnaList(
     p_startNum IN NUMBER,
     p_endNum IN NUMBER,
@@ -239,7 +240,7 @@ BEGIN
         ) WHERE rn<=p_endNum;
 END;
 
-
+-- *****
 alter table orders add oname varchar2(100);
 
 
@@ -253,9 +254,9 @@ select a.oseq, a.result, a.oname, a.indate, a.id, a.rideryn, a.plasticyn, a.paym
 from orders a, order_detail b, member c, foodmenu d, restaurant e
 where a.oseq=b.oseq and a.id = c.id and b.fseq=d.fseq and d.rseq=e.rseq;
 
-select*from order_detail ;
-select*from orders;
 
+
+-- *****
 INSERT INTO order_detail(odseq, oseq, quantity, fseq, sideyn1, sideyn2, sideyn3 )
 VALUES(order_detail_seq.nextVal, 1, v_quantity, v_fseq, v_sideyn1, v_sideyn2, v_sideyn3);
 
@@ -293,22 +294,20 @@ BEGIN
        select count(rownum) into p_cnt from orders where id=p_id and result in(0,1);
 END;
 
+delete from order_detail;
+delete from orders;
 
-
-CREATE OR REPLACE PROCEDURE selectOrdersIngById( p_id IN orders.id%TYPE, p_startNum IN NUMBER, p_endNum IN NUMBER, p_cur OUT SYS_REFCURSOR)
+CREATE OR REPLACE PROCEDURE selectOrdersById( p_id IN orders.id%TYPE, p_oa IN varchar2, p_startNum IN NUMBER, p_endNum IN NUMBER, p_cur OUT SYS_REFCURSOR)
 IS
 BEGIN
+    IF(p_oa ='ÁøÇàÁßÀÎ')then 
     OPEN p_cur FOR
        select * from ( select * from ( select rownum as rn, b.* from 
-       (( select * from orders where id=p_id and result in(0,1) order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+       (( select distinct oseq,rseq,oname,rname,rimage,indate,result,totalprice from order_view where id=p_id and result in(0,1) order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+    ELSE
+     OPEN p_cur FOR
+       select * from ( select * from ( select rownum as rn, b.* from 
+       (( select distinct oseq,rseq,oname,rname,rimage,indate,result,totalprice from order_view where id=p_id  order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+    END IF;
 END;
-
-CREATE OR REPLACE PROCEDURE selectOrderViewByOseq( p_oseq IN order_view.oseq%TYPE, p_cur OUT SYS_REFCURSOR)
-IS
-BEGIN
-    OPEN p_cur FOR
-      select * from order_view where oseq=p_oseq;
-END;
-
-select * from order_view a, orders b where b.id='bsc1234' and a.oseq=b.oseq order by a.oseq desc;
-select * from orders where oseq=2;
+commit;

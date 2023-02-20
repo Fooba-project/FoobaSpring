@@ -41,9 +41,9 @@ public interface IMemberDao2 {
 
 	void delCart(String cseq);
 
-	void getOrderIngCount(HashMap<String, Object> prm);
+	void getOrderCount(HashMap<String, Object> prm);
 
-	void selectOrdersIngById(HashMap<String, Object> prm);
+	void selectOrdersById(HashMap<String, Object> prm);
 
 	void selectOrderViewByOseq(HashMap<String, Object> rvo);
 

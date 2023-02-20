@@ -134,7 +134,8 @@ public class MemberService2 {
 					 int size = cartList.size();
 					 String oname = "";
 					for(HashMap<String,Object> hvo : cartList) {
-						oname=oname+hvo.get("CFNAME")+"";
+						i++;
+						oname=oname+hvo.get("CFNAME");
 						 if ( !(""+hvo.get("SIDEYN1")+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("") ) {
 							 oname = oname + " 사이드(";
 			        		 if (!(""+hvo.get("SIDEYN1")).trim().equals("")) {
@@ -158,14 +159,19 @@ public class MemberService2 {
 					 	else oname = oname+" "+hvo.get("QUANTITY")+"개";						
 					}
 					prm.put("oname", oname);
+					System.out.println("oname : "+oname);
 					mdao.insertOrder(prm);
+					prm.put("OSEQ", 0);
 					mdao.lookupOseq(prm);
 					int oseq=Integer.parseInt( prm.get("OSEQ")+"");
+					System.out.println("OSEQ : "+ oseq);
 					prm.put("oseq", oseq);
 					for(HashMap<String,Object> hvo : cartList) {
 						prm.put("hvo",hvo);
 						mdao.insertOrder_Detail( prm );
 						mdao.delCart( hvo.get("CSEQ")+"" );
+						System.out.println("QUANTITY : "+  hvo.get("QUANTITY"));
+						System.out.println("FSEQ : "+  hvo.get("FSEQ"));
 					}	
 				}
 			});
@@ -183,8 +189,6 @@ public class MemberService2 {
 		
 		HttpServletRequest request = (HttpServletRequest)prm.get("request");
 		HttpSession session = request.getSession();
-		HashMap<String, Object> loginUser 
-		= (HashMap<String, Object>)session.getAttribute("loginUser");
 		
 		int page=1;
 		if( request.getParameter("page")!= null) {
@@ -200,9 +204,8 @@ public class MemberService2 {
 		paging.setDisplayRow(5);
 		paging.setDisplayPage(10);
 		prm.put("cnt", 0);	// 카운트 커서
-		prm.put("ID", loginUser.get("ID")+"");
 		
-		mdao.getOrderIngCount(prm); //아이디로 조회 
+		mdao.getOrderCount(prm); //아이디로 조회 
 		
 		int count = Integer.parseInt( prm.get("cnt")+"");
 		paging.setTotalCount(count);
@@ -211,57 +214,8 @@ public class MemberService2 {
 		prm.put("endNum", paging.getEndNum() );
 		prm.put("paging", paging);
 
-		prm.put("ref_cursor1", null);
-		
-		mdao.selectOrdersIngById(prm); 
+		mdao.selectOrdersById(prm); 
 
-		ArrayList<HashMap<String, Object>> oiList	
-		= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor1"); //아이디로 조회한 진행중인 오더리스트를 담은?
-
-		 for (HashMap<String,Object> rvo : oiList) { // 현재 주문배송중인 레스토랑수만큼 반복
-        	 String oname = "";
-        	 prm.put("ref_cursor2", null);
-        	 prm.put("OSEQ", Integer.parseInt(String.valueOf(rvo.get("OSEQ"))));
-        	 mdao.selectOrderViewByOseq(prm);
-        		ArrayList<HashMap<String, Object>> ovList	
-        		= (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor2");
-
-        	 int i = 0;
-        	 int size = ovList.size();
-        	 
-		 for(HashMap<String,Object> hvo : ovList) {  // 주문한 메뉴별(odseq 수만큼)로 반복
-			 oname=oname+hvo.get("CFNAME")+"";
-			 if ( !(""+hvo.get("SIDEYN1")+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("") ) {
-				 oname = oname + " 사이드(";
-        		 if (!(""+hvo.get("SIDEYN1")).trim().equals("")) {
-        			 oname = oname + hvo.get("SIDEYN1");
-        			 if (!(""+hvo.get("SIDEYN2")+hvo.get("SIDEYN3")).trim().equals("")) {
-        				 oname = oname + ", ";
-        			 }
-        		 }
-        		 if (!(""+hvo.get("SIDEYN2")).trim().equals("")) {
-        			 oname = oname + hvo.get("SIDEYN2");
-        			 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
-        				 oname = oname + ", ";
-        			 }
-        		 }
-        		 if (!(""+hvo.get("SIDEYN3")).trim().equals("")) {
-        			 oname = oname + hvo.get("SIDEYN3");
-        		 }
-        		 if(size==i) oname=oname+") "+hvo.get("QUANTITY")+"개"; // 주문한메뉴갯수==반복횟수 일때
-        		 else oname = oname + ") "+hvo.get("QUANTITY")+"개, "; // 주문한메뉴갯수>반복횟수일 때
-		 	}else if (size!=i) oname = oname+" "+hvo.get("QUANTITY")+"개, ";// 주문한메뉴갯수>반복횟수일 때
-		 	else oname = oname+" "+hvo.get("QUANTITY")+"개";						
-		}
-        	 
-		 rvo.put("oname", oname);
-		 rvo.put("RNAME", ovList.get(0).get("RNAME"));
-		 rvo.put("RIMAGE", ovList.get(0).get("RIMAGE"));
-		 rvo.put("RSEQ", Integer.parseInt(rvo.get("RSEQ")+""));
-		 orderIngList.add(rvo);
-		 }
-		 prm.put("orderIngList", orderIngList);
-		
 	}
 	
 	
