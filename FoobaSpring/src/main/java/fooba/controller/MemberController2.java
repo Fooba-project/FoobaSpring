@@ -27,13 +27,7 @@ import fooba.service.ResService;
 @Controller
 public class MemberController2 {
 	
-	@Autowired
-	MemberService2 ms;
-	 
-	@Autowired
-	ResService rs;
-	
-	
+
 	@RequestMapping("/loginForm")
 	public String loginForm() {
 		return "member/memberLogin";
