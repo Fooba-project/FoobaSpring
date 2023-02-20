@@ -52,13 +52,13 @@ public class ResController {
 	}
 	*/
 	
-	@RequestMapping("/res_loginForm")
+	@RequestMapping("/res_loginForm")  //레스토랑 로그인 창 이동
 	public String res_loginForm(HttpSession session) {
 		if(session.getAttribute("loginRes")!=null) return "redirect:/res_foodmenu";
 		return "restaurant/res_login";
 	}
 	
-	@RequestMapping(value="/res_login",method=RequestMethod.POST)
+	@RequestMapping(value="/res_login",method=RequestMethod.POST) //레스토랑 로그인 
 	public String res_login(@ModelAttribute("loginRes")@Valid RestaurantVO vo,
 			 BindingResult result, HttpSession session, Model model) { 
 		
@@ -106,7 +106,7 @@ public class ResController {
 		return url;
 	}
 	
-	@RequestMapping(value="/res_logout")
+	@RequestMapping(value="/res_logout") //로그아웃
 	public String res_logout(HttpSession session) {
 		session.removeAttribute("loginRes");
 		session.removeAttribute("intstar");
@@ -114,12 +114,12 @@ public class ResController {
 		return "redirect:/res_loginForm";
 	}
 	
-	@RequestMapping("/res_FindIdForm")
+	@RequestMapping("/res_FindIdForm") //아이디 찾기 창 이동
 	public String res_FindIdForm() {
 		return"restaurant/res_FindId";
 	}
 	
-	@RequestMapping(value="res_FindId")
+	@RequestMapping(value="res_FindId") //아이디 찾기
 	public String res_FindId(@RequestParam(value="rname" ,required=false)String rname,@RequestParam(value="rphone",required=false)String rphone,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
 		paramMap.put("rname",rname);
@@ -143,12 +143,12 @@ public class ResController {
 		}
 	}
 	
-	@RequestMapping("/res_FindPwForm")
+	@RequestMapping("/res_FindPwForm") //비밀번호 찾기 창 이동
 	public String res_FindPwForm() {
 		return"restaurant/res_FindPw";
 	}
 	
-	@RequestMapping(value="/res_FindPw",method=RequestMethod.POST)
+	@RequestMapping(value="/res_FindPw",method=RequestMethod.POST) //비밀번호 찾기
 	public String res_FindPw(@RequestParam(value="rname",required=false)String rname,@RequestParam(value="rphone",required=false)String rphone,
 			@RequestParam("rid")String rid,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
@@ -173,13 +173,13 @@ public class ResController {
 		}
 	}
 	
-	@RequestMapping("/res_show")
+	@RequestMapping("/res_show") //레스토랑 현황 창 이동
 	public String res_show(HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		return "restaurant/res_show";
 		
 	}
-	@RequestMapping("/res_joinForm")
+	@RequestMapping("/res_joinForm") //레스토랑 회원가입 창 이동
 	public String res_joinForm() {
 		return"restaurant/res_join";
 	}
@@ -188,7 +188,7 @@ public class ResController {
 	
 	
 	
-	@RequestMapping(value="/res_idCheckForm")
+	@RequestMapping(value="/res_idCheckForm") //아이디 중복 확인
 	public String res_idCheckForm(@RequestParam("RID")String rid,Model model) {
 		HashMap<String,Object>paramMap=new HashMap<String,Object>();
 		paramMap.put("RID",rid);
@@ -203,7 +203,7 @@ public class ResController {
 		return "restaurant/res_idcheck";
 	}
 	
-	@RequestMapping(value="/res_join",method=RequestMethod.POST)
+	@RequestMapping(value="/res_join",method=RequestMethod.POST) //레스토랑 회원가입
 	public String res_join(@ModelAttribute("vo")@Valid RestaurantVO vo,BindingResult result,
 			@RequestParam(value="reid",required=false)String reid, 
 			@RequestParam(value="respwdchk",required=false)String respwdchk,Model model) {
@@ -251,12 +251,13 @@ public class ResController {
 		return "restaurant/res_join";
 	}
 	
-	@RequestMapping("/res_updateForm")
+	@RequestMapping("/res_updateForm") //레스토랑 회원 정보 변경 창 이동
 	public String res_updateForm(HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		return "restaurant/res_updateForm";
 	}
 	
+	//파일업로드를 위한 메서드
 	@RequestMapping(value="fileup2",method=RequestMethod.POST)
 	@ResponseBody	
 	public HashMap<String , Object>fileup2(Model model,HttpServletRequest request){
@@ -276,7 +277,7 @@ public class ResController {
 		return result;
 	}
 	
-	@RequestMapping(value="/res_update",method=RequestMethod.POST)
+	@RequestMapping(value="/res_update",method=RequestMethod.POST) //레스토랑 회원 정보 변경
 	public String res_update(HttpSession session,@ModelAttribute("loginRes")@Valid RestaurantVO vo,
 			BindingResult result,Model model ,@RequestParam("oldImage")String oldImage) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
@@ -311,7 +312,6 @@ public class ResController {
 			if( !NEWRIMAGE.equals("")  ) 	vo.setRIMAGE(oldImage);
 		}else{
 			rs.updateRes(vo);
-			System.out.println("xx  "+vo.getRIMAGE());
 			
 			session.removeAttribute("loginRes");
 			
@@ -328,7 +328,7 @@ public class ResController {
 		}
 		return "restaurant/res_updateForm";
 	}
-	@RequestMapping("/res_withdrawal")
+	@RequestMapping("/res_withdrawal") //레스토랑 회원 탈퇴
 	public String res_withdrawal(HttpSession session,Model model) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
@@ -338,7 +338,7 @@ public class ResController {
 		return "restaurant/res_login";
 	}
 		
-		@RequestMapping("/res_review")
+		@RequestMapping("/res_review") //주문 리뷰 확인 
 		public String res_review( HttpSession session, Model model, @ModelAttribute("key")int key) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
@@ -357,7 +357,7 @@ public class ResController {
 		return "restaurant/res_reviewList";
 	}
 
-		@RequestMapping(value="res_reviewReplyWrite",method=RequestMethod.POST)
+		@RequestMapping(value="res_reviewReplyWrite",method=RequestMethod.POST) //주문 리뷰에 답글 작성
 		public String res_reviewReplyWrite(@RequestParam(value="REVIEW_SEQ",required=false)String r_seq, 
 				@RequestParam(value="REPLY",required=false)String reply, Model model,HttpSession session) {
 			HashMap<String , Object> paramMap = new HashMap<String , Object>();
@@ -371,7 +371,7 @@ public class ResController {
 		}
 		
 
-		@RequestMapping("/res_order")
+		@RequestMapping("/res_order") //주문 확인 창
 			public String res_order( HttpSession session, Model model, OrderVO ovo){
 			HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 			if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
@@ -387,7 +387,7 @@ public class ResController {
 		}
 		
 		
-		@RequestMapping("/res_orderAll")
+		@RequestMapping("/res_orderAll") //전체 주문 확인 창
 			public String res_orderAll(HttpSession session, Model model){
 			HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 			if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
@@ -404,7 +404,7 @@ public class ResController {
 		}
 		
 		
-		@RequestMapping("/res_orderComplete")
+		@RequestMapping("/res_orderComplete") //주문 단계 변경 (주문 확인, 배달중, 배달완료)
 			public String res_orderComplete(HttpSession session, Model model, 
 					@RequestParam("OSEQ") int OSEQ){
 			HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
@@ -415,7 +415,7 @@ public class ResController {
 			return "redirect:/res_order";	
 		}
 		
-		@RequestMapping("/res_foodmenu")
+		@RequestMapping("/res_foodmenu") //레스토랑 메뉴 창
 		public String res_foodmenu(HttpSession session, Model model) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
@@ -428,8 +428,15 @@ public class ResController {
 		model.addAttribute("list",list);
 		return "restaurant/res_foodmenu";  
 	}
-	
-	@RequestMapping("/res_foodmenuUpdateForm")
+		
+
+	@RequestMapping("/res_foodmenuAddForm") //메뉴 추가 창 이동
+		public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session) {
+		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
+		return "restaurant/res_foodMenuAdd";
+	}
+
+	@RequestMapping("/res_foodmenuUpdateForm") //메뉴 변경 창 이동
 		public String res_foodmenuUpdateForm(HttpSession session, Model model,
 				@RequestParam("FSEQ") int FSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
@@ -445,7 +452,8 @@ public class ResController {
 		return "restaurant/res_foodmenuUpdateForm";  
 	}
 	
-	@RequestMapping("/res_foodmenuUA")
+	
+	@RequestMapping("/res_foodmenuUA") //레스토랑 메뉴 추가,변경
 		public String res_foodmenuUA(@ModelAttribute("vo") @Valid FoodmenuVO vo, BindingResult result,
 			HttpSession session, Model model, @RequestParam("procedure") String procedure,
 			@RequestParam(value="OLDIMAGE", required=false) String OLDIMAGE) {
@@ -491,7 +499,8 @@ public class ResController {
 		}
 		return url;
 	}
-			
+	
+	//레스토랑 메뉴 이미지 추가 메서드
 	@RequestMapping(value="ResImgfileUp", method=RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String,Object> ResImgfileUp(Model model, HttpServletRequest request) throws IOException{
@@ -508,15 +517,9 @@ public class ResController {
 		return result; 
 	}
 	
-	
-	@RequestMapping("/res_foodmenuAddForm")
-		public String res_foodmenuAddForm(HttpServletRequest request, HttpSession session) {
-		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
-		return "restaurant/res_foodMenuAdd";
-	}
 
 		
-	@RequestMapping("/res_foodmenuDelete")
+	@RequestMapping("/res_foodmenuDelete") //메뉴 삭제
 		public String res_foodmenuDelete(HttpServletRequest request, HttpSession session,
 			@RequestParam("FSEQ") int FSEQ) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
@@ -526,24 +529,24 @@ public class ResController {
 		return "redirect:/res_foodmenu";
 	}
 	
-	@RequestMapping("/res_fooba_tos")
+	@RequestMapping("/res_fooba_tos") // 이용약관 창 이동
 		public String res_fooba_tosAction() {
 		return "restaurant/res_fooba_tos";
 	}
 	
-	@RequestMapping("/res_fooba_privacy")
+	@RequestMapping("/res_fooba_privacy") //개인정보 처리방침 창 이동
 		public String res_fooba_privacy() {
 		return "restaurant/res_fooba_privacy";
 	}
 	
-	@RequestMapping("/res_qnalist_footer")
+	@RequestMapping("/res_qnalist_footer") //QNA 창 이동
 		public String res_qnalist_footer() {
 		return "restaurant/res_qnalist_footer";
 	}
 	
 	
 	
-	@RequestMapping("/res_restaurantRestReturn") // 휴업으로 변경
+	@RequestMapping("/res_restaurantRestReturn") // 레스토랑 상태(영업중, 휴업) 변경
 		public String res_restaurantRestReturn(HttpServletRequest request, HttpSession session) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
