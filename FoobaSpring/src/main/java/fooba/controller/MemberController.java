@@ -257,215 +257,164 @@ public class MemberController {
 		return "main/resList";
 	}
 
-	@RequestMapping("/restaurantDetail")
+	@RequestMapping("/restaurantDetail") // 레스토랑 디테일 조회, (레스토랑기본정보, 메뉴리스트, 리뷰리스트, 카트리스트)
 	public String restaurant_detail(HttpServletRequest request, HttpSession session,
 	Model model, @RequestParam("RSEQ")int RSEQ) {
 		int carttotalprice=0;
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("RSEQ", RSEQ);
-		 
-		rs.foodList(prm); // 레스토랑 음리스트 조회
+
 		ms.resInf(prm); // 레스토랑 기본 정보 조회
-		ms.reviewList(prm); // 레스토랑의 리뷰리스트 조회
-
-		ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
-		 ArrayList<HashMap<String,Object>>list1 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
-		 HashMap<String,Object> rvo =list1.get(0);
-		 ArrayList<HashMap<String,Object>>list2 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
-		 
-		 HashMap<String,Object> vo = (HashMap<String,Object>)session.getAttribute("loginUser");
-
-		 if(vo != null) {
-			 prm.put("ID", vo.get("ID")+"");
-			 int sum = 0;
-			 prm.put("ref_cursor", null);
-			 ms.cartList(prm);
-			 ArrayList<HashMap<String,Object>> list3
-				= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-			 for (HashMap<String,Object> cart : list3)
-				sum += Integer.parseInt(cart.get("CPRICE")+"");
-			 model.addAttribute("clist",list3);
-			 model.addAttribute("carttotalprice", sum + Integer.parseInt(rvo.get("RTIP")+""));
-		 }
-	
-		 /*가게 별점*/
-		rs.starAvg(prm);
-		session.setAttribute("intstar",prm.get("intstar")); //별 개수
-		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)
+		ArrayList<HashMap<String,Object>> resList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		HashMap<String,Object> rvo = resList.get(0); // 레스토랑 기본 정보 조회해서, rvo에 저장
 		
-		 model.addAttribute("FoodmenuList",list);
-		 model.addAttribute("RestaurantVO",rvo);
-		 model.addAttribute("ReviewList",list2);
-		 
-		 return "main/restaurantDetail";
-	 }
-	
-	@RequestMapping("/menupopup")
-	public String memu_popup(HttpServletRequest request, HttpSession session,
-			Model model, @RequestParam("FSEQ")int FSEQ) {
-	HashMap<String, Object> prm = new HashMap<>();
-	prm.put("FSEQ", FSEQ);
-	prm.put("ref_cursor", null);
-	
-	ms.getFoodDetail(prm);
-	
-	ArrayList<HashMap<String, Object>> list
-	=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
-	HashMap<String, Object>fvo=list.get(0);
-	
-	model.addAttribute("vo", fvo);
+		rs.foodList(prm); // 레스토랑 음리스트 조회
+		ArrayList<HashMap<String, Object>> foodList = (ArrayList<HashMap<String, Object>>)prm.get("ref_cursor"); // 푸드리스트 저장
+		
+		ms.reviewList(prm); // 레스토랑의 리뷰리스트 조회
+		ArrayList<HashMap<String,Object>> reviewList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor"); // 리뷰 리스트
+ 
+		HashMap<String,Object> mvo = (HashMap<String,Object>)session.getAttribute("loginUser");
+		if(mvo != null) {
+			prm.put("ID", mvo.get("ID")+"");
+			int sum = 0;
+			ms.cartList(prm); // 카트 내역 조회
+			ArrayList<HashMap<String,Object>> cartList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			for (HashMap<String,Object> cvo : cartList) sum += Integer.parseInt(cvo.get("CPRICE")+"");
+			model.addAttribute("clist", cartList);
+			model.addAttribute("carttotalprice", sum + Integer.parseInt(rvo.get("RTIP")+""));
+		}
+
+		rs.starAvg(prm); // 가게 별점 계산
+		session.setAttribute("intstar", prm.get("intstar")); //별 개수
+		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)]
+		model.addAttribute("FoodmenuList",foodList);
+		model.addAttribute("RestaurantVO",rvo);
+		model.addAttribute("ReviewList",reviewList);
+		return "main/restaurantDetail";
+	}
+
+	@RequestMapping("/menupopup") // 카트에 메뉴추가를 위한 팝업창
+	public String memu_popup(HttpServletRequest request, HttpSession session, Model model, @RequestParam("FSEQ")int FSEQ) {
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("FSEQ", FSEQ);		
+		ms.getFoodDetail(prm);
+		ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
+		HashMap<String, Object> fvo = list.get(0);
+		model.addAttribute("vo", fvo);
 		return "main/popupMenu";
 	}
 	
+	@RequestMapping("/miniLoginForm") // 카트추가 메뉴팝업 실행시, 로그인을 하지 않았을 경우 띄워지는 미니로그인창
+	public String mini_login_form( HttpServletRequest request) {
+		if(request.getParameter("check")==null) request.setAttribute("message", "로그인이 필요합니다.");
+		return "member/memberMiniLogin";
+	}
 	 
-	 @RequestMapping("/miniLoginForm")
-	 public String mini_login_form( HttpServletRequest request) {
-		 if(request.getParameter("check")==null)
-			 request.setAttribute("message", "로그인이 필요합니다.");
-		 return "member/memberMiniLogin";
-	 }
-	 
-	 @RequestMapping("/miniLogin")
-	 public String miniLogin(@ModelAttribute("dto") @Valid MemberVO membervo, BindingResult result, 
-	         HttpServletRequest request, Model model,
-	         @RequestParam("FSEQ") String FSEQ) {
-		 
-		 String url="member/memberMiniLogin";
-		 
-		 model.addAttribute("check", "1");
-		 model.addAttribute("FSEQ",FSEQ);
-		 
-		 if(result.getFieldError("ID")!=null)
-	         model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
-	      else if (result.getFieldError("PWD")!=null)
-	         model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
-	      else {
-	         HashMap<String, Object> prm = new HashMap<String, Object>();
-	         prm.put("ID", membervo.getID());
-	         prm.put("ref_cursor", null);
-	         prm.put("FSEQ", FSEQ);
-	         ms.getMember(prm);
-	         
-	         ArrayList<HashMap<String,Object>> list 
-	         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-	         if(list==null) {	
-	            model.addAttribute("message","아이디가 없습니다.");
-	            return "member/memberLogin";   
-	         }
-	         HashMap<String, Object> mvo = list.get(0);
-	         if(!mvo.get("PWD").equals(membervo.getPWD()))
-	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (mvo.get("PWD").equals(membervo.getPWD())) {
-	            HttpSession session = request.getSession();
-	            session.setAttribute("loginUser", mvo);
-	            url = "redirect:/menupopup?FSEQ="+FSEQ;
-	         }	   	 
-	      }
-		 return url;
-	 }
+	@RequestMapping("/miniLogin")
+	public String miniLogin(@ModelAttribute("dto") @Valid MemberVO membervo, BindingResult result, 
+	HttpServletRequest request, Model model, @RequestParam("FSEQ") String FSEQ) {
+		String url="member/memberMiniLogin"; 
+		model.addAttribute("check", "1");
+		model.addAttribute("FSEQ",FSEQ);
+		if(result.getFieldError("ID")!=null) model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+		else if (result.getFieldError("PWD")!=null) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+		else {
+			HashMap<String, Object> prm = new HashMap<String, Object>();
+			prm.put("ID", membervo.getID());
+			prm.put("FSEQ", FSEQ);
+			ms.getMember(prm);
+			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			if(list==null) {	
+				model.addAttribute("message","아이디가 없습니다.");
+				return "member/memberLogin";   
+			}
+			HashMap<String, Object> mvo = list.get(0);
+			if(!mvo.get("PWD").equals(membervo.getPWD()))
+				model.addAttribute("message","비밀번호가 틀렸습니다.");
+			else if (mvo.get("PWD").equals(membervo.getPWD())) {
+				HttpSession session = request.getSession();
+				session.setAttribute("loginUser", mvo);
+				url = "redirect:/menupopup?FSEQ="+FSEQ;
+			}	   	 
+		}
+		return url;
+	}
 	 
 	@RequestMapping("/jangbaguni")
 	public String jangbaguni(CartVO cvo, FoodmenuVO fvo, HttpSession session, Model model) {
-		 HashMap<String,Object> loginUser=
-				 (HashMap<String,Object>)session.getAttribute("loginUser");
+		HashMap<String,Object> loginUser =  (HashMap<String,Object>)session.getAttribute("loginUser");
 		if(loginUser==null) return "member/memberMiniLogin";
-		
 		if(cvo.getSIDEYN1() != null) cvo.setSIDEYN1(cvo.getFSIDE1());
 		else cvo.setSIDEYN1(" ");
 		if(cvo.getSIDEYN2() != null) cvo.setSIDEYN2(cvo.getFSIDE2());
 		else cvo.setSIDEYN2(" ");
 		if(cvo.getSIDEYN3() != null) cvo.setSIDEYN3(cvo.getFSIDE3());
 		else cvo.setSIDEYN3(" ");
-		
 		ms.insertCart(cvo);
-		
-
 		model.addAttribute("vo", cvo);
 		return "main/popupMenuClose";
 	}
 	
 	@RequestMapping("deleteCartmenu")
 	public String delete_cartmenu(HttpServletRequest request,HttpSession session,Model model,
-			@RequestParam("CSEQ")int CSEQ,@RequestParam("RSEQ")int RSEQ) {
-		HashMap<String,Object> loginUser=
-				 (HashMap<String,Object>)session.getAttribute("loginUser");
+	@RequestParam("CSEQ")int CSEQ,@RequestParam("RSEQ")int RSEQ) {
+		HashMap<String,Object> loginUser = (HashMap<String,Object>)session.getAttribute("loginUser");
 		if(loginUser==null) return "member/memberLogin";
-		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("CSEQ", CSEQ);
 		prm.put("RSEQ", RSEQ);
-		
 		ms.deletecart(prm);
-		
 		return "redirect:/restaurantDetail?RSEQ="+RSEQ;
 	}
-	
-	@RequestMapping("orderForm")
+
+	@RequestMapping("orderForm") // 주문표 폼으로 이동
 	public String orderForm(HttpServletRequest request, MemberVO mvo, CartVO cvo, HttpSession session,Model model,
 	@RequestParam("RSEQ")int RSEQ, @RequestParam("carttotalprice")int carttotalprice, @RequestParam("RTIP")int RTIP, @RequestParam("ID")String ID) {
-		
 		HashMap<String,Object> loginUser=(HashMap<String,Object>) session.getAttribute("loginUser");
-		
 		if(loginUser==null) return "member/memberLogin";
-		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("RSEQ", RSEQ);
 		prm.put("ID",ID);
-		prm.put("ref_cursor", null);
-
 		ms.cartList(prm);
-		
-		 ArrayList<HashMap<String,Object>> cartList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		 model.addAttribute("RTIP", RTIP);
-		 model.addAttribute("RSEQ", RSEQ);
-		 model.addAttribute("list", cartList);
-		 model.addAttribute("carttotalprice", carttotalprice);
-		 
-		 return "main/menuorder";
+		ArrayList<HashMap<String,Object>> cartList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		model.addAttribute("RTIP", RTIP);
+		model.addAttribute("RSEQ", RSEQ);
+		model.addAttribute("list", cartList);
+		model.addAttribute("carttotalprice", carttotalprice);
+		return "main/menuorder";
 	}
 	
-	@RequestMapping("order")
-	public String order(HttpServletRequest request,HttpSession session,Model model,
-			OrderVO ovo, CartVO cvo) {
+	@RequestMapping("order") // 주문 입력
+	public String order(HttpServletRequest request,HttpSession session,Model model, OrderVO ovo, CartVO cvo) {
 		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
-		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("RSEQ", ovo.getRSEQ());
 		prm.put("ID", ovo.getID());
 		prm.put("ovo", ovo);
-		
 		ms.insertOrders(prm);
-		
-		 int result = Integer.parseInt(prm.get("result") + "");
-         if(result  == 2) return "redirect:/orderForm";
-		
-		return "redirect:/memberOrderList";
+		int result = Integer.parseInt(prm.get("result") + "");
+        if(result  == 2) return "redirect:/orderForm";
+		return "redirect:/memberOrderList?page=1&oa=";
 	}
 	
-	@RequestMapping("memberOrderList")
-	public String memberOrderList(HttpServletRequest request,HttpSession session,Model model,
-			OrderVO ovo, @RequestParam("oa") String oa ) {
+	@RequestMapping("memberOrderList") // 주문내역 조회
+	public String memberOrderList(HttpServletRequest request,HttpSession session,Model model, OrderVO ovo, @RequestParam("oa") String oa ) {
 		session.setAttribute("oa", oa);
-		HashMap<String, Object> loginUser 
-		= (HashMap<String, Object>)session.getAttribute("loginUser");
+		HashMap<String, Object> loginUser = (HashMap<String, Object>)session.getAttribute("loginUser");
 		if( loginUser == null) return "member/memberLogin";
-		
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("ID", loginUser.get("ID")+"");
 		prm.put("oa", oa);
 		prm.put("request", request);
 		ms.memberOrderList(prm);
-		
-		ArrayList<HashMap<String,Object>> list 	// 주문리스트
-        = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		model.addAttribute("list", list);
 		model.addAttribute("paging", (Paging)prm.get("paging"));
-	
 		return "member/memberOrderList";
 	}
 	
-	@RequestMapping("/memberOrderDetail")
+	@RequestMapping("/memberOrderDetail") // 오더 디테일
 	public String memberOrderDetail(HttpSession session,Model model,@RequestParam("OSEQ")int OSEQ) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
 		HashMap<String, Object> prm = new HashMap<String, Object>();		
@@ -480,11 +429,12 @@ public class MemberController {
 		return "member/memberOrderDetail";
 	}
 	
-	@RequestMapping(value="/memberReviewWrite", method=RequestMethod.POST)
+	@RequestMapping(value="/memberReviewWrite", method=RequestMethod.POST) // 리뷰 쓰기
 	public String memberReviewWrite(HttpSession session,ReviewVO vo, Model model ) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
 		ms.writeReview(vo);
 		ms.reviewComplete(vo.getOSEQ());
 		return "redirect:/memberOrderDetail?OSEQ="+vo.getOSEQ();
 	}
+	
 }

@@ -681,25 +681,6 @@ BEGIN
 END;
 
 
-CREATE OR REPLACE PROCEDURE memberGetAllCount(
-    p_cnt  OUT  NUMBER
-)
-IS
-    v_cnt NUMBER;
-BEGIN
-       SELECT COUNT(*) INTO v_cnt FROM qna;
-       p_cnt := v_cnt;
-END;
-
-
-
-
-
-CREATE OR REPLACE PROCEDURE getOrderIngCount( p_id IN orders.id%TYPE, p_cnt  OUT  NUMBER)
-IS
-BEGIN
-       select count(rownum) into p_cnt from orders where id=p_id and result in(0,1);
-END;
 
 
 

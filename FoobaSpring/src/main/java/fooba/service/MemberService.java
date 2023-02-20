@@ -239,6 +239,7 @@ public class MemberService {
 	public void reviewComplete(int oseq) {
 		mdao.reviewComplete(oseq);
 	}
+	
 }
 
 

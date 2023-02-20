@@ -47,7 +47,6 @@
 		{CALL selectOrdersAllByRseq( #{RSEQ},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
 	</select>
 	
-
 	<update id="nextOrderStatement" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL nextOrderStatement( #{OSEQ})}
 	</update>
@@ -63,7 +62,6 @@
 	<update id="updateFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL updateFoodMenu(#{FSEQ},#{FNAME},#{FPRICE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3},#{FIMAGE}) }
 	</update>
-	
 	
 	<insert id="addFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
 		{CALL addFoodMenu( #{RSEQ},#{FSEQ},#{FNAME},#{FPRICE},#{FIMAGE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3}) }
