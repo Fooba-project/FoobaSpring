@@ -311,7 +311,7 @@ public class MemberController {
 		return "member/memberMiniLogin";
 	}
 	 
-	@RequestMapping("/miniLogin")
+	@RequestMapping("/miniLogin") // 미니 로그인
 	public String miniLogin(@ModelAttribute("dto") @Valid MemberVO membervo, BindingResult result, 
 	HttpServletRequest request, Model model, @RequestParam("FSEQ") String FSEQ) {
 		String url="member/memberMiniLogin"; 
@@ -430,7 +430,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberReviewWrite", method=RequestMethod.POST) // 리뷰 쓰기
-	public String memberReviewWrite(HttpSession session,ReviewVO vo, Model model ) {
+	public String memberReviewWrite(HttpSession session, ReviewVO vo, Model model ) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
 		ms.writeReview(vo);
 		ms.reviewComplete(vo.getOSEQ());

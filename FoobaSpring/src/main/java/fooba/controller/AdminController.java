@@ -36,42 +36,35 @@ public class AdminController {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping("/admin_fooba_tos")
+	@RequestMapping("/admin_fooba_tos") // 이용약관 페이지
 	public String admin_fooba_tos() {
 		return "admin/admin_fooba_tos";
 	}
 	
-	
-	@RequestMapping("/admin_fooba_privacy")
+	@RequestMapping("/admin_fooba_privacy") // 개인정보 페이지
 	public String admin_fooba_privacy() {
 		return "admin/admin_fooba_privacy";
 	}
 	
-	
-	@RequestMapping("/admin_logout")
+	@RequestMapping("/admin_logout") // 로그아웃
 	public String admin_logout(HttpSession session) {
 		session.removeAttribute("loginAdmin");
 		return "admin/admin_login";
 	}
 	
-	
-	@RequestMapping("/admin_loginForm")
+	@RequestMapping("/admin_loginForm") // 로그인폼 이동
 	public String admin_loginForm(HttpSession session) {
 		session.removeAttribute("loginAdmin");
 		return "admin/admin_login";
 	}
 
-	
-	@RequestMapping("/admin_login")
+	@RequestMapping("/admin_login") // 로그인
 	public String admin_login(	HttpSession session, Model model,
-			@RequestParam("ADMINID") String ADMINID, @RequestParam("ADMINPW") String ADMINPW) {
-		
+	@RequestParam("ADMINID") String ADMINID, @RequestParam("ADMINPW") String ADMINPW) {
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("ADMINID", ADMINID);
-		prm.put("ref_cursor", null);
 		as.getAdmin(prm);
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		
 		if(list.size()==0) model.addAttribute("message", "아이디가 없습니다.");
 		else {
 			HashMap<String,Object> hm = list.get(0);
@@ -85,15 +78,12 @@ public class AdminController {
 		return "admin/admin_login";
 	}
 	
-	
-	@RequestMapping("/adminList")
+	@RequestMapping("/adminList") // 어드민 리스트 조회 (레스토랑, 오더, 멤버, qna, 배너)
 	public String adminList(HttpServletRequest request, HttpSession session, Model model, @RequestParam("table") String table) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-		
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("table", table);
 		prm.put("request", request);
-		prm.put("ref_cursor", null);
 		as.adminList(prm);
 		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		model.addAttribute("paging", (Paging)prm.get("paging"));
@@ -106,11 +96,26 @@ public class AdminController {
 		else	return "admin/admin_bannerlist";
 	}
 	
+	@RequestMapping("/adminDetail") // qna view, res detail 조회 병합 메서드
+	public String adminDetail(HttpSession session, Model model,
+	@RequestParam("procedure") String procedure, @RequestParam("SEQ") int SEQ ) {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("procedure", procedure);
+		prm.put("SEQ", SEQ);
+		as.adminDetail(prm);
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		HashMap<String,Object> vo = list.get(0);
+		model.addAttribute("vo", vo);
+		if (procedure.equals("res")) return "admin/admin_resDetail";
+		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
+		if (procedure.equals("bannerUp")) return "admin/admin_bannerUpdate";
+		else return "admin/admin_qnaDetail";
+	}
 	
-	@RequestMapping("/admin_resOx")
+	@RequestMapping("/admin_resOx") // 레스토랑 승인
 	public String admin_restaurantOk(	HttpSession session, @RequestParam("ox") int ox, @RequestParam("RSEQ") int RSEQ) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
-
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login";
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("ox", ox);
 		prm.put("RSEQ", RSEQ);
@@ -118,11 +123,9 @@ public class AdminController {
 		return "redirect:/adminList?table=r";
 	}
 	
-	
-	@RequestMapping("/admin_orderLR")
+	@RequestMapping("/admin_orderLR") // 주문 상태 변경
 	public String admin_orderLR(	HttpSession session, @RequestParam("result") int result, @RequestParam("OSEQ") int OSEQ) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
-
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("result", result);
 		prm.put("OSEQ", OSEQ);
@@ -130,20 +133,17 @@ public class AdminController {
 		return "redirect:/adminList?table=o";
 	}
 	
-	
-	@RequestMapping("/admin_qnaWriteForm")
+	@RequestMapping("/admin_qnaWriteForm") // qna 작성 폼 
 	public String admin_qnaWriteForm(HttpSession session) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		return "admin/admin_qnaWrite";
 	}
 	
-	
-	@RequestMapping("/adminQna")
+	@RequestMapping("/adminQna") // qna write, delete, update 병합 메서드
 	public String admin_qnaWrite(@ModelAttribute("vo") @Valid QnaVO qvo, BindingResult result, HttpSession session, Model model, @RequestParam("procedure") String procedure) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		String url = "admin/admin_qnaWrite";
 		if(procedure.equals("update")) url = "admin/admin_qnaUpdate";
-		
 		if(!procedure.equals("delete") && result.getFieldError("SUBJECT")!=null)
 			model.addAttribute("message",result.getFieldError("SUBJECT").getDefaultMessage());
 		else if(!procedure.equals("delete") && result.getFieldError("CONTENT")!=null)
@@ -159,31 +159,9 @@ public class AdminController {
 		return url;
 	}
 	
-	
-	@RequestMapping("/adminDetail")
-	public String adminDetail(HttpSession session, Model model,
-			@RequestParam("procedure") String procedure, @RequestParam("SEQ") int SEQ ) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-		
-		HashMap<String, Object> prm = new HashMap<>();
-		prm.put("procedure", procedure);
-		prm.put("SEQ", SEQ);
-		prm.put("ref_cursor", null);
-		as.adminDetail(prm);
-		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		HashMap<String,Object> vo = list.get(0);
-		model.addAttribute("vo", vo);
-
-		if (procedure.equals("res")) return "admin/admin_resDetail";
-		if (procedure.equals("qnaUp")) return "admin/admin_qnaUpdate";
-		if (procedure.equals("bannerUp")) return "admin/admin_bannerUpdate";
-		else return "admin/admin_qnaDetail";
-	}
-	
-	
-	@RequestMapping("/admin_bupdown")
+	@RequestMapping("/admin_bupdown") // 배너 순서 변경
 	public String admin_bupdown(HttpSession session, @RequestParam("BSEQ") int BSEQ, @RequestParam("num") int num) {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("BSEQ", BSEQ);
 		prm.put("num", num);
@@ -192,15 +170,13 @@ public class AdminController {
 		return "redirect:/adminList?table=b";
 	}
 	
-	
-	@RequestMapping("/admin_bannerWriteForm")
+	@RequestMapping("/admin_bannerWriteForm") // 배너 작성 폼
 	public String admin_bannerWriteForm() {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		return "admin/admin_bannerWrite";
 	}
 	
-	
-	@RequestMapping(value="/bannerFileup", method=RequestMethod.POST)
+	@RequestMapping(value="/bannerFileup", method=RequestMethod.POST) // 배너 사진 업로드
 	@ResponseBody
 	public HashMap<String,Object> fileup(HttpServletRequest request) throws IOException {
 		String path = context.getRealPath("images");
@@ -213,11 +189,9 @@ public class AdminController {
 		return prm;
 	}
 	
-	
-	@RequestMapping("/admin_bannerWrite")
+	@RequestMapping("/admin_bannerWrite") // 배너 작성
 	public String admin_bannerWrite(@ModelAttribute("vo") @Valid BannerVO bvo, BindingResult result, HttpSession session, Model model) throws IOException {
-		//if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
-		
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/login";
 		if( result.getFieldError("BNAME")!=null ) model.addAttribute("message","배너 이름을 입력하세요");
 		else if( result.getFieldError("BIMAGE")!=null ) model.addAttribute("message","배너 이미지를 등록하세요");
 		else {
@@ -229,41 +203,33 @@ public class AdminController {
 		return "admin/admin_bannerWrite";
 	}
 	
-	
-	
-	@RequestMapping("/admin_bannerUpdate")
+	@RequestMapping("/admin_bannerUpdate") // 배너 업데이트
 	public String admin_bannerUpdate(@Valid BannerVO bvo, BindingResult result, @RequestParam("OLDBIMAGE") String OLDBIMAGE,
-			HttpSession session, Model model) throws IOException {
-	//	if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-
+	HttpSession session, Model model) throws IOException {
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		String NEWBIMAGE = bvo.getBIMAGE();
-		
 		if( bvo.getBIMAGE().equals("") ) bvo.setBIMAGE(OLDBIMAGE);
 		else model.addAttribute("NEWBIMAGE", NEWBIMAGE);
-		
 		if( result.getFieldError("BNAME")!=null ) { model.addAttribute("message","배너 이름을 입력하세요");
 			if( !NEWBIMAGE.equals("")  ) 	bvo.setBIMAGE(OLDBIMAGE);
 		} else {
 			HashMap<String, Object> prm = new HashMap<>();
 			prm.put("vo", bvo);
-			as.admin_bannerUpdate(prm);
-			model.addAttribute("result", 1);
+			as.admin_bannerUpdate(prm);;
 		}
+		model.addAttribute("result", 1);
 		model.addAttribute("vo", bvo);
 		return "admin/admin_bannerUpdate";
 	}
 	
-	
-	@RequestMapping("/admin_bannerDelete")
+	@RequestMapping("/admin_bannerDelete") // 배너 삭제
 	public String admin_bannerDelete( HttpSession session, @RequestParam("BSEQ") int BSEQ ) throws IOException {
-	//	if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
-		
+		if(session.getAttribute("loginAdmin")==null) return "redirect:/admin_loginForm";
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("BSEQ", BSEQ );
 		as.admin_bannerDelete(prm);
 		return "redirect:/adminList?table=b";
 	}
-	
 	
 }
 	
