@@ -663,12 +663,14 @@ BEGIN
         commit;
 END;
 
+
 CREATE OR REPLACE PROCEDURE delCart( p_cseq  IN varchar2   )
 IS
 BEGIN
     DELETE FROM cart WHERE cseq = p_cseq;
     COMMIT;    
 END;
+
 
 CREATE OR REPLACE PROCEDURE insertOrder(p_rseq IN orders.rseq%type, p_id IN orders.id%type, p_rideryn IN orders.rideryn%type,
     p_plasticyn IN orders.plasticyn%type, p_payment IN orders.payment%type, p_address1  IN orders.address1%type, p_address2  IN orders.address2%type,
@@ -682,21 +684,28 @@ END;
 
 
 
-
-
-
-CREATE OR REPLACE PROCEDURE selectOrdersIngById( p_id IN orders.id%TYPE, p_startNum IN NUMBER, p_endNum IN NUMBER, p_cur OUT SYS_REFCURSOR)
+CREATE OR REPLACE PROCEDURE getOrderCount( p_id IN orders.id%TYPE, p_oa IN varchar2, p_cnt  OUT  NUMBER)
 IS
 BEGIN
-    OPEN p_cur FOR
+	if (p_oa ='전체') then
+		select count(rownum) into p_cnt from orders where id=p_id;
+	else
+    	select count(rownum) into p_cnt from orders where id=p_id and result in(0,1);
+    end if;
+END;
+
+
+CREATE OR REPLACE PROCEDURE selectOrdersById( p_id IN orders.id%TYPE, p_oa IN varchar2, p_startNum IN NUMBER, p_endNum IN NUMBER, p_cur OUT SYS_REFCURSOR)
+IS
+BEGIN
+	IF(p_oa ='전체')then
+	OPEN p_cur FOR
        select * from ( select * from ( select rownum as rn, b.* from 
-       (( select * from orders where id=p_id and result in(0,1) order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+       (( select distinct oseq,rseq,oname,rname,rimage,indate,result,totalprice from order_view where id=p_id  order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+	ELSE
+		OPEN p_cur FOR
+		select * from ( select * from ( select rownum as rn, b.* from 
+		(( select distinct oseq,rseq,oname,rname,rimage,indate,result,totalprice from order_view where id=p_id and result in(0,1) order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
+	END IF;
 END;
-
-CREATE OR REPLACE PROCEDURE selectOrderViewByOseq( p_oseq IN order_view.oseq%TYPE, p_cur OUT SYS_REFCURSOR)
-IS
-BEGIN
-    OPEN p_cur FOR
-      select * from order_view where oseq=p_oseq;
-END;
-
+commit;
