@@ -278,7 +278,7 @@ end;
 CREATE OR REPLACE PROCEDURE deleteFoodMenu(p_fseq IN foodmenu.fseq%type)
 IS
 BEGIN
-	delete FROM foodmenu WHERE fseq = p_fseq; 
+	 delete FROM foodmenu WHERE fseq = p_fseq; 
 end;
 
 
@@ -427,7 +427,7 @@ end;
 CREATE OR REPLACE  PROCEDURE getMemberFooba( p_id IN member.id%type, p_curvar OUT SYS_REFCURSOR )
 IS
 BEGIN
-     OPEN  p_curvar  FOR SELECT*FROM member WHERE id = p_id; 
+    OPEN  p_curvar  FOR SELECT*FROM member WHERE id = p_id; 
 END;
 
 
