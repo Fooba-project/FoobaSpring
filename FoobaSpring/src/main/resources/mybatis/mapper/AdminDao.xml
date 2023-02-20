@@ -18,14 +18,12 @@
 	
 	<!-- res, member, order, qna, banner 통합 -->
 	<select id="adminList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL adminList (#{table}, #{key}, #{startNum}, #{endNum},
-		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
+		{ CALL adminList (#{table}, #{key}, #{startNum}, #{endNum},#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
 	</select>
 	
 	<!-- qnaDetail, resDetail 통합 -->
 	<select id="adminDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL adminDetail (#{procedure}, #{SEQ},
-		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
+		{ CALL adminDetail (#{procedure}, #{SEQ},#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=adminMap } )}
 	</select>
 
 	<!-- accept, reject 통합 -->
