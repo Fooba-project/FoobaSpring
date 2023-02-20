@@ -8,141 +8,91 @@
 	<resultMap id="memberMap" type="java.util.HashMap"></resultMap>
 	
 	<select id="banner" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL bannerx(
-			#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-		)}		
+		{CALL bannerx(#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}		
 	</select>
 	
-	
 	<select id="getMember" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{
-			CALL getMember( 
-				#{ ID, mode=IN }, 
-				#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-			)
-		}
+		{CALL getMember(#{ ID, mode=IN },#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<insert id="insertMember" statementType="CALLABLE" parameterType="fooba.dto.MemberVO" >
-		{ 
-			CALL insertMember( 
-				#{ID},#{PWD},#{NAME},#{EMAIL},#{PHONE},#{ZIP_NUM},#{ADDRESS1},#{ADDRESS2},#{ADDRESS3},#{NICK}
-			) 
-		}
+		{CALL insertMember(#{ID},#{PWD},#{NAME},#{EMAIL},#{PHONE},#{ZIP_NUM},#{ADDRESS1},#{ADDRESS2},#{ADDRESS3},#{NICK})}
 	</insert>
 	
 	<select id="memberFindId" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{
-				CALL memberFindId(
-		#{NAME},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
-									)
-		}
+		{CALL memberFindId(#{NAME},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap})}
 	</select>
 	
 	<select id="memberFindPw" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{
-				CALL memberFindPw(
-		#{ID},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap}
-									)
-		}
+		{CALL memberFindPw(#{ID},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap})}
 	</select>
 	 
 	<select id="memberQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL memberQnaList (
-		 #{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-		 )}
+		{CALL memberQnaList (#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<update id="memberUpdate" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{ 
-			CALL memberUpdate( 
-				#{mvo.ID}, #{mvo.PWD}, #{mvo.NAME}, #{mvo.EMAIL}, #{mvo.PHONE}, 
-				#{mvo.ZIP_NUM},#{mvo.ADDRESS1}, #{mvo.ADDRESS2}, #{mvo.ADDRESS3}, #{mvo.NICK},
-				#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-			) 
-		}
+		{CALL memberUpdate(#{mvo.ID}, #{mvo.PWD}, #{mvo.NAME}, #{mvo.EMAIL}, #{mvo.PHONE}, #{mvo.ZIP_NUM},#{mvo.ADDRESS1}, #{mvo.ADDRESS2}, #{mvo.ADDRESS3}, #{mvo.NICK},#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</update>
 	
 	<delete id="withdrawalMember" statementType="CALLABLE" >
-		{CALL withdrawalMember(
-			#{PARAM1}
-		)}
+		{CALL withdrawalMember(#{PARAM1})}
 	</delete>
 	
 	<select id="getOrderbyOseq" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{CALL getOrderbyOseq(
-			#{OSEQ},#{ ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-		)}
+		{CALL getOrderbyOseq(#{OSEQ},#{ ref_cursor1, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="selectOrderViewByOseq" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{CALL selectOrderViewByOseq(
-			#{OSEQ},#{ ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-		)}
+		{CALL selectOrderViewByOseq(#{OSEQ},#{ ref_cursor2, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="getOrderReviewByOseq" statementType="CALLABLE" parameterType="java.util.HashMap" >
-		{CALL getOrderReviewByOseq(
-			#{OSEQ},#{ ref_cursor3, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap } 
-		)}
+		{CALL getOrderReviewByOseq(#{OSEQ},#{ ref_cursor3, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
-	
-	<select id="getMember"  statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL getMemberFooba(#{ID},
-				#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 } )	}
-	</select>	
 
 	<select id="SearchResList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL SearchResList(#{searchtext},
-		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL SearchResList(#{searchtext},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 
 	<select id="FimagebyRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL FimagebyRseq(#{RSEQ},
-		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL FimagebyRseq(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="searchKind" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL searchKind(#{KIND},
-		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL searchKind(#{KIND},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="resInf" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{	CALL resInf(#{RSEQ},
-	#{ref_cursor1 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL resInf(#{RSEQ},#{ref_cursor1 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="reviewList" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{ CALL reviewList(#{RSEQ},
-	#{ref_cursor2 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL reviewList(#{RSEQ},#{ref_cursor2 ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="cartList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL cartList(#{RSEQ}, #{ID},
-	#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL cartList(#{RSEQ}, #{ID},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<select id="getFoodDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL getFoodDetail(#{FSEQ},
-		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL getFoodDetail(#{FSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<insert id="insertCart" statementType="CALLABLE" parameterType="fooba.dto.CartVO">
-	{CALL insertCartFooba(#{ID}, #{FSEQ},#{SIDEYN1},#{SIDEYN2},#{SIDEYN3},#{QUANTITY},#{CPRICE},#{CFNAME},#{RSEQ})}
+		{CALL insertCartFooba(#{ID}, #{FSEQ},#{SIDEYN1},#{SIDEYN2},#{SIDEYN3},#{QUANTITY},#{CPRICE},#{CFNAME},#{RSEQ})}
 	</insert>
 	
 	<delete id="deletecart">
-	{CALL deletecartFooba(#{CSEQ},#{RSEQ})}
+		{CALL deletecartFooba(#{CSEQ},#{RSEQ})}
 	</delete>
 
-	
 	<insert id="insertOrder" statementType="CALLABLE" parameterType="java.util.HashMap">
-	{CALL insertOrder(#{ovo.RSEQ}, #{ovo.ID},#{ovo.RIDERYN},#{ovo.PLASTICYN},#{ovo.PAYMENT},
-	#{ovo.ADDRESS1},#{ovo.ADDRESS2},#{ovo.PHONE},#{ovo.TOTALPRICE},#{oname})}
+		{CALL insertOrder(#{ovo.RSEQ}, #{ovo.ID},#{ovo.RIDERYN},#{ovo.PLASTICYN},#{ovo.PAYMENT},#{ovo.ADDRESS1},#{ovo.ADDRESS2},#{ovo.PHONE},#{ovo.TOTALPRICE},#{oname})}
 	</insert>
 	
 	<select id="memberGetAllCount" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL memberGetAllCount(#{cnt , mode=OUT, jdbcType=INTEGER })	  }
+		{CALL memberGetAllCount(#{cnt , mode=OUT, jdbcType=INTEGER })}
 	</select>
 	
 	<!-- <select id="memberQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -151,30 +101,27 @@
 	</select> -->
 	
 	<select id="lookupOseq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL lookupOseq( #{ID},  #{OSEQ, mode=OUT, jdbcType=INTEGER} )}
+		{CALL lookupOseq( #{ID},  #{OSEQ, mode=OUT, jdbcType=INTEGER} )}
 	</select>
 
 	<insert id="insertOrder_Detail" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL insertOrder_Detail( #{OSEQ}, #{hvo.QUANTITY}, #{hvo.FSEQ}, #{hvo.SIDEYN1}, #{hvo.SIDEYN2},#{hvo.SIDEYN3}
-		)}
+		{CALL insertOrder_Detail( #{OSEQ}, #{hvo.QUANTITY}, #{hvo.FSEQ}, #{hvo.SIDEYN1}, #{hvo.SIDEYN2},#{hvo.SIDEYN3})}
 	</insert>
 	
 	<delete id="delCart" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL delCart( #{param1} )}
+		{CALL delCart( #{param1} )}
 	</delete>
 	
 	<select id="getOrderCount" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL getOrderCount( #{ID}, #{oa}, #{cnt, mode=OUT, jdbcType=INTEGER}) }
+		{CALL getOrderCount( #{ID}, #{oa}, #{cnt, mode=OUT, jdbcType=INTEGER}) }
 	</select>
 	
 	<select id="selectOrdersById" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{	CALL selectOrdersById( #{ID}, #{oa}, #{startNum},#{endNum},
-		#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL selectOrdersById( #{ID}, #{oa}, #{startNum},#{endNum},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
 	</select>
 	
 	<insert  id="writeReview" parameterType="fooba.dto.ReviewVO">
-		insert into review(review_seq,id,rseq,star,image,content,oseq,nick)
-		values(review_seq_seq.nextVal,#{ID},#{RSEQ},#{STAR},#{IMAGE},#{CONTENT},#{OSEQ},#{NICK})
+		insert into review(review_seq,id,rseq,star,image,content,oseq,nick)values(review_seq_seq.nextVal,#{ID},#{RSEQ},#{STAR},#{IMAGE},#{CONTENT},#{OSEQ},#{NICK})
 	</insert>
 	
 	<update id="reviewComplete" >
