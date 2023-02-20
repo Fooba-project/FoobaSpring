@@ -28,6 +28,10 @@ public class MemberService {
 	@Autowired
 	TransactionTemplate tt;
 	
+	public void banner(HashMap<String, Object> prm) {
+		mdao.banner(prm);
+	}
+	
 	public void getMember(HashMap<String, Object> paramMap) {
 		mdao.getMember(paramMap);
 	}
@@ -35,7 +39,15 @@ public class MemberService {
 	public void insertMember(MemberVO mvo) {
 		mdao.insertMember(mvo);
 	}
-
+	
+	public void memberUpdate(HashMap<String, Object> prm) {
+		mdao.memberUpdate(prm);
+	}
+	
+	public void withdrawalMember(String ID) {
+		mdao.withdrawalMember(ID);
+	}
+	
 	public void memberFindId(HashMap<String, Object> prm) {
 		mdao.memberFindId(prm);
 	}
@@ -48,18 +60,6 @@ public class MemberService {
 		mdao.memberQnaList(prm);
 	}
 
-	public void memberUpdate(HashMap<String, Object> prm) {
-		mdao.memberUpdate(prm);
-	}
-
-	public void withdrawalMember(String ID) {
-		mdao.withdrawalMember(ID);
-	}
-
-	public void banner(HashMap<String, Object> prm) {
-		mdao.banner(prm);
-	}
-
 	public void SearchResList(HashMap<String, Object> prm) {
 		HttpServletRequest request	= (HttpServletRequest)prm.get("request");
 		HttpSession session = request.getSession();		
@@ -68,21 +68,34 @@ public class MemberService {
 		if( request.getParameter("searchtext") != null ) {
 			searchtext = request.getParameter("searchtext");
 			search=searchtext;
-		} // 검색어 입력
+		} // 검색어가 존재할 경우 검색어를 searchtext에 저장
 
 		String hash = "";
 		if( request.getParameter("HASH") != null ) {
 			searchtext = request.getParameter("HASH");
 			search="#"+searchtext;
-		} // 해쉬검색어가 존재하면 해쉬검색어를 search에 입력
-		prm.put("search", search);
-		prm.put("searchtext", searchtext);
+		} // 해쉬검색어가 존재할 경우 해쉬검색어를 searchtext에 저장
+		
+		prm.put("search", search); // 검색창까지 가져갈 서치값 미리 저장.
+		prm.put("searchtext", searchtext); //  sql에서 조회할 searchtext 저장
 		
 		mdao.SearchResList(prm);
 		
 		ArrayList< HashMap<String,Object> > list = (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
-		insertFimageByRseq(list);
+		insertFimageByRseq(list); // 레스토랑의 대표 음식사진 조회 및 저장
 		prm.put("list", list);
+	}
+	
+	// 레스토랑 대표 음식 사진 조회 및 hash맵 리스트에 저장
+	private void insertFimageByRseq(ArrayList<HashMap<String, Object>> list) {
+		for(HashMap<String,Object> a : list) {
+			HashMap<String, Object> prm = new HashMap<>();
+			prm.put("RSEQ", a.get("RSEQ"));
+			mdao.FimagebyRseq(prm);
+			ArrayList< HashMap<String,Object> > fimageList = (ArrayList<HashMap<String, Object>>) prm.get("ref_cursor");
+			HashMap<String,Object> one = fimageList.get(0);
+			a.put("FIMAGE",one.get("FIMAGE"));
+		}
 	}
 
 	public void searchKind(HashMap<String, Object> prm) {
@@ -97,19 +110,7 @@ public class MemberService {
 		prm.put("list", klist);
 	}
 
-	private void insertFimageByRseq(ArrayList<HashMap<String, Object>> list) {
-		for(HashMap<String,Object> a : list) {
-			HashMap<String, Object> hm = new HashMap<>();
-			int rseq=Integer.parseInt(a.get("RSEQ")+"");
-			hm.put("RSEQ", rseq);
-			mdao.FimagebyRseq(hm);
-			ArrayList< HashMap<String,Object> > fimageList = (ArrayList<HashMap<String, Object>>) hm.get("ref_cursor");
-			HashMap<String,Object> one = fimageList.get(0);
-			String fimage=(String)one.get("FIMAGE");
-			a.put("FIMAGE",fimage);
-		}
-	}
-
+	// 레스토랑 정보 조회
 	public void resInf(HashMap<String, Object> prm) {
 		mdao.resInf(prm);		
 	}
@@ -233,12 +234,10 @@ public class MemberService {
 	
 	public void writeReview(ReviewVO vo) {
 		mdao.writeReview(vo);
-		
 	}
 
 	public void reviewComplete(int oseq) {
 		mdao.reviewComplete(oseq);
-		
 	}
 }
 

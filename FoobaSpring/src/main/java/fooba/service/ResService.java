@@ -22,12 +22,10 @@ public class ResService {
 	public void getRes(HashMap<String, Object> paramMap) {
 		paramMap.put("ref_cursor",null);
 		rdao.getRes(paramMap);
-		
 	}
 	
 	//별점 평균 계산
 	public void starAvg(HashMap<String, Object> paramMap) {
-		
 		rdao.starAvg(paramMap);
 		ArrayList<HashMap<String,Object>> list
 		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
@@ -43,49 +41,41 @@ public class ResService {
 		double doublestar=(int)(star*10)/(double)10;
 		paramMap.put("intstar", intstar);
 		paramMap.put("doublestar", doublestar);
-		
 	}
 	
 	//아이디 찾기, 비밀번호 찾기
 	public void resFindId(HashMap<String, Object> paramMap) {
 		rdao.resFindId(paramMap);
-		
 	}
 	
 	//회원가입
 	public void joinRes(RestaurantVO vo) {
 		rdao.joinRes(vo);
-		
 	}
 	
 	//정보변경
 	public void updateRes(RestaurantVO vo) {
 		rdao.updateRes(vo);
-		
 	}
 	
 	//삭제
 	public void withdrawal(String RID) {
 		rdao.withdrawal(RID);
-		
 	}
 	
 	//리뷰 목록 획득
 	public void selectReview(HashMap<String, Object> paramMap) {
 		rdao.selectReview(paramMap);
-		
 	}
 
 	//리뷰 변경
 	public void updateReply(HashMap<String, Object> paramMap) {
 		rdao.updateReply(paramMap);
-		
 	} 
 	
 	//주문단계 변경
 	public void nextOrderStatement(int OSEQ) {
 		rdao.nextOrderStatement(OSEQ);
-		
 	}
 	
 	//주문중인 주문 목록
@@ -96,7 +86,6 @@ public class ResService {
 	//전체 주문 목록
 	public void selectOrdersAllByRseq(HashMap<String, Object> paramMap) {
 		rdao.selectOrdersAllByRseq(paramMap);
-		
 	}	
 	
 	//음식 메뉴 리스트

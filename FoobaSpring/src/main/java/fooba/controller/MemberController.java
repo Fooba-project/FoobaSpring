@@ -2,7 +2,6 @@ package fooba.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import java.util.HashMap;
 
 import javax.servlet.ServletContext;
@@ -37,277 +36,287 @@ public class MemberController {
 
 	@Autowired
 	MemberService ms;
-	
+
 	@Autowired
 	ResService rs;
-	
+
 	@Autowired
 	ServletContext context;
-	
-	@RequestMapping("/")
+
+	@RequestMapping("/") // 메인화면으로 이동
 	public String main(Model model) {
 		return "redirect:/index";
 	}
-	
-	@RequestMapping("/index")
+
+	@RequestMapping("/index") // 메인화면으로 이동
 	public String index(Model model) {
 		HashMap<String,Object>prm=new HashMap<String,Object>();
-		prm.put("ref_cursor",null);
 		ms.banner(prm);
-		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		ArrayList<HashMap<String,Object>> list =(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
 		model.addAttribute("bannerList",list);
 		model.addAttribute("size",list.size());
 		return "main";
 	}
-
-	@RequestMapping("/memberIdCheck")
-		public String member_id_check( 
-				@RequestParam("ID") String ID,
-				Model model, 
-				HttpServletRequest request ) {
-		HashMap<String, Object> paramMap = new HashMap<String, Object>();
-		paramMap.put("ID", ID);
-		paramMap.put("ref_cursor", null);
-		ms.getMember( paramMap );
-		
-		ArrayList< HashMap<String,Object> > list 
-			= (ArrayList< HashMap<String,Object> >) paramMap.get("ref_cursor");
-		
-		if( list.size()==0 ) model.addAttribute("result" , -1);
-		else model.addAttribute("result" , 1);
-		
-		model.addAttribute("ID", ID);		
-		return "member/memberIdCheck";
+	
+	@RequestMapping("/fooba_tos") // 이용약관 페이지로 이동
+	public String fooba_tos(HttpServletRequest request) {
+		 return "etc/fooba_tos";
+	}
+	 
+	@RequestMapping("/fooba_privacy") // 개인정보처리방침 페이지로 이동
+	public String fooba_privacy(HttpServletRequest request) {
+		return "etc/fooba_privacy";
 	}
 	
-	
-	@RequestMapping("/memberJoinForm")
-	public String memberJoinForm() {
-		return "member/memberJoin";
+	@RequestMapping("/loginForm") // 회원 로그인 폼 이동
+	public String loginForm() {
+		return "member/memberLogin";
 	}
 	
-	
-	
-	@RequestMapping(value="/memberJoin", method=RequestMethod.POST)
-	public String method(@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, 
-		Model model ) {
-		String url = "member/memberJoin"; 
-		if (result.getFieldError("ID")!=null ) 	model.addAttribute("message", "아이디를 입력하세요" );
-		else if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", "비밀번호를 입력하세요" );
-		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message", "이름을 입력하세요" );
-		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", "전화번호를 입력하세요" );
-		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", "이메일을 입력하세요" );
-		else if( mvo.getREID() == null || ( mvo.getREID() != null && !mvo.getREID().equals(mvo.getID() ) ) )
-			model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
-		else if( mvo.getUSERPWDCHK() == null || (  mvo.getUSERPWDCHK() != null && !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) ) 
-			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
+	@RequestMapping(value="/login", method=RequestMethod.POST) // 회원 로그인, validation 적용
+	public String login(@ModelAttribute("dto") @Valid MemberVO mvo, BindingResult result, HttpSession session, Model model) {
+		String url = "member/memberLogin";
+		if(result.getFieldError("ID")!=null) model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+		else if (result.getFieldError("PWD")!=null) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 		else {
-			ms.insertMember( mvo);
-			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
-			url = "member/memberLogin";
+			HashMap<String, Object> prm = new HashMap<>();
+			prm.put("ID", mvo.getID());
+			ms.getMember(prm);
+			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			if(list.size()==0) model.addAttribute("message","아이디가 없습니다.");
+			else { HashMap<String, Object> hvo = list.get(0);
+				if(!hvo.get("PWD").equals(mvo.getPWD())) model.addAttribute("message","비밀번호가 틀렸습니다.");
+				else if (hvo.get("PWD").equals(mvo.getPWD())) {
+					session.setAttribute("loginUser", hvo);
+					url = "redirect:/";
+				}
+			}
 		}
 		return url;
 	}
 	
-	@RequestMapping("/memberFindIdForm")
+	@RequestMapping("/logout") // 회원 로그아웃
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginUser");
+		return "redirect:/";
+	}
+	 
+	@RequestMapping("/memberJoinForm") // 회원가입폼 이동
+	public String memberJoinForm() {
+		return "member/memberJoin";
+	}
+
+	@RequestMapping("/memberIdCheck") // 회원가입 아이디 중복체크
+		public String member_id_check( @RequestParam("ID") String ID, Model model, HttpServletRequest request ) {
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		paramMap.put("ID", ID);
+		ms.getMember( paramMap );
+		ArrayList< HashMap<String,Object> > list = (ArrayList< HashMap<String,Object> >) paramMap.get("ref_cursor");
+		if( list.size()==0 ) model.addAttribute("result" , -1);
+		else model.addAttribute("result" , 1);
+		model.addAttribute("ID", ID);		
+		return "member/memberIdCheck";
+	}
+	
+	@RequestMapping(value="/memberJoin", method=RequestMethod.POST) // 회원가입, validation 적용
+	public String method(@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model ) {
+		String url = "member/memberJoin"; 
+		if (result.getFieldError("ID")!=null ) 	model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+		else if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message",result.getFieldError("NAME").getDefaultMessage());
+		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
+		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
+		else if( mvo.getREID() != null || !mvo.getREID().equals(mvo.getID() ) ) model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
+		else if( mvo.getUSERPWDCHK() != null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
+		else {
+			ms.insertMember( mvo);
+			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
+			return "member/memberLogin";
+		}
+		return "member/memberJoin";
+	}
+	
+	@RequestMapping("/memberFindIdForm") // 회원 아이디 찾기 폼으로 이동
 	public String memberFindIdForm() {
 		return"member/memberFindId";
 	}
 	
-	@RequestMapping(value="memberFindId")
-	public String memberFindId(
-			@RequestParam(value="NAME" ,required=false)String NAME,
-			@RequestParam(value="PHONE",required=false)String PHONE, Model model) {
+	@RequestMapping(value="memberFindId") // 회원 아이디 찾기
+	public String memberFindId( @RequestParam(value="NAME", required=false) String NAME, 
+			@RequestParam(value="PHONE", required=false)String PHONE, Model model) {
 		HashMap<String,Object>prm =new HashMap<String,Object>();
-		prm.put("NAME",NAME);
-		prm.put("ref_cursor",null);
+		prm.put("NAME", NAME);
 		ms.memberFindId(prm);
-		
-		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
-		
-		if(list.size()==0) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-			return "member/memberFindId";
-		}else {
+		ArrayList<HashMap<String,Object>> list =(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		if(list.size()==0) model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+		else {
 			HashMap<String,Object> mvo=list.get(0);
-			if(!mvo.get("PHONE").equals(PHONE)) {
-				model.addAttribute("message","휴대폰 번호가 틀렸습니다. 다시 입력하세요.");
-				return "member/memberFindId";
-			}
+			if(!mvo.get("PHONE").equals(PHONE)) model.addAttribute("message","휴대폰 번호가 틀렸습니다. 다시 입력하세요.");
 			else {
 				model.addAttribute("message","귀하의 아이디는 '"+mvo.get("ID")+"'입니다.");
 				return  "member/memberLogin";
 			}
 		}
+		return "member/memberFindId";
 	}
-	
-	@RequestMapping("/memberFindPwForm")
+		
+	@RequestMapping("/memberFindPwForm") // 회원 비밀번호 찾기 폼으로 이동
 	public String memberFindPwForm() {
 		return"member/memberFindPw";
 	}
 	
-	@RequestMapping(value="memberFindPw")
+	@RequestMapping(value="memberFindPw") // 회원 비밀번호 찾기
 	public String memberFindPw(
 			@RequestParam(value="ID" ,required=false)String ID,
 			@RequestParam(value="NAME" ,required=false)String NAME,
 			@RequestParam(value="PHONE",required=false)String PHONE, Model model) {
 		HashMap<String,Object>prm =new HashMap<String,Object>();
-		
-		prm.put("ID",ID);
-		prm.put("ref_cursor",null);
+		prm.put("ID", ID);
 		ms.memberFindPw(prm);
-		
-		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
-		
-		if(list.size()==0) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-			return "member/memberFindPw";
-		}else {
+		ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
+		if(list.size()==0) model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+		else {
 			HashMap<String,Object> mvo=list.get(0);
-			if(!mvo.get("PHONE").equals(PHONE)||!mvo.get("NAME").equals(NAME)) {
-				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-				return "member/memberFindPw";
-			}
+			if(!mvo.get("PHONE").equals(PHONE)||!mvo.get("NAME").equals(NAME)) model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
 			else {
 				model.addAttribute("message","귀하의 비밀번호는 '"+mvo.get("PWD")+"'입니다.");
 				return  "member/memberLogin";
 			}
 		}
+		return "member/memberFindPw";
 	}
 	
-	@RequestMapping("/memberQnalist")
+	@RequestMapping("/memberQnalist") // 자주묻는 질문 조회 및 이동
 	public String memberQnalist(Model model) {
-		
 		HashMap<String, Object> prm = new HashMap<String, Object>();
-		
-		prm.put("ref_cursor", null);
 		ms.memberQnaList(prm);
-		
-		ArrayList<HashMap<String,Object>> list = 		
-				(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-		
-		model.addAttribute("qnaList", list);
+		ArrayList<HashMap<String,Object>> list = 	(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		model.addAttribute("list", list);
 		return"member/memberQnalist";
 	}
 	
-	
-	@RequestMapping("/memberUpdateForm")
+	@RequestMapping("/memberUpdateForm") // 회원 정보 수정 폼으로 이동
 	public String memberUpdateForm() {
 		return "member/memberUpdate";
 	}
 	
-	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST)
-	public String memberUpdate(HttpSession session,
-			@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model ) {
-		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
-		
-		if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", "비밀번호를 입력하세요" );
-		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message", "이름을 입력하세요" );
-		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", "전화번호를 입력하세요" );
-		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", "이메일을 입력하세요" );
-		else if( mvo.getUSERPWDCHK() == null || (  mvo.getUSERPWDCHK() != null && !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) ) 
-			model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
+	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST) // 회원 정보 수정, validation 적용
+	public String memberUpdate( @ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model, HttpSession session ) {
+		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm"; // 로그인 방어
+		if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message", result.getFieldError("NAME").getDefaultMessage());
+		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
+		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
+		else if(mvo.getUSERPWDCHK() != null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
 		else {
 			HashMap<String, Object> prm = new HashMap<String, Object>();		
-			
 			prm.put("mvo", mvo);
 			mvo.setID( mvo.getID().replace("id : ", "").replace(" (수정 불가)", "") );
 			mvo.setNAME( mvo.getNAME().replace("이름 : ", "").replace(" (수정 불가)", "") );
-			prm.put("ref_cursor",null);
-			ms.memberUpdate( prm);
-			ArrayList<HashMap<String,Object>> list 
-			= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			ms.memberUpdate( prm ); // 업데이트 후, 갱신된 정보로 로그인 유저 조회
+			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 			if(list.size()!=0) {
-			HashMap<String,Object> loginUser = list.get(0);
-			session.setAttribute("loginUser", loginUser);
-			return "member/memberUpdate";
+				HashMap<String,Object> loginUser = list.get(0);
+				session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
+				model.addAttribute("message", "정보 수정 완료");
 			}
-			}
+		}
 		return "member/memberUpdate";
 	}
 	
-	@RequestMapping("/withdrawalMember")
+	@RequestMapping("/withdrawalMember") // 회원 탈퇴
 	public String res_withdrawal(HttpSession session,Model model) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
 		HashMap<String , Object> loginUser = (HashMap<String , Object>)session.getAttribute("loginUser");
 		ms.withdrawalMember((String)loginUser.get("ID"));
 		session.removeAttribute("loginUser");
-		model.addAttribute("message","아이디가 정지 되었습니다. 복구요청은 고객센터에 전화주세요");
+		model.addAttribute("message","아이디가 정지 되었습니다. 복구 요청은 고객센터로 전화해 주세요");
 		return "member/memberLogin";
 	}
 	
-	@RequestMapping("/memberOrderDetail")
-	public String memberOrderDetail(HttpSession session,Model model,@RequestParam("OSEQ")int OSEQ) {
-		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
-		HashMap<String, Object> prm = new HashMap<String, Object>();		
-		prm.put("OSEQ", OSEQ);
-		prm.put("ref_cursor1",null);
-		prm.put("ref_cursor2",null);
-		prm.put("ref_cursor3",null);
-		
-		ms.getOrderDetail(prm);
-		
-		ArrayList<HashMap<String,Object>> list1 
-		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
-		ArrayList<HashMap<String,Object>> list2 
-		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
-		ArrayList<HashMap<String,Object>> list3 
-		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
-		model.addAttribute("ovo", list1.get(0));
-		model.addAttribute("ovList", list2);
-		if(list3.size()!=0)model.addAttribute("review", list3.get(0));
-		return "member/memberOrderDetail";
+	@RequestMapping("/search") // 검색어 및 해쉬태그로 레스토랑 검색
+	public String search(HttpServletRequest request,HttpSession session,Model model){
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("request", request);
+		ms.SearchResList(prm);
+		String search = (String)prm.get("search");
+		model.addAttribute("search",search);
+		ArrayList< HashMap<String,Object> > list = (ArrayList<HashMap<String, Object>>) prm.get("list");
+		model.addAttribute("list",list);
+		return "main/resList";
 	}
-	
-	
-	
-	@RequestMapping("/loginForm")
-	public String loginForm() {
-		return "member/memberLogin";
+	 
+	@RequestMapping("/category") // 카테고리별 레스토랑 검색
+	public String category(HttpServletRequest request, HttpSession session, Model model){
+	HashMap<String, Object> prm = new HashMap<>();
+		prm.put("request", request);
+		ms.searchKind(prm);
+		ArrayList< HashMap<String,Object> > list = (ArrayList<HashMap<String, Object>>) prm.get("list");
+		model.addAttribute("list", list);
+		return "main/resList";
 	}
+
+	@RequestMapping("/restaurantDetail")
+	public String restaurant_detail(HttpServletRequest request, HttpSession session,
+	Model model, @RequestParam("RSEQ")int RSEQ) {
+		int carttotalprice=0;
+		HashMap<String, Object> prm = new HashMap<>();
+		prm.put("RSEQ", RSEQ);
+		 
+		rs.foodList(prm); // 레스토랑 음리스트 조회
+		ms.resInf(prm); // 레스토랑 기본 정보 조회
+		ms.reviewList(prm); // 레스토랑의 리뷰리스트 조회
+
+		ArrayList<HashMap<String, Object>> list = (ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
+		 ArrayList<HashMap<String,Object>>list1 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		 HashMap<String,Object> rvo =list1.get(0);
+		 ArrayList<HashMap<String,Object>>list2 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
+		 
+		 HashMap<String,Object> vo = (HashMap<String,Object>)session.getAttribute("loginUser");
+
+		 if(vo != null) {
+			 prm.put("ID", vo.get("ID")+"");
+			 int sum = 0;
+			 prm.put("ref_cursor", null);
+			 ms.cartList(prm);
+			 ArrayList<HashMap<String,Object>> list3
+				= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+			 for (HashMap<String,Object> cart : list3)
+				sum += Integer.parseInt(cart.get("CPRICE")+"");
+			 model.addAttribute("clist",list3);
+			 model.addAttribute("carttotalprice", sum + Integer.parseInt(rvo.get("RTIP")+""));
+		 }
 	
-	 @RequestMapping(value="/login", method=RequestMethod.POST)
-	   public String login(@ModelAttribute("dto") @Valid MemberVO mvo, 
-			   BindingResult result, HttpSession session, Model model) {
-	      
-	      String url = "member/memberLogin";
-	      if(result.getFieldError("ID")!=null)
-	         model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
-	      else if (result.getFieldError("PWD")!=null)
-	         model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
-	      else {
-	         HashMap<String, Object> prm = new HashMap<>();
-	         prm.put("ID", mvo.getID());
-	         prm.put("ref_cursor", null);
-	         
-	         ms.getMember(prm);
-	         
-	         ArrayList<HashMap<String,Object>> list 
-	         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-	         if(list.size()==0) {	
-	            model.addAttribute("message","아이디가 없습니다.");
-	            return "member/memberLogin";   
-	         }
-	         HashMap<String, Object> hvo = list.get(0);
-	         if(!hvo.get("PWD").equals(mvo.getPWD()))
-	            model.addAttribute("message","비번이 안맞습니다.");
-	         else if (hvo.get("PWD").equals(mvo.getPWD())) {
-	            session.setAttribute("loginUser", hvo);
-	            url = "redirect:/";
-	         }	   
-	      }
-	      return url;
+		 /*가게 별점*/
+		rs.starAvg(prm);
+		session.setAttribute("intstar",prm.get("intstar")); //별 개수
+		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)
+		
+		 model.addAttribute("FoodmenuList",list);
+		 model.addAttribute("RestaurantVO",rvo);
+		 model.addAttribute("ReviewList",list2);
+		 
+		 return "main/restaurantDetail";
 	 }
 	
-	 @RequestMapping("/logout")
-	 public String logout(HttpServletRequest request) {
-		 HttpSession session = request.getSession();
-		 session.removeAttribute("loginUser");
-		 return "redirect:/";
-	 }
+	@RequestMapping("/menupopup")
+	public String memu_popup(HttpServletRequest request, HttpSession session,
+			Model model, @RequestParam("FSEQ")int FSEQ) {
+	HashMap<String, Object> prm = new HashMap<>();
+	prm.put("FSEQ", FSEQ);
+	prm.put("ref_cursor", null);
+	
+	ms.getFoodDetail(prm);
+	
+	ArrayList<HashMap<String, Object>> list
+	=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
+	HashMap<String, Object>fvo=list.get(0);
+	
+	model.addAttribute("vo", fvo);
+		return "main/popupMenu";
+	}
+	
 	 
 	 @RequestMapping("/miniLoginForm")
 	 public String mini_login_form( HttpServletRequest request) {
@@ -354,125 +363,7 @@ public class MemberController {
 	      }
 		 return url;
 	 }
-	 	
 	 
-	 @RequestMapping("/search")
-	 public String search(HttpServletRequest request,HttpSession session,Model model){
-		 
-		 HashMap<String, Object> prm = new HashMap<>();
-		 prm.put("request", request);
-		 prm.put("ref_cursor", null);
-		 
-		 ms.SearchResList(prm);
-		 String search = (String)prm.get("search");
-		 model.addAttribute("search",search);
-		 
-		 ArrayList< HashMap<String,Object> > list 
-			= (ArrayList<HashMap<String, Object>>) prm.get("list");
-		 
-		 model.addAttribute("RList",list);
-		 		 
-		 return "main/resList";
-	}
-	 
-	 @RequestMapping("/category")
-	 public String category(HttpServletRequest request,HttpSession session,Model model){
-		 HashMap<String, Object> prm = new HashMap<>();
-		 prm.put("request", request);
-		 prm.put("ref_cursor", null);
-		 
-		 ms.searchKind(prm);
-		 ArrayList< HashMap<String,Object> > list 
-			= (ArrayList<HashMap<String, Object>>) prm.get("list");
-		 model.addAttribute("RList",list);
-		 
-		 return "main/resList";
-	 }
-	 
-	 @RequestMapping("/fooba_tos")
-	 public String fooba_tos(HttpServletRequest request) {
-		 
-		 return "etc/fooba_tos";
-	 }
-	 
-	 @RequestMapping("/fooba_privacy")
-	 public String fooba_privacy(HttpServletRequest request) {
-		 
-		 return "etc/fooba_privacy";
-	 }
-	 
-	@RequestMapping("/restaurantDetail")
-	public String restaurant_detail(HttpServletRequest request, HttpSession session,
-	Model model, @RequestParam("RSEQ")int RSEQ) {
-		 
-		int carttotalprice=0; 
-		 
-		 HashMap<String, Object> prm = new HashMap<>();
-		 prm.put("RSEQ", RSEQ);	 
-		 prm.put("ref_cursor", null);
-		 prm.put("ref_cursor1", null);
-		 prm.put("ref_cursor2", null);
-		 
-		 rs.foodList(prm);
-		 ms.resInf(prm);
-		 ms.reviewList(prm);
-		 	 
-		 ArrayList<HashMap<String, Object>> list
-			=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
-		 
-		 ArrayList<HashMap<String,Object>>list1
-			=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
-		 HashMap<String,Object> rvo =list1.get(0);
-		 
-		 ArrayList<HashMap<String,Object>>list2
-			=(ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
-		 
-		 HashMap<String,Object> vo=
-				 (HashMap<String,Object>)session.getAttribute("loginUser");
-				 
-		 if(vo != null) {
-			 prm.put("ID", vo.get("ID")+"");
-			 int sum = 0;
-			 prm.put("ref_cursor", null);
-			 ms.cartList(prm);
-			 ArrayList<HashMap<String,Object>> list3
-				= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-			 for (HashMap<String,Object> cart : list3)
-				sum += Integer.parseInt(cart.get("CPRICE")+"");
-			 model.addAttribute("clist",list3);
-			 model.addAttribute("carttotalprice",
-					 sum + Integer.parseInt(rvo.get("RTIP")+""));
-		 }
-	
-		 /*가게 별점*/
-		rs.starAvg(prm);
-		session.setAttribute("intstar",prm.get("intstar")); //별 개수
-		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)
-		
-		 model.addAttribute("FoodmenuList",list);
-		 model.addAttribute("RestaurantVO",rvo);
-		 model.addAttribute("ReviewList",list2);
-		 
-		 return "main/restaurantDetail";
-	 }
-	
-	@RequestMapping("/menupopup")
-	public String memu_popup(HttpServletRequest request, HttpSession session,
-			Model model, @RequestParam("FSEQ")int FSEQ) {
-	HashMap<String, Object> prm = new HashMap<>();
-	prm.put("FSEQ", FSEQ);
-	prm.put("ref_cursor", null);
-	
-	ms.getFoodDetail(prm);
-	
-	ArrayList<HashMap<String, Object>> list
-	=(ArrayList<HashMap<String, Object>>)prm.get("ref_cursor");
-	HashMap<String, Object>fvo=list.get(0);
-	
-	model.addAttribute("vo", fvo);
-		return "main/popupMenu";
-	}
-	
 	@RequestMapping("/jangbaguni")
 	public String jangbaguni(CartVO cvo, FoodmenuVO fvo, HttpSession session, Model model) {
 		 HashMap<String,Object> loginUser=
@@ -524,8 +415,7 @@ public class MemberController {
 
 		ms.cartList(prm);
 		
-		 ArrayList<HashMap<String,Object>> cartList 
-         = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+		 ArrayList<HashMap<String,Object>> cartList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 		 model.addAttribute("RTIP", RTIP);
 		 model.addAttribute("RSEQ", RSEQ);
 		 model.addAttribute("list", cartList);
@@ -575,23 +465,19 @@ public class MemberController {
 		return "member/memberOrderList";
 	}
 	
-	@RequestMapping(value="reviewfileup",method=RequestMethod.POST)
-	@ResponseBody	
-	public HashMap<String , Object>reviewfileup(Model model,HttpServletRequest request){
-		
-		String path=context.getRealPath("images/review/");
-		HashMap<String,Object>result=new HashMap<String,Object>();
-		
-		try {
-			MultipartRequest multi =new MultipartRequest(
-					request,path,5*1024*1024,"UTF-8",new DefaultFileRenamePolicy()
-			);
-			result.put("STATUS",1);
-			result.put("FILENAME", multi.getFilesystemName("fileimage"));
-		} catch (IOException e) {	e.printStackTrace();
-		}
-		
-		return result;
+	@RequestMapping("/memberOrderDetail")
+	public String memberOrderDetail(HttpSession session,Model model,@RequestParam("OSEQ")int OSEQ) {
+		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
+		HashMap<String, Object> prm = new HashMap<String, Object>();		
+		prm.put("OSEQ", OSEQ);
+		ms.getOrderDetail(prm);
+		ArrayList<HashMap<String,Object>> list1 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		ArrayList<HashMap<String,Object>> list2 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
+		ArrayList<HashMap<String,Object>> list3 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
+		model.addAttribute("ovo", list1.get(0));
+		model.addAttribute("ovList", list2);
+		if(list3.size()!=0)model.addAttribute("review", list3.get(0));
+		return "member/memberOrderDetail";
 	}
 	
 	@RequestMapping(value="/memberReviewWrite", method=RequestMethod.POST)
