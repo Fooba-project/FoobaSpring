@@ -8,55 +8,35 @@
 	<resultMap id="resMap" type="java.util.HashMap"></resultMap>
 	
 	<select id="getRes" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL getRes(#{RID},
-				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
-				)}
+		{CALL getRes(#{RID},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
 	</select>
 	
 	<select id="starAvg" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{
-			CALL starAvg(
-				#{RSEQ},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
-			)
-		}
+		{CALL starAvg(#{RSEQ},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
 	</select>
 	
 	<select id="resFindId" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL resFindId(#{rname},
-				#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
-				)}
+		{CALL resFindId(#{rname},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
 	</select>
 
 	<insert id="joinRes" statementType="CALLABLE" parameterType="fooba.dto.RestaurantVO">
-		{CALL joinRes (
-			#{RID},#{RPWD},#{RNAME},#{OWNERNAME},#{RPHONE},#{ZIP_NUM},#{RADDRESS},#{RADDRESS2},#{RADDRESS3}
-			,#{RIMAGE},#{CONTENT},#{HASH},#{RBIZNUM},#{KIND},#{RTIP}
-		)}
+		{CALL joinRes (#{RID},#{RPWD},#{RNAME},#{OWNERNAME},#{RPHONE},#{ZIP_NUM},#{RADDRESS},#{RADDRESS2},#{RADDRESS3},#{RIMAGE},#{CONTENT},#{HASH},#{RBIZNUM},#{KIND},#{RTIP})}
 	</insert>
 	
 	<update id="updateRes" statementType="CALLABLE" parameterType="fooba.dto.RestaurantVO">
-		{CALL updateRes(
-			#{RSEQ},#{CONTENT},#{RPHONE},#{ZIP_NUM},#{RADDRESS},#{RADDRESS2},#{RADDRESS3},#{RTIP},#{HASH},
-			#{RIMAGE}
-		)}
+		{CALL updateRes(#{RSEQ},#{CONTENT},#{RPHONE},#{ZIP_NUM},#{RADDRESS},#{RADDRESS2},#{RADDRESS3},#{RTIP},#{HASH},#{RIMAGE})}
 	</update>
 	
 	<delete id="withdrawal" statementType="CALLABLE" >
-		{CALL withdrawal(
-			#{PARAM1}
-		)}
+		{CALL withdrawal(#{PARAM1})}
 	</delete>
 	
 	<select id="selectReview" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL selectReview(
-			#{RSEQ},#{key},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap}
-		)}
+		{CALL selectReview(#{RSEQ},#{key},#{ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
 	</select>
 	
 	<update id="updateReply" statementType="CALLABLE">
-		{CALL updateReply(
-			#{r_seq},#{reply}
-		)}
+		{CALL updateReply(#{r_seq},#{reply})}
 	</update>
 	
 	<select id="selectOrdersIngByRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
@@ -64,8 +44,7 @@
 	</select>
 	
 	<select id="selectOrdersAllByRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL selectOrdersAllByRseq( #{RSEQ},
-		#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
+		{CALL selectOrdersAllByRseq( #{RSEQ},#{ref_cursor , mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=resMap})}
 	</select>
 	
 
@@ -82,18 +61,16 @@
 	</select>
 	
 	<update id="updateFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL updateFoodMenu(#{FSEQ},#{FNAME},#{FPRICE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},
-			#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3},#{FIMAGE}) }
+		{CALL updateFoodMenu(#{FSEQ},#{FNAME},#{FPRICE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3},#{FIMAGE}) }
 	</update>
 	
 	
 	<insert id="addFoodMenu" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{ CALL addFoodMenu( #{RSEQ},#{FSEQ},#{FNAME},#{FPRICE},#{FIMAGE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},
-			#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3}) }
+		{CALL addFoodMenu( #{RSEQ},#{FSEQ},#{FNAME},#{FPRICE},#{FIMAGE},#{FCONTENT},#{FSIDE1},#{FSIDEPRICE1},#{FSIDE2},#{FSIDEPRICE2},#{FSIDE3},#{FSIDEPRICE3}) }
 	</insert>
 	
 	<delete id="deleteFoodeMenu" statementType="CALLABLE">
-		{ CALL deleteFoodMenu(#{FSEQ})}	
+		{CALL deleteFoodMenu(#{FSEQ})}	
 	</delete>
 	
 </mapper>
