@@ -124,7 +124,7 @@ body {margin: 0; position:relative;}
 <div class="headbuttons" id="adminheadbuttons">
 	<c:choose>
 		<c:when test="${empty loginAdmin}">
-			<input type="button" value="Res" class="headbutton" onclick="location.href='res_login'">
+			<input type="button" value="Res" class="headbutton" onclick="location.href='res_loginForm'">
 			<input type="button" value="Home" class="headbutton" onclick="location.href='index'">
 		</c:when>
 		<c:otherwise>

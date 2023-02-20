@@ -3,13 +3,13 @@
 <footer>
 	<div class="footerbox" id="adminfooterbox">
 		<div class="linemenubox">
-			<span class="linetext" onclick="location.href='fooba.do?command=admin_fooba_privacy'">/개인정보 처리방침</span>
+			<span class="linetext" onclick="location.href='admin_fooba_privacy'">/개인정보 처리방침</span>
 		</div>
 		<div class="linemenubox">
-			<span class="linetext" onclick="location.href='fooba.do?command=admin_fooba_tos'">/이용약관</span>
+			<span class="linetext" onclick="location.href='admin_fooba_tos'">/이용약관</span>
 		</div>
 		<div class="linemenubox">
-			<span class="linetext" onclick="location.href='fooba.do?command=res_joinForm'">/사장님 입점문의</span>
+			<span class="linetext" onclick="location.href='res_joinForm'">/사장님 입점문의</span>
 		</div>
 		<img src="images/mainlogo2.png" id="logo">
 		<div id="logotextbox">
@@ -22,8 +22,8 @@
 		</div>
 		<div id="copy">	All contents Copyright 2022 Fooba.Co all rights reserved<br>
 			Contact mail : abc@abc.com  Tel : +82 02 1234 1234 Fax : +82 02 1233 1233<br>
-			*<a href="fooba.do?command=index">UserHome</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			*<a href="fooba.do?command=res_loginForm">restaurant</a>
+			*<a href="index">UserHome</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			*<a href="res_loginForm">restaurant</a>
 		</div>
 	</div>
 </footer>

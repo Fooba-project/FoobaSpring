@@ -36,14 +36,14 @@ public class AdminController {
 	@Autowired
 	ServletContext context;
 	
-	@RequestMapping("/admin_tos")
-	public String admin_tos() {
+	@RequestMapping("/admin_fooba_tos")
+	public String admin_fooba_tos() {
 		return "admin/admin_fooba_tos";
 	}
 	
 	
-	@RequestMapping("/admin_privacy")
-	public String admin_privacy() {
+	@RequestMapping("/admin_fooba_privacy")
+	public String admin_fooba_privacy() {
 		return "admin/admin_fooba_privacy";
 	}
 	
