@@ -280,7 +280,6 @@ public class ResController {
 	public String res_update(HttpSession session,@ModelAttribute("loginRes")@Valid RestaurantVO vo,
 			BindingResult result,Model model ,@RequestParam("oldImage")String oldImage) {
 		if(session.getAttribute("loginRes")==null) return "redirect:/res_loginForm";
-		System.out.println(vo.getRIMAGE());
 		
 		String NEWRIMAGE = vo.getRIMAGE();
 		if( vo.getRIMAGE().equals("") ) vo.setRIMAGE(oldImage);
