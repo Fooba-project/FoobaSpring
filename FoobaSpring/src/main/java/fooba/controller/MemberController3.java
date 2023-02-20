@@ -56,7 +56,7 @@ public class MemberController3 {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
 		ms.writeReview(vo);
 		ms.reviewComplete(vo.getOSEQ());
-		return "memberOrderDetail?OSEQ="+vo.getOSEQ();
+		return "redirect:/memberOrderDetail?OSEQ="+vo.getOSEQ();
 	}
 	
 	

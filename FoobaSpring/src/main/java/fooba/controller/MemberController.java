@@ -229,19 +229,19 @@ public class MemberController {
 		prm.put("OSEQ", OSEQ);
 		prm.put("ref_cursor1",null);
 		prm.put("ref_cursor2",null);
-		prm.put("ref_curso3",null);
+		prm.put("ref_cursor3",null);
 		
 		ms.getOrderDetail(prm);
 		
 		ArrayList<HashMap<String,Object>> list1 
 		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
 		ArrayList<HashMap<String,Object>> list2 
-		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor2");
 		ArrayList<HashMap<String,Object>> list3 
-		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
+		= (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor3");
 		model.addAttribute("ovo", list1.get(0));
 		model.addAttribute("ovList", list2);
-		model.addAttribute("review", list3.get(0));
+		if(list3.size()!=0)model.addAttribute("review", list3.get(0));
 		return "member/memberOrderDetail";
 	}
 	
