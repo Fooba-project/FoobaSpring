@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ include file="admin_header.jsp"%>
-    
+
 <div class="res_join">
     <div class="res_join_title">레스토랑 정보</div>
     <div style="border-top: 2px solid rgb(23,55,94); margin-top:15px;"></div>

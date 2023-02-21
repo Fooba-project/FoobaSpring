@@ -274,7 +274,10 @@ public class MemberController {
 		
 		ms.reviewList(prm); // 레스토랑의 리뷰리스트 조회
 		ArrayList<HashMap<String,Object>> reviewList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor"); // 리뷰 리스트
- 
+		
+		int listsize = 0;
+		if ( foodList.size() > reviewList.size()) listsize = foodList.size();
+		else listsize = reviewList.size();
 		HashMap<String,Object> mvo = (HashMap<String,Object>)session.getAttribute("loginUser");
 		if(mvo != null) {
 			prm.put("ID", mvo.get("ID")+"");
@@ -283,6 +286,7 @@ public class MemberController {
 			ArrayList<HashMap<String,Object>> cartList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
 			for (HashMap<String,Object> cvo : cartList) sum += Integer.parseInt(cvo.get("CPRICE")+"");
 			model.addAttribute("clist", cartList);
+			if (listsize < cartList.size() ) listsize = cartList.size();
 			model.addAttribute("carttotalprice", sum + Integer.parseInt(rvo.get("RTIP")+""));
 		}
 
@@ -291,7 +295,8 @@ public class MemberController {
 		session.setAttribute("doublestar",prm.get("doublestar")); //별점(소수점까지)]
 		model.addAttribute("FoodmenuList",foodList);
 		model.addAttribute("RestaurantVO",rvo);
-		model.addAttribute("ReviewList",reviewList);
+		model.addAttribute("ReviewList",reviewList);		
+		model.addAttribute("listsize",listsize);
 		return "main/restaurantDetail";
 	}
 

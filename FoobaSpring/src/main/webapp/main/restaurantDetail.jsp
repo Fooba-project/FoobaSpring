@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 	<!-- RestaurantVO, FoodmenuList, ReviewList, clist-->
-	
- 	
+<div style="height:${listsize*210}px">
 	<div id="realjenche">
         <div id="jenche"> 
         <div id="gageirm">${RestaurantVO.RNAME}</div>
@@ -158,5 +157,6 @@
 	   		
 		</form>
 		</div>
-	</div>  
+	</div> 
+</div>
 <%@ include file="../footer.jsp"%>
