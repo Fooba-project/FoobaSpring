@@ -11,7 +11,7 @@
                 미답변</div>
             </div>
 		
-            <div id="res_menuall_a" style="background-color: rgb(250, 248, 215);">
+            <div id="res_menuall_b" style="background-color: rgb(250, 248, 215);">
                 	
                 <div style="text-align:center;"><span style="color:red;font-weight:bold;">&nbsp;&nbsp;&nbsp;${message}</span></div>
                     <c:forEach items="${list}" var="ReviewVO">
