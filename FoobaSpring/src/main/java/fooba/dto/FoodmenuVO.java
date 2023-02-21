@@ -2,6 +2,7 @@ package fooba.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.Data;
 
@@ -15,6 +16,7 @@ public class FoodmenuVO {
 	@NotEmpty
 	private String FNAME;
 	@NotNull
+	@Positive
 	private int FPRICE;
 	@NotNull
 	@NotEmpty
