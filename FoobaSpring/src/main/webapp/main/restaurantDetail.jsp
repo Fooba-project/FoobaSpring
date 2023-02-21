@@ -114,7 +114,7 @@
 	                        <c:choose>
 		                        <c:when test="${ReviewVO.IMAGE==null}"></c:when>
 		                        <c:otherwise>
-			                        <div class="rvsajin" style="border:1px solid red;">
+			                        <div class="rvsajin">
 			                            <img class="reviewimage" src="images/review/${ReviewVO.IMAGE }" 
 			                            style="width:150px; height:100px;">
 			                        </div>
