@@ -648,3 +648,10 @@ BEGIN
     commit;
 END;
 	
+    
+create or replace procedure memberFindpw(p_id in member.id%type, p_curvar OUT SYS_REFCURSOR)
+is
+begin
+    open p_curvar for
+    select * from member where id=p_id;
+end;
