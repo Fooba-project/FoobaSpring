@@ -121,8 +121,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST) // 회원가입, validation 적용
 	public String method(@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model ,HttpServletRequest request) {
-		String url = "member/memberJoin"; 
-		System.out.println(mvo.getID()+" / "+mvo.getREID());
+		String url = "member/memberJoin";
 		if (result.getFieldError("ID")!=null ) 	model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
 		else if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message",result.getFieldError("NAME").getDefaultMessage());
@@ -206,25 +205,21 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST) // 회원 정보 수정, validation 적용
-	public String memberUpdate( @ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model, HttpSession session ) {
-		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm"; // 로그인 방어
-		if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
-		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message", result.getFieldError("NAME").getDefaultMessage());
-		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
-		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
-		else if(mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
+	public String memberUpdate( @ModelAttribute("loginUser") @Valid MemberVO mvo, BindingResult result, Model model, HttpSession session ) {
+		if (session.getAttribute("loginUser")==null) return "redirect:/loginForm";
+		if (result.getFieldError("PWD")!=null ) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+		else if (result.getFieldError("NAME")!=null ) model.addAttribute("message", result.getFieldError("NAME").getDefaultMessage());
+		else if (result.getFieldError("PHONE")!=null ) model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
+		else if (result.getFieldError("EMAIL")!=null ) model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
+		else if (mvo.getUSERPWDCHK().equals("") || mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호가 일치하지 않습니다");
 		else {
 			HashMap<String, Object> prm = new HashMap<String, Object>();		
 			prm.put("mvo", mvo);
-			mvo.setID( mvo.getID().replace("id : ", "").replace(" (수정 불가)", "") );
-			mvo.setNAME( mvo.getNAME().replace("이름 : ", "").replace(" (수정 불가)", "") );
 			ms.memberUpdate( prm ); // 업데이트 후, 갱신된 정보로 로그인 유저 조회
 			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-			if(list.size()!=0) {
-				HashMap<String,Object> loginUser = list.get(0);
-				session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
-				model.addAttribute("message", "정보 수정 완료");
-			}
+			HashMap<String,Object> loginUser = list.get(0);
+			session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
+			model.addAttribute("message", "정보 수정 완료");
 		}
 		return "member/memberUpdate";
 	}
@@ -321,28 +316,29 @@ public class MemberController {
 		String url="member/memberMiniLogin"; 
 		model.addAttribute("check", "1");
 		model.addAttribute("FSEQ",FSEQ);
-		if(result.getFieldError("ID")!=null) model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
-		else if (result.getFieldError("PWD")!=null) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+		if(result.getFieldError("ID")!=null) {model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+			System.out.println("아이디 에러");
+		}
+		else if (result.getFieldError("PWD")!=null) {model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+			System.out.println("비번 에러");
+		}
 		else {
+			System.out.println("통과1");
 			HashMap<String, Object> prm = new HashMap<String, Object>();
 			prm.put("ID", membervo.getID());
-			prm.put("FSEQ", FSEQ);
 			ms.getMember(prm);
 			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-			if(list==null) {	
-				model.addAttribute("message","아이디가 없습니다.");
-				return "member/memberLogin";   
+			if(list.size()==0) model.addAttribute("message","아이디가 없습니다."); 
+			else {
+				HashMap<String, Object> loginUser = list.get(0);
+				if(!loginUser.get("PWD").equals(membervo.getPWD()))
+					model.addAttribute("message","비밀번호가 틀렸습니다.");
+				else {
+					HttpSession session = request.getSession();
+					session.setAttribute("loginUser", loginUser);
+					url = "redirect:/menupopup?FSEQ="+FSEQ;
+				}
 			}
-			HashMap<String, Object> mvo = list.get(0);
-			if(!mvo.get("PWD").equals(membervo.getPWD()))
-				model.addAttribute("message","비밀번호가 틀렸습니다.");
-			else if (!mvo.get("ID").equals(membervo.getID()))
-				model.addAttribute("message","아이디가 틀렸습니다.");
-			else if (mvo.get("PWD").equals(membervo.getPWD())) {
-				HttpSession session = request.getSession();
-				session.setAttribute("loginUser", mvo);
-				url = "redirect:/menupopup?FSEQ="+FSEQ;
-			}	   	 
 		}
 		return url;
 	}

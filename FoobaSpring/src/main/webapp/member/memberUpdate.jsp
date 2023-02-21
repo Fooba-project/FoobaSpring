@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 <%@ include file="memberMypageSub.jsp"%>
-<script type="text/javascript" src="/code.jquery.com/jquery-2.1.3.min.js"></script>
-<script type="text/javascript" src="script/jquery-3.6.1.js"></script>
-<script type="text/javascript" src="script/fooba.js"></script>
+
 <style type="text/css">
 	.join_list {position:relative;}
 	.input_text {position:absolute; color:black; width:550px; color:black; right:0}
@@ -11,7 +9,7 @@
 </style>
 
 <div class="member_join">
-	<div class="member_join_title">회원정보수정 <span style="color:blue;font-size:18px; ">${message }</span></div>
+	<div class="member_join_title">회원정보수정 <span style="color:red;font-size:18px; ">${message }</span></div>
 	<div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
 	<form name="member_update_form" id="member_join_send_form" method="post" action="memberUpdate">
 		<table class="member_join_table">
@@ -66,8 +64,8 @@
             </table>
             <br><br>
 			<div id="join_btn">
-				<input class="join_btn" type="submit" value="정보수정" class="submit" onclick="go_update();"> 
-				<input class="join_btn" type="reset" value="취소" class="cancel" onclick="location.href='index'">
+				<input class="join_btn" type="submit" value="정보수정" class="submit"> 
+				<input class="join_btn" type="button" value="돌아가기" class="cancel" onclick="location.href='index'">
 			</div>
 		</div>
 	</form>
