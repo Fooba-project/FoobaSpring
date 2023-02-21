@@ -275,9 +275,9 @@ public class MemberController {
 		ms.reviewList(prm); // 레스토랑의 리뷰리스트 조회
 		ArrayList<HashMap<String,Object>> reviewList = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor"); // 리뷰 리스트
 		
-		int listsize = 0;
-		if ( foodList.size() > reviewList.size()) listsize = foodList.size();
-		else listsize = reviewList.size();
+		int listsize = 4;
+		if ( listsize < reviewList.size()) listsize = reviewList.size();
+		if ( listsize < foodList.size()) listsize = foodList.size();
 		HashMap<String,Object> mvo = (HashMap<String,Object>)session.getAttribute("loginUser");
 		if(mvo != null) {
 			prm.put("ID", mvo.get("ID")+"");
