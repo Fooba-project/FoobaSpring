@@ -71,6 +71,7 @@
 		{CALL deleteFoodMenu(#{FSEQ})}	
 	</delete>
 	
+	
 </mapper>
 
 

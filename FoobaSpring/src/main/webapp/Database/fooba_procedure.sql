@@ -593,3 +593,39 @@ BEGIN
 		((select distinct oseq,rseq,oname,rname,rimage,indate,result,totalprice from order_view where id=p_id and result in(0,1) order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
 	END IF;
 END;
+
+
+
+create or replace PROCEDURE getOrderbyOseq(
+    p_oseq IN number,
+    p_cur OUT SYS_REFCURSOR
+
+)
+IS
+
+BEGIN
+ open p_cur for
+    select * from orders where oseq=p_oseq;
+end;
+
+
+
+create or replace PROCEDURE getOrderReviewByOseq(
+    p_oseq IN number,
+    p_cur OUT SYS_REFCURSOR
+
+)
+IS
+
+BEGIN
+ open p_cur for
+    select * from review where oseq=p_oseq;
+end;
+
+
+create or replace PROCEDURE selectOrderViewByOseq( p_oseq IN order_view.oseq%TYPE, p_cur OUT SYS_REFCURSOR)
+IS
+BEGIN
+    OPEN p_cur FOR
+      select * from order_view where oseq=p_oseq;
+END;
