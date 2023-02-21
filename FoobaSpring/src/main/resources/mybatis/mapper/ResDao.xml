@@ -71,6 +71,11 @@
 		{CALL deleteFoodMenu(#{FSEQ})}	
 	</delete>
 	
+	<update id="restRes" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL restRes(#{RYN},#{RSEQ}) }
+	</update>
+	
+	
 </mapper>
 
 
