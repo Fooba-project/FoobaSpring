@@ -145,11 +145,11 @@ background-image:url("../images/mainlogo2.png"); background-position: center; ba
 #jengboreview{width:680px; position:absolute; top:0px; right: 0px;}
 #reviewww{border-bottom: 1px solid #fa6146;}
 
-#menutabb{background-color: #fa6146;border :1px solid #fa6146;}
-#jengbotabb{background-color: #ffb6a9;border :1px solid #ffb6a9;}
+#menutabb{background-color: #fa6146; border :1px solid #fa6146;}
+#jengbotabb{background-color: #ffb6a9; border :1px solid #ffb6a9;}
 
 
-#jangbagunitul{width: 352px;border: 1px solid #fa6146;position: absolute;top:20px;right: 0;}
+#jangbagunitul{width: 352px; border: 1px solid #fa6146; position: absolute; top:10px; right: 0;}
 #jbtitle{width: 350px;border: 1px solid #fa6146;height: 50px;text-align: center;line-height: 50px; font-size: 140%; font-weight: bold; color: white;background:#fa6146 ;}
 .jbitem{width: 340px;border: 1px solid rgb(241, 241, 241); height: 100px; position: relative;padding: 5px;}
 .jbitemname{font-size: 120%;}
