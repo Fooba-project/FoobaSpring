@@ -607,30 +607,18 @@ BEGIN
 END;
 
 
-
-create or replace PROCEDURE getOrderbyOseq(
-    p_oseq IN number,
-    p_cur OUT SYS_REFCURSOR
-
-)
+create or replace PROCEDURE getOrderbyOseq(p_oseq IN number, p_cur OUT SYS_REFCURSOR)
 IS
-
 BEGIN
  open p_cur for
     select * from orders where oseq=p_oseq;
 end;
 
 
-
-create or replace PROCEDURE getOrderReviewByOseq(
-    p_oseq IN number,
-    p_cur OUT SYS_REFCURSOR
-
-)
+create or replace PROCEDURE getOrderReviewByOseq(p_oseq IN number, p_cur OUT SYS_REFCURSOR )
 IS
-
 BEGIN
- open p_cur for
+    open p_cur for
     select * from review where oseq=p_oseq;
 end;
 
@@ -638,6 +626,23 @@ end;
 create or replace PROCEDURE selectOrderViewByOseq( p_oseq IN order_view.oseq%TYPE, p_cur OUT SYS_REFCURSOR)
 IS
 BEGIN
-    OPEN p_cur FOR
-      select * from order_view where oseq=p_oseq;
+    OPEN p_cur FOR select * from order_view where oseq=p_oseq;
 END;
+
+
+create or replace PROCEDURE memberReviewWrite(
+p_id in review.id%type,
+p_rseq in review.rseq%type,
+p_star in review.star%type,
+p_image in review.image%type,
+p_content in review.content%type,
+p_oseq in review.oseq%type,
+p_nick in review.nick%type
+)
+IS
+BEGIN
+    insert into review (review_seq,id,rseq,star,image,content,oseq,nick) values (review_seq_seq.nextVal,p_id,p_rseq,p_star,p_image,p_content,p_oseq,p_nick);
+	update orders set result=3 where oseq=p_oseq;
+    commit;
+END;
+	
