@@ -374,7 +374,7 @@ public class MemberController {
 	public String orderForm(HttpServletRequest request, MemberVO mvo, CartVO cvo, HttpSession session,Model model,
 	@RequestParam("RSEQ")int RSEQ, @RequestParam("carttotalprice")int carttotalprice, @RequestParam("RTIP")int RTIP, @RequestParam("ID")String ID) {
 		HashMap<String,Object> loginUser=(HashMap<String,Object>) session.getAttribute("loginUser");
-		if(loginUser==null) return "member/memberLogin";
+		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
 		HashMap<String,Object> prm = new HashMap<String,Object>();
 		prm.put("RSEQ", RSEQ);
 		prm.put("ID",ID);

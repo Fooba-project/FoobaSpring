@@ -34,11 +34,11 @@
     
                 </div>
                 <div id="juso2">
-                    <input type="text" class="gumaeinput_text" style="width: 490px; color:black;" name="ZIP_NUM"  value="${loginUser.ZIP_NUM }" id="sample6_postcode"  placeholder="우편번호 : ${loginUser.ZIP_NUM}" readonly />
+                    <input type="text" class="gumaeinput_text" style="width: 490px; color:black;" name="ZIP_NUM"  id="sample6_postcode"  placeholder="우편번호 : " readonly />
                     <input type="button" id="oopyon" value="우편번호 검색" onclick="sample6_execDaumPostcode()"> 
-                    <input type="text" class="gumaeinput_text" name="ADDRESS1" value="${loginUser.ADDRESS1 }" id="sample6_address" placeholder="주소 : ${loginUser.ADDRESS1 }" readonly style="color:black;"/>
-                    <input type="text" class="gumaeinput_text" name="ADDRESS2" value="${loginUser.ADDRESS2 }" id="sample6_detailAddress"  placeholder="상세 주소 1 : ${loginUser.ADDRESS2 }" style="color:black;"/>
-                    <input type="text" class="gumaeinput_text" name="PHONE" value="${loginUser.PHONE }" id="PHONE" placeholder="전화번호 : ${loginUser.PHONE }" onkeyup="chkPhoneCode(event)" maxlength="13" style="color:black;"/>
+                    <input type="text" class="gumaeinput_text" name="ADDRESS1"  id="sample6_address" placeholder="주소 : " readonly style="color:black;"/>
+                    <input type="text" class="gumaeinput_text" name="ADDRESS2" id="sample6_detailAddress"  placeholder="상세 주소 1 : " style="color:black;"/>
+                    <input type="text" class="gumaeinput_text" name="PHONE"  id="PHONE" placeholder="전화번호 : " onkeyup="chkPhoneCode(event)" maxlength="13" style="color:black;"/>
 
                 </div>    
             </div>
