@@ -572,7 +572,7 @@ END;
 CREATE OR REPLACE PROCEDURE getOrderCount( p_id IN orders.id%TYPE, p_oa IN varchar2, p_cnt  OUT  NUMBER)
 IS
 BEGIN
-	if (p_oa ='all') then
+	if (p_oa ='전체') then
 		select count(rownum) into p_cnt from orders where id=p_id;
 	else
     	select count(rownum) into p_cnt from orders where id=p_id and result in(0,1);
@@ -583,7 +583,7 @@ END;
 CREATE OR REPLACE PROCEDURE selectOrdersById( p_id IN orders.id%TYPE, p_oa IN varchar2, p_startNum IN NUMBER, p_endNum IN NUMBER, p_cur OUT SYS_REFCURSOR)
 IS
 BEGIN
-	IF(p_oa ='all')then
+	IF(p_oa ='전체')then
 		OPEN p_cur FOR
         select * from ( select * from ( select rownum as rn, b.* from 
         ((select distinct oseq,rseq,oname,rname,rimage,indate,result,totalprice from order_view where id=p_id  order by oseq desc) b)) where rn>=p_startNum ) where rn<=p_endNum;
