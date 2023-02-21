@@ -175,7 +175,7 @@ public class AdminController {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		return "admin/admin_bannerWrite";
 	}
-	
+	 
 	@RequestMapping(value="/bannerFileup", method=RequestMethod.POST) // 배너 사진 업로드
 	@ResponseBody
 	public HashMap<String,Object> fileup(HttpServletRequest request) throws IOException {
