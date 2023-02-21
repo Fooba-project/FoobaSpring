@@ -4,47 +4,63 @@
 <script type="text/javascript" src="/code.jquery.com/jquery-2.1.3.min.js"></script>
 <script type="text/javascript" src="script/jquery-3.6.1.js"></script>
 <script type="text/javascript" src="script/fooba.js"></script>
- 
+<style type="text/css">
+	.join_list {position:relative;}
+	.input_text {position:absolute; color:black; width:550px; color:black; right:0}
+	.input_text_title {float:left; font-size:100%; line-height:40px}
+</style>
+
 <div class="member_join">
-	<div class="member_join_title">회원정보수정   <span style="color:blue;font-size:18px; ">${message }</span></div>
+	<div class="member_join_title">회원정보수정 <span style="color:blue;font-size:18px; ">${message }</span></div>
 	<div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
 	<form name="member_update_form" id="member_join_send_form" method="post" action="memberUpdate">
 		<table class="member_join_table">
 			<div class="join_list" >
-				<input type="text" class="input_text" name="ID" value="id : ${loginUser.ID} (수정 불가)" style="color:black" readonly/>
+				<span class="input_text_title">아이디(수정불가)</span>
+				<input type="text" class="input_text" name="ID" value="${loginUser.ID}" readonly/>
 			</div>
 			<div class="join_list">
-				<input type="password" class="input_text" name="PWD" id="userpwd" placeholder="비밀번호" style="color:red;"/>
+				<span class="input_text_title">비밀번호</span>
+				<input type="password" class="input_text" name="PWD" id="userpwd" value="${loginUser.PWD}"/>
 			</div>
 			<div class="join_list">
-				<input type="password" class="input_text" name="USERPWDCHK" id="userpwdchk" placeholder="비밀번호 확인" style="color:red;"/>
+				<span class="input_text_title">비밀번호확인</span>
+				<input type="password" class="input_text" name="USERPWDCHK" id="userpwdchk" value="${loginUser.USERPWDCHK}"/>
 			</div>
 			<p class="error_text" id="error1"></p>
 			<div class="join_list">
-				<input type="text" class="input_text" name="NAME" value="이름 : ${loginUser.NAME} (수정 불가)" style="color:black" readonly/>
+				<span class="input_text_title">이름(수정불가)</span>
+				<input type="text" class="input_text" name="NAME" value="${loginUser.NAME}" readonly/>
 			</div>
 			<div class="join_list">
-				<input type="text" id="userphone" class="input_text" name="PHONE" maxlength="13" placeholder="전화번호 : ${loginUser.PHONE}" onkeyup="chkPhoneCode(event)" style="color:red;"/>
+				<span class="input_text_title">전화번호</span>
+				<input type="text" id="userphone" class="input_text" name="PHONE" maxlength="13" value="${loginUser.PHONE}" onkeyup="chkPhoneCode(event)"/>
 			</div>
 			<div class="join_list">
-				<input type="text" class="input_text" name="EMAIL"  id="useremail" placeholder="이메일 : ${loginUser.EMAIL}" style="color:red;"/>
+				<span class="input_text_title">이메일</span>
+				<input type="text" class="input_text" name="EMAIL"  id="useremail" value="${loginUser.EMAIL}" />
 			</div>
 			<p class="error_text" id="error2"></p>
 			<div class="join_list">
-				<input type="text" class="input_text" style="width: 490px; color:red;" name="ZIP_NUM"  placeholder="우편번호  : ${loginUser.ZIP_NUM}"   id="sample6_postcode" readonly />
-				<input type="button" id="id_btn" value="우편번호 검색" onclick="sample6_execDaumPostcode()"> 
+				<span class="input_text_title">우편번호</span>
+				<input type="text" class="input_text" style="width: 350px; right:200px;" name="ZIP_NUM"  value="${loginUser.ZIP_NUM}" id="sample6_postcode" readonly />
+				<input type="button" id="id_btn" style="position:absolute; right:0" value="우편번호 검색" onclick="sample6_execDaumPostcode()"> 
 			</div>
 			<div class="join_list">
-				<input type="text" class="input_text" name="ADDRESS1" placeholder="주소 : ${loginUser.ADDRESS1}" style="color:red;"  id="sample6_address" readonly/>
+				<span class="input_text_title">도로명 주소</span>
+				<input type="text" class="input_text" name="ADDRESS1" value="${loginUser.ADDRESS1}"  id="sample6_address" readonly/>
 			</div>
 			<div class="join_list">
-				<input type="text" class="input_text" name="ADDRESS2" placeholder="상세 주소1 : ${loginUser.ADDRESS2}" style="color:red;" id="sample6_detailAddress"  />
+				<span class="input_text_title">상세 주소</span>
+				<input type="text" class="input_text" name="ADDRESS2" value="${loginUser.ADDRESS2}" id="sample6_detailAddress"  />
 			</div>
 			<div class="join_list">
-				<input type="text" class="input_text" name="ADDRESS3" placeholder="상세 주소2 : ${loginUser.ADDRESS3}" style="color:red;" id="sample6_extraAddress" />
+				<span class="input_text_title">(구주소)</span>
+				<input type="text" class="input_text" name="ADDRESS3" value="${loginUser.ADDRESS3}" id="sample6_extraAddress" />
 			</div>
 			<div class="join_list" margin="20px">
-				<input type="text" class="input_text" name="NICK" placeholder="닉네임 : ${loginUser.NICK}" style="color:red;"/><br>    		
+				<span class="input_text_title">닉네임</span>
+				<input type="text" class="input_text" name="NICK" value="${loginUser.NICK}"/><br>    		
 			</div>
 			<br>
             </table>
