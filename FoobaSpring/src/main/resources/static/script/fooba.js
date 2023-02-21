@@ -232,7 +232,7 @@ function go_search(HASH){
 
 function withdrawalMember(){
    var ok=confirm("정말 탈퇴하겠습니까?");
-   if(오케이){
+   if(ok){
       location.href="withdrawalMember";
    }
 }
@@ -244,7 +244,7 @@ function menupopup(FSEQ){
  
 function deleteejb(CSEQ,RSEQ){
    var ok=confirm("장바구니에서 삭제하시겠습니까?");
-   if(오케이) location.href="deleteCartmenu?CSEQ="+CSEQ+"&RSEQ="+RSEQ;
+   if(ok) location.href="deleteCartmenu?CSEQ="+CSEQ+"&RSEQ="+RSEQ;
 else return;
 }
  
