@@ -655,3 +655,14 @@ begin
     open p_curvar for
     select * from member where id=p_id;
 end;
+
+
+create or replace procedure updateReply(
+    p_rseq in number,
+    p_reply in varchar2
+)
+is
+begin
+    update review set reply=p_reply,replyyn='1' where review_seq=p_rseq;
+    commit;
+end;
