@@ -36,29 +36,6 @@ function review_write() {
 }
 
 
-$(function(){
-	$('#myButton2').click( function(){
-		var formselect = $("#reviewfileupForm")[0];   
-		var formdata = new FormData(formselect); 
-		$.ajax({    
-			url:"<%=request.getContextPath() %>/reviewfileup",
-			type:"POST",
-			enctype:"multipart/form-data",
-			async: false,
-			data: formdata,
-	    	timeout: 10000,
-	    	contentType : false,
-	        processData : false,
-	        success : function(data){
-	            if(data.STATUS == 1){  	
-	            	$("#fileimage").val(data.FILENAME);
-	            	$("#filename").html("<img src='images/review/"+data.FILENAME+"' height='150'/>");
-	            }
-	        },
-	        error: function() {	alert("업로드 실패");}
-		});
-	});
-});
 </script>
 <div id="menuorderdetail">
     <div class="menuorderdetaildiv" id="menuorderdetaildiv1" >
@@ -164,23 +141,15 @@ $(function(){
             </fieldset>
             <div id="review_img">
             	<label for="imgInput" >리뷰 이미지 첨부</label>
-            	<input type="hidden" name="IMAGE" id="fileimage">
-                         <div id="filename"></div>
-            	
+            	<input type="file" name="reviewImage" id="imgInput" onchange="readURL(this)" value="리뷰 이미지 첨부" style="display:none;" accept="image/*" />
             </div>
     		<div id="previewDiv"></div>
             <div>
-                <textarea class="review" id="reviewContent" name="CONTENT"
+                <textarea class="review" type="text" id="reviewContent" name="reviewContent"
                     placeholder="음식에 대한 솔직한 리뷰를 남겨주세요!"></textarea>
             </div>
             <input type="submit" value="리뷰 작성" id="reviewWriteButton" onclick="return review_write()">
         </form>
-        
-        <div style="position:absolute; bottom:400px;">
-			<form name="fromm" id="reviewfileupForm" method="post" enctype="multipart/form-data">
-						&nbsp;&nbsp;<input type="file" name="fileimage"  id="imgInput" accept="image/*" ><input type="button" id="myButton2" value="추가">
-			</form>
-		</div>
         
     </c:if>
 	

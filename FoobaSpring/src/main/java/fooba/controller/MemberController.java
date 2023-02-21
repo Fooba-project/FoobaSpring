@@ -417,7 +417,7 @@ public class MemberController {
 	@RequestMapping("/memberOrderDetail") // 오더 디테일
 	public String memberOrderDetail(HttpSession session,Model model,@RequestParam("OSEQ")int OSEQ) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
-		HashMap<String, Object> prm = new HashMap<String, Object>();		
+		HashMap<String, Object> prm = new HashMap<String, Object>();
 		prm.put("OSEQ", OSEQ);
 		ms.getOrderDetail(prm);
 		ArrayList<HashMap<String,Object>> list1 = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor1");
@@ -432,8 +432,10 @@ public class MemberController {
 	@RequestMapping(value="/memberReviewWrite", method=RequestMethod.POST) // 리뷰 쓰기
 	public String memberReviewWrite(HttpSession session, ReviewVO vo, Model model ) {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
-		ms.writeReview(vo);
-		ms.reviewComplete(vo.getOSEQ());
+		HashMap<String, Object> prm = new HashMap<String, Object>();
+		prm.put("vo", vo);
+		prm.put("loginUser", session.getAttribute("loginUser"));
+		ms.memberReviewWrite(prm);
 		return "redirect:/memberOrderDetail?OSEQ="+vo.getOSEQ();
 	}
 	

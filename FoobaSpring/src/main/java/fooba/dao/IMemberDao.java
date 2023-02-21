@@ -39,7 +39,6 @@ public interface IMemberDao {
 	void delCart(String cseq);
 	void getOrderCount(HashMap<String, Object> prm);
 	void selectOrdersById(HashMap<String, Object> prm);
-	void writeReview(ReviewVO vo);
-	void reviewComplete(int oseq);
+	void memberReviewWrite(HashMap<String, Object> prm);
 	
 }

@@ -232,12 +232,8 @@ public class MemberService {
 		mdao.getOrderReviewByOseq(prm);
 	}
 	
-	public void writeReview(ReviewVO vo) {
-		mdao.writeReview(vo);
-	}
-
-	public void reviewComplete(int oseq) {
-		mdao.reviewComplete(oseq);
+	public void memberReviewWrite(HashMap<String, Object> prm) {
+		mdao.memberReviewWrite(prm);
 	}
 	
 }
