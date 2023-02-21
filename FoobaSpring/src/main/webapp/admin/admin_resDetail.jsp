@@ -23,7 +23,7 @@
                 <input type="text" id="rbiznum" class="input_text1" value="사업자 번호 : ${vo.RBIZNUM}" readonly/>
             </div>			
 			<div class="join_list">
-                <input type="text" class="input_text1" value="사업장 주소 : ${vo.RADDRESS1}, ${vo.RADDRESS2} (${vo.RADDRESS3})" readonly/>
+                <input type="text" class="input_text1" value="사업장 주소 : ${vo.RADDRESS}, ${vo.RADDRESS2} (${vo.RADDRESS3})" readonly/>
             </div>
             <div class="join_list">
          
