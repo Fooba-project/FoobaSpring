@@ -28,7 +28,7 @@
                     	<div id="res_num">
 	                        <h3>업체 정보</h3><hr>
 	                        <a class="basic">사업자 번호</a>&nbsp;
-	                        	<input type="text" value="${loginRes.RBIZNUM}" readonly style=" border:0;"><br><hr>                    
+	                        	<input type="text" name="RBIZNUM" value="${loginRes.RBIZNUM}" readonly style=" border:0;"><br><hr>                    
 	                        <a class="basic">전화 번호</a>&nbsp;
 	                        	<input type="text" name="RPHONE" style="border-radius:5px; width:170px; height:20px;"
 	                        	 value="${loginRes.RPHONE}"  maxlength="13" id="rphone" onkeyup="chkPhoneCode(event)"/><br><hr>

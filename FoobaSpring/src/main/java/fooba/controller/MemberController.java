@@ -127,6 +127,8 @@ public class MemberController {
 		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message",result.getFieldError("NAME").getDefaultMessage());
 		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
 		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
+		else if (mvo.getZIP_NUM()==null||mvo.getZIP_NUM().equals("") ) 	model.addAttribute("message", "우편번호를 검색해주세요");
+		else if (mvo.getADDRESS2()==null||mvo.getADDRESS2().equals("") ) 	model.addAttribute("message", "상세주소 1을 입력해주세요");
 		else if( mvo.getREID() == null || !mvo.getREID().equals(mvo.getID() ) ) model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
 		else if( mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
 		else if(request.getParameter("useragree")==null) model.addAttribute("message", "약관에 동의하지 않았습니다.");
