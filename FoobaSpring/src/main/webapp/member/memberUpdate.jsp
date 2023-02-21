@@ -56,8 +56,10 @@
                 </div>
 				
                 <div class="join_list" margin="20px">
-                    <input type="text" class="input_text" name="NICK" placeholder="닉네임 : ${loginUser.NICK}" style="color:red;"/>
+                    <input type="text" class="input_text" name="NICK" placeholder="닉네임 : ${loginUser.NICK}" style="color:red;"/><br>
+                    ${ message}               		
                 </div>
+                
 
                 <br>
                 

@@ -146,14 +146,13 @@
         	<input type="hidden" value="${RestaurantVO.RTIP }" name="RTIP">
 	        <input type="hidden" value="${RestaurantVO.RSEQ }" name="RSEQ"> 
 	        <input type="hidden" value="${carttotalprice}" name="carttotalprice">
-	   		<input type="hidden" value="${loginUser.ID}" name="ID">
+	   		<input type="hidden" value="${loginUser.ID}" name="ID"> 
 	   		<c:choose>
 	   			<c:when test="${RestaurantVO.RYN==1}">
-	   				<input type="submit" value="주문하기" class="jbwanryo" onclick="return goPay('${RestaurantVO.RTIP }','${carttotalprice }')"> 	
+	   				<input type="submit" value="주문하기" class="jbwanryo" onclick="return goPay()"> 	
 	   			</c:when>
 	   			<c:otherwise>
-	   				<input type="submit" value="지금은 영업중이 아닙니다" class="jbwanryo" style="background: #BCBCBC;" 
-	   				disabled="disabled;" > 		   				
+	   				<input type="submit" value="지금은 영업중이 아닙니다" class="jbwanryo" style="background: #BCBCBC;" disabled="disabled;" > 		   				
 	   			</c:otherwise>
 	   		</c:choose>
 	   		

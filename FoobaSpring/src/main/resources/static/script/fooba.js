@@ -300,13 +300,17 @@ function jusomove(x){
 }
     
     
- function goPay(a,b){
- 	
-	if (a==b){
- 	alert('음식을 주문표에 담으세요.');
+ function goPay(){
+ 	var1 = document.frm.carttotalprice.value;
+ 	var2 = document.frm.RTIP.value;
+ 	var3 = document.frm.ID.value;
+	if ( var3==''){
+		location.href="loginForm";
+		return false;
+ 	}else if(var1 == var2){
+		 alert('음식을 주문표에 담으세요.');
  	return false;
- 	}
- 	else  { return true;}
+	 }else  { return true;}
  }
  
 var kk=0;
