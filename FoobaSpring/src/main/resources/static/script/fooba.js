@@ -263,23 +263,23 @@ function goPay(){
 }
  
 function jusochoice(){
-   if(document.getElementById("bdjs").value==1){
-      if(document.member_join_send_form.useraddress1.value.length==0){
-         alert("주소를 입력하세요.");
-         sample6_execDaumPostcode();
-         return false;
-      }else if(document.member_join_send_form.useraddress2.value.length==0){
-         alert("상세 주소를 입력하세요.");
-         document.member_join_send_form.useraddress2.focus();
-         return false;         
-      }else if(document.member_join_send_form.phone.value.length==0){
-         alert("전화번호를 입력하세요.");
-         document.member_join_send_form.phone.focus();
-         return false;
-      } 
-   }
-   var ok=confirm("결제하시겠습니까?");
-   return ok;
+	if(document.getElementById("bdjs").value==1){
+		if(document.member_join_send_form.ZIP_NUM.value.length==0){
+			alert("주소를 입력하세요.");
+			sample6_execDaumPostcode();
+			return false;
+		}else if(document.member_join_send_form.ADDRESS2.value.length==0){
+			alert("상세 주소를 입력하세요.");
+			document.member_join_send_form.ADDRESS2.focus();
+			return false;			
+		}else if(document.member_join_send_form.PHONE.value.length==0){
+			alert("전화번호를 입력하세요.");
+			document.member_join_send_form.PHONE.focus();
+			return false;
+		} 
+	}
+	var ok=confirm("결제하시겠습니까?");
+	return ok;
 }
 
 function sample6_execDaumPostcode() {
