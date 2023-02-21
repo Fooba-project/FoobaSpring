@@ -389,7 +389,7 @@ background-color: black; margin-top: 10px; float: right; margin-right:10px; }
     	<c:choose>
     		<c:when test="${empty loginRes}">
 	    		<input type="button" value="가입신청" class="headbutton" name="userLogin" onclick="location.href='res_joinForm'">
-	    		<input type="button" value="Home" class="headbutton" name="userJoin" onclick="location.href='res_loginForm'">
+	    		<input type="button" value="Home" class="headbutton" name="userJoin" onclick="location.href='index'">
     		</c:when>
     		<c:otherwise>
     			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='res_logout'">
