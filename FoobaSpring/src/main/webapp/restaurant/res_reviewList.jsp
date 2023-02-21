@@ -36,9 +36,8 @@
                             </div>
                             <a style="color:gray; font-size:90%">&nbsp;&nbsp;&nbsp;&nbsp;${ReviewVO.FNAMES}</a>
                             <div id="mrev_conbox" >
-                            	<c:if test="${ReviewVO.image!=null }">	
-	                                	<img id="mrev_img" src="images/review/${ReviewVO.IMAGE}" >                               
-	                                  
+                            	<c:if test="${ReviewVO.IMAGE!=null }">	
+	                                	<img id="mrev_img" src="../images/review/${ReviewVO.IMAGE}" >                                                      
                                 </c:if>
                                 <div id="mrev_con" style="background:white;" >&nbsp;&nbsp;&nbsp; ${ReviewVO.CONTENT}</div>   
                             </div>

@@ -25,6 +25,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import fooba.dto.FoodmenuVO;
 import fooba.dto.OrderVO;
 import fooba.dto.RestaurantVO;
+import fooba.dto.ReviewVO;
 import fooba.service.ResService;
 
 @Controller
@@ -297,7 +298,8 @@ public class ResController {
 	}
 		
 	@RequestMapping("/res_review") //주문 리뷰 확인 
-	public String res_review( HttpSession session, Model model, @ModelAttribute("key")int key) {
+	public String res_review( HttpSession session, Model model, @ModelAttribute("key")int key,
+			ReviewVO revo) {
 		if(session.getAttribute("loginRes")==null) return "restaurant/res_login";
 		HashMap<String , Object> loginRes = (HashMap<String , Object>)session.getAttribute("loginRes");
 		HashMap<String , Object> paramMap = new HashMap<String , Object>();

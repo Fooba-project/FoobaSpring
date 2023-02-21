@@ -22,7 +22,7 @@ table#memberOrderList {margin: 0 auto; border-collapse:collapse; width:50%;  bor
 				<tr>
 					<td style="width:20%">
 						<div id="memberOrderListimg">
-							<a href="restaurantDetail?rseq=${ovo.RSEQ }"><img src="images/title/${ovo.RIMAGE}" width="80" height="80"></a>
+							<a href="restaurantDetail?RSEQ=${ovo.RSEQ }"><img src="images/title/${ovo.RIMAGE}" width="80" height="80"></a>
 						</div>
 						<div>${ovo.RNAME }</div>
 					</td>
