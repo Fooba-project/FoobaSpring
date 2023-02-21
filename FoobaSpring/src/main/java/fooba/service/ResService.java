@@ -117,5 +117,10 @@ public class ResService {
 	public void restRes(HashMap<String, Object> paramMap) {
 		rdao.restRes(paramMap);
 	}
+
+	public void resQnaList(HashMap<String, Object> paramMap) {
+		rdao.resQnaList(paramMap);
+		
+	}
 	
 }

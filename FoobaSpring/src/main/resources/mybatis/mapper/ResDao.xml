@@ -75,6 +75,10 @@
 		{CALL restRes(#{RSEQ},#{RYN}) }
 	</update>
 	
+	<select id="resQnaList" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL resQnaList (#{ ref_cursor, mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
+	</select>
+	
 	
 </mapper>
 

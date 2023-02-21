@@ -27,5 +27,6 @@ public interface IResDao {
 	void addFoodMenu(FoodmenuVO vo);
 	void deleteFoodMenu(HashMap<String, Object> paramMap);
 	void restRes(HashMap<String, Object> paramMap);
+	void resQnaList(HashMap<String, Object> paramMap);
 	
 }

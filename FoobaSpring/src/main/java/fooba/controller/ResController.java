@@ -53,7 +53,12 @@ public class ResController {
 	}
 	
 	@RequestMapping("/res_qnalist_footer") //QNA 창 이동
-	public String res_qnalist_footer() {
+	public String res_qnalist_footer(Model model) {
+		HashMap<String, Object> paramMap = new HashMap<String, Object>();
+		rs.resQnaList(paramMap);
+		ArrayList<HashMap<String,Object>> list = 	
+				(ArrayList<HashMap<String,Object>>)paramMap.get("ref_cursor");
+		model.addAttribute("qnaList", list);
 		return "restaurant/res_qnalist_footer";
 	}
 	

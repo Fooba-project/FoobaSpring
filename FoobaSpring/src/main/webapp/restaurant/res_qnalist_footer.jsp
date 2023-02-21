@@ -38,7 +38,7 @@
             <div class="clear"></div>
     </article> 
 <br>
-<jsp:include page="/member/paging/paging.jsp">
+<jsp:include page="">
 <jsp:param name="command" value="res_qnalist_footer"/>
 </jsp:include>	
 <br><br><br><br><br><br><br><br><br><br><br><br>
