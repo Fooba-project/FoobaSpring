@@ -6,7 +6,7 @@
 <script type="text/javascript" src="script/fooba.js"></script>
  
     <div class="member_join">
-        <div class="member_join_title">회원정보수정</div>
+        <div class="member_join_title">회원정보수정   <span style="color:blue;font-size:18px; ">${message }</span></div>
         <div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
         <form name="member_update_form" id="member_join_send_form" method="post" action="memberUpdate">
             <table class="member_join_table">
