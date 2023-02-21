@@ -323,14 +323,9 @@ public class MemberController {
 		String url="member/memberMiniLogin"; 
 		model.addAttribute("check", "1");
 		model.addAttribute("FSEQ",FSEQ);
-		if(result.getFieldError("ID")!=null) {model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
-			System.out.println("아이디 에러");
-		}
-		else if (result.getFieldError("PWD")!=null) {model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
-			System.out.println("비번 에러");
-		}
+		if(result.getFieldError("ID")!=null) model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
+		else if (result.getFieldError("PWD")!=null) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 		else {
-			System.out.println("통과1");
 			HashMap<String, Object> prm = new HashMap<String, Object>();
 			prm.put("ID", membervo.getID());
 			ms.getMember(prm);
