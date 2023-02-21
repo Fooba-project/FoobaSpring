@@ -337,6 +337,18 @@ BEGIN
 	 select * from order_view where rseq=p_rseq order by oseq desc;
 end;
 
+create or replace procedure selectReview(
+    p_rseq in number,
+    key in number,
+    p_cur out sys_refcursor
+)
+is
+begin
+    open p_cur for
+        select*from review where rseq=p_rseq and replyyn<key order by review_seq desc;
+end;
+
+
 
 --member
 
