@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp"%>
 <%@ include file="sub_head.jsp"%>
-<div class="row">
+<div class="row" style="width:100%; height:750px;">
 	<c:forEach items="${list}" var="RestaurantVO">
    		<div class="resList">        	<a href="restaurantDetail?RSEQ=${RestaurantVO.RSEQ }&search=&hash=" class="rimage">                
 	          	<div class="res_imgbox">
