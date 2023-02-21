@@ -2,13 +2,13 @@
 <%@ include file="../header.jsp"%>
 
     <div class="member_join">
-        <div class="member_join_title">회원가입</div>
+        <div class="member_join_title">회원가입 <span style="color:blue;text-align:center;">&nbsp;&nbsp;&nbsp;${message}</span></div> 
         <div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
         <form name="member_join_send_form" id="member_join_send_form" method="post" action="memberJoin">
             <table class="member_join_table">
                 <div class="join_list">
                     <input type="text" class="input_text" style="width: 490px;" name="ID" placeholder="아이디" onkeyup="chkIdCode(event)" value="${vo.ID}"/>
-                    <input type="hidden" name="REID" value="${REID}"/>
+                    <input type="hidden" name="REID" value="${vo.REID}"/>
                     <input type="button" id="id_btn" value="중복 확인" onclick="idcheck()" >
                 </div>
 
@@ -112,7 +112,7 @@
 			 </table>
             <br><br>
             <div id="join_btn">
-                <input class="join_btn" type="submit" value="가입" onclick="joincheck()">
+                <input class="join_btn" type="submit" value="가입" >
                 <input class="join_btn" type="button" value="홈으로" onclick="location.href='index'">
             </div>
         </form>

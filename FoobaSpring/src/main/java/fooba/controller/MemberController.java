@@ -122,14 +122,16 @@ public class MemberController {
 	@RequestMapping(value="/memberJoin", method=RequestMethod.POST) // 회원가입, validation 적용
 	public String method(@ModelAttribute("vo") @Valid MemberVO mvo, BindingResult result, Model model ) {
 		String url = "member/memberJoin"; 
+		System.out.println(mvo.getID()+" / "+mvo.getREID());
 		if (result.getFieldError("ID")!=null ) 	model.addAttribute("message", result.getFieldError("ID").getDefaultMessage());
 		else if (result.getFieldError("PWD")!=null ) 	model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
 		else if (result.getFieldError("NAME")!=null ) 	model.addAttribute("message",result.getFieldError("NAME").getDefaultMessage());
 		else if (result.getFieldError("PHONE")!=null ) 	model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
 		else if (result.getFieldError("EMAIL")!=null ) 	model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
-		else if( mvo.getREID() != null || !mvo.getREID().equals(mvo.getID() ) ) model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
-		else if( mvo.getUSERPWDCHK() != null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
+		else if( mvo.getREID() == null || !mvo.getREID().equals(mvo.getID() ) ) model.addAttribute("message", "아이디 중복체크를 하지 않으셨습니다");
+		else if( mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호 확인 일치하지 않습니다");
 		else {
+			if (mvo.getNICK()==null||mvo.getNICK().equals("")) mvo.setNICK(mvo.getNAME());
 			ms.insertMember( mvo);
 			model.addAttribute("message", "회원가입이 완료되었습니다. 로그인하세요");
 			return "member/memberLogin";
