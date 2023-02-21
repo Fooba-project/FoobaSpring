@@ -287,14 +287,6 @@ function jusomove(x){
    document.getElementById("tul2").style.left=dist+'px';
 }
 
-function goPay(a,b){
-if (a==b){
-   alert('음식을 주문표에 담으세요.');
-   return false;
-   }
-   else { return true;}
-}
-
 var kk=0;
 function pojang(a){
    if(kk==0){
