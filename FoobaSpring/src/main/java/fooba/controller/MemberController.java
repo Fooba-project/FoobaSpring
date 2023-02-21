@@ -336,6 +336,8 @@ public class MemberController {
 			HashMap<String, Object> mvo = list.get(0);
 			if(!mvo.get("PWD").equals(membervo.getPWD()))
 				model.addAttribute("message","비밀번호가 틀렸습니다.");
+			else if (!mvo.get("ID").equals(membervo.getID()))
+				model.addAttribute("message","아이디가 틀렸습니다.");
 			else if (mvo.get("PWD").equals(membervo.getPWD())) {
 				HttpSession session = request.getSession();
 				session.setAttribute("loginUser", mvo);
