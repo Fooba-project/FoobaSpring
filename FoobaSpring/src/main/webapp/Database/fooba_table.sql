@@ -66,6 +66,7 @@ CREATE TABLE member
 	zip_num varchar2(10) NOT NULL,
 	address1 varchar2(100) NOT NULL,
 	address2 varchar2(100) NOT NULL,
+	address3 varchar2(100),
 	indate date DEFAULT sysdate,
 	nick varchar2(100) NOT NULL,
 	PRIMARY KEY (id)

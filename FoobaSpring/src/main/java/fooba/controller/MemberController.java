@@ -51,7 +51,7 @@ public class MemberController {
 	@RequestMapping("/index") // 메인화면으로 이동
 	public String index(Model model) {
 		HashMap<String,Object>prm=new HashMap<String,Object>();
-		ms.banner(prm);
+		ms.rollingBanner(prm);
 		ArrayList<HashMap<String,Object>> list =(ArrayList<HashMap<String,Object>>) prm.get("ref_cursor");
 		model.addAttribute("bannerList",list);
 		model.addAttribute("size",list.size());

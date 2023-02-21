@@ -28,8 +28,8 @@ public class MemberService {
 	@Autowired
 	TransactionTemplate tt;
 	
-	public void banner(HashMap<String, Object> prm) {
-		mdao.banner(prm);
+	public void rollingBanner(HashMap<String, Object> prm) {
+		mdao.rollingBanner(prm);
 	}
 	
 	public void getMember(HashMap<String, Object> paramMap) {
