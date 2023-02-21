@@ -63,7 +63,7 @@ function review_write() {
         <div id="menuorderdetaildiv1_3">주문번호 : ${ovo.OSEQ}</div>
         <div id="menuorderdetaildiv1_3">주문일시 : <fmt:formatDate value="${ovo.INDATE}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
         <div id="menuorderdetaildiv1_3">총주문가격 : <fmt:formatNumber value="${ovo.TOTALPRICE}" pattern="#,###원"/></div>
-        <div id="menuorderdetaildiv1_4">(음식가격 : <fmt:formatNumber value="${ovo.TOTALPRICE-ovList[0].RTIP}" pattern="#,###원"/>, 배달팁 : <fmt:formatNumber value="${ovList[0].rtip}" pattern="#,###원"/>)
+        <div id="menuorderdetaildiv1_4">(음식가격 : <fmt:formatNumber value="${ovo.TOTALPRICE-ovList[0].RTIP}" pattern="#,###원"/>, 배달팁 : <fmt:formatNumber value="${ovList[0].RTIP}" pattern="#,###원"/>)
         </div>
     </div>
 <br>
