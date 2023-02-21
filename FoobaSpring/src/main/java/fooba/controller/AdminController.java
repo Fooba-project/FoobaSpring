@@ -125,7 +125,6 @@ public class AdminController {
 	
 	@RequestMapping("/admin_orderLR") // 주문 상태 변경
 	public String admin_orderLR(	HttpSession session, @RequestParam("result") int result, @RequestParam("OSEQ") int OSEQ) {
-		System.out.println(1122);
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		HashMap<String, Object> prm = new HashMap<>();
 		prm.put("result", result);
