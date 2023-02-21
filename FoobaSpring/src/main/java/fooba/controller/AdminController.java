@@ -171,7 +171,7 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/admin_bannerWriteForm") // 배너 작성 폼
-	public String admin_bannerWriteForm() {
+	public String admin_bannerWriteForm(HttpSession session) {
 		if(session.getAttribute("loginAdmin")==null) return "redirect:/login"; // 로그인체크
 		return "admin/admin_bannerWrite";
 	}
