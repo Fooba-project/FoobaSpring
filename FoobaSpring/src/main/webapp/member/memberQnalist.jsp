@@ -16,7 +16,7 @@
         <form name="frm" method="post">
             <div id="member_list_table">
                 
-                <c:forEach items="${qnaList}" var="QnaVO">        
+                <c:forEach items="${list}" var="QnaVO">        
                 <tr> 
                     <div class="qna_box">
                         <div class="qna_title">
