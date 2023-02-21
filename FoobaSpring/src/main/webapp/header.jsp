@@ -31,3 +31,4 @@
     		</c:otherwise>
     	</c:choose>
     </div>
+<div style="width:100%; height:730px;">
