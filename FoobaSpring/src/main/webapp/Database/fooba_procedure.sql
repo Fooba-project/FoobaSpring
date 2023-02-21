@@ -334,8 +334,10 @@ CREATE OR REPLACE PROCEDURE selectOrdersAllByRseq(p_rseq IN number, p_cur OUT SY
 IS
 BEGIN
 	 open p_cur for
-	 select * from order_view where rseq=p_rseq order by oseq desc;
+	 select DISTINCT oseq, indate,totalprice,result,nick,oname,oadd1,oadd2,ophone, rideryn from order_view 
+ 	where rseq=p_rseq order by oseq desc;
 end;
+
 
 create or replace procedure selectReview(
     p_rseq in number,
