@@ -20,7 +20,7 @@
 		<div id="join_btn">
 			<input type="hidden" name="QSEQ" value="${vo.QSEQ}">
 			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="submit" value="수정완료">
-			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="취소" onclick="location.href='adminDetail?procedure=qna&seq=${vo.QSEQ}'">
+			<input style="margin:auto; background-color:rgb(23,55,94)" class="join_btn1" type="button" value="취소" onclick="location.href='adminDetail?procedure=qna&SEQ=${vo.QSEQ}'">
 		</div>
 	</form>
 	<h3 style="text-align:center;">${message}</h3>
