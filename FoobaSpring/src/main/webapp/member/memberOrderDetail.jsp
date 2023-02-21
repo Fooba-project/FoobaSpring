@@ -22,14 +22,18 @@ function readURL(obj) {
 }
 
 function review_write() {
-	if(document.review_form.reviewStar.value.length==0) {
+	if(document.review_form.STAR.value.length==0) {
 		alert('별점을 눌러주세요');
 		history.scrollRestoration = "auto";
 		return false;
 	}
-	else if (document.review_form.reviewContent.value.length==0) {
+	else if (document.review_form.CONTENT.value.length==0) {
 		alert('내용을 입력해주세요');
-		document.review_form.reviewContent.focus();
+		document.review_form.CONTENT.focus();
+		history.scrollRestoration = "auto";
+		return false;
+	} else if (document.review_form.IMAGE.value.length==0) {
+		alert('이미지를 첨부해주세요');
 		history.scrollRestoration = "auto";
 		return false;
 	} else return true;
@@ -117,7 +121,7 @@ function review_write() {
     </div>
 <br>
     <c:if test="${ovo.RESULT==2}">
-        <form class="review" name="review_form" id="review_form" method="post" action="memberReviewWrite">
+        <form class="review" name="review_form" id="review_form" method="post" action="memberReviewWrite" enctype="multipart/form-data">
             <input type="hidden" name="ID" value="${loginUser.ID}">
             <input type="hidden" name="NICK" value="${loginUser.NICK }">
             <input type="hidden" name="OSEQ" value="${ovo.OSEQ }">
@@ -141,11 +145,11 @@ function review_write() {
             </fieldset>
             <div id="review_img">
             	<label for="imgInput" >리뷰 이미지 첨부</label>
-            	<input type="file" name="reviewImage" id="imgInput" onchange="readURL(this)" value="리뷰 이미지 첨부" style="display:none;" accept="image/*" />
+            	<input type="file" name="IMAGE" id="imgInput" onchange="readURL(this)" value="리뷰 이미지 첨부" style="display:none;" accept="image/*" />
             </div>
     		<div id="previewDiv"></div>
             <div>
-                <textarea class="review" type="text" id="reviewContent" name="reviewContent"
+                <textarea class="review" type="text" id="reviewContent" name="CONTENT"
                     placeholder="음식에 대한 솔직한 리뷰를 남겨주세요!"></textarea>
             </div>
             <input type="submit" value="리뷰 작성" id="reviewWriteButton" onclick="return review_write()">

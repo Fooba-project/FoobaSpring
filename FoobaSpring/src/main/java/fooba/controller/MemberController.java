@@ -430,13 +430,22 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/memberReviewWrite", method=RequestMethod.POST) // 리뷰 쓰기
-	public String memberReviewWrite(HttpSession session, ReviewVO vo, Model model ) {
+	public String memberReviewWrite(HttpServletRequest request, HttpSession session, Model model ) throws IOException {
 		if(session.getAttribute("loginUser")==null) return "redirect:/loginForm";
+		String path=context.getRealPath("images/review");
+        MultipartRequest multi = new MultipartRequest(
+                 request, path, 5*1024*1024, "UTF-8", new DefaultFileRenamePolicy()
+        );
 		HashMap<String, Object> prm = new HashMap<String, Object>();
-		prm.put("vo", vo);
-		prm.put("loginUser", session.getAttribute("loginUser"));
+		prm.put("ID", multi.getParameter("ID"));
+		prm.put("RSEQ", multi.getParameter("RSEQ"));
+		prm.put("STAR", multi.getParameter("STAR"));
+		prm.put("IMAGE", multi.getFilesystemName("IMAGE"));
+		prm.put("CONTENT", multi.getParameter("CONTENT"));
+		prm.put("OSEQ", multi.getParameter("OSEQ"));
+		prm.put("NICK", multi.getParameter("NICK"));
 		ms.memberReviewWrite(prm);
-		return "redirect:/memberOrderDetail?OSEQ="+vo.getOSEQ();
+		return "redirect:/memberOrderDetail?OSEQ="+prm.get("OSEQ");
 	}
 	
 }

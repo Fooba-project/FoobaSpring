@@ -111,13 +111,9 @@
 		{CALL selectOrdersById( #{ID}, #{oa}, #{startNum},#{endNum},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
-	<insert  id="writeReview" parameterType="fooba.dto.ReviewVO">
-		insert into review(review_seq,id,rseq,star,image,content,oseq,nick)values(review_seq_seq.nextVal,#{ID},#{RSEQ},#{STAR},#{IMAGE},#{CONTENT},#{OSEQ},#{NICK})
+	<insert  id="memberReviewWrite" statementType="CALLABLE" parameterType="java.util.HashMap">
+		{CALL memberReviewWrite( #{ID}, #{RSEQ}, #{STAR}, #{IMAGE}, #{CONTENT}, #{OSEQ}, #{NICK} ) }
 	</insert>
-	
-	<update id="reviewComplete" >
-		update orders set result=3 where oseq=#{param1}
-	</update>
 	
 </mapper>
 
