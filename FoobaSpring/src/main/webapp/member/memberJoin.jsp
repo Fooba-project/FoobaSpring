@@ -55,7 +55,7 @@
                 </div>
 
 				<div class="join_list">
-                    <input type="text" class="input_text" name="ADDRESS3" placeholder="상세 주소2"  value="${vo.ADDRESS3}"  id="sample6_extraAddress" />
+                    <input type="text" class="input_text" name="ADDRESS3" placeholder="상세 주소2"  value="${vo.ADDRESS3}"  id="sample6_extraAddress" readonly/>
                 </div>
                 
                 <div class="join_list" margin="20px">

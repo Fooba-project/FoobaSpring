@@ -193,25 +193,27 @@ public class ResController {
 	@RequestMapping(value="/res_join",method=RequestMethod.POST) //레스토랑 회원가입
 	public String res_join(@ModelAttribute("vo")@Valid RestaurantVO vo,BindingResult result,
 	@RequestParam(value="reid",required=false)String reid, 
-	@RequestParam(value="respwdchk",required=false)String respwdchk,Model model) {
+	@RequestParam(value="respwdchk",required=false)String respwdchk,Model model,HttpServletRequest request) {
+		
 		model.addAttribute("reid",reid);
 		model.addAttribute("respwdchk",respwdchk);
 		if(result.getFieldError("RID")!=null) model.addAttribute("message",result.getFieldError("RID").getDefaultMessage());			
 		else if(result.getFieldError("RPWD")!=null) model.addAttribute("message",result.getFieldError("RPWD").getDefaultMessage());			
 		else if(result.getFieldError("OWNERNAME")!=null) model.addAttribute("message",result.getFieldError("OWNERNAME").getDefaultMessage());					
-		else if(result.getFieldError("RNAME")!=null) model.addAttribute("message",result.getFieldError("RBIZNUM").getDefaultMessage());	
-		else if(result.getFieldError("RBIZNUM")!=null) model.addAttribute("message",result.getFieldError("RNAME").getDefaultMessage());
+		else if(result.getFieldError("RNAME")!=null) model.addAttribute("message",result.getFieldError("RNAME").getDefaultMessage());	
+		else if(result.getFieldError("RBIZNUM")!=null) model.addAttribute("message",result.getFieldError("RBIZNUM").getDefaultMessage());
 		else if(result.getFieldError("RPHONE")!=null) model.addAttribute("message",result.getFieldError("RPHONE").getDefaultMessage());
 		else if(result.getFieldError("ZIP_NUM")!=null) model.addAttribute("message",result.getFieldError("ZIP_NUM").getDefaultMessage());
 		else if(result.getFieldError("RADDRESS")!=null) model.addAttribute("message",result.getFieldError("RADDRESS").getDefaultMessage());
 		else if(result.getFieldError("RADDRESS2")!=null) model.addAttribute("message",result.getFieldError("RADDRESS2").getDefaultMessage());
 		else if(result.getFieldError("KIND")!=null) model.addAttribute("message",result.getFieldError("KIND").getDefaultMessage());
 		else if(result.getFieldError("CONTENT")!=null) model.addAttribute("message",result.getFieldError("CONTENT").getDefaultMessage());
-		else if(result.getFieldError("RTIP")!=null) model.addAttribute("message",result.getFieldError("RTIP").getDefaultMessage());
+		else if(result.getFieldError("RTIP")!=null) model.addAttribute("message","배달팁을 입력하세요.");
 		else if(result.getFieldError("HASH")!=null) model.addAttribute("message",result.getFieldError("HASH").getDefaultMessage());
 		else if(result.getFieldError("RIMAGE")!=null) model.addAttribute("message",result.getFieldError("RIMAGE").getDefaultMessage());
 		else if(!reid.equals(vo.getRID())) model.addAttribute("message","아이디 중복확인을 하세요.");	
 		else if(!respwdchk.equals(vo.getRPWD())) model.addAttribute("message","비밀번호가 일치하지 않습니다.");	
+		else if(request.getParameter("res_agree")==null)model.addAttribute("message","약관에 동의하지 않았습니다.");	
 		else {
 			rs.joinRes(vo);
 			model.addAttribute("message","회원가입이 완료되었습니다.");
