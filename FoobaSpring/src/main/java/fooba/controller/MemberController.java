@@ -224,7 +224,7 @@ public class MemberController {
 				model.addAttribute("message", "정보 수정 완료");
 			}
 		}
-		return "member/memberUpdate";
+		return "redirect:/memberUpdateForm";
 	}
 	
 	@RequestMapping("/withdrawalMember") // 회원 탈퇴
