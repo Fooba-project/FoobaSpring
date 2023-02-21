@@ -341,7 +341,7 @@ end;
 --member
 
 
-create or replace procedure bannerx(p_cur out sys_refcursor)
+create or replace procedure banner(p_cur out sys_refcursor)
 is
 begin
     open p_cur for
