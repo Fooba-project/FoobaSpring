@@ -52,31 +52,31 @@
 	</select>
 
 	<select id="SearchResList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL SearchResList(#{searchtext},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL SearchResList(#{searchtext},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 
 	<select id="FimagebyRseq" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL FimagebyRseq(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL FimagebyRseq(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="searchKind" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL searchKind(#{KIND},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL searchKind(#{KIND},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="resInf" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL resInf(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL resInf(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="reviewList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL reviewList(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL reviewList(#{RSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="cartList" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL cartList(#{RSEQ}, #{ID},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL cartList(#{RSEQ}, #{ID},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<select id="getFoodDetail" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL getFoodDetail(#{FSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL getFoodDetail(#{FSEQ},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<insert id="insertCart" statementType="CALLABLE" parameterType="fooba.dto.CartVO">
@@ -108,7 +108,7 @@
 	</select>
 	
 	<select id="selectOrdersById" statementType="CALLABLE" parameterType="java.util.HashMap">
-		{CALL selectOrdersById( #{ID}, #{oa}, #{startNum},#{endNum},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap2 })}
+		{CALL selectOrdersById( #{ID}, #{oa}, #{startNum},#{endNum},#{ref_cursor ,mode=OUT, jdbcType=CURSOR, javaType=ResultSet, resultMap=memberMap })}
 	</select>
 	
 	<insert  id="writeReview" parameterType="fooba.dto.ReviewVO">
