@@ -3,24 +3,17 @@
 
 <script type="text/javascript">
 function go_detail( QSEQ ){
-	document.frm.action = "adminDetail?procedure=qna&SEQ="+QSEQ;
-	document.frm.submit();
+	location.href = "adminDetail?procedure=qna&SEQ="+QSEQ;
 }
-
-function go_search(){
-		document.frm.action = "adminList?table=q";
-}
-
 function go_total(){
-		document.frm.action = "adminList?table=q&first=y";
-		document.frm.submit();
+	location.href = "adminList?table=q&first=y";
 }
 </script>
 
 
 <article>
 	<h2 class="admin_list">질문 리스트</h2><br> 
-	<form name="frm" method="post">
+	<form name="frm" method="post" action="adminList?table=q">
 		<table id="admin_searchres">
 			<tr>
 				<td style="font-size:17px; width:642;">질문 제목: <input class="keyy" type="text" name="key" value="${key}">

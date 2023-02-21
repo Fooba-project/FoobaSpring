@@ -2,17 +2,15 @@
 <%@ include file="admin_header.jsp"%>
  
   <script type="text/javascript">
-  function lrb( result, oseq ){
-		document.frm.action = "admin_orderLR?OSEQ="+OSEQ+"&result="+result;
-		document.frm.submit();
+  function lrb( result, OSEQ ){
+		location.href = "admin_orderLR?OSEQ="+OSEQ+"&result="+result;
 	} 
   function go_search(){
 		document.frm.action = "adminList?table=o";
 		
 }
 	function go_total(){
-		document.frm.action = "adminList?table=o&first=y";
-		document.frm.submit();
+		location.href = "adminList?table=o&first=y";
 } 
   
 </script>
