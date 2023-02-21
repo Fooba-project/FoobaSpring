@@ -53,7 +53,7 @@ function chkIdCode(event) {
    
 </script>
 <div class="res_join">
-    <div class="res_join_title">사업자 회원가입 <span style="color:red;font-size:14px; ">${message }</span></div>
+    <div class="res_join_title">사업자 회원가입 <span style="color:blue;font-size:18px; ">${message }</span></div>
     <div style="border-top: 2px solid  rgb(255,204,0); margin-top:15px;"></div>
     <form name="res_join_send_form" id="res_join_send_form" method="post" action="res_join" >
         <table class="member_join_table">

@@ -22,7 +22,7 @@
                 
 	                    <div id="res_cont">
 	                    	<br>
-	                        <h3>사장님 알림 &nbsp;&nbsp;<span style="color:red;font-size:14px; ">${message }</span></h3><hr>
+	                        <h3>사장님 알림 &nbsp;&nbsp;<span style="color:blue; ">${message }</span></h3><hr>
 	                        <textarea name="CONTENT" rows="5" cols="50" style="border-radius:2px; resize:none" maxlength="100" >${loginRes.CONTENT}</textarea>
 	                    </div><br>
                     	<div id="res_num">
