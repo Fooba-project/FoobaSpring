@@ -50,55 +50,9 @@ function chkPhoneCode(event){
       event.target.value = event.target.value.replace(regExp3, '');
    }
 }
- 
- 
-$( function(){
-   $("#USERPWDCHK").keyup( function(event){
-      event.target.value = event.target.value.trim();
-      let pass1 = $("#PWD").val();
-      let pass2 = $("#USERPWDCHK").val();
-      if (pass1 != "" || pass2 != ""){
-         if (pass1 == pass2){
-            $("#error1").html('');
-         } else {
-            $("#error1").html('비밀번호가 일치하지 않습니다.');
-            $("#error1").css('color','red');
-         }
-      }
-   })
-   
-   $("#PWD").keyup( function(event){
-      event.target.value = event.target.value.trim();
-      let pass1 = $("#PWD").val();
-      let pass2 = $("#USERPWDCHK").val();
-      if (pass1 != '' && pass2 != ''){
-         if (pass1 == pass2){
-            $("#error1").html('');
-         } else {
-            $("#error1").html('비밀번호가 일치하지 않습니다.');
-            $("#error1").css('color','red');
-         }
-      }
-   })
- 
-   $("#EMAIL").keyup( function(event){
-      const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
-      event.target.value = event.target.value.trim();
-      if (regExp.test(event.target.value)) {
-         event.target.value = event.target.value.replace(regExp, '');
-      }
-      let email = $("#EMAIL").val();
-      var reg_email = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-      if (!reg_email.test(email)){
-         $("#error2").html('이메일 형식이 잘못되었습니다.');
-         $("#error2").css('color','red');
-      } else {
-         $("#error2").html('');
-      }
-   })
-})
- 
- 
+
+
+
 function joincheck() {
    if(document.member_join_send_form.ID.value.length==0){
       alert("아이디를 입력하세요");
@@ -168,16 +122,11 @@ function idok( ID ){
    self.close();
 }
 
-
-
 function post_zip(){
    var url = document.memberFindZipNum;
    var opt = "toolbar=no, menubar=no, scrollbars=no, resizable=no, width=550, height=500, top=100, left=700";
    window.open( url, "우편번호 찾기", opt);
 }
-
-
-
 
 function result( zip_num, sido, gugun, dong){
    // 함수 호출 형태 - result( '123-123', '서울시', '서대문구', '대현동')
@@ -224,7 +173,6 @@ function menumove(x){
    document.getElementById("tul").style.left=dist+'px';
 }
 
-
 function go_search2(){
    document.search.submit();
 }
@@ -234,8 +182,6 @@ function go_search(HASH){
    document.search.action = url;
    document.search.submit();
 } 
-
-
 
 function withdrawalMember(){
    var ok=confirm("정말 탈퇴하겠습니까?");
@@ -254,7 +200,6 @@ function deleteejb(CSEQ,RSEQ){
    if(오케이) location.href="deleteCartmenu?CSEQ="+CSEQ+"&RSEQ="+RSEQ;
 else return;
 }
- 
  
 var nummx=0;
 
