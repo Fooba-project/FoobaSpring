@@ -51,7 +51,7 @@ function chkPhoneCode(event){
    }
 }
 
-
+ 
 
 function joincheck() {
    if(document.member_join_send_form.ID.value.length==0){
