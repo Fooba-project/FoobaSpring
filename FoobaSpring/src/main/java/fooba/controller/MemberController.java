@@ -223,7 +223,7 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
 			model.addAttribute("message", "정보 수정 완료");
 		}
-		return "member/memberUpdate";
+		return "redirect:/index";
 	}
 	
 	@RequestMapping("/withdrawalMember") // 회원 탈퇴
