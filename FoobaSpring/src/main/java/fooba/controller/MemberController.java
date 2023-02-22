@@ -393,6 +393,11 @@ public class MemberController {
 	public String order(HttpServletRequest request,HttpSession session,Model model, OrderVO ovo, CartVO cvo) {
 		if(session.getAttribute("loginUser")==null) return "member/memberLogin";
 		HashMap<String,Object> prm = new HashMap<String,Object>();
+		if(Integer.parseInt(request.getParameter("bdjs"))==0) {
+			ovo.setADDRESS1(request.getParameter("ORADD1"));
+			ovo.setADDRESS2(request.getParameter("ORADD2"));
+			ovo.setPHONE(request.getParameter("ORP"));
+		}
 		prm.put("RSEQ", ovo.getRSEQ());
 		prm.put("ID", ovo.getID());
 		prm.put("ovo", ovo);

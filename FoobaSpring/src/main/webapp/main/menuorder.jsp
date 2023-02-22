@@ -8,10 +8,9 @@
 <form name="member_join_send_form" id="member_join_send_form" method="post" action="order">
 <input type="hidden" value="${ RSEQ }" name="RSEQ">
 <input type="hidden" value="${ loginUser.ID }" name="ID">
-<input type="hidden" value="${ loginUser.PHONE }" id="ORP">
-<input type="hidden" value="${ loginUser.ADDRESS1 }" id="ORADD1">
-<input type="hidden" value="${ loginUser.ADDRESS2 }" id="ORADD2">
-<input type="hidden" value="${ loginUser.ADDRESS3 }" id="ORADD3">
+<input type="hidden" value="${ loginUser.PHONE }" name="ORP">
+<input type="hidden" value="${ loginUser.ADDRESS1 }" name="ORADD1">
+<input type="hidden" value="${ loginUser.ADDRESS2 }" name="ORADD2">
 
 <div id="realjenche2">
         <div id="jenche2">
