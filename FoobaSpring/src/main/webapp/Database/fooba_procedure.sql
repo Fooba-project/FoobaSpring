@@ -432,7 +432,7 @@ END;
 create or replace procedure withdrawalMember(p_id IN member.id%TYPE)
 is 
 begin
-    delete from member where id=p_id;
+    update member set  where id=p_id;
     COMMIT;
 end;
 
