@@ -41,9 +41,9 @@
                 <div id="login_box">
                     <div id="text_button_box">
                         <div id="login_idpw_box">
-                        	<input type="text" id="find_id" name="rid" placeholder="아이디를 입력하세요" maxlength="16" onkeyup="chkIdCode(event)">
-							<input type="text" id="find_name" name="rname" placeholder="가게 이름" title="이름" maxlength="30">
-                            <input type="text" id="find_phone" name="rphone" placeholder="휴대폰 번호를 입력하세요" maxlength="13"  onkeyup="chkPhoneCode(event)">
+                        	<input type="text" id="find_id" name="rid" placeholder="아이디를 입력하세요" maxlength="16" onkeyup="chkIdCode(event)" value="${rid}">
+							<input type="text" id="find_name" name="rname" placeholder="가게 이름" title="이름" maxlength="30" value="${rname}">
+                            <input type="text" id="find_phone" name="rphone" placeholder="휴대폰 번호를 입력하세요" maxlength="13"  onkeyup="chkPhoneCode(event)" value="${rphone}">
                         </div>
             			<br><br>
             			<div style="text-align:center; "><p id="check" class="check" >${check}${message }</p></div>
@@ -68,7 +68,7 @@
 
     $("#find_name").focusout(function(){
         if($('#find_name').val() == ""){
-            $('#check').text('사업자이름을 입력해주세요.');
+            $('#check').text('가게 이름을 입력해주세요.');
             $('#check').css('color', 'red');
         } else {
             $('#check').hide();
@@ -77,7 +77,7 @@
 
     $("#find_phone").focusout(function(){
         if($('#find_phone').val() == ""){
-            $('#check').text('전화번호를 입력해주세요.');
+            $('#check').text('휴대폰 번호를 입력해주세요.');
             $('#check').css('color', 'red');
         } else {
             $('#check').hide();

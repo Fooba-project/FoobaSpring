@@ -116,23 +116,30 @@ public class ResController {
 	
 	@RequestMapping(value="res_FindId") //아이디 찾기
 	public String res_FindId(@RequestParam(value="rname" ,required=false)String rname,@RequestParam(value="rphone",required=false)String rphone,Model model) {
-		HashMap<String,Object>paramMap=new HashMap<String,Object>();
-		paramMap.put("rname",rname);
-		rs.resFindId(paramMap);
-		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
-		if(list.size()==0) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요1.");
-			return "restaurant/res_FindId";
+		if(rname!=null)model.addAttribute("rname",rname);
+		if(rphone!=null)model.addAttribute("rphone",rphone);
+		if(rname==null||rname.equals("")||rphone==null||rphone.equals("")) {
+			model.addAttribute("message","정보를 모두 입력하세요");
+			return  "restaurant/res_FindId";
 		}else {
-			HashMap<String,Object> rvo=list.get(0);
-			if(!rvo.get("RPHONE").equals(rphone)) {
-				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요2.");
+			HashMap<String,Object>paramMap=new HashMap<String,Object>();
+			paramMap.put("rname",rname);
+			rs.resFindId(paramMap);
+			ArrayList<HashMap<String,Object>> list
+			=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+			if(list.size()==0) {
+				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
 				return "restaurant/res_FindId";
-			}
-			else {
-				model.addAttribute("message","귀하의 아이디는 '"+rvo.get("RID")+"'입니다.");
-				return  "restaurant/res_login";
+			}else {
+				HashMap<String,Object> rvo=list.get(0);
+				if(!rvo.get("RPHONE").equals(rphone)) {
+					model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+					return "restaurant/res_FindId";
+				}
+				else {
+					model.addAttribute("message","귀하의 아이디는 '"+rvo.get("RID")+"'입니다.");
+					return  "restaurant/res_login";
+				}
 			}
 		}
 	}
@@ -144,24 +151,32 @@ public class ResController {
 	
 	@RequestMapping(value="/res_FindPw",method=RequestMethod.POST) //비밀번호 찾기
 	public String res_FindPw(@RequestParam(value="rname",required=false)String rname,@RequestParam(value="rphone",required=false)String rphone,
-			@RequestParam("rid")String rid,Model model) {
-		HashMap<String,Object>paramMap=new HashMap<String,Object>();
-		paramMap.put("rid",rid);
-		rs.getRes(paramMap);
-		ArrayList<HashMap<String,Object>> list
-		=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
-		if(list.size()==0) {
-			model.addAttribute("message","아이디가 없습니다.");
-			return "restaurant/res_FindPw";
-		}
-		HashMap<String,Object> rvo=list.get(0);
-		if(!rvo.get("RPHONE").equals(rphone)||!rvo.get("RNAME").equals(rname)) {
-			model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
-			return "restaurant/res_FindPw";
-		}
-		else {
-			model.addAttribute("message","귀하의 비밀번호는 '"+rphone+"'로 전송되었습니다.");
-			return "restaurant/res_login";
+			@RequestParam(value="rid",required=false)String rid,Model model) {
+		if(rid!=null) model.addAttribute("rid",rid);
+		if(rname!=null) model.addAttribute("rname",rname);
+		if(rphone!=null) model.addAttribute("rphone",rphone);
+		if(rid==null||rid.equals("")||rname==null||rname.equals("")||rphone==null||rphone.equals("")) {
+			model.addAttribute("message","정보를 모두 입력하세요");
+			return  "restaurant/res_FindPw";
+		}else {
+			HashMap<String,Object>paramMap=new HashMap<String,Object>();
+			paramMap.put("RID",rid);
+			rs.getRes(paramMap);
+			ArrayList<HashMap<String,Object>> list
+			=(ArrayList<HashMap<String,Object>>) paramMap.get("ref_cursor");
+			if(list.size()==0) {
+				model.addAttribute("message","아이디가 없습니다.");
+				return "restaurant/res_FindPw";
+			}
+			HashMap<String,Object> rvo=list.get(0);
+			if(!rvo.get("RPHONE").equals(rphone)||!rvo.get("RNAME").equals(rname)) {
+				model.addAttribute("message","일치하는 정보가 없습니다. 다시 입력하세요.");
+				return "restaurant/res_FindPw";
+			}
+			else {
+				model.addAttribute("message","귀하의 비밀번호는 '"+rphone+"'로 전송되었습니다.");
+				return "restaurant/res_login";
+			}
 		}
 	}
 	
