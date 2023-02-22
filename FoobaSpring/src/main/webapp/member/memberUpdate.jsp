@@ -8,6 +8,13 @@
 	.input_text_title {float:left; font-size:100%; line-height:40px}
 </style>
 
+<c:if test="${success=='1'}">
+	<script type="text/javascript">
+		alert('수정이 완료되었습니다.');
+		location.href="index";
+	</script>
+</c:if>
+
 <div class="member_join">
 	<div class="member_join_title">회원정보수정 <span style="color:red;font-size:18px; ">${message }</span></div>
 	<div style="border-top: 2px solid #fa6146; margin-top:15px;"></div>
@@ -64,12 +71,15 @@
             </table>
             <br><br>
 			<div id="join_btn">
-				<input class="join_btn" type="submit" value="정보수정" class="submit"> 
+				<input class="join_btn" type="submit" value="정보수정" class="submit">			 
 				<input class="join_btn" type="button" value="돌아가기" class="cancel" onclick="location.href='index'">
 			</div>
 		</div>
 	</form>
 </div>
+
+
+
     
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>

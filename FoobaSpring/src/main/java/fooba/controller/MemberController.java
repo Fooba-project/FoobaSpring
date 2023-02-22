@@ -206,25 +206,26 @@ public class MemberController {
 		return "member/memberUpdate";
 	}
 	
-	@RequestMapping(value="/memberUpdate", method=RequestMethod.POST) // 회원 정보 수정, validation 적용
-	public String memberUpdate( @ModelAttribute("loginUser") @Valid MemberVO mvo, BindingResult result, Model model, HttpSession session ) {
-		if (session.getAttribute("loginUser")==null) return "redirect:/loginForm";
-		if (result.getFieldError("PWD")!=null ) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
-		else if (result.getFieldError("NAME")!=null ) model.addAttribute("message", result.getFieldError("NAME").getDefaultMessage());
-		else if (result.getFieldError("PHONE")!=null ) model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
-		else if (result.getFieldError("EMAIL")!=null ) model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
-		else if (mvo.getUSERPWDCHK().equals("") || mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호가 일치하지 않습니다");
-		else {
-			HashMap<String, Object> prm = new HashMap<String, Object>();		
-			prm.put("mvo", mvo);
-			ms.memberUpdate( prm ); // 업데이트 후, 갱신된 정보로 로그인 유저 조회
-			ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
-			HashMap<String,Object> loginUser = list.get(0);
-			session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
-			model.addAttribute("message", "정보 수정 완료");
-		}
-		return "redirect:/index";
-	}
+
+   @RequestMapping(value="/memberUpdate", method=RequestMethod.POST) // 회원 정보 수정, validation 적용
+   public String memberUpdate( @ModelAttribute("loginUser") @Valid MemberVO mvo, BindingResult result, Model model, HttpSession session ) {
+      if (session.getAttribute("loginUser")==null) return "redirect:/loginForm";
+      if (result.getFieldError("PWD")!=null ) model.addAttribute("message", result.getFieldError("PWD").getDefaultMessage());
+      else if (result.getFieldError("NAME")!=null ) model.addAttribute("message", result.getFieldError("NAME").getDefaultMessage());
+      else if (result.getFieldError("PHONE")!=null ) model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
+      else if (result.getFieldError("EMAIL")!=null ) model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
+      else if (mvo.getUSERPWDCHK().equals("") || mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호가 일치하지 않습니다");
+      else {
+         HashMap<String, Object> prm = new HashMap<String, Object>();      
+         prm.put("mvo", mvo);
+         ms.memberUpdate( prm ); // 업데이트 후, 갱신된 정보로 로그인 유저 조회
+         ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
+         HashMap<String,Object> loginUser = list.get(0);
+         session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
+         model.addAttribute("success", "1");
+      }
+      return "member/memberUpdate";
+   }
 	
 	@RequestMapping("/withdrawalMember") // 회원 탈퇴
 	public String res_withdrawal(HttpSession session,Model model) {
