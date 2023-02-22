@@ -232,7 +232,7 @@ public class MemberController {
 		HashMap<String , Object> loginUser = (HashMap<String , Object>)session.getAttribute("loginUser");
 		ms.withdrawalMember((String)loginUser.get("ID"));
 		session.removeAttribute("loginUser");
-		model.addAttribute("message","아이디가 정지 되었습니다. 복구 요청은 고객센터로 전화해 주세요");
+		model.addAttribute("message","아이디가 삭제 되었습니다. 동일한 아이디로 가입가능합니다.");
 		return "member/memberLogin";
 	}
 	
