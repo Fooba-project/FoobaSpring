@@ -8,9 +8,6 @@
 		<div class="linemenubox">
 			<span class="linetext" onclick="location.href='admin_fooba_tos'">/이용약관</span>
 		</div>
-		<div class="linemenubox">
-			<span class="linetext" onclick="location.href='res_joinForm'">/사장님 입점문의</span>
-		</div>
 		<img src="images/mainlogo2.png" id="logo">
 		<div id="logotextbox">
 			<span id="logotext">
