@@ -213,7 +213,8 @@ body {margin:0}
 .headback {width: 100%; height: 100px; background-color: rgb(255,204,0); margin: 0;}
 #mainlogo {position: relative; text-align: center; width: 150px; height: 100px; margin: auto auto;}
 #mainlogo img {width: 100px; height: 100px;}
-
+.resheadbutton {width: 100px; height: 50px;border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 90%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #fff; line-height: 50px; color:#fff; background-color: transparent; border: 2px solid white; }
+.resheadbutton:hover {background-color: white; color: rgb(255,204,0); cursor: pointer;}
 .headbuttons {position:absolute; width: 380px; top:23px; left:calc(50% + 300px); }
 .headbutton {width: 70px; height: 50px;border-radius: 5px; text-decoration: none; font-weight: bold; font-size: 90%; font-family: Verdana, Geneva, Tahoma, sans-serif; background-color: #fff; line-height: 50px; color:#fff; background-color: transparent; border: 2px solid white; }
 .headbutton:hover {background-color: white; color: rgb(255,204,0); cursor: pointer;}
@@ -388,8 +389,8 @@ background-color: black; margin-top: 10px; float: right; margin-right:10px; }
     <div class="headbuttons" id="resheadbuttons">
     	<c:choose>
     		<c:when test="${empty loginRes}">
-	    		<input type="button" value="가입신청" class="headbutton" name="userLogin" onclick="location.href='res_joinForm'">
-	    		<input type="button" value="Home" class="headbutton" name="userJoin" onclick="location.href='index'">
+	    		<input type="button" value="가입신청" class="resheadbutton" name="userLogin" onclick="location.href='res_joinForm'">
+	    		<input type="button" value="Res Home" class="resheadbutton" name="userJoin" onclick="location.href='res_loginForm'">
     		</c:when>
     		<c:otherwise>
     			<input type="button" value="로그아웃" class="headbutton" onclick="location.href='res_logout'">
