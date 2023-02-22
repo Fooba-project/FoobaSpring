@@ -214,6 +214,8 @@ public class MemberController {
       else if (result.getFieldError("NAME")!=null ) model.addAttribute("message", result.getFieldError("NAME").getDefaultMessage());
       else if (result.getFieldError("PHONE")!=null ) model.addAttribute("message", result.getFieldError("PHONE").getDefaultMessage());
       else if (result.getFieldError("EMAIL")!=null ) model.addAttribute("message", result.getFieldError("EMAIL").getDefaultMessage());
+      else if (mvo.getADDRESS2()==null||mvo.getADDRESS2().equals(""))model.addAttribute("message","상세주소를 입력해주세요");
+      else if (mvo.getNICK()==null||mvo.getNICK().equals(""))model.addAttribute("message","닉네임을 입력해주세요");
       else if (mvo.getUSERPWDCHK().equals("") || mvo.getUSERPWDCHK() == null || !mvo.getUSERPWDCHK().equals(mvo.getPWD() ) ) model.addAttribute("message", "비밀번호가 일치하지 않습니다");
       else {
          HashMap<String, Object> prm = new HashMap<String, Object>();      
@@ -222,7 +224,7 @@ public class MemberController {
          ArrayList<HashMap<String,Object>> list = (ArrayList<HashMap<String,Object>>)prm.get("ref_cursor");
          HashMap<String,Object> loginUser = list.get(0);
          session.setAttribute("loginUser", loginUser); // 갱신된 정보 세션에 저장
-         model.addAttribute("success", "1");
+         model.addAttribute("success", "1"); //정보수정 알림
       }
       return "member/memberUpdate";
    }

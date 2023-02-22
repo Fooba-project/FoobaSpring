@@ -109,6 +109,7 @@
 				}
 				document.getElementById('sample6_postcode').value = data.zonecode;
 				document.getElementById("sample6_address").value = addr;
+				document.getElementById("sample6_detailAddress").value="";
 				document.getElementById("sample6_detailAddress").focus();
 			}
 		}).open();
