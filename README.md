@@ -44,38 +44,24 @@ Fooba 배달 웹사이트 만들기 (Spring)
   
  <img width="800px" src="https://user-images.githubusercontent.com/115220828/221538497-f71ca706-86d8-40e6-bc65-c601dc7967a1.png">
 
-  
-  
-
 </div>
 </details>
 
-
-<summary>레스토랑 오너 화면</summary>
+<details>
+<summary>롤링 배너 추가</summary>
 <div markdown="1">
   
-+ **주문 관리**
-    - 주문 현황 확인
-
-+ **리뷰 관리**
-    - 리뷰 댓글 관리 
-      (전체답변 / 미답변) 확인 
-
-+ **메뉴 관리**
-    - 메뉴 수정 및 삭제
+   <img width="800px" src="https://user-images.githubusercontent.com/115220828/221539211-b3ebed68-a5b6-4143-bd36-67c65d64220e.png">
   
-  <img width="500px" src="https://user-images.githubusercontent.com/115220828/221534448-8105c753-1ff4-487b-828a-9435823bbafb.png">
-
-+ **정보 관리 / 수정**
-  
-   <img width="500px" src="https://user-images.githubusercontent.com/115220828/221534658-928dadcc-10a1-430e-9905-343f9b90bb5c.png">
+   <img width="300px" src="https://user-images.githubusercontent.com/115220828/221539359-85f5c5cb-3566-4f84-938f-08c9675e3682.png">
 
 </details>
 
 <details>
 <summary>관리자 화면 </summary>
 <div markdown="1">
-  
+ 
+
 + **입점 가게 관리**
 
     - 가게 정보확인 
