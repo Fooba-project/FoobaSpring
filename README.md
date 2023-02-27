@@ -43,7 +43,7 @@ Fooba 배달 웹사이트 만들기 (Spring)
 <div markdown="1">
   
  <img width="800px" src="https://user-images.githubusercontent.com/115220828/221538497-f71ca706-86d8-40e6-bc65-c601dc7967a1.png">
-
+<br>
 </div>
 </details>
 
@@ -51,9 +51,11 @@ Fooba 배달 웹사이트 만들기 (Spring)
 <summary>롤링 배너 추가</summary>
 <div markdown="1">
   
-   <img width="800px" src="https://user-images.githubusercontent.com/115220828/221539211-b3ebed68-a5b6-4143-bd36-67c65d64220e.png">
+   <img width="500px" src="https://user-images.githubusercontent.com/115220828/221539211-b3ebed68-a5b6-4143-bd36-67c65d64220e.png">
   
    <img width="300px" src="https://user-images.githubusercontent.com/115220828/221539359-85f5c5cb-3566-4f84-938f-08c9675e3682.png">
+  <br>
+</div>  
 
 </details>
 
@@ -63,7 +65,7 @@ Fooba 배달 웹사이트 만들기 (Spring)
  
   <img width="500px" src="https://user-images.githubusercontent.com/115220828/221540550-b659bb0b-fefe-45fa-ba31-00ef41480c18.png">
 
-
+<br>
 </div>
 </details>
   
@@ -71,8 +73,8 @@ Fooba 배달 웹사이트 만들기 (Spring)
 <summary>이미지 업로드 방식 수정 </summary>
 <div markdown="1">
  
-  <img width="600px" src="https://user-images.githubusercontent.com/115220828/221540824-3e2674ad-3867-4760-8896-ce17bdec06a6.png">
-  <img width="600px" src="https://user-images.githubusercontent.com/115220828/221540838-16045d93-6478-472c-a04f-09e8163a0f96.png">
-
+  <img width="500px" src="https://user-images.githubusercontent.com/115220828/221540824-3e2674ad-3867-4760-8896-ce17bdec06a6.png">
+  <img width="500px" src="https://user-images.githubusercontent.com/115220828/221540838-16045d93-6478-472c-a04f-09e8163a0f96.png">
+<br>
 </div>
 </details>
