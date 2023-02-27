@@ -37,29 +37,12 @@ Fooba 배달 웹사이트 만들기 (Spring)
 </div>
 
 
-## 📌 기능 설명
+## 📌 변경 사항
 <details>
-<summary style="font-weight:bold">사용자 화면</summary>
+<summary style="font-weight:bold">요구사항</summary>
 <div markdown="1">
   
-+ **가게 검색**
-    - 해쉬 / 메뉴 / 카테고리 별 검색
-  <img width="500px" src="https://user-images.githubusercontent.com/115220828/221533614-c15ff458-5aa1-4c95-9831-91cdb3c98bdf.png">
-
-+ **메뉴 확인 및  주문하기**
-    - 옵션 추가 카트 담기
-    - 가게 정보 확인 및 리뷰 확인
-    - 배송지 변경 및 배달 옵션 선택
-  
-  <img width="500px" src="https://user-images.githubusercontent.com/115220828/221534036-a501b5ab-6007-42cd-ac6a-fcd77cc6ec7e.png">
-
-+ **마이페이지**
-    - 주문 내역 상세 확인 및 리뷰 작성!
-    - 회원정보 수정 및 탈퇴 
-  
-   <img width="500px" src="https://user-images.githubusercontent.com/115220828/221536387-2f342d43-c584-4f81-b066-aaf164468c12.png">
-
-+ **Q&A 확인**
+ <img width="800px" src="https://user-images.githubusercontent.com/115220828/221538497-f71ca706-86d8-40e6-bc65-c601dc7967a1.png">
 
   
   
@@ -67,7 +50,7 @@ Fooba 배달 웹사이트 만들기 (Spring)
 </div>
 </details>
 
-<details>
+
 <summary>레스토랑 오너 화면</summary>
 <div markdown="1">
   
