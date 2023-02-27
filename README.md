@@ -51,12 +51,10 @@ Fooba 배달 웹사이트 만들기 (Spring)
 <summary>롤링 배너 추가</summary>
 <div markdown="1">
   
-   <img width="500px" src="https://user-images.githubusercontent.com/115220828/221539211-b3ebed68-a5b6-4143-bd36-67c65d64220e.png">
+   <img width="800px" src="https://user-images.githubusercontent.com/115220828/221541699-34891afe-a975-4c4d-b3cc-7899a196a92c.png">
   
-   <img width="300px" src="https://user-images.githubusercontent.com/115220828/221539359-85f5c5cb-3566-4f84-938f-08c9675e3682.png">
   <br>
-</div>  
-
+</div>
 </details>
 
 <details>
