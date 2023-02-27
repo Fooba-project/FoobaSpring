@@ -53,31 +53,26 @@ Fooba 배달 웹사이트 만들기 (Spring)
   
    <img width="800px" src="https://user-images.githubusercontent.com/115220828/221539211-b3ebed68-a5b6-4143-bd36-67c65d64220e.png">
   
-   <img width="300px" margin-left="100px" src="https://user-images.githubusercontent.com/115220828/221539359-85f5c5cb-3566-4f84-938f-08c9675e3682.png">
+   <img width="300px" src="https://user-images.githubusercontent.com/115220828/221539359-85f5c5cb-3566-4f84-938f-08c9675e3682.png">
 
 </details>
 
 <details>
-<summary>관리자 화면 </summary>
+<summary>다음 주소 api 사용 </summary>
 <div markdown="1">
  
+  <img width="500px" src="https://user-images.githubusercontent.com/115220828/221540550-b659bb0b-fefe-45fa-ba31-00ef41480c18.png">
 
-+ **입점 가게 관리**
-
-    - 가게 정보확인 
-    - 가입 현황 / 입점 승인 및 거부
-
-+ **주문내역 관리** 
-    - 주문 내역 확인
-    - 주문 상태 변경
-
-+ **회원 관리**
-    - 회원 정보 확인
-    
-+ **Q&A 관리**
-    - Q&A 등록 및 삭제 
 
 </div>
 </details>
+  
+<details>
+<summary>이미지 업로드 방식 수정 </summary>
+<div markdown="1">
+ 
+  <img width="600px" src="https://user-images.githubusercontent.com/115220828/221540824-3e2674ad-3867-4760-8896-ce17bdec06a6.png">
+  <img width="600px" src="https://user-images.githubusercontent.com/115220828/221540838-16045d93-6478-472c-a04f-09e8163a0f96.png">
 
-
+</div>
+</details>
