@@ -17,6 +17,14 @@ Fooba 배달 웹사이트 만들기 (Spring)
 ## 프로젝트 변경점
 기존 Model2방식으로 만들었던 푸바 사이트를 Springboot 로 재구성
 
+## 프로젝트 설계
+- 작업일정
+<img width="500px" img src="https://user-images.githubusercontent.com/115220828/234450809-fb026123-49df-4cb9-81f5-5c220f3e5cd5.jpg">
+
+- 요구사항 확인
+<img width="500px" img src="https://user-images.githubusercontent.com/115220828/234450863-e4727c92-9223-47d5-a6bb-c833faad7aca.jpg">
+
+
 ## ⚒️ 사용한 툴 & 플랫폼
 <div style="float:left">
   
